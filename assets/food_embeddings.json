@@ -1,0 +1,13 @@
+[
+  {
+    "_comment": "예시 스키마용 placeholder. 실제 200종 데이터는 tools/build_embedding_db.py로 생성해 이 파일을 교체하세요. vector는 실제로는 MobileNetV2 출력 차원(예: 1280)이어야 합니다.",
+    "foodName": "김치찌개",
+    "caloriesPer100g": 90,
+    "vector": [0.12, 0.98, -0.33, 0.05]
+  },
+  {
+    "foodName": "된장찌개",
+    "caloriesPer100g": 80,
+    "vector": [0.44, 0.11, 0.87, -0.21]
+  }
+]
