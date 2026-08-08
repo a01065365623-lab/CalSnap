@@ -12,11 +12,12 @@ CalSnap Flutter 앱의 HybridFoodRecognitionService가 온디바이스 매칭에
 """
 import base64
 import binascii
+import json
 import os
-import tempfile
 
 from flask import Flask, jsonify, request
 from google.cloud import vision
+from google.oauth2 import service_account
 
 app = Flask(__name__)
 
@@ -26,12 +27,13 @@ _PROXY_API_KEY = os.environ.get("PROXY_API_KEY")
 
 def _init_vision_client() -> vision.ImageAnnotatorClient:
     creds_json = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS_JSON")
-    if creds_json:
-        fd, path = tempfile.mkstemp(suffix=".json")
-        with os.fdopen(fd, "w", encoding="utf-8") as f:
-            f.write(creds_json)
-        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = path
-    return vision.ImageAnnotatorClient()
+    if not creds_json:
+        raise RuntimeError(
+            "GOOGLE_APPLICATION_CREDENTIALS_JSON 환경변수가 설정되지 않았습니다."
+        )
+    info = json.loads(creds_json)
+    credentials = service_account.Credentials.from_service_account_info(info)
+    return vision.ImageAnnotatorClient(credentials=credentials)
 
 
 _vision_client = _init_vision_client()
