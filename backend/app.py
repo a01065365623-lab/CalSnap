@@ -64,6 +64,26 @@ def health():
     return jsonify(status="ok")
 
 
+@app.get("/models")
+def list_models():
+    """디버그용: 이 GEMINI_API_KEY로 실제 사용 가능한 모델 목록을 조회한다."""
+    if _PROXY_API_KEY and request.headers.get("X-API-Key") != _PROXY_API_KEY:
+        return jsonify(error="unauthorized"), 401
+
+    try:
+        models = [
+            {
+                "name": m.name,
+                "supported_generation_methods": list(m.supported_generation_methods),
+            }
+            for m in genai.list_models()
+        ]
+    except Exception as exc:
+        return jsonify(error=f"모델 목록 조회 실패: {exc}"), 502
+
+    return jsonify(models=models)
+
+
 @app.post("/recognize")
 def recognize():
     if _PROXY_API_KEY and request.headers.get("X-API-Key") != _PROXY_API_KEY:
