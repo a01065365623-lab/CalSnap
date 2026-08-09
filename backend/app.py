@@ -24,10 +24,13 @@ _MAX_IMAGE_BYTES = 8 * 1024 * 1024  # 8MB
 _PROXY_API_KEY = os.environ.get("PROXY_API_KEY")
 
 _PROMPT = (
-    "이 사진 속 음식의 정확한 이름과 100g당 예상 칼로리(kcal)를 JSON으로만 답해줘: "
-    "{foodName, caloriesPer100g}. "
-    "사진에 여러 음식이 있으면 각각의 이름과 칼로리를 모두 파악해서 합산한 뒤, "
-    "대표 이름(예: '목살 스테이크 정식')과 합산 칼로리를 이 JSON 형식으로 답해줘."
+    "이 사진 속 음식의 정확한 이름, 100g당 예상 칼로리(kcal), 추정 총 중량(g)을 "
+    "JSON으로만 답해줘: {foodName, caloriesPer100g, estimatedWeightG}. "
+    "사진에 여러 음식이 있으면 각각의 이름과 칼로리, 중량을 모두 파악해서 "
+    "칼로리와 중량을 각각 합산한 뒤, 대표 이름(예: '목살 스테이크 정식')과 "
+    "합산 칼로리(caloriesPer100g), 합산 중량(estimatedWeightG)을 이 JSON 형식으로 답해줘. "
+    "리조또와 아란치니처럼 조리법이 다른 유사 음식을 헷갈리지 않도록, "
+    "재료·조리 형태·모양을 꼼꼼히 살펴 최대한 구체적인 이름으로 답해줘."
 )
 
 
@@ -55,10 +58,15 @@ def _parse_food_json(text: str) -> dict | None:
     except (json.JSONDecodeError, TypeError):
         return None
 
-    if not isinstance(data, dict) or "foodName" not in data or "caloriesPer100g" not in data:
+    required_keys = ("foodName", "caloriesPer100g", "estimatedWeightG")
+    if not isinstance(data, dict) or not all(key in data for key in required_keys):
         return None
 
-    return {"foodName": data["foodName"], "caloriesPer100g": data["caloriesPer100g"]}
+    return {
+        "foodName": data["foodName"],
+        "caloriesPer100g": data["caloriesPer100g"],
+        "estimatedWeightG": data["estimatedWeightG"],
+    }
 
 
 @app.get("/health")
