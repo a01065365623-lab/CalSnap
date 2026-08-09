@@ -11,7 +11,7 @@ import 'food_recognition_service.dart';
 /// 프록시 계약 — POST {proxyBaseUrl}/recognize
 ///   헤더: Content-Type: application/json, X-API-Key: <apiKey>
 ///   요청 바디: {"image": "<base64 인코딩 이미지>"}
-///   응답 예시: {"foodName": "김치찌개", "caloriesPer100g": 90}
+///   응답 예시: {"foodName": "김치찌개", "caloriesPer100g": 90, "estimatedWeightG": 400}
 ///
 /// proxyBaseUrl / apiKey는 소스에 하드코딩하지 않고 컴파일 타임에 주입한다:
 ///   flutter run --dart-define=PROXY_BASE_URL=https://your-proxy.up.railway.app \
@@ -61,10 +61,12 @@ class GeminiFoodRecognitionService implements FoodRecognitionService {
     final data = jsonDecode(res.body) as Map<String, dynamic>;
     final foodName = data['foodName'] as String? ?? '알 수 없음';
     final caloriesPer100g = (data['caloriesPer100g'] as num?)?.toDouble() ?? 0;
+    final estimatedWeightG = (data['estimatedWeightG'] as num?)?.toDouble() ?? 0;
 
     return FoodRecognitionResult(
       foodName: foodName,
-      estimatedCalories: caloriesPer100g,
+      caloriesPer100g: caloriesPer100g,
+      estimatedWeightG: estimatedWeightG,
       confidence: _placeholderConfidence,
     );
   }

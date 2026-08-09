@@ -32,6 +32,14 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
     super.dispose();
   }
 
+  double get _totalCalories {
+    final result = _result;
+    if (result == null) return 0;
+    return result.caloriesPer100g *
+        (result.estimatedWeightG * _portionMultiplier) /
+        100;
+  }
+
   Future<void> _pickImage(ImageSource source) async {
     final picked = await _picker.pickImage(source: source, imageQuality: 80);
     if (picked == null) return;
@@ -59,7 +67,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
       datetime: DateTime.now(),
       type: LogType.food,
       name: foodName,
-      calories: _result!.estimatedCalories * _portionMultiplier,
+      calories: _totalCalories,
       mode: LogMode.quick,
     ));
     if (mounted) {
@@ -74,7 +82,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('빠른 측정')),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
@@ -140,7 +148,8 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
                 onChanged: (v) => setState(() => _portionMultiplier = v),
               ),
               Text(
-                '${(_result!.estimatedCalories * _portionMultiplier).toStringAsFixed(0)} kcal',
+                '추정 ${(_result!.estimatedWeightG * _portionMultiplier).toStringAsFixed(0)}g '
+                '· ${_totalCalories.toStringAsFixed(0)}kcal',
                 style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),

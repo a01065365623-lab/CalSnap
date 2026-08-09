@@ -6,12 +6,14 @@ import 'gemini_food_recognition_service.dart';
 /// 사진 한 장을 분석해 음식 카테고리와 추정 칼로리를 반환하는 서비스.
 class FoodRecognitionResult {
   final String foodName;
-  final double estimatedCalories;
+  final double caloriesPer100g;
+  final double estimatedWeightG;
   final double confidence; // 0.0 ~ 1.0
 
   const FoodRecognitionResult({
     required this.foodName,
-    required this.estimatedCalories,
+    required this.caloriesPer100g,
+    required this.estimatedWeightG,
     required this.confidence,
   });
 }
@@ -27,7 +29,8 @@ class MockFoodRecognitionService implements FoodRecognitionService {
     await Future.delayed(const Duration(milliseconds: 500));
     return const FoodRecognitionResult(
       foodName: '김치찌개 (추정)',
-      estimatedCalories: 450,
+      caloriesPer100g: 90,
+      estimatedWeightG: 500,
       confidence: 0.75,
     );
   }
@@ -37,6 +40,9 @@ class MockFoodRecognitionService implements FoodRecognitionService {
 class HybridFoodRecognitionService implements FoodRecognitionService {
   /// 코사인 유사도가 이 값 미만이면 온디바이스 매칭 결과를 신뢰하지 않고 폴백한다.
   static const double similarityThreshold = 0.75;
+
+  /// 온디바이스 매칭은 중량을 추정하지 않으므로 사용하는 기본 1인분 중량(g).
+  static const double _defaultEstimatedWeightG = 300;
 
   final OnDeviceFoodMatcher _onDeviceMatcher;
   final GeminiFoodRecognitionService _geminiFallback;
@@ -54,7 +60,8 @@ class HybridFoodRecognitionService implements FoodRecognitionService {
       if (match != null && match.similarity >= similarityThreshold) {
         return FoodRecognitionResult(
           foodName: match.food.foodName,
-          estimatedCalories: match.food.caloriesPer100g,
+          caloriesPer100g: match.food.caloriesPer100g,
+          estimatedWeightG: _defaultEstimatedWeightG,
           confidence: match.similarity,
         );
       }
