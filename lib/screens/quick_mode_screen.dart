@@ -5,8 +5,8 @@ import 'package:image_picker/image_picker.dart';
 
 import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
-import '../services/cloud_vision_food_recognition_service.dart';
 import '../services/food_recognition_service.dart';
+import '../services/gemini_food_recognition_service.dart';
 
 class QuickModeScreen extends StatefulWidget {
   const QuickModeScreen({super.key});
@@ -17,8 +17,8 @@ class QuickModeScreen extends StatefulWidget {
 
 class _QuickModeScreenState extends State<QuickModeScreen> {
   final _picker = ImagePicker();
-  // proxyBaseUrl / apiKey는 CloudVisionFoodRecognitionService 기본값(--dart-define 주입) 사용.
-  final FoodRecognitionService _recognitionService = CloudVisionFoodRecognitionService();
+  // proxyBaseUrl / apiKey는 GeminiFoodRecognitionService 기본값(--dart-define 주입) 사용.
+  final FoodRecognitionService _recognitionService = GeminiFoodRecognitionService();
   final _foodNameController = TextEditingController();
 
   File? _image;
