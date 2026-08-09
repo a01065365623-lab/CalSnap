@@ -25,7 +25,9 @@ _PROXY_API_KEY = os.environ.get("PROXY_API_KEY")
 
 _PROMPT = (
     "이 사진 속 음식의 정확한 이름과 100g당 예상 칼로리(kcal)를 JSON으로만 답해줘: "
-    "{foodName, caloriesPer100g}"
+    "{foodName, caloriesPer100g}. "
+    "사진에 여러 음식이 있으면 각각의 이름과 칼로리를 모두 파악해서 합산한 뒤, "
+    "대표 이름(예: '목살 스테이크 정식')과 합산 칼로리를 이 JSON 형식으로 답해줘."
 )
 
 

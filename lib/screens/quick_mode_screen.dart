@@ -93,6 +93,12 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
                 child: const Center(child: Text('사진을 찍거나 선택해주세요')),
               ),
             const SizedBox(height: 16),
+            const Text(
+              '한 가지 음식만 촬영하면 더 정확해요. 여러 음식이 있으면 정확도가 떨어질 수 있어요.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+            const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
