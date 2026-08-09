@@ -34,7 +34,7 @@ def _init_model() -> genai.GenerativeModel:
     if not api_key:
         raise RuntimeError("GEMINI_API_KEY 환경변수가 설정되지 않았습니다.")
     genai.configure(api_key=api_key)
-    return genai.GenerativeModel("gemini-2.0-flash")
+    return genai.GenerativeModel("gemini-1.5-flash")
 
 
 _model = _init_model()
