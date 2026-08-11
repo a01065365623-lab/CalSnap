@@ -19,12 +19,14 @@ X-API-Key: <PROXY_API_KEY와 동일한 값, PROXY_API_KEY 설정 시 필수>
 
 성공 응답 (200)
 ```json
-{ "foodName": "김치찌개", "caloriesPer100g": 90 }
+{ "foodName": "김치찌개", "caloriesPer100g": 90, "estimatedWeightG": 400, "carbsG": 6, "proteinG": 8, "fatG": 4 }
 ```
 
 내부적으로 gemini-2.0-flash에 이미지와 함께
-"이 사진 속 음식의 정확한 이름과 100g당 예상 칼로리(kcal)를 JSON으로만 답해줘:
-{foodName, caloriesPer100g}" 프롬프트를 보내고, 응답 텍스트를 그대로 파싱해서 돌려준다.
+"이 사진 속 음식의 정확한 이름, 100g당 예상 칼로리(kcal), 추정 총 중량(g),
+100g당 예상 탄수화물(g)/단백질(g)/지방(g)을 JSON으로만 답해줘:
+{foodName, caloriesPer100g, estimatedWeightG, carbsG, proteinG, fatG}" 프롬프트를 보내고,
+응답 텍스트를 그대로 파싱해서 돌려준다. carbsG/proteinG/fatG는 100g 기준 값이다.
 
 실패 응답: `{"error": "..."}` + 400(잘못된 요청)/401(인증 실패)/502(Gemini 호출 실패 또는 응답 파싱 실패)
 

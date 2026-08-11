@@ -10,6 +10,11 @@ class DailyLogEntry {
   final double calories; // food: +, exercise: -, water: 0
   final double? amount; // g, 분, ml 등
   final LogMode? mode; // food 전용, null 가능
+  // food 전용 영양소(g). calories와 마찬가지로 이미 실제 중량 기준으로 환산된
+  // 절대값이다(100g당 값이 아님). exercise/water나 영양소 정보가 없던 과거 기록은 null.
+  final double? carbsG;
+  final double? proteinG;
+  final double? fatG;
 
   const DailyLogEntry({
     this.id,
@@ -19,6 +24,9 @@ class DailyLogEntry {
     required this.calories,
     this.amount,
     this.mode,
+    this.carbsG,
+    this.proteinG,
+    this.fatG,
   });
 
   Map<String, dynamic> toMap() {
@@ -30,6 +38,9 @@ class DailyLogEntry {
       'calories': calories,
       'amount': amount,
       'mode': mode?.name,
+      'carbsG': carbsG,
+      'proteinG': proteinG,
+      'fatG': fatG,
     };
   }
 
@@ -42,6 +53,9 @@ class DailyLogEntry {
       calories: (map['calories'] as num).toDouble(),
       amount: (map['amount'] as num?)?.toDouble(),
       mode: map['mode'] != null ? LogMode.values.byName(map['mode'] as String) : null,
+      carbsG: (map['carbsG'] as num?)?.toDouble(),
+      proteinG: (map['proteinG'] as num?)?.toDouble(),
+      fatG: (map['fatG'] as num?)?.toDouble(),
     );
   }
 }

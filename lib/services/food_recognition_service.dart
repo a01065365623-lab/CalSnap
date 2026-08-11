@@ -9,12 +9,18 @@ class FoodRecognitionResult {
   final double caloriesPer100g;
   final double estimatedWeightG;
   final double confidence; // 0.0 ~ 1.0
+  final double carbsG; // 100g당 탄수화물(g)
+  final double proteinG; // 100g당 단백질(g)
+  final double fatG; // 100g당 지방(g)
 
   const FoodRecognitionResult({
     required this.foodName,
     required this.caloriesPer100g,
     required this.estimatedWeightG,
     required this.confidence,
+    this.carbsG = 0,
+    this.proteinG = 0,
+    this.fatG = 0,
   });
 }
 
@@ -32,6 +38,9 @@ class MockFoodRecognitionService implements FoodRecognitionService {
       caloriesPer100g: 90,
       estimatedWeightG: 500,
       confidence: 0.75,
+      carbsG: 8,
+      proteinG: 7,
+      fatG: 5,
     );
   }
 }
@@ -58,6 +67,7 @@ class HybridFoodRecognitionService implements FoodRecognitionService {
     try {
       final match = await _onDeviceMatcher.match(imageFile);
       if (match != null && match.similarity >= similarityThreshold) {
+        // 온디바이스 참조 DB(FoodEmbedding)에는 탄단지 정보가 없어 0으로 채운다.
         return FoodRecognitionResult(
           foodName: match.food.foodName,
           caloriesPer100g: match.food.caloriesPer100g,

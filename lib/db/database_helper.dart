@@ -19,7 +19,7 @@ class DatabaseHelper {
     final path = join(dbPath, 'calsnap.db');
     return openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE daily_log (
@@ -29,7 +29,10 @@ class DatabaseHelper {
             name TEXT NOT NULL,
             calories REAL NOT NULL,
             amount REAL,
-            mode TEXT
+            mode TEXT,
+            carbsG REAL,
+            proteinG REAL,
+            fatG REAL
           )
         ''');
         await db.execute('''
@@ -40,6 +43,15 @@ class DatabaseHelper {
             net_calories REAL DEFAULT 0
           )
         ''');
+      },
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < 2) {
+          // 기존 행은 세 컬럼 모두 NULL로 채워지고, log_entry_tile/일일 영양소 집계에서
+          // null을 0으로 취급한다.
+          await db.execute('ALTER TABLE daily_log ADD COLUMN carbsG REAL');
+          await db.execute('ALTER TABLE daily_log ADD COLUMN proteinG REAL');
+          await db.execute('ALTER TABLE daily_log ADD COLUMN fatG REAL');
+        }
       },
     );
   }
@@ -69,6 +81,60 @@ class DatabaseHelper {
     final db = await database;
     await db.delete('daily_log', where: 'id = ?', whereArgs: [id]);
     await _refreshDailySummary(_dateKey(date));
+  }
+
+  /// 여러 건을 한 번에 삽입한다 (트랜잭션 배치 + 날짜별 요약 1회씩만 갱신).
+  /// 대량 시드 데이터처럼 insertLog를 건마다 호출하기엔 비효율적인 경우에 사용.
+  Future<void> insertLogsBulk(List<DailyLogEntry> entries) async {
+    if (entries.isEmpty) return;
+    final db = await database;
+    final batch = db.batch();
+    for (final entry in entries) {
+      batch.insert('daily_log', entry.toMap()..remove('id'));
+    }
+    await batch.commit(noResult: true);
+
+    final dateKeys = entries.map((e) => _dateKey(e.datetime)).toSet();
+    for (final key in dateKeys) {
+      await _refreshDailySummary(key);
+    }
+  }
+
+  /// 여러 날짜에 걸친 원본 로그 목록을 조회한다 (daily_summary 집계가 아닌 개별 항목).
+  Future<List<DailyLogEntry>> getLogsForRange(DateTime from, DateTime to) async {
+    final db = await database;
+    final rows = await db.query(
+      'daily_log',
+      where: 'substr(datetime, 1, 10) >= ? AND substr(datetime, 1, 10) <= ?',
+      whereArgs: [_dateKey(from), _dateKey(to)],
+      orderBy: 'datetime ASC',
+    );
+    return rows.map((r) => DailyLogEntry.fromMap(r)).toList();
+  }
+
+  /// name이 주어진 접두사로 시작하는 로그를 모두 삭제한다 (시드 데이터 정리용).
+  Future<int> deleteLogsWhereNameStartsWith(String prefix) async {
+    final db = await database;
+    final rows = await db.query(
+      'daily_log',
+      columns: ['id', 'datetime'],
+      where: 'name LIKE ?',
+      whereArgs: ['$prefix%'],
+    );
+    if (rows.isEmpty) return 0;
+
+    final ids = rows.map((r) => r['id'] as int).toList();
+    await db.delete(
+      'daily_log',
+      where: 'id IN (${List.filled(ids.length, '?').join(',')})',
+      whereArgs: ids,
+    );
+
+    final dateKeys = rows.map((r) => _dateKey(DateTime.parse(r['datetime'] as String))).toSet();
+    for (final key in dateKeys) {
+      await _refreshDailySummary(key);
+    }
+    return ids.length;
   }
 
   // ── daily_summary ──────────────────────────────────────

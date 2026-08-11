@@ -7,6 +7,8 @@ import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
 import '../services/food_recognition_service.dart';
 import '../services/gemini_food_recognition_service.dart';
+import '../services/user_profile_service.dart';
+import '../utils/unit_converter.dart';
 
 class QuickModeScreen extends StatefulWidget {
   const QuickModeScreen({super.key});
@@ -25,6 +27,18 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
   FoodRecognitionResult? _result;
   double _portionMultiplier = 1.0; // 보정 슬라이더 (0.5x ~ 2.0x)
   bool _loading = false;
+  UnitSystem _unitSystem = UnitSystem.metric;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUnitSystem();
+  }
+
+  Future<void> _loadUnitSystem() async {
+    final unitSystem = await UserProfileService.instance.getUnitSystem();
+    if (mounted) setState(() => _unitSystem = unitSystem);
+  }
 
   @override
   void dispose() {
@@ -38,6 +52,17 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
     return result.caloriesPer100g *
         (result.estimatedWeightG * _portionMultiplier) /
         100;
+  }
+
+  double get _totalCarbs => _scaledNutrient((r) => r.carbsG);
+  double get _totalProtein => _scaledNutrient((r) => r.proteinG);
+  double get _totalFat => _scaledNutrient((r) => r.fatG);
+
+  /// 100g당 영양소 값을, 보정된 추정 중량 기준 절대량으로 환산한다(calories와 동일한 방식).
+  double _scaledNutrient(double Function(FoodRecognitionResult) per100g) {
+    final result = _result;
+    if (result == null) return 0;
+    return per100g(result) * (result.estimatedWeightG * _portionMultiplier) / 100;
   }
 
   Future<void> _pickImage(ImageSource source) async {
@@ -69,6 +94,9 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
       name: foodName,
       calories: _totalCalories,
       mode: LogMode.quick,
+      carbsG: _totalCarbs,
+      proteinG: _totalProtein,
+      fatG: _totalFat,
     ));
     if (mounted) {
       Navigator.pop(context);
@@ -148,9 +176,16 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
                 onChanged: (v) => setState(() => _portionMultiplier = v),
               ),
               Text(
-                '추정 ${(_result!.estimatedWeightG * _portionMultiplier).toStringAsFixed(0)}g '
+                '추정 ${formatWeight(_result!.estimatedWeightG * _portionMultiplier, _unitSystem)} '
                 '· ${_totalCalories.toStringAsFixed(0)}kcal',
                 style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                '탄수화물 ${_totalCarbs.toStringAsFixed(0)}g · '
+                '단백질 ${_totalProtein.toStringAsFixed(0)}g · '
+                '지방 ${_totalFat.toStringAsFixed(0)}g',
+                style: const TextStyle(fontSize: 13, color: Colors.grey),
               ),
               const SizedBox(height: 16),
               ElevatedButton(onPressed: _save, child: const Text('저장')),
