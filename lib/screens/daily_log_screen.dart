@@ -5,6 +5,7 @@ import '../models/daily_log_entry.dart';
 import '../services/user_profile_service.dart';
 import '../utils/unit_converter.dart';
 import '../widgets/log_entry_tile.dart';
+import 'weight_log_screen.dart';
 
 class DailyLogScreen extends StatefulWidget {
   /// 조회할 날짜. 생략하면 오늘. 통계 화면 등에서 특정 날짜의 상세 내역을
@@ -78,6 +79,24 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
     _load();
   }
 
+  Future<void> _deleteAllForDate() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('전체 삭제'),
+        content: const Text('이 날짜의 모든 기록을 삭제하시겠습니까?'),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('취소')),
+          TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('삭제')),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+
+    await _db.deleteLogsForDate(_selectedDate);
+    _load();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,11 +114,23 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
             tooltip: '날짜 선택',
             onPressed: _pickDate,
           ),
+          if (_entries.isNotEmpty)
+            IconButton(
+              icon: const Icon(Icons.delete_sweep),
+              tooltip: '이 날짜 기록 전체 삭제',
+              onPressed: _deleteAllForDate,
+            ),
         ],
       ),
       body: Column(
         children: [
           _SummaryCard(summary: _summary),
+          _WeightLogEntryCard(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const WeightLogScreen()),
+            ),
+          ),
           _NutrientsCard(entries: _entries),
           Expanded(
             child: _entries.isEmpty
@@ -157,6 +188,26 @@ class _SummaryCard extends StatelessWidget {
             _StatColumn(label: '순칼로리', value: net, highlight: true),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// 체중 기록 캘린더(WeightLogScreen)로 이동하는 진입점 카드.
+class _WeightLogEntryCard extends StatelessWidget {
+  final VoidCallback onTap;
+  const _WeightLogEntryCard({required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+      child: ListTile(
+        leading: const Icon(Icons.monitor_weight_outlined),
+        title: const Text('체중 기록'),
+        subtitle: const Text('날짜별 체중을 기록하고 추이를 확인해요'),
+        trailing: const Icon(Icons.chevron_right),
+        onTap: onTap,
       ),
     );
   }

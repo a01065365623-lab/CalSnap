@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../db/database_helper.dart';
 import '../dev/seed_data.dart';
 import '../services/user_profile_service.dart';
+import '../utils/bmr_calculator.dart';
 import '../utils/unit_converter.dart';
 import 'onboarding_screen.dart';
 import 'profile_edit_screen.dart';
@@ -20,6 +22,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   double? _goalCalories;
   String? _userId;
   UnitSystem _unitSystem = UnitSystem.metric;
+  UserProfile? _profile;
 
   @override
   void initState() {
@@ -31,13 +34,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final goalCalories = await UserProfileService.instance.getGoalCalories();
     final userId = await UserProfileService.instance.getUserId();
     final unitSystem = await UserProfileService.instance.getUnitSystem();
+    final profile = await UserProfileService.instance.getProfile();
     if (mounted) {
       setState(() {
         _goalCalories = goalCalories;
         _userId = userId;
         _unitSystem = unitSystem;
+        _profile = profile;
       });
     }
+  }
+
+  /// 온보딩 전이거나 키/체중이 없으면 null(표시 안 함).
+  String? get _bmiBmrText {
+    final profile = _profile;
+    if (profile == null) return null;
+    final bmi = calculateBmi(weightKg: profile.weightKg, heightCm: profile.heightCm);
+    final bmr = calculateBmr(
+      gender: profile.gender,
+      age: profile.age,
+      heightCm: profile.heightCm,
+      weightKg: profile.weightKg,
+    );
+    final bmrText = NumberFormat('#,##0').format(bmr);
+    return 'BMI ${bmi.toStringAsFixed(1)} (${getBmiCategory(bmi)}) · BMR $bmrText kcal';
   }
 
   String get _unitSystemLabel =>
@@ -170,15 +190,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
         children: [
           ListTile(
             title: const Text('목표 칼로리 설정'),
-            subtitle: Text(
-              _goalCalories != null
-                  ? '${_goalCalories!.toStringAsFixed(0)} kcal/일 · 성별·나이·키·체중 기준'
-                  : '정보를 입력해주세요',
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _goalCalories != null
+                      ? '${_goalCalories!.toStringAsFixed(0)} kcal/일 · 성별·나이·키·체중 기준'
+                      : '정보를 입력해주세요',
+                ),
+                if (_bmiBmrText != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2),
+                    child: Text(
+                      _bmiBmrText!,
+                      style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                    ),
+                  ),
+              ],
             ),
             trailing: const Icon(Icons.chevron_right),
             onTap: _openProfileEditor,
           ),
           ListTile(
+            leading: Icon(Icons.restart_alt, color: Colors.deepOrange.shade400),
             title: const Text('프로필 초기화 (온보딩 다시하기)'),
             subtitle: const Text('성별·나이·키·체중·목표 칼로리를 지우고 온보딩부터 다시 시작'),
             trailing: const Icon(Icons.chevron_right),

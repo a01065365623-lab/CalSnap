@@ -26,3 +26,17 @@ double calculateGoalCalories({
 }) {
   return calculateBmr(gender: gender, age: age, heightCm: heightCm, weightKg: weightKg) * activityFactor;
 }
+
+/// 체질량지수(BMI, kg/m²)를 계산한다.
+double calculateBmi({required double weightKg, required double heightCm}) {
+  final heightM = heightCm / 100;
+  return weightKg / (heightM * heightM);
+}
+
+/// 대한비만학회 기준 BMI 분류.
+String getBmiCategory(double bmi) {
+  if (bmi < 18.5) return '저체중';
+  if (bmi < 23) return '정상';
+  if (bmi < 25) return '과체중';
+  return '비만';
+}

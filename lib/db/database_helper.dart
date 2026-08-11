@@ -19,7 +19,7 @@ class DatabaseHelper {
     final path = join(dbPath, 'calsnap.db');
     return openDatabase(
       path,
-      version: 2,
+      version: 3,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE daily_log (
@@ -43,6 +43,12 @@ class DatabaseHelper {
             net_calories REAL DEFAULT 0
           )
         ''');
+        await db.execute('''
+          CREATE TABLE weight_log (
+            date TEXT PRIMARY KEY,
+            weight_kg REAL NOT NULL
+          )
+        ''');
       },
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -51,6 +57,16 @@ class DatabaseHelper {
           await db.execute('ALTER TABLE daily_log ADD COLUMN carbsG REAL');
           await db.execute('ALTER TABLE daily_log ADD COLUMN proteinG REAL');
           await db.execute('ALTER TABLE daily_log ADD COLUMN fatG REAL');
+        }
+        if (oldVersion < 3) {
+          // 온보딩/프로필 체중(user_profile_service)과는 별개로, 날짜별 체중 추이를
+          // 기록하기 위한 테이블. 날짜당 하나만 유지한다(같은 날 재기록 시 덮어씀).
+          await db.execute('''
+            CREATE TABLE weight_log (
+              date TEXT PRIMARY KEY,
+              weight_kg REAL NOT NULL
+            )
+          ''');
         }
       },
     );
@@ -81,6 +97,16 @@ class DatabaseHelper {
     final db = await database;
     await db.delete('daily_log', where: 'id = ?', whereArgs: [id]);
     await _refreshDailySummary(_dateKey(date));
+  }
+
+  /// 해당 날짜의 로그를 전부 삭제한다("오늘 기록 전체 초기화" 등). 삭제 후
+  /// daily_summary도 그 날짜 기준으로 다시 계산되어 0으로 갱신된다.
+  Future<int> deleteLogsForDate(DateTime date) async {
+    final db = await database;
+    final key = _dateKey(date);
+    final count = await db.delete('daily_log', where: 'datetime LIKE ?', whereArgs: ['$key%']);
+    await _refreshDailySummary(key);
+    return count;
   }
 
   /// 여러 건을 한 번에 삽입한다 (트랜잭션 배치 + 날짜별 요약 1회씩만 갱신).
@@ -198,6 +224,50 @@ class DatabaseHelper {
               totalBurned: (r['total_burned'] as num).toDouble(),
             ))
         .toList();
+  }
+
+  // ── weight_log (온보딩/프로필 체중과 별개인 날짜별 체중 기록) ──────
+
+  /// 해당 날짜의 체중을 기록/수정한다(같은 날짜면 덮어씀).
+  Future<void> setWeightForDate(DateTime date, double weightKg) async {
+    final db = await database;
+    await db.insert(
+      'weight_log',
+      {'date': _dateKey(date), 'weight_kg': weightKg},
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  /// 해당 날짜의 체중 기록을 삭제한다(입력값을 비워 취소하는 용도).
+  Future<void> deleteWeightForDate(DateTime date) async {
+    final db = await database;
+    await db.delete('weight_log', where: 'date = ?', whereArgs: [_dateKey(date)]);
+  }
+
+  Future<double?> getWeightForDate(DateTime date) async {
+    final db = await database;
+    final rows = await db.query('weight_log', where: 'date = ?', whereArgs: [_dateKey(date)]);
+    if (rows.isEmpty) return null;
+    return (rows.first['weight_kg'] as num).toDouble();
+  }
+
+  /// 캘린더 한 달치처럼, 구간 내 날짜별 체중을 한 번에 조회한다. 키는 'yyyy-MM-dd'.
+  Future<Map<String, double>> getWeightsForRange(DateTime from, DateTime to) async {
+    final db = await database;
+    final rows = await db.query(
+      'weight_log',
+      where: 'date >= ? AND date <= ?',
+      whereArgs: [_dateKey(from), _dateKey(to)],
+    );
+    return {for (final r in rows) r['date'] as String: (r['weight_kg'] as num).toDouble()};
+  }
+
+  /// 가장 최근에 기록된 체중 하나(날짜 무관). 최신 체중 기준 표시용.
+  Future<double?> getLatestWeight() async {
+    final db = await database;
+    final rows = await db.query('weight_log', orderBy: 'date DESC', limit: 1);
+    if (rows.isEmpty) return null;
+    return (rows.first['weight_kg'] as num).toDouble();
   }
 
   String _dateKey(DateTime d) =>

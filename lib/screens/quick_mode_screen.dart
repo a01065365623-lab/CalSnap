@@ -83,6 +83,17 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
     });
   }
 
+  /// 인식 결과를 취소하고 촬영/갤러리 버튼만 있는 초기 상태로 되돌린다.
+  void _reset() {
+    setState(() {
+      _image = null;
+      _result = null;
+      _foodNameController.clear();
+      _portionMultiplier = 1.0;
+      _loading = false;
+    });
+  }
+
   Future<void> _save() async {
     if (_result == null) return;
     final foodName = _foodNameController.text.trim().isEmpty
@@ -189,6 +200,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
               ),
               const SizedBox(height: 16),
               ElevatedButton(onPressed: _save, child: const Text('저장')),
+              TextButton(onPressed: _reset, child: const Text('다시 찍기 / 초기화')),
             ],
           ],
         ),

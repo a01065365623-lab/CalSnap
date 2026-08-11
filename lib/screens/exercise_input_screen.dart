@@ -67,6 +67,16 @@ class _ExerciseInputScreenState extends State<ExerciseInputScreen> {
     );
   }
 
+  /// 운동 종류/시간/기타운동 입력을 전부 초기 상태로 되돌린다.
+  void _reset() {
+    setState(() {
+      _selected = exerciseTypes.first;
+      _minutes = 30;
+      _customNameController.clear();
+      _customCaloriesController.clear();
+    });
+  }
+
   Future<void> _save() async {
     if (!_canSave) return;
     final name = _isCustom ? _customNameController.text.trim() : '${_selected.emoji} ${_selected.name}';
@@ -201,6 +211,7 @@ class _ExerciseInputScreenState extends State<ExerciseInputScreen> {
                 child: const Text('저장'),
               ),
             ),
+            TextButton(onPressed: _reset, child: const Text('초기화')),
           ],
         ),
       ),
