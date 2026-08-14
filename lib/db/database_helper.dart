@@ -72,6 +72,15 @@ class DatabaseHelper {
     );
   }
 
+  /// 식사·운동·물, 요약, 체중 기록을 전부 삭제한다. 시크릿 모드 "비밀번호를 잊으셨나요?"
+  /// 초기화 흐름 전용 — 스키마는 그대로 두고 데이터만 비운다.
+  Future<void> resetAllData() async {
+    final db = await database;
+    await db.delete('daily_log');
+    await db.delete('daily_summary');
+    await db.delete('weight_log');
+  }
+
   // ── daily_log ──────────────────────────────────────────
 
   Future<int> insertLog(DailyLogEntry entry) async {
@@ -224,6 +233,86 @@ class DatabaseHelper {
               totalBurned: (r['total_burned'] as num).toDouble(),
             ))
         .toList();
+  }
+
+  /// 기간 내 운동(LogType.exercise) 기록만 날짜별로 집계한다(칼로리는 절댓값,
+  /// 시간은 amount 합). 운동 기록이 없는 날짜는 결과에서 생략되므로, 통계 화면처럼
+  /// 빈 날짜를 0으로 채워야 하는 호출부에서 직접 채워 넣어야 한다.
+  Future<List<ExerciseSummary>> getExerciseSummaryRange(DateTime from, DateTime to) async {
+    final db = await database;
+    final rows = await db.rawQuery(
+      '''
+      SELECT substr(datetime, 1, 10) AS date,
+             SUM(-calories) AS caloriesBurned,
+             SUM(COALESCE(amount, 0)) AS minutes
+      FROM daily_log
+      WHERE type = ? AND substr(datetime, 1, 10) >= ? AND substr(datetime, 1, 10) <= ?
+      GROUP BY date
+      ORDER BY date ASC
+      ''',
+      [LogType.exercise.name, _dateKey(from), _dateKey(to)],
+    );
+    return rows
+        .map((r) => ExerciseSummary(
+              date: r['date'] as String,
+              caloriesBurned: (r['caloriesBurned'] as num).toDouble(),
+              minutes: (r['minutes'] as num).toDouble(),
+            ))
+        .toList();
+  }
+
+  /// 기간 내 음식(LogType.food) 기록의 탄단지(g)를 날짜별로 합산한다. 음식 기록이
+  /// 없는 날짜는 결과에서 생략된다.
+  Future<List<NutrientSummary>> getNutrientSummaryRange(DateTime from, DateTime to) async {
+    final db = await database;
+    final rows = await db.rawQuery(
+      '''
+      SELECT substr(datetime, 1, 10) AS date,
+             SUM(COALESCE(carbsG, 0)) AS carbsG,
+             SUM(COALESCE(proteinG, 0)) AS proteinG,
+             SUM(COALESCE(fatG, 0)) AS fatG
+      FROM daily_log
+      WHERE type = ? AND substr(datetime, 1, 10) >= ? AND substr(datetime, 1, 10) <= ?
+      GROUP BY date
+      ORDER BY date ASC
+      ''',
+      [LogType.food.name, _dateKey(from), _dateKey(to)],
+    );
+    return rows
+        .map((r) => NutrientSummary(
+              date: r['date'] as String,
+              carbsG: (r['carbsG'] as num).toDouble(),
+              proteinG: (r['proteinG'] as num).toDouble(),
+              fatG: (r['fatG'] as num).toDouble(),
+            ))
+        .toList();
+  }
+
+  /// [date]부터 과거로 거슬러 올라가며 하루도 빠짐없이 기록(daily_log)이 있는 연속
+  /// 일수를 센다. 최대 [maxDays]일까지만 확인한다(스트릭 표시 목적상 그 이상은
+  /// 의미가 크지 않고 쿼리 비용만 커진다). daily_summary가 아닌 daily_log를 직접
+  /// 보는 이유: 하루의 기록을 전부 삭제해도 daily_summary 행 자체는 0으로 남아있어
+  /// "기록한 날"로 잘못 셀 수 있기 때문이다.
+  Future<int> getStreakDaysEndingOn(DateTime date, {int maxDays = 60}) async {
+    final db = await database;
+    final from = date.subtract(Duration(days: maxDays - 1));
+    final rows = await db.rawQuery(
+      '''
+      SELECT DISTINCT substr(datetime, 1, 10) AS date
+      FROM daily_log
+      WHERE substr(datetime, 1, 10) >= ? AND substr(datetime, 1, 10) <= ?
+      ''',
+      [_dateKey(from), _dateKey(date)],
+    );
+    final loggedDates = rows.map((r) => r['date'] as String).toSet();
+
+    int streak = 0;
+    var cursor = date;
+    while (loggedDates.contains(_dateKey(cursor))) {
+      streak++;
+      cursor = cursor.subtract(const Duration(days: 1));
+    }
+    return streak;
   }
 
   // ── weight_log (온보딩/프로필 체중과 별개인 날짜별 체중 기록) ──────

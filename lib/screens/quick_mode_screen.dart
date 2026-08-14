@@ -1,14 +1,19 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
 import '../services/food_recognition_service.dart';
 import '../services/gemini_food_recognition_service.dart';
+import '../services/tts_service.dart';
 import '../services/user_profile_service.dart';
+import '../theme/app_colors.dart';
 import '../utils/unit_converter.dart';
+import '../widgets/related_products_button.dart';
 
 class QuickModeScreen extends StatefulWidget {
   const QuickModeScreen({super.key});
@@ -22,11 +27,13 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
   // proxyBaseUrl / apiKey는 GeminiFoodRecognitionService 기본값(--dart-define 주입) 사용.
   final FoodRecognitionService _recognitionService = GeminiFoodRecognitionService();
   final _foodNameController = TextEditingController();
+  final _hintController = TextEditingController();
 
   File? _image;
   FoodRecognitionResult? _result;
   double _portionMultiplier = 1.0; // 보정 슬라이더 (0.5x ~ 2.0x)
   bool _loading = false;
+  String? _errorMessage;
   UnitSystem _unitSystem = UnitSystem.metric;
 
   @override
@@ -43,6 +50,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
   @override
   void dispose() {
     _foodNameController.dispose();
+    _hintController.dispose();
     super.dispose();
   }
 
@@ -69,18 +77,65 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
     final picked = await _picker.pickImage(source: source, imageQuality: 80);
     if (picked == null) return;
 
+    final image = File(picked.path);
     setState(() {
-      _image = File(picked.path);
-      _loading = true;
+      _image = image;
       _result = null;
+      _errorMessage = null;
+    });
+    await _recognize(image);
+  }
+
+  Future<void> _recognize(File image) async {
+    setState(() {
+      _loading = true;
+      _errorMessage = null;
     });
 
-    final result = await _recognitionService.recognize(_image!);
-    setState(() {
-      _result = result;
-      _foodNameController.text = result.foodName;
-      _loading = false;
-    });
+    final hint = _hintController.text.trim();
+    try {
+      final result = await _recognitionService.recognize(
+        image,
+        hint: hint.isEmpty ? null : hint,
+      );
+      if (!mounted) return;
+      setState(() {
+        _result = result;
+        _foodNameController.text = result.foodName;
+        _loading = false;
+      });
+    } catch (e) {
+      if (!mounted) return;
+      final l10n = AppLocalizations.of(context)!;
+      final message = _friendlyErrorMessage(l10n, e);
+      setState(() {
+        _loading = false;
+        _errorMessage = message;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+          action: SnackBarAction(label: l10n.retryButton, onPressed: () => _recognize(image)),
+        ),
+      );
+    }
+  }
+
+  String _friendlyErrorMessage(AppLocalizations l10n, Object error) {
+    if (error is FoodRecognitionException) {
+      switch (error.failure) {
+        case FoodRecognitionFailure.unauthorized:
+          return l10n.recognitionErrorUnauthorized;
+        case FoodRecognitionFailure.timeout:
+          return l10n.recognitionErrorTimeout;
+        case FoodRecognitionFailure.network:
+          return l10n.recognitionErrorNetwork;
+        case FoodRecognitionFailure.server:
+        case FoodRecognitionFailure.unknown:
+          return l10n.recognitionErrorGeneric;
+      }
+    }
+    return l10n.recognitionErrorGeneric;
   }
 
   /// 인식 결과를 취소하고 촬영/갤러리 버튼만 있는 초기 상태로 되돌린다.
@@ -88,6 +143,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
     setState(() {
       _image = null;
       _result = null;
+      _errorMessage = null;
       _foodNameController.clear();
       _portionMultiplier = 1.0;
       _loading = false;
@@ -109,18 +165,29 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
       proteinG: _totalProtein,
       fatG: _totalFat,
     ));
+    unawaited(TtsService.instance.speakAfterSave(TtsCategory.mealSave));
     if (mounted) {
+      final l10n = AppLocalizations.of(context)!;
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('저장했어요')),
+        SnackBar(content: Text(l10n.savedSnackbarMessage)),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: const Text('빠른 측정')),
+      appBar: AppBar(
+        title: Row(
+          children: [
+            const Icon(Icons.restaurant, color: AppColors.foodCoral, size: 22),
+            const SizedBox(width: 8),
+            Text(l10n.quickModeAppBarTitle),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -137,13 +204,22 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
                   color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Center(child: Text('사진을 찍거나 선택해주세요')),
+                child: Center(child: Text(l10n.quickModePlaceholder)),
               ),
             const SizedBox(height: 16),
-            const Text(
-              '한 가지 음식만 촬영하면 더 정확해요. 여러 음식이 있으면 정확도가 떨어질 수 있어요.',
+            Text(
+              l10n.quickModeGuidance,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12, color: Colors.grey),
+              style: const TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+            const SizedBox(height: 8),
+            TextField(
+              controller: _hintController,
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                isDense: true,
+                hintText: l10n.quickModeHintFieldPlaceholder,
+              ),
             ),
             const SizedBox(height: 8),
             Row(
@@ -151,18 +227,27 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
               children: [
                 ElevatedButton.icon(
                   onPressed: () => _pickImage(ImageSource.camera),
-                  icon: const Icon(Icons.camera_alt),
-                  label: const Text('촬영'),
+                  icon: const Icon(Icons.camera_alt, color: AppColors.foodCoral),
+                  label: Text(l10n.quickModeCameraButton),
                 ),
                 ElevatedButton.icon(
                   onPressed: () => _pickImage(ImageSource.gallery),
-                  icon: const Icon(Icons.photo_library),
-                  label: const Text('갤러리'),
+                  icon: const Icon(Icons.photo_library, color: AppColors.foodCoral),
+                  label: Text(l10n.quickModeGalleryButton),
                 ),
               ],
             ),
             const SizedBox(height: 24),
             if (_loading) const CircularProgressIndicator(),
+            if (!_loading && _errorMessage != null) ...[
+              Text(_errorMessage!, style: const TextStyle(color: Colors.red)),
+              const SizedBox(height: 8),
+              ElevatedButton.icon(
+                onPressed: _image == null ? null : () => _recognize(_image!),
+                icon: const Icon(Icons.refresh),
+                label: Text(l10n.retryButton),
+              ),
+            ],
             if (_result != null) ...[
               TextField(
                 controller: _foodNameController,
@@ -171,13 +256,13 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
                 decoration: const InputDecoration(
                   isDense: true,
                   border: InputBorder.none,
-                  suffixIcon: Icon(Icons.edit, size: 18),
+                  suffixIcon: Icon(Icons.edit, size: 18, color: AppColors.foodCoral),
                 ),
               ),
-              Text('추정 정확도 ${(_result!.confidence * 100).toStringAsFixed(0)}%',
+              Text(l10n.quickModeConfidence((_result!.confidence * 100).toStringAsFixed(0)),
                   style: const TextStyle(color: Colors.grey)),
               const SizedBox(height: 12),
-              Text('양 보정: ${(_portionMultiplier * 100).toStringAsFixed(0)}%'),
+              Text(l10n.quickModePortionAdjust((_portionMultiplier * 100).toStringAsFixed(0))),
               Slider(
                 value: _portionMultiplier,
                 min: 0.5,
@@ -187,20 +272,30 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
                 onChanged: (v) => setState(() => _portionMultiplier = v),
               ),
               Text(
-                '추정 ${formatWeight(_result!.estimatedWeightG * _portionMultiplier, _unitSystem)} '
-                '· ${_totalCalories.toStringAsFixed(0)}kcal',
+                l10n.quickModeEstimatedSummary(
+                  formatWeight(_result!.estimatedWeightG * _portionMultiplier, _unitSystem),
+                  _totalCalories.toStringAsFixed(0),
+                ),
                 style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 4),
               Text(
-                '탄수화물 ${_totalCarbs.toStringAsFixed(0)}g · '
-                '단백질 ${_totalProtein.toStringAsFixed(0)}g · '
-                '지방 ${_totalFat.toStringAsFixed(0)}g',
+                l10n.nutrientsSummary(
+                  _totalCarbs.toStringAsFixed(0),
+                  _totalProtein.toStringAsFixed(0),
+                  _totalFat.toStringAsFixed(0),
+                ),
                 style: const TextStyle(fontSize: 13, color: Colors.grey),
               ),
               const SizedBox(height: 16),
-              ElevatedButton(onPressed: _save, child: const Text('저장')),
-              TextButton(onPressed: _reset, child: const Text('다시 찍기 / 초기화')),
+              ElevatedButton(onPressed: _save, child: Text(l10n.saveButton)),
+              const SizedBox(height: 8),
+              RelatedProductsButton(
+                queryBuilder: () => _foodNameController.text.trim().isEmpty
+                    ? _result!.foodName
+                    : _foodNameController.text.trim(),
+              ),
+              TextButton(onPressed: _reset, child: Text(l10n.quickModeRetakeResetButton)),
             ],
           ],
         ),

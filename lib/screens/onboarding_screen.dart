@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../services/user_profile_service.dart';
 import '../utils/bmr_calculator.dart';
@@ -75,43 +76,45 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: const Text('시작하기 전에')),
+      appBar: AppBar(title: Text(l10n.onboardingAppBarTitle)),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                '목표 칼로리 계산에 필요한 최소 정보만 입력해주세요.',
-                style: TextStyle(fontSize: 14, color: Colors.grey),
+              Text(
+                l10n.onboardingIntro,
+                style: const TextStyle(fontSize: 14, color: Colors.grey),
               ),
               const SizedBox(height: 24),
-              const Text('성별', style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(l10n.genderLabel, style: const TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 12,
                 children: [
                   ChoiceChip(
-                    label: const Text('남'),
+                    label: Text(l10n.genderMale),
                     selected: _gender == Gender.male,
                     onSelected: (_) => setState(() => _gender = Gender.male),
                   ),
                   ChoiceChip(
-                    label: const Text('여'),
+                    label: Text(l10n.genderFemale),
                     selected: _gender == Gender.female,
                     onSelected: (_) => setState(() => _gender = Gender.female),
                   ),
                 ],
               ),
               const SizedBox(height: 24),
-              LabeledNumberField(label: '나이', suffix: '세', controller: _ageController),
-              const SizedBox(height: 16),
-              LabeledNumberField(label: '키', suffix: 'cm', controller: _heightController, allowDecimal: true),
+              LabeledNumberField(label: l10n.ageLabel, suffix: l10n.ageSuffix, controller: _ageController),
               const SizedBox(height: 16),
               LabeledNumberField(
-                label: '체중',
+                  label: l10n.heightLabel, suffix: 'cm', controller: _heightController, allowDecimal: true),
+              const SizedBox(height: 16),
+              LabeledNumberField(
+                label: l10n.weightLabel,
                 suffix: _unitSystem == UnitSystem.imperial ? 'lb' : 'kg',
                 controller: _weightController,
                 allowDecimal: true,
@@ -127,7 +130,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           height: 20,
                           child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
                         )
-                      : const Text('시작하기'),
+                      : Text(l10n.onboardingStartButton),
                 ),
               ),
             ],

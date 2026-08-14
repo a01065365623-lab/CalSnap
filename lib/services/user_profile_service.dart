@@ -32,6 +32,7 @@ class UserProfileService {
   static const _keyWeightKg = 'profile_weight_kg';
   static const _keyGoalCalories = 'profile_goal_calories';
   static const _keyUnitSystem = 'unit_system';
+  static const _keyTtsEnabled = 'tts_enabled';
 
   Future<bool> isOnboardingComplete() async {
     final prefs = await SharedPreferences.getInstance();
@@ -122,6 +123,17 @@ class UserProfileService {
   Future<void> setUnitSystem(UnitSystem unit) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_keyUnitSystem, unit.name);
+  }
+
+  /// 상황별 TTS 격려 멘트 음성 안내 on/off. 기본값은 켜짐.
+  Future<bool> getTtsEnabled() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_keyTtsEnabled) ?? true;
+  }
+
+  Future<void> setTtsEnabled(bool enabled) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_keyTtsEnabled, enabled);
   }
 
   /// 저장된 체중이 있으면 그 값을, 없으면 [fallback]을 반환한다.

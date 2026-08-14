@@ -33,10 +33,14 @@ double calculateBmi({required double weightKg, required double heightCm}) {
   return weightKg / (heightM * heightM);
 }
 
-/// 대한비만학회 기준 BMI 분류.
-String getBmiCategory(double bmi) {
-  if (bmi < 18.5) return '저체중';
-  if (bmi < 23) return '정상';
-  if (bmi < 25) return '과체중';
-  return '비만';
+/// 대한비만학회 기준 BMI 분류. 문자열이 아닌 enum을 반환해, 화면(UI 레이어)에서
+/// AppLocalizations로 언어별 라벨을 붙이도록 한다(이 파일은 Flutter 의존성 없는
+/// 순수 계산 유틸로 유지).
+enum BmiCategory { underweight, normal, overweight, obese }
+
+BmiCategory getBmiCategory(double bmi) {
+  if (bmi < 18.5) return BmiCategory.underweight;
+  if (bmi < 23) return BmiCategory.normal;
+  if (bmi < 25) return BmiCategory.overweight;
+  return BmiCategory.obese;
 }

@@ -1,9 +1,62 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
 import '../models/exercise_type.dart';
+import '../services/tts_service.dart';
 import '../services/user_profile_service.dart';
+import '../theme/app_colors.dart';
+
+String _exerciseTypeLabel(AppLocalizations l10n, String id) {
+  switch (id) {
+    case 'walk':
+      return l10n.exerciseTypeWalk;
+    case 'briskWalk':
+      return l10n.exerciseTypeBriskWalk;
+    case 'jog':
+      return l10n.exerciseTypeJog;
+    case 'run':
+      return l10n.exerciseTypeRun;
+    case 'cycle':
+      return l10n.exerciseTypeCycle;
+    case 'strength':
+      return l10n.exerciseTypeStrength;
+    case 'yoga':
+      return l10n.exerciseTypeYoga;
+    case 'hike':
+      return l10n.exerciseTypeHike;
+    case 'swim':
+      return l10n.exerciseTypeSwim;
+    case 'stairs':
+      return l10n.exerciseTypeStairs;
+    case 'other':
+      return l10n.exerciseTypeOther;
+    default:
+      return id;
+  }
+}
+
+String _presetLabel(AppLocalizations l10n, String id) {
+  switch (id) {
+    case 'fishing':
+      return l10n.presetFishing;
+    case 'badminton':
+      return l10n.presetBadminton;
+    case 'golf':
+      return l10n.presetGolf;
+    case 'housework':
+      return l10n.presetHousework;
+    case 'lightHike':
+      return l10n.presetLightHike;
+    case 'stairsChildcare':
+      return l10n.presetStairsChildcare;
+    default:
+      return id;
+  }
+}
 
 class ExerciseInputScreen extends StatefulWidget {
   const ExerciseInputScreen({super.key});
@@ -40,15 +93,15 @@ class _ExerciseInputScreenState extends State<ExerciseInputScreen> {
     super.dispose();
   }
 
-  bool get _isCustom => _selected.name == customExerciseName;
+  bool get _isCustom => _selected.id == customExerciseId;
 
   double? get _customCalories => double.tryParse(_customCaloriesController.text.trim());
 
-  String? get _customCaloriesError {
+  String? _customCaloriesError(AppLocalizations l10n) {
     if (_customCaloriesController.text.trim().isEmpty) return null;
     final value = _customCalories;
-    if (value == null) return '숫자를 입력해주세요';
-    if (value <= 0) return '0보다 커야 해요';
+    if (value == null) return l10n.exerciseInputCustomCaloriesErrorNaN;
+    if (value <= 0) return l10n.exerciseInputCustomCaloriesErrorNonPositive;
     return null;
   }
 
@@ -79,7 +132,10 @@ class _ExerciseInputScreenState extends State<ExerciseInputScreen> {
 
   Future<void> _save() async {
     if (!_canSave) return;
-    final name = _isCustom ? _customNameController.text.trim() : '${_selected.emoji} ${_selected.name}';
+    final l10n = AppLocalizations.of(context)!;
+    final name = _isCustom
+        ? _customNameController.text.trim()
+        : '${_selected.emoji} ${_exerciseTypeLabel(l10n, _selected.id)}';
     await DatabaseHelper.instance.insertLog(DailyLogEntry(
       datetime: DateTime.now(),
       type: LogType.exercise,
@@ -87,66 +143,78 @@ class _ExerciseInputScreenState extends State<ExerciseInputScreen> {
       calories: -_caloriesBurned,
       amount: _isCustom ? null : _minutes,
     ));
+    unawaited(TtsService.instance.speakAfterSave(TtsCategory.exerciseSave));
     if (mounted) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('저장했어요')),
+        SnackBar(content: Text(l10n.savedSnackbarMessage)),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: const Text('운동 기록')),
+      appBar: AppBar(
+        title: Row(
+          children: [
+            const Icon(Icons.fitness_center, color: AppColors.exerciseTeal, size: 22),
+            const SizedBox(width: 8),
+            Text(l10n.exerciseInputAppBarTitle),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('운동 종류', style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(l10n.exerciseInputTypeLabel, style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
               runSpacing: 8,
               children: exerciseTypes.map((e) {
-                final selected = e.name == _selected.name;
+                final selected = e.id == _selected.id;
                 return ChoiceChip(
-                  label: Text('${e.emoji} ${e.name}'),
+                  label: Text('${e.emoji} ${_exerciseTypeLabel(l10n, e.id)}'),
                   selected: selected,
+                  selectedColor: AppColors.exerciseTealBg,
+                  checkmarkColor: AppColors.exerciseTeal,
                   onSelected: (_) => setState(() => _selected = e),
                 );
               }).toList(),
             ),
             const SizedBox(height: 24),
             if (_isCustom) ...[
-              const Text('운동명', style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(l10n.exerciseInputCustomNameLabel, style: const TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),
               TextField(
                 controller: _customNameController,
-                decoration: const InputDecoration(
-                  hintText: '예: 낚시, 배드민턴',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  hintText: l10n.exerciseInputCustomNameHint,
+                  border: const OutlineInputBorder(),
                   isDense: true,
                 ),
               ),
               const SizedBox(height: 16),
-              const Text('소모 칼로리', style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(l10n.exerciseInputCustomCaloriesLabel, style: const TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),
               TextField(
                 controller: _customCaloriesController,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(
-                  hintText: '예: 300',
+                  hintText: l10n.exerciseInputCustomCaloriesHint,
                   suffixText: 'kcal',
                   border: const OutlineInputBorder(),
                   isDense: true,
-                  errorText: _customCaloriesError,
+                  errorText: _customCaloriesError(l10n),
                 ),
               ),
               const SizedBox(height: 16),
               Text(
-                '30분 기준 예시예요, 활동 강도에 따라 조절하세요',
+                l10n.exerciseInputPresetHint,
                 style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
               ),
               const SizedBox(height: 8),
@@ -154,21 +222,22 @@ class _ExerciseInputScreenState extends State<ExerciseInputScreen> {
                 spacing: 8,
                 runSpacing: 8,
                 children: customExercisePresets.map((p) {
+                  final label = _presetLabel(l10n, p.id);
                   return ActionChip(
-                    label: Text('${p.name} · ${p.caloriesPer30Min.toStringAsFixed(0)}kcal'),
+                    label: Text('$label · ${p.caloriesPer30Min.toStringAsFixed(0)}kcal'),
                     labelStyle: const TextStyle(fontSize: 12),
                     visualDensity: VisualDensity.compact,
                     onPressed: () {
-                      _customNameController.text = p.name;
+                      _customNameController.text = label;
                       _customCaloriesController.text = p.caloriesPer30Min.toStringAsFixed(0);
                     },
                   );
                 }).toList(),
               ),
             ] else ...[
-              const Text('운동 시간', style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(l10n.exerciseInputDurationLabel, style: const TextStyle(fontWeight: FontWeight.bold)),
               Text(
-                '${_minutes.round()}분',
+                '${_minutes.round()}${l10n.minutesSuffix}',
                 style: const TextStyle(fontSize: 18),
               ),
               Slider(
@@ -176,7 +245,7 @@ class _ExerciseInputScreenState extends State<ExerciseInputScreen> {
                 min: 10,
                 max: 180,
                 divisions: 17,
-                label: '${_minutes.round()}분',
+                label: '${_minutes.round()}${l10n.minutesSuffix}',
                 onChanged: (v) => setState(() => _minutes = v),
               ),
             ],
@@ -189,15 +258,20 @@ class _ExerciseInputScreenState extends State<ExerciseInputScreen> {
                     Text(
                       _isCustom
                           ? (_customNameController.text.trim().isEmpty
-                              ? '운동명을 입력해주세요'
+                              ? l10n.exerciseInputCustomNamePlaceholder
                               : _customNameController.text.trim())
-                          : '${_selected.emoji} ${_selected.name} · ${_minutes.round()}분',
+                          : '${_selected.emoji} ${_exerciseTypeLabel(l10n, _selected.id)} · '
+                              '${_minutes.round()}${l10n.minutesSuffix}',
                       style: const TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '예상 소모 ${_caloriesBurned.toStringAsFixed(0)} kcal',
-                      style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      l10n.exerciseInputEstimatedBurn(_caloriesBurned.toStringAsFixed(0)),
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.exerciseTeal,
+                      ),
                     ),
                   ],
                 ),
@@ -208,10 +282,10 @@ class _ExerciseInputScreenState extends State<ExerciseInputScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: _canSave ? _save : null,
-                child: const Text('저장'),
+                child: Text(l10n.saveButton),
               ),
             ),
-            TextButton(onPressed: _reset, child: const Text('초기화')),
+            TextButton(onPressed: _reset, child: Text(l10n.resetButton)),
           ],
         ),
       ),

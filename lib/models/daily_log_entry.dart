@@ -72,3 +72,31 @@ class DailySummary {
     required this.totalBurned,
   });
 }
+
+/// 하루치 운동(LogType.exercise) 기록 집계. 그 날 운동 기록이 없으면 결과에서 생략된다.
+class ExerciseSummary {
+  final String date; // yyyy-MM-dd
+  final double caloriesBurned;
+  final double minutes;
+
+  const ExerciseSummary({
+    required this.date,
+    required this.caloriesBurned,
+    required this.minutes,
+  });
+}
+
+/// 하루치 음식(LogType.food) 탄단지(g) 합산. 그 날 음식 기록이 없으면 결과에서 생략된다.
+class NutrientSummary {
+  final String date; // yyyy-MM-dd
+  final double carbsG;
+  final double proteinG;
+  final double fatG;
+
+  const NutrientSummary({
+    required this.date,
+    required this.carbsG,
+    required this.proteinG,
+    required this.fatG,
+  });
+}

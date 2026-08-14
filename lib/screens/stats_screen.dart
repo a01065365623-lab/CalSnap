@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
+import '../theme/app_colors.dart';
 import 'daily_log_screen.dart';
+import 'weight_log_screen.dart';
 
 enum _Period { week, month, year }
 
@@ -19,14 +22,58 @@ extension on _Period {
     }
   }
 
-  String get label {
+  String label(AppLocalizations l10n) {
     switch (this) {
       case _Period.week:
-        return '주간';
+        return l10n.statsPeriodWeek;
       case _Period.month:
-        return '월간';
+        return l10n.statsPeriodMonth;
       case _Period.year:
-        return '연간';
+        return l10n.statsPeriodYear;
+    }
+  }
+}
+
+enum _Category { calorie, weight, exercise, nutrition }
+
+extension on _Category {
+  String label(AppLocalizations l10n) {
+    switch (this) {
+      case _Category.calorie:
+        return l10n.statsCategoryCalorie;
+      case _Category.weight:
+        return l10n.statsCategoryWeight;
+      case _Category.exercise:
+        return l10n.statsCategoryExercise;
+      case _Category.nutrition:
+        return l10n.statsCategoryNutrition;
+    }
+  }
+
+  IconData get icon {
+    switch (this) {
+      case _Category.calorie:
+        return Icons.local_fire_department;
+      case _Category.weight:
+        return Icons.monitor_weight_outlined;
+      case _Category.exercise:
+        return Icons.fitness_center;
+      case _Category.nutrition:
+        return Icons.pie_chart_outline;
+    }
+  }
+
+  /// 칼로리=통계(그레이), 체중/운동량=틸, 영양소=음식(코랄) — 기존 카테고리 컬러 재사용.
+  Color get color {
+    switch (this) {
+      case _Category.calorie:
+        return AppColors.statsGray;
+      case _Category.weight:
+        return AppColors.weightTeal;
+      case _Category.exercise:
+        return AppColors.exerciseTeal;
+      case _Category.nutrition:
+        return AppColors.foodCoral;
     }
   }
 }
@@ -38,9 +85,14 @@ class StatsScreen extends StatefulWidget {
   State<StatsScreen> createState() => _StatsScreenState();
 }
 
-class _StatsScreenState extends State<StatsScreen> {
+class _StatsScreenState extends State<StatsScreen> with SingleTickerProviderStateMixin {
+  late final TabController _tabController;
+
   _Period _period = _Period.week;
-  List<DailySummary> _data = [];
+  List<DailySummary> _calorieData = [];
+  Map<String, double> _weightMap = {};
+  List<ExerciseSummary> _exerciseData = [];
+  List<NutrientSummary> _nutrientData = [];
   bool _loading = true;
 
   /// null이면 "오늘 기준 최근 N일". 값이 있으면 이 날짜부터 시작하는 구간을 본다.
@@ -52,7 +104,15 @@ class _StatsScreenState extends State<StatsScreen> {
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: _Category.values.length, vsync: this);
+    _tabController.addListener(() => setState(() {})); // 탭 전환 시 하단 안내 문구 갱신
     _load();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   Future<void> _load() async {
@@ -62,9 +122,23 @@ class _StatsScreenState extends State<StatsScreen> {
         ? _rangeStart!
         : now.subtract(Duration(days: _period.days - 1));
     final to = from.add(Duration(days: _period.days - 1));
-    final data = await DatabaseHelper.instance.getSummaryRange(from, to);
+
+    final calorieFuture = DatabaseHelper.instance.getSummaryRange(from, to);
+    final weightFuture = DatabaseHelper.instance.getWeightsForRange(from, to);
+    final exerciseFuture = DatabaseHelper.instance.getExerciseSummaryRange(from, to);
+    final nutrientFuture = DatabaseHelper.instance.getNutrientSummaryRange(from, to);
+
+    final calorieData = await calorieFuture;
+    final weightMap = await weightFuture;
+    final exerciseData = await exerciseFuture;
+    final nutrientData = await nutrientFuture;
+
+    if (!mounted) return;
     setState(() {
-      _data = data;
+      _calorieData = calorieData;
+      _weightMap = weightMap;
+      _exerciseData = exerciseData;
+      _nutrientData = nutrientData;
       _rangeFrom = from;
       _rangeTo = to;
       _loading = false;
@@ -103,59 +177,129 @@ class _StatsScreenState extends State<StatsScreen> {
     Navigator.push(context, MaterialPageRoute(builder: (_) => DailyLogScreen(initialDate: date)));
   }
 
+  Future<void> _openWeightEdit(DateTime date) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => WeightLogScreen(initialDate: date)),
+    );
+    _load(); // 체중을 수정/삭제했을 수 있으니 그래프를 갱신한다.
+  }
+
+  String _rangeHeaderText(AppLocalizations l10n) {
+    final base = l10n.statsDateRange(_rangeFrom.month, _rangeFrom.day, _rangeTo.month, _rangeTo.day);
+    if (_Category.values[_tabController.index] == _Category.calorie) {
+      return '$base${l10n.statsCalorieRangeSuffix(_calorieData.length)}';
+    }
+    return base;
+  }
+
+  String _tapHintText(AppLocalizations l10n) {
+    return _Category.values[_tabController.index] == _Category.weight
+        ? l10n.statsTapHintWeight
+        : l10n.statsTapHintDefault;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: const Text('통계')),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      appBar: AppBar(
+        title: Row(
           children: [
-            SegmentedButton<_Period>(
-              segments: _Period.values
-                  .map((p) => ButtonSegment(value: p, label: Text(p.label)))
-                  .toList(),
-              selected: {_period},
-              onSelectionChanged: (selection) => _changePeriod(selection.first),
-            ),
-            if (_period != _Period.year) ...[
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  TextButton.icon(
-                    onPressed: _pickRangeStart,
-                    icon: const Icon(Icons.date_range, size: 18),
-                    label: Text(_rangeStart != null ? '기간 변경' : '기간 직접 선택'),
-                  ),
-                  if (_rangeStart != null)
-                    TextButton(onPressed: _resetToToday, child: const Text('오늘 기준으로')),
-                ],
-              ),
-            ],
-            const SizedBox(height: 8),
-            if (!_loading)
-              Text(
-                '${_rangeFrom.month}월 ${_rangeFrom.day}일 ~ ${_rangeTo.month}월 ${_rangeTo.day}일 순칼로리 · 기록 ${_data.length}일',
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            const SizedBox(height: 4),
-            Text(
-              '날짜를 탭하면 그날의 상세 기록을 볼 수 있어요',
-              style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
-            ),
-            const SizedBox(height: 16),
-            Expanded(
-              child: _loading
-                  ? const Center(child: CircularProgressIndicator())
-                  : _data.isEmpty
-                      ? const Center(child: Text('아직 데이터가 부족해요'))
-                      : _period == _Period.year
-                          ? _SummaryList(data: _data, onTapDate: _openDayDetail)
-                          : _SummaryBarChart(data: _data, period: _period, onTapDate: _openDayDetail),
-            ),
+            const Icon(Icons.bar_chart, color: AppColors.statsGray, size: 22),
+            const SizedBox(width: 8),
+            Text(l10n.statsAppBarTitle),
           ],
         ),
+      ),
+      body: Column(
+        children: [
+          TabBar(
+            controller: _tabController,
+            labelColor: AppColors.statsGray,
+            unselectedLabelColor: Colors.grey.shade400,
+            indicatorColor: AppColors.statsGray,
+            tabs: _Category.values
+                .map((c) => Tab(icon: Icon(c.icon, color: c.color), text: c.label(l10n)))
+                .toList(),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SegmentedButton<_Period>(
+                    segments: _Period.values
+                        .map((p) => ButtonSegment(value: p, label: Text(p.label(l10n))))
+                        .toList(),
+                    selected: {_period},
+                    onSelectionChanged: (selection) => _changePeriod(selection.first),
+                  ),
+                  if (_period != _Period.year) ...[
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        TextButton.icon(
+                          onPressed: _pickRangeStart,
+                          icon: const Icon(Icons.date_range, size: 18, color: AppColors.statsGray),
+                          label: Text(_rangeStart != null
+                              ? l10n.statsRangeChangeButton
+                              : l10n.statsRangePickButton),
+                        ),
+                        if (_rangeStart != null)
+                          TextButton(onPressed: _resetToToday, child: Text(l10n.statsResetToTodayButton)),
+                      ],
+                    ),
+                  ],
+                  const SizedBox(height: 8),
+                  if (!_loading)
+                    Text(
+                      _rangeHeaderText(l10n),
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                  const SizedBox(height: 4),
+                  Text(
+                    _tapHintText(l10n),
+                    style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
+                  ),
+                  const SizedBox(height: 16),
+                  Expanded(
+                    child: _loading
+                        ? const Center(child: CircularProgressIndicator())
+                        : TabBarView(
+                            controller: _tabController,
+                            children: [
+                              _CalorieTab(data: _calorieData, period: _period, onTapDate: _openDayDetail),
+                              _WeightTab(
+                                weights: _weightMap,
+                                from: _rangeFrom,
+                                to: _rangeTo,
+                                period: _period,
+                                onTapDate: _openWeightEdit,
+                              ),
+                              _ExerciseTab(
+                                data: _exerciseData,
+                                from: _rangeFrom,
+                                to: _rangeTo,
+                                period: _period,
+                                onTapDate: _openDayDetail,
+                              ),
+                              _NutritionTab(
+                                data: _nutrientData,
+                                from: _rangeFrom,
+                                to: _rangeTo,
+                                period: _period,
+                                onTapDate: _openDayDetail,
+                              ),
+                            ],
+                          ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -164,6 +308,49 @@ class _StatsScreenState extends State<StatsScreen> {
 String _shortDate(String yyyyMMdd) {
   final parts = yyyyMMdd.split('-');
   return '${int.parse(parts[1])}/${int.parse(parts[2])}';
+}
+
+String _dateKeyOf(DateTime d) =>
+    '${d.year.toString().padLeft(4, '0')}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
+
+/// [from]~[to] 사이 모든 날짜를 하루 단위로 나열한다(기록 유무 무관).
+List<DateTime> _dateRange(DateTime from, DateTime to) {
+  final days = to.difference(from).inDays + 1;
+  return [for (int i = 0; i < days; i++) DateTime(from.year, from.month, from.day + i)];
+}
+
+/// 월요일 시작 순서(date.weekday와 인덱스가 1:1 대응하도록 월~일).
+List<String> _weekdayNames(AppLocalizations l10n) => [
+      l10n.weekdayMon,
+      l10n.weekdayTue,
+      l10n.weekdayWed,
+      l10n.weekdayThu,
+      l10n.weekdayFri,
+      l10n.weekdaySat,
+      l10n.weekdaySun,
+    ];
+
+String _dateWithWeekday(AppLocalizations l10n, DateTime date) =>
+    l10n.statsDateWithWeekday(date.month, date.day, _weekdayNames(l10n)[date.weekday - 1]);
+
+// ── 칼로리 탭 (기존 로직 그대로) ──────────────────────────────
+
+class _CalorieTab extends StatelessWidget {
+  final List<DailySummary> data;
+  final _Period period;
+  final void Function(DateTime date) onTapDate;
+
+  const _CalorieTab({required this.data, required this.period, required this.onTapDate});
+
+  @override
+  Widget build(BuildContext context) {
+    if (data.isEmpty) {
+      return Center(child: Text(AppLocalizations.of(context)!.statsInsufficientData));
+    }
+    return period == _Period.year
+        ? _SummaryList(data: data, onTapDate: onTapDate)
+        : _SummaryBarChart(data: data, period: period, onTapDate: onTapDate);
+  }
 }
 
 /// 주간(7일)/월간(30일) 뷰: 날짜별 순칼로리 막대그래프. 막대를 탭하면 그날 상세로 이동.
@@ -230,8 +417,6 @@ class _SummaryBarChart extends StatelessWidget {
   }
 }
 
-const List<String> _weekdayNames = ['월', '화', '수', '목', '금', '토', '일'];
-
 /// 연간(365일) 뷰: 막대 365개나 선 하나로는 눈이 아프니 날짜별 텍스트 리스트로 보여준다.
 /// 각 행을 탭하면 그날 상세로 이동.
 class _SummaryList extends StatelessWidget {
@@ -242,6 +427,7 @@ class _SummaryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final reversed = data.reversed.toList(); // 최신 날짜가 위로
     return ListView.separated(
       itemCount: reversed.length,
@@ -249,16 +435,613 @@ class _SummaryList extends StatelessWidget {
       itemBuilder: (context, i) {
         final s = reversed[i];
         final date = DateTime.parse(s.date);
-        final weekday = _weekdayNames[date.weekday - 1];
         return ListTile(
           dense: true,
-          title: Text('${date.month}월 ${date.day}일 ($weekday)'),
-          subtitle: Text('섭취 ${s.totalIntake.toStringAsFixed(0)} · 소모 ${s.totalBurned.toStringAsFixed(0)}'),
+          title: Text(_dateWithWeekday(l10n, date)),
+          subtitle: Text(
+            '${l10n.dailyLogIntakeLabel} ${s.totalIntake.toStringAsFixed(0)} · '
+            '${l10n.dailyLogBurnedLabel} ${s.totalBurned.toStringAsFixed(0)}',
+          ),
           trailing: Text(
             '${s.netCalories >= 0 ? '+' : ''}${s.netCalories.toStringAsFixed(0)} kcal',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: s.netCalories >= 0 ? Colors.deepOrange : Colors.teal,
+            ),
+          ),
+          onTap: () => onTapDate(date),
+        );
+      },
+    );
+  }
+}
+
+// ── 체중 탭 ──────────────────────────────────────────────
+
+class _WeightTab extends StatelessWidget {
+  final Map<String, double> weights;
+  final DateTime from;
+  final DateTime to;
+  final _Period period;
+  final void Function(DateTime date) onTapDate;
+
+  const _WeightTab({
+    required this.weights,
+    required this.from,
+    required this.to,
+    required this.period,
+    required this.onTapDate,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (weights.isEmpty) {
+      return Center(child: Text(AppLocalizations.of(context)!.statsNoWeightRecorded));
+    }
+    final dates = _dateRange(from, to);
+    return period == _Period.year
+        ? _WeightList(dates: dates, weights: weights, onTapDate: onTapDate)
+        : _WeightLineChart(dates: dates, weights: weights, period: period, onTapDate: onTapDate);
+  }
+}
+
+/// 기록이 없는 날짜에서는 선을 잇지 않고 구간을 나눠, 값이 있는 날짜끼리만 자연스럽게 이어 그린다.
+class _WeightLineChart extends StatelessWidget {
+  final List<DateTime> dates;
+  final Map<String, double> weights;
+  final _Period period;
+  final void Function(DateTime date) onTapDate;
+
+  const _WeightLineChart({
+    required this.dates,
+    required this.weights,
+    required this.period,
+    required this.onTapDate,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final values = [for (final d in dates) weights[_dateKeyOf(d)]];
+
+    final segments = <List<FlSpot>>[];
+    List<FlSpot>? current;
+    for (int i = 0; i < values.length; i++) {
+      final v = values[i];
+      if (v == null) {
+        current = null;
+        continue;
+      }
+      if (current == null) {
+        current = [];
+        segments.add(current);
+      }
+      current.add(FlSpot(i.toDouble(), v));
+    }
+
+    final recorded = values.whereType<double>().toList();
+    final minY = (recorded.reduce((a, b) => a < b ? a : b) - 1).floorToDouble();
+    final maxY = (recorded.reduce((a, b) => a > b ? a : b) + 1).ceilToDouble();
+    final labelInterval = period == _Period.month ? 5 : 1;
+
+    return LineChart(
+      LineChartData(
+        minY: minY,
+        maxY: maxY,
+        lineTouchData: LineTouchData(
+          touchCallback: (event, response) {
+            if (event is! FlTapUpEvent) return;
+            final spots = response?.lineBarSpots;
+            if (spots == null || spots.isEmpty) return;
+            final index = spots.first.x.toInt();
+            if (index < 0 || index >= dates.length) return;
+            onTapDate(dates[index]);
+          },
+        ),
+        lineBarsData: [
+          for (final segment in segments)
+            LineChartBarData(
+              spots: segment,
+              isCurved: true,
+              color: AppColors.weightTeal,
+              barWidth: 3,
+              dotData: const FlDotData(show: true),
+              belowBarData: BarAreaData(show: false),
+            ),
+        ],
+        titlesData: FlTitlesData(
+          leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 40)),
+          rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              reservedSize: 28,
+              getTitlesWidget: (value, meta) {
+                final i = value.toInt();
+                if (i < 0 || i >= dates.length || i % labelInterval != 0) {
+                  return const SizedBox.shrink();
+                }
+                return Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(_shortDate(_dateKeyOf(dates[i])), style: const TextStyle(fontSize: 10)),
+                );
+              },
+            ),
+          ),
+        ),
+        borderData: FlBorderData(show: false),
+        gridData: const FlGridData(show: true, drawVerticalLine: false),
+      ),
+    );
+  }
+}
+
+class _WeightList extends StatelessWidget {
+  final List<DateTime> dates;
+  final Map<String, double> weights;
+  final void Function(DateTime date) onTapDate;
+
+  const _WeightList({required this.dates, required this.weights, required this.onTapDate});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final recordedDates =
+        dates.where((d) => weights.containsKey(_dateKeyOf(d))).toList().reversed.toList();
+    if (recordedDates.isEmpty) return Center(child: Text(l10n.statsNoWeightRecorded));
+    return ListView.separated(
+      itemCount: recordedDates.length,
+      separatorBuilder: (_, __) => const Divider(height: 1),
+      itemBuilder: (context, i) {
+        final date = recordedDates[i];
+        final weight = weights[_dateKeyOf(date)]!;
+        return ListTile(
+          dense: true,
+          title: Text(_dateWithWeekday(l10n, date)),
+          trailing: Text(
+            '${weight.toStringAsFixed(1)} kg',
+            style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.weightTeal),
+          ),
+          onTap: () => onTapDate(date),
+        );
+      },
+    );
+  }
+}
+
+// ── 운동량 탭 ──────────────────────────────────────────────
+
+enum _ExerciseMetric { calories, minutes }
+
+class _ExerciseTab extends StatefulWidget {
+  final List<ExerciseSummary> data;
+  final DateTime from;
+  final DateTime to;
+  final _Period period;
+  final void Function(DateTime date) onTapDate;
+
+  const _ExerciseTab({
+    required this.data,
+    required this.from,
+    required this.to,
+    required this.period,
+    required this.onTapDate,
+  });
+
+  @override
+  State<_ExerciseTab> createState() => _ExerciseTabState();
+}
+
+class _ExerciseTabState extends State<_ExerciseTab> {
+  _ExerciseMetric _metric = _ExerciseMetric.calories;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    if (widget.data.isEmpty) {
+      return Center(child: Text(l10n.statsNoExerciseRecorded));
+    }
+
+    final dates = _dateRange(widget.from, widget.to);
+    final byDate = {for (final e in widget.data) e.date: e};
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SegmentedButton<_ExerciseMetric>(
+          segments: [
+            ButtonSegment(
+                value: _ExerciseMetric.calories, label: Text(l10n.exerciseInputCustomCaloriesLabel)),
+            ButtonSegment(value: _ExerciseMetric.minutes, label: Text(l10n.exerciseInputDurationLabel)),
+          ],
+          selected: {_metric},
+          onSelectionChanged: (selection) => setState(() => _metric = selection.first),
+        ),
+        const SizedBox(height: 12),
+        Expanded(
+          child: widget.period == _Period.year
+              ? _ExerciseList(dates: dates, byDate: byDate, metric: _metric, onTapDate: widget.onTapDate)
+              : _ExerciseBarChart(
+                  dates: dates,
+                  byDate: byDate,
+                  period: widget.period,
+                  metric: _metric,
+                  onTapDate: widget.onTapDate,
+                ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ExerciseBarChart extends StatelessWidget {
+  final List<DateTime> dates;
+  final Map<String, ExerciseSummary> byDate;
+  final _Period period;
+  final _ExerciseMetric metric;
+  final void Function(DateTime date) onTapDate;
+
+  const _ExerciseBarChart({
+    required this.dates,
+    required this.byDate,
+    required this.period,
+    required this.metric,
+    required this.onTapDate,
+  });
+
+  double _valueFor(DateTime d) {
+    final e = byDate[_dateKeyOf(d)];
+    if (e == null) return 0;
+    return metric == _ExerciseMetric.calories ? e.caloriesBurned : e.minutes;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final labelInterval = period == _Period.month ? 5 : 1;
+
+    return BarChart(
+      BarChartData(
+        barTouchData: BarTouchData(
+          touchCallback: (event, response) {
+            if (event is! FlTapUpEvent) return;
+            final index = response?.spot?.touchedBarGroupIndex;
+            if (index == null || index < 0 || index >= dates.length) return;
+            onTapDate(dates[index]);
+          },
+        ),
+        barGroups: [
+          for (int i = 0; i < dates.length; i++)
+            BarChartGroupData(
+              x: i,
+              barRods: [
+                BarChartRodData(
+                  toY: _valueFor(dates[i]),
+                  color: AppColors.exerciseTeal,
+                  width: period == _Period.month ? 4 : 12,
+                ),
+              ],
+            ),
+        ],
+        titlesData: FlTitlesData(
+          leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 40)),
+          rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              reservedSize: 28,
+              getTitlesWidget: (value, meta) {
+                final i = value.toInt();
+                if (i < 0 || i >= dates.length || i % labelInterval != 0) {
+                  return const SizedBox.shrink();
+                }
+                return Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(_shortDate(_dateKeyOf(dates[i])), style: const TextStyle(fontSize: 10)),
+                );
+              },
+            ),
+          ),
+        ),
+        borderData: FlBorderData(show: false),
+        gridData: const FlGridData(show: true, drawVerticalLine: false),
+      ),
+    );
+  }
+}
+
+class _ExerciseList extends StatelessWidget {
+  final List<DateTime> dates;
+  final Map<String, ExerciseSummary> byDate;
+  final _ExerciseMetric metric;
+  final void Function(DateTime date) onTapDate;
+
+  const _ExerciseList({
+    required this.dates,
+    required this.byDate,
+    required this.metric,
+    required this.onTapDate,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final recorded = dates.where((d) => byDate.containsKey(_dateKeyOf(d))).toList().reversed.toList();
+    if (recorded.isEmpty) return Center(child: Text(l10n.statsNoExerciseRecorded));
+    return ListView.separated(
+      itemCount: recorded.length,
+      separatorBuilder: (_, __) => const Divider(height: 1),
+      itemBuilder: (context, i) {
+        final date = recorded[i];
+        final e = byDate[_dateKeyOf(date)]!;
+        return ListTile(
+          dense: true,
+          title: Text(_dateWithWeekday(l10n, date)),
+          subtitle: Text('${e.caloriesBurned.toStringAsFixed(0)}kcal · ${e.minutes.toStringAsFixed(0)}${l10n.minutesSuffix}'),
+          trailing: Text(
+            metric == _ExerciseMetric.calories
+                ? '${e.caloriesBurned.toStringAsFixed(0)}kcal'
+                : '${e.minutes.toStringAsFixed(0)}${l10n.minutesSuffix}',
+            style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.exerciseTeal),
+          ),
+          onTap: () => onTapDate(date),
+        );
+      },
+    );
+  }
+}
+
+// ── 영양소 탭 ──────────────────────────────────────────────
+
+class _NutritionTab extends StatelessWidget {
+  final List<NutrientSummary> data;
+  final DateTime from;
+  final DateTime to;
+  final _Period period;
+  final void Function(DateTime date) onTapDate;
+
+  const _NutritionTab({
+    required this.data,
+    required this.from,
+    required this.to,
+    required this.period,
+    required this.onTapDate,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (data.isEmpty) {
+      return Center(child: Text(AppLocalizations.of(context)!.statsNoFoodRecorded));
+    }
+
+    final dates = _dateRange(from, to);
+    final byDate = {for (final n in data) n.date: n};
+
+    final totalCarbs = data.fold<double>(0, (sum, n) => sum + n.carbsG);
+    final totalProtein = data.fold<double>(0, (sum, n) => sum + n.proteinG);
+    final totalFat = data.fold<double>(0, (sum, n) => sum + n.fatG);
+    // 탄수화물/단백질 4kcal/g, 지방 9kcal/g 기준 칼로리 비율.
+    final carbsCal = totalCarbs * 4;
+    final proteinCal = totalProtein * 4;
+    final fatCal = totalFat * 9;
+    final totalCal = carbsCal + proteinCal + fatCal;
+    final carbsRatio = totalCal > 0 ? carbsCal / totalCal : 0.0;
+    final proteinRatio = totalCal > 0 ? proteinCal / totalCal : 0.0;
+    final fatRatio = totalCal > 0 ? fatCal / totalCal : 0.0;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _MacroRatioSummary(
+          carbsRatio: carbsRatio,
+          proteinRatio: proteinRatio,
+          fatRatio: fatRatio,
+          days: data.length,
+        ),
+        const SizedBox(height: 16),
+        Expanded(
+          child: period == _Period.year
+              ? _NutritionList(dates: dates, byDate: byDate, onTapDate: onTapDate)
+              : _NutritionStackedBarChart(dates: dates, byDate: byDate, period: period, onTapDate: onTapDate),
+        ),
+      ],
+    );
+  }
+}
+
+class _MacroRatioSummary extends StatelessWidget {
+  final double carbsRatio;
+  final double proteinRatio;
+  final double fatRatio;
+  final int days;
+
+  const _MacroRatioSummary({
+    required this.carbsRatio,
+    required this.proteinRatio,
+    required this.fatRatio,
+    required this.days,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(l10n.statsMacroRatioTitle(days), style: const TextStyle(fontWeight: FontWeight.bold)),
+        const SizedBox(height: 8),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(6),
+          child: SizedBox(
+            height: 12,
+            child: Row(
+              children: [
+                if (carbsRatio > 0)
+                  Expanded(
+                    flex: (carbsRatio * 1000).round().clamp(1, 1000),
+                    child: Container(color: AppColors.foodCoral),
+                  ),
+                if (proteinRatio > 0)
+                  Expanded(
+                    flex: (proteinRatio * 1000).round().clamp(1, 1000),
+                    child: Container(color: AppColors.exerciseTeal),
+                  ),
+                if (fatRatio > 0)
+                  Expanded(
+                    flex: (fatRatio * 1000).round().clamp(1, 1000),
+                    child: Container(color: AppColors.statsGray),
+                  ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 16,
+          children: [
+            _MacroLegend(
+              color: AppColors.foodCoral,
+              label: '${l10n.macroCarbsLabel} ${(carbsRatio * 100).toStringAsFixed(0)}%',
+            ),
+            _MacroLegend(
+              color: AppColors.exerciseTeal,
+              label: '${l10n.macroProteinLabel} ${(proteinRatio * 100).toStringAsFixed(0)}%',
+            ),
+            _MacroLegend(
+              color: AppColors.statsGray,
+              label: '${l10n.macroFatLabel} ${(fatRatio * 100).toStringAsFixed(0)}%',
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _MacroLegend extends StatelessWidget {
+  final Color color;
+  final String label;
+
+  const _MacroLegend({required this.color, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(width: 10, height: 10, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+        const SizedBox(width: 4),
+        Text(label, style: const TextStyle(fontSize: 12)),
+      ],
+    );
+  }
+}
+
+class _NutritionStackedBarChart extends StatelessWidget {
+  final List<DateTime> dates;
+  final Map<String, NutrientSummary> byDate;
+  final _Period period;
+  final void Function(DateTime date) onTapDate;
+
+  const _NutritionStackedBarChart({
+    required this.dates,
+    required this.byDate,
+    required this.period,
+    required this.onTapDate,
+  });
+
+  BarChartGroupData _stackedGroup(int index, DateTime date) {
+    final n = byDate[_dateKeyOf(date)];
+    final carbs = n?.carbsG ?? 0;
+    final protein = n?.proteinG ?? 0;
+    final fat = n?.fatG ?? 0;
+    final total = carbs + protein + fat;
+
+    return BarChartGroupData(
+      x: index,
+      barRods: [
+        BarChartRodData(
+          toY: total,
+          width: period == _Period.month ? 4 : 12,
+          rodStackItems: [
+            BarChartRodStackItem(0, carbs, AppColors.foodCoral),
+            BarChartRodStackItem(carbs, carbs + protein, AppColors.exerciseTeal),
+            BarChartRodStackItem(carbs + protein, total, AppColors.statsGray),
+          ],
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final labelInterval = period == _Period.month ? 5 : 1;
+
+    return BarChart(
+      BarChartData(
+        barTouchData: BarTouchData(
+          touchCallback: (event, response) {
+            if (event is! FlTapUpEvent) return;
+            final index = response?.spot?.touchedBarGroupIndex;
+            if (index == null || index < 0 || index >= dates.length) return;
+            onTapDate(dates[index]);
+          },
+        ),
+        barGroups: [for (int i = 0; i < dates.length; i++) _stackedGroup(i, dates[i])],
+        titlesData: FlTitlesData(
+          leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 40)),
+          rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              reservedSize: 28,
+              getTitlesWidget: (value, meta) {
+                final i = value.toInt();
+                if (i < 0 || i >= dates.length || i % labelInterval != 0) {
+                  return const SizedBox.shrink();
+                }
+                return Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(_shortDate(_dateKeyOf(dates[i])), style: const TextStyle(fontSize: 10)),
+                );
+              },
+            ),
+          ),
+        ),
+        borderData: FlBorderData(show: false),
+        gridData: const FlGridData(show: true, drawVerticalLine: false),
+      ),
+    );
+  }
+}
+
+class _NutritionList extends StatelessWidget {
+  final List<DateTime> dates;
+  final Map<String, NutrientSummary> byDate;
+  final void Function(DateTime date) onTapDate;
+
+  const _NutritionList({required this.dates, required this.byDate, required this.onTapDate});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final recorded = dates.where((d) => byDate.containsKey(_dateKeyOf(d))).toList().reversed.toList();
+    if (recorded.isEmpty) return Center(child: Text(l10n.statsNoFoodRecorded));
+    return ListView.separated(
+      itemCount: recorded.length,
+      separatorBuilder: (_, __) => const Divider(height: 1),
+      itemBuilder: (context, i) {
+        final date = recorded[i];
+        final n = byDate[_dateKeyOf(date)]!;
+        return ListTile(
+          dense: true,
+          title: Text(_dateWithWeekday(l10n, date)),
+          subtitle: Text(
+            l10n.statsNutritionListSummary(
+              n.carbsG.toStringAsFixed(0),
+              n.proteinG.toStringAsFixed(0),
+              n.fatG.toStringAsFixed(0),
             ),
           ),
           onTap: () => onTapDate(date),

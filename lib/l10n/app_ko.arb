@@ -1,0 +1,308 @@
+{
+  "@@locale": "ko",
+
+  "saveButton": "저장",
+  "@saveButton": { "description": "일반 저장 버튼 (여러 화면에서 공용)" },
+
+  "genderLabel": "성별",
+  "genderMale": "남",
+  "@genderMale": { "description": "성별 선택 칩: 남성" },
+  "genderFemale": "여",
+  "@genderFemale": { "description": "성별 선택 칩: 여성" },
+  "ageLabel": "나이",
+  "ageSuffix": "세",
+  "@ageSuffix": { "description": "나이 입력 필드 뒤에 붙는 단위(예: 30세)" },
+  "heightLabel": "키",
+  "@heightLabel": { "description": "신체 키(신장) 입력 필드 라벨" },
+  "weightLabel": "체중",
+
+  "onboardingAppBarTitle": "시작하기 전에",
+  "onboardingIntro": "목표 칼로리 계산에 필요한 최소 정보만 입력해주세요.",
+  "onboardingStartButton": "시작하기",
+
+  "profileEditAppBarTitle": "내 정보 수정",
+  "profileEditGoalCaloriesLabel": "목표 칼로리 (직접 수정 가능)",
+  "profileEditApplyAutoCalculated": "자동 계산값 적용",
+  "profileEditAutoCalculatedHint": "공식 계산값: {value} kcal/일 (성별·나이·키·체중 기준)",
+  "@profileEditAutoCalculatedHint": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+
+  "homeExerciseFabLabel": "운동",
+  "homeCameraFabLabel": "찍기",
+
+  "cancelButton": "취소",
+
+  "bmiCategoryUnderweight": "저체중",
+  "bmiCategoryNormal": "정상",
+  "bmiCategoryOverweight": "과체중",
+  "bmiCategoryObese": "비만",
+
+  "unitSystemMetricLabel": "미터법 (g / kg)",
+  "unitSystemImperialLabel": "야드파운드법 (oz / lb)",
+
+  "settingsAppBarTitle": "설정",
+  "settingsGoalCaloriesTile": "목표 칼로리 설정",
+  "settingsGoalCaloriesSubtitle": "{value} kcal/일 · 성별·나이·키·체중 기준",
+  "@settingsGoalCaloriesSubtitle": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "settingsGoalCaloriesEmpty": "정보를 입력해주세요",
+  "settingsBmiBmrSummary": "BMI {bmi} ({category}) · BMR {bmr} kcal",
+  "@settingsBmiBmrSummary": {
+    "placeholders": {
+      "bmi": { "type": "String" },
+      "category": { "type": "String" },
+      "bmr": { "type": "String" }
+    }
+  },
+  "settingsResetProfileTile": "프로필 초기화 (온보딩 다시하기)",
+  "settingsResetProfileSubtitle": "성별·나이·키·체중·목표 칼로리를 지우고 온보딩부터 다시 시작",
+  "settingsUserIdTile": "임시 사용자 ID",
+  "settingsEditUserIdTitle": "임시 사용자 ID 변경",
+  "settingsUnitTile": "단위 (g / oz)",
+  "settingsUnitPickerTitle": "단위 선택",
+  "settingsVoiceGuideTile": "음성 안내",
+  "settingsVoiceGuideSubtitle": "저장·목표 달성 등 상황에 맞는 음성 멘트를 들려줘요",
+  "settingsAffiliateTile": "제휴 쇼핑 추천 표시",
+  "settingsAffiliateSubtitle": "추후 구현",
+  "settingsResetProfileDialogTitle": "프로필 초기화",
+  "settingsResetProfileDialogContent": "성별·나이·키·체중·목표 칼로리 등 프로필 정보를 모두 지우고 온보딩을 처음부터 다시 진행합니다. 식사·운동 기록은 그대로 유지됩니다. 계속할까요?",
+  "settingsResetProfileConfirmButton": "초기화",
+  "settingsActionFailed": "실패: {error}",
+  "@settingsActionFailed": {
+    "placeholders": { "error": { "type": "String" } }
+  },
+
+  "deleteButton": "삭제",
+
+  "weekdaySun": "일",
+  "weekdayMon": "월",
+  "weekdayTue": "화",
+  "weekdayWed": "수",
+  "weekdayThu": "목",
+  "weekdayFri": "금",
+  "weekdaySat": "토",
+
+  "weightLogAppBarTitle": "체중 기록",
+  "weightLogMonthHeader": "{year}년 {month}월",
+  "@weightLogMonthHeader": {
+    "placeholders": {
+      "year": { "type": "int" },
+      "month": { "type": "int" }
+    }
+  },
+  "weightLogEditDialogTitle": "{month}월 {day}일 체중",
+  "@weightLogEditDialogTitle": {
+    "placeholders": {
+      "month": { "type": "int" },
+      "day": { "type": "int" }
+    }
+  },
+  "weightLogRecentWeight": "최근 체중 {weight}kg",
+  "@weightLogRecentWeight": {
+    "placeholders": { "weight": { "type": "String" } }
+  },
+  "weightLogBmiSummary": "BMI {bmi}({category})",
+  "@weightLogBmiSummary": {
+    "placeholders": {
+      "bmi": { "type": "String" },
+      "category": { "type": "String" }
+    }
+  },
+  "weightLogBmrSummary": "BMR {bmr}kcal",
+  "@weightLogBmrSummary": {
+    "placeholders": { "bmr": { "type": "String" } }
+  },
+
+  "dailyLogTodayTitle": "오늘의 로그",
+  "dailyLogDateTitle": "{month}월 {day}일 로그",
+  "@dailyLogDateTitle": {
+    "placeholders": {
+      "month": { "type": "int" },
+      "day": { "type": "int" }
+    }
+  },
+  "dailyLogBackToTodayTooltip": "오늘로 돌아가기",
+  "dailyLogPickDateTooltip": "날짜 선택",
+  "dailyLogDeleteAllTooltip": "이 날짜 기록 전체 삭제",
+  "dailyLogEmptyToday": "아직 기록이 없어요. 사진을 찍어보세요!",
+  "dailyLogEmptyOtherDay": "이 날짜에는 기록이 없어요.",
+  "dailyLogQuickAddWaterTooltip": "물 250ml 빠르게 추가",
+  "dailyLogWaterEntryName": "물",
+  "@dailyLogWaterEntryName": { "description": "물 빠른 추가 시 로그 항목의 이름으로 저장되는 값" },
+  "dailyLogDeleteAllDialogTitle": "전체 삭제",
+  "dailyLogDeleteAllDialogContent": "이 날짜의 모든 기록을 삭제하시겠습니까?",
+  "dailyLogIntakeLabel": "섭취",
+  "dailyLogBurnedLabel": "소모",
+  "netCaloriesLabel": "순칼로리",
+  "weightLogCardSubtitle": "날짜별 체중을 기록하고 추이를 확인해요",
+  "nutrientsSummary": "탄수화물 {carbs}g · 단백질 {protein}g · 지방 {fat}g",
+  "@nutrientsSummary": {
+    "placeholders": {
+      "carbs": { "type": "String" },
+      "protein": { "type": "String" },
+      "fat": { "type": "String" }
+    }
+  },
+
+  "minutesSuffix": "분",
+  "@minutesSuffix": { "description": "운동 시간 뒤에 붙는 단위(예: 30분)" },
+
+  "savedSnackbarMessage": "저장했어요",
+  "resetButton": "초기화",
+
+  "exerciseTypeWalk": "걷기",
+  "exerciseTypeBriskWalk": "빠르게 걷기",
+  "exerciseTypeJog": "조깅",
+  "exerciseTypeRun": "달리기",
+  "exerciseTypeCycle": "자전거",
+  "exerciseTypeStrength": "근력운동",
+  "exerciseTypeYoga": "요가/스트레칭",
+  "exerciseTypeHike": "등산",
+  "exerciseTypeSwim": "수영",
+  "exerciseTypeStairs": "계단 오르기",
+  "exerciseTypeOther": "기타운동",
+
+  "presetFishing": "낚시",
+  "presetBadminton": "배드민턴",
+  "presetGolf": "골프",
+  "presetHousework": "청소/집안일",
+  "presetLightHike": "등산(가벼운)",
+  "presetStairsChildcare": "계단청소/육아활동",
+
+  "exerciseInputAppBarTitle": "운동 기록",
+  "exerciseInputTypeLabel": "운동 종류",
+  "exerciseInputCustomNameLabel": "운동명",
+  "exerciseInputCustomNameHint": "예: 낚시, 배드민턴",
+  "exerciseInputCustomCaloriesLabel": "소모 칼로리",
+  "exerciseInputCustomCaloriesHint": "예: 300",
+  "exerciseInputCustomCaloriesErrorNaN": "숫자를 입력해주세요",
+  "exerciseInputCustomCaloriesErrorNonPositive": "0보다 커야 해요",
+  "exerciseInputPresetHint": "30분 기준 예시예요, 활동 강도에 따라 조절하세요",
+  "exerciseInputDurationLabel": "운동 시간",
+  "exerciseInputCustomNamePlaceholder": "운동명을 입력해주세요",
+  "exerciseInputEstimatedBurn": "예상 소모 {value} kcal",
+  "@exerciseInputEstimatedBurn": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+
+  "retryButton": "재시도",
+
+  "quickModeAppBarTitle": "빠른 측정",
+  "quickModePlaceholder": "사진을 찍거나 선택해주세요",
+  "quickModeGuidance": "한 가지 음식만 촬영하면 더 정확해요. 여러 음식이 있으면 정확도가 떨어질 수 있어요.",
+  "quickModeHintFieldPlaceholder": "음식 이름을 알고 있다면 적어주세요 (선택)",
+  "quickModeCameraButton": "촬영",
+  "quickModeGalleryButton": "갤러리",
+  "recognitionErrorUnauthorized": "인식 서버 인증에 실패했어요. 앱 설정을 확인해주세요.",
+  "recognitionErrorTimeout": "서버 응답이 지연되고 있어요. 잠시 후 다시 시도해주세요.",
+  "recognitionErrorNetwork": "네트워크 연결을 확인하고 다시 시도해주세요.",
+  "recognitionErrorGeneric": "인식에 실패했어요. 다시 시도해주세요.",
+  "quickModeConfidence": "추정 정확도 {value}%",
+  "@quickModeConfidence": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "quickModePortionAdjust": "양 보정: {value}%",
+  "@quickModePortionAdjust": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "quickModeEstimatedSummary": "추정 {weight} · {calories}kcal",
+  "@quickModeEstimatedSummary": {
+    "placeholders": {
+      "weight": { "type": "String" },
+      "calories": { "type": "String" }
+    }
+  },
+  "quickModeRetakeResetButton": "다시 찍기 / 초기화",
+
+  "precisionModeAppBarTitle": "정밀 측정",
+  "precisionModeComingSoon": "정밀 측정 모드는 준비 중입니다.\n곧 업데이트로 만나보실 수 있어요.",
+
+  "statsAppBarTitle": "통계",
+  "statsPeriodWeek": "주간",
+  "statsPeriodMonth": "월간",
+  "statsPeriodYear": "연간",
+  "statsCategoryCalorie": "칼로리",
+  "statsCategoryWeight": "체중",
+  "statsCategoryExercise": "운동량",
+  "statsCategoryNutrition": "영양소",
+  "statsDateRange": "{fromMonth}월 {fromDay}일 ~ {toMonth}월 {toDay}일",
+  "@statsDateRange": {
+    "placeholders": {
+      "fromMonth": { "type": "int" },
+      "fromDay": { "type": "int" },
+      "toMonth": { "type": "int" },
+      "toDay": { "type": "int" }
+    }
+  },
+  "statsCalorieRangeSuffix": " 순칼로리 · 기록 {days}일",
+  "@statsCalorieRangeSuffix": {
+    "placeholders": { "days": { "type": "int" } }
+  },
+  "statsTapHintWeight": "그래프의 점을 탭하면 그날 체중을 수정할 수 있어요",
+  "statsTapHintDefault": "날짜를 탭하면 그날의 상세 기록을 볼 수 있어요",
+  "statsRangeChangeButton": "기간 변경",
+  "statsRangePickButton": "기간 직접 선택",
+  "statsResetToTodayButton": "오늘 기준으로",
+  "statsInsufficientData": "아직 데이터가 부족해요",
+  "statsNoWeightRecorded": "기록된 체중이 없어요",
+  "statsNoExerciseRecorded": "기록된 운동이 없어요",
+  "statsNoFoodRecorded": "기록된 음식이 없어요",
+  "statsMacroRatioTitle": "하루 평균 탄단지 비율 (기록 {days}일)",
+  "@statsMacroRatioTitle": {
+    "placeholders": { "days": { "type": "int" } }
+  },
+  "macroCarbsLabel": "탄수화물",
+  "macroProteinLabel": "단백질",
+  "macroFatLabel": "지방",
+  "statsNutritionListSummary": "탄 {carbs}g · 단 {protein}g · 지 {fat}g",
+  "@statsNutritionListSummary": {
+    "placeholders": {
+      "carbs": { "type": "String" },
+      "protein": { "type": "String" },
+      "fat": { "type": "String" }
+    }
+  },
+  "statsDateWithWeekday": "{month}월 {day}일 ({weekday})",
+  "@statsDateWithWeekday": {
+    "placeholders": {
+      "month": { "type": "int" },
+      "day": { "type": "int" },
+      "weekday": { "type": "String" }
+    }
+  },
+
+  "shopLinkConfirmTitle": "이동할 링크",
+  "shopLinkGoButton": "이동",
+
+  "confirmButton": "확인",
+
+  "settingsSecretModeTile": "시크릿 모드 (앱 잠금)",
+  "settingsSecretModeSubtitle": "앱을 열 때마다 2자리 비밀번호를 확인해요",
+
+  "secretModeSetTitle": "비밀번호 설정",
+  "secretModeSetLabel": "새 비밀번호",
+  "secretModeConfirmLabel": "비밀번호 확인",
+  "secretModeHint2Digits": "숫자 2자리",
+  "secretModeMismatchError": "비밀번호가 일치하지 않아요",
+  "secretModeInvalidError": "숫자 2자리를 입력해주세요",
+
+  "secretModeDisableTitle": "시크릿 모드 해제",
+  "secretModeDisableLabel": "현재 비밀번호",
+  "secretModeDisableWrongError": "비밀번호가 올바르지 않아요",
+
+  "appLockTitle": "잠금 해제",
+  "appLockSubtitle": "비밀번호 2자리를 입력해주세요",
+  "appLockWrongPassword": "비밀번호가 올바르지 않아요",
+  "appLockForgotPassword": "비밀번호를 잊으셨나요?",
+  "appLockResetDialogTitle": "정말 초기화할까요?",
+  "appLockResetDialogContent": "비밀번호를 초기화하면 저장된 모든 기록(식사, 운동, 체중, 프로필)이 삭제됩니다. 계속하시겠습니까?",
+
+  "shopRelatedProductsButton": "관련 상품 보기",
+  "shopPickPlatformTitle": "어디서 찾아볼까요?",
+  "shopPlatformCoupang": "쿠팡",
+  "shopPlatformNaver": "네이버",
+  "shopPlatformAmazon": "아마존",
+  "shopLinkOpenFailed": "링크를 열 수 없어요"
+}

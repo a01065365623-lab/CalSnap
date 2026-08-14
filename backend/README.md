@@ -14,7 +14,11 @@ X-API-Key: <PROXY_API_KEY와 동일한 값, PROXY_API_KEY 설정 시 필수>
 
 요청 바디
 ```json
-{ "image": "<base64 인코딩된 이미지, data URI 접두사(data:image/jpeg;base64,...) 허용>" }
+{
+  "image": "<base64 인코딩된 이미지, data URI 접두사(data:image/jpeg;base64,...) 허용>",
+  "hint": "<선택, 사용자가 미리 적어둔 음식명 힌트, 최대 100자>",
+  "language": "<선택, 기기 언어 코드(예: ko, en, ja). foodName만 이 언어로 응답, 최대 10자>"
+}
 ```
 
 성공 응답 (200)
@@ -27,6 +31,11 @@ X-API-Key: <PROXY_API_KEY와 동일한 값, PROXY_API_KEY 설정 시 필수>
 100g당 예상 탄수화물(g)/단백질(g)/지방(g)을 JSON으로만 답해줘:
 {foodName, caloriesPer100g, estimatedWeightG, carbsG, proteinG, fatG}" 프롬프트를 보내고,
 응답 텍스트를 그대로 파싱해서 돌려준다. carbsG/proteinG/fatG는 100g 기준 값이다.
+
+`language`를 함께 보내면 foodName만 그 언어로 답하도록 프롬프트에 지시가 추가된다(지원하지
+않는/알 수 없는 언어 코드면 영어로 폴백). caloriesPer100g 등 숫자 필드는 언어와 무관하다.
+`hint`가 함께 오면 "힌트는 참고용일 뿐, 최종 응답 언어는 language를 따른다"는 지시도 추가된다.
+기존에 저장된 로그의 foodName은 인식 당시 언어로 고정되며, 이후 언어를 바꿔도 소급 변경되지 않는다.
 
 실패 응답: `{"error": "..."}` + 400(잘못된 요청)/401(인증 실패)/502(Gemini 호출 실패 또는 응답 파싱 실패)
 

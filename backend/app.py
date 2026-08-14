@@ -36,6 +36,31 @@ _PROMPT = (
 )
 
 
+def _build_prompt(hint: str | None, language: str | None) -> str:
+    prompt = _PROMPT
+
+    if language:
+        prompt += (
+            f" 응답 중 foodName 값은 반드시 언어 코드 '{language}'에 해당하는 언어로 답해줘. "
+            "이 언어 코드를 모르거나 지원하지 않는다면 영어로 답해줘. "
+            "caloriesPer100g, estimatedWeightG, carbsG, proteinG, fatG는 언어와 무관하게 "
+            "숫자만 그대로 반환하고, 단위나 설명 문구는 붙이지 마."
+        )
+
+    if hint:
+        prompt += (
+            f" 사용자가 제공한 음식명 힌트: {hint}. 이 정보를 참고해서 정확한 이름과 "
+            "칼로리를 답해줘. 사진과 힌트가 명백히 다르면 사진을 우선해줘."
+        )
+        if language:
+            prompt += (
+                " 힌트가 어떤 언어로 적혀 있든 그건 참고용일 뿐이고, foodName의 최종 응답 "
+                f"언어는 위에서 지정한 '{language}'를 그대로 따라야 해(힌트 언어로 답하지 마)."
+            )
+
+    return prompt
+
+
 def _init_model() -> genai.GenerativeModel:
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
@@ -123,9 +148,23 @@ def recognize():
     if len(image_bytes) > _MAX_IMAGE_BYTES:
         return jsonify(error="이미지가 너무 큽니다 (최대 8MB)."), 400
 
+    hint = payload.get("hint")
+    if not isinstance(hint, str):
+        hint = None
+    else:
+        hint = hint.strip()[:100] or None
+
+    language = payload.get("language")
+    if not isinstance(language, str):
+        language = None
+    else:
+        # 언어 코드는 짧다(예: "ko", "zh-Hant") — 프롬프트에 그대로 삽입되므로 길이를
+        # 넉넉히 제한해 이상한 입력이 프롬프트를 부풀리는 걸 막는다.
+        language = language.strip()[:10] or None
+
     try:
         response = _model.generate_content(
-            [_PROMPT, {"mime_type": "image/jpeg", "data": image_bytes}]
+            [_build_prompt(hint, language), {"mime_type": "image/jpeg", "data": image_bytes}]
         )
     except Exception as exc:  # Gemini SDK의 다양한 예외를 502로 통일해 전달
         return jsonify(error=f"Gemini 호출 실패: {exc}"), 502

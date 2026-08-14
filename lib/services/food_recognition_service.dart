@@ -25,13 +25,41 @@ class FoodRecognitionResult {
 }
 
 abstract class FoodRecognitionService {
-  Future<FoodRecognitionResult> recognize(File imageFile);
+  /// [hint]: 사용자가 알고 있는 음식 이름(선택). 인식 정확도를 높이는 참고용이며 비어있어도 된다.
+  Future<FoodRecognitionResult> recognize(File imageFile, {String? hint});
+}
+
+enum FoodRecognitionFailure {
+  /// 프록시가 401을 반환. X-API-Key(PROXY_API_KEY)가 서버와 불일치 — 재시도로는 해결 안 됨.
+  unauthorized,
+
+  /// 클라이언트 타임아웃(20초) 초과. Gemini 응답 지연 또는 네트워크 불안정.
+  timeout,
+
+  /// 소켓/DNS/연결 실패 등 요청 자체가 서버에 도달하지 못함.
+  network,
+
+  /// 프록시가 4xx/5xx(401 제외)를 반환 — Gemini 호출 실패, 응답 파싱 실패 등 서버측 문제.
+  server,
+
+  /// 위에 해당하지 않는 예기치 못한 오류.
+  unknown,
+}
+
+class FoodRecognitionException implements Exception {
+  final FoodRecognitionFailure failure;
+  final String message;
+
+  const FoodRecognitionException(this.failure, this.message);
+
+  @override
+  String toString() => message;
 }
 
 /// 실제 API 연동 전까지 사용할 더미 구현.
 class MockFoodRecognitionService implements FoodRecognitionService {
   @override
-  Future<FoodRecognitionResult> recognize(File imageFile) async {
+  Future<FoodRecognitionResult> recognize(File imageFile, {String? hint}) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return const FoodRecognitionResult(
       foodName: '김치찌개 (추정)',
@@ -63,22 +91,26 @@ class HybridFoodRecognitionService implements FoodRecognitionService {
         _onDeviceMatcher = onDeviceMatcher ?? OnDeviceFoodMatcher();
 
   @override
-  Future<FoodRecognitionResult> recognize(File imageFile) async {
-    try {
-      final match = await _onDeviceMatcher.match(imageFile);
-      if (match != null && match.similarity >= similarityThreshold) {
-        // 온디바이스 참조 DB(FoodEmbedding)에는 탄단지 정보가 없어 0으로 채운다.
-        return FoodRecognitionResult(
-          foodName: match.food.foodName,
-          caloriesPer100g: match.food.caloriesPer100g,
-          estimatedWeightG: _defaultEstimatedWeightG,
-          confidence: match.similarity,
-        );
+  Future<FoodRecognitionResult> recognize(File imageFile, {String? hint}) async {
+    // 사용자가 힌트를 제공한 경우, 이름을 확신할 수 없는 온디바이스 매칭보다
+    // 힌트를 반영할 수 있는 Gemini 폴백이 더 정확하므로 곧바로 폴백한다.
+    if (hint == null || hint.trim().isEmpty) {
+      try {
+        final match = await _onDeviceMatcher.match(imageFile);
+        if (match != null && match.similarity >= similarityThreshold) {
+          // 온디바이스 참조 DB(FoodEmbedding)에는 탄단지 정보가 없어 0으로 채운다.
+          return FoodRecognitionResult(
+            foodName: match.food.foodName,
+            caloriesPer100g: match.food.caloriesPer100g,
+            estimatedWeightG: _defaultEstimatedWeightG,
+            confidence: match.similarity,
+          );
+        }
+      } catch (_) {
+        // 모델/DB 로드 실패 등 온디바이스 매칭 불가 시에도 앱이 죽지 않고 폴백한다.
       }
-    } catch (_) {
-      // 모델/DB 로드 실패 등 온디바이스 매칭 불가 시에도 앱이 죽지 않고 폴백한다.
     }
-    return _geminiFallback.recognize(imageFile);
+    return _geminiFallback.recognize(imageFile, hint: hint);
   }
 
   void dispose() => _onDeviceMatcher.dispose();

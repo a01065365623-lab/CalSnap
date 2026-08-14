@@ -1,10 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
+import '../services/tts_service.dart';
 import '../services/user_profile_service.dart';
+import '../theme/app_colors.dart';
 import '../utils/unit_converter.dart';
 import '../widgets/log_entry_tile.dart';
+import '../widgets/related_products_button.dart';
 import 'weight_log_screen.dart';
 
 class DailyLogScreen extends StatefulWidget {
@@ -31,7 +37,9 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
     return _selectedDate.year == now.year && _selectedDate.month == now.month && _selectedDate.day == now.day;
   }
 
-  String get _title => _isToday ? '오늘의 로그' : '${_selectedDate.month}월 ${_selectedDate.day}일 로그';
+  String _title(AppLocalizations l10n) => _isToday
+      ? l10n.dailyLogTodayTitle
+      : l10n.dailyLogDateTitle(_selectedDate.month, _selectedDate.day);
 
   @override
   void initState() {
@@ -69,25 +77,28 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
   }
 
   Future<void> _quickAddWater() async {
+    final l10n = AppLocalizations.of(context)!;
     await _db.insertLog(DailyLogEntry(
       datetime: DateTime.now(),
       type: LogType.water,
-      name: '물',
+      name: l10n.dailyLogWaterEntryName,
       calories: 0,
       amount: 250,
     ));
+    unawaited(TtsService.instance.speak(TtsCategory.waterLog));
     _load();
   }
 
   Future<void> _deleteAllForDate() async {
+    final l10n = AppLocalizations.of(context)!;
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('전체 삭제'),
-        content: const Text('이 날짜의 모든 기록을 삭제하시겠습니까?'),
+        title: Text(l10n.dailyLogDeleteAllDialogTitle),
+        content: Text(l10n.dailyLogDeleteAllDialogContent),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('취소')),
-          TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('삭제')),
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(l10n.cancelButton)),
+          TextButton(onPressed: () => Navigator.pop(context, true), child: Text(l10n.deleteButton)),
         ],
       ),
     );
@@ -97,27 +108,66 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
     _load();
   }
 
+  /// 음식 항목을 탭했을 때 상세 정보 + "관련 상품 보기" 버튼을 보여준다.
+  /// 운동/물 항목에는 이 상세 시트를 연결하지 않는다(build()에서 onTap을 null로 둠).
+  void _showFoodDetail(BuildContext context, DailyLogEntry entry) {
+    final l10n = AppLocalizations.of(context)!;
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (ctx) => Padding(
+        padding: EdgeInsets.fromLTRB(20, 20, 20, 20 + MediaQuery.of(ctx).viewInsets.bottom),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(entry.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 4),
+            Text(
+              '${entry.calories.toStringAsFixed(0)} kcal',
+              style: TextStyle(fontSize: 14, color: Colors.grey.shade700),
+            ),
+            if (entry.carbsG != null || entry.proteinG != null || entry.fatG != null) ...[
+              const SizedBox(height: 4),
+              Text(
+                l10n.nutrientsSummary(
+                  (entry.carbsG ?? 0).toStringAsFixed(0),
+                  (entry.proteinG ?? 0).toStringAsFixed(0),
+                  (entry.fatG ?? 0).toStringAsFixed(0),
+                ),
+                style: TextStyle(fontSize: 13, color: Colors.grey.shade600),
+              ),
+            ],
+            const SizedBox(height: 16),
+            RelatedProductsButton(queryBuilder: () => entry.name),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(_title),
+        title: Text(_title(l10n)),
         actions: [
           if (!_isToday)
             IconButton(
               icon: const Icon(Icons.today),
-              tooltip: '오늘로 돌아가기',
+              tooltip: l10n.dailyLogBackToTodayTooltip,
               onPressed: _goToToday,
             ),
           IconButton(
             icon: const Icon(Icons.calendar_month),
-            tooltip: '날짜 선택',
+            tooltip: l10n.dailyLogPickDateTooltip,
             onPressed: _pickDate,
           ),
           if (_entries.isNotEmpty)
             IconButton(
               icon: const Icon(Icons.delete_sweep),
-              tooltip: '이 날짜 기록 전체 삭제',
+              tooltip: l10n.dailyLogDeleteAllTooltip,
               onPressed: _deleteAllForDate,
             ),
         ],
@@ -135,7 +185,7 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
           Expanded(
             child: _entries.isEmpty
                 ? Center(
-                    child: Text(_isToday ? '아직 기록이 없어요. 사진을 찍어보세요!' : '이 날짜에는 기록이 없어요.'),
+                    child: Text(_isToday ? l10n.dailyLogEmptyToday : l10n.dailyLogEmptyOtherDay),
                   )
                 : ListView.builder(
                     itemCount: _entries.length,
@@ -148,6 +198,9 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
                           await _db.deleteLog(e.id!, _selectedDate);
                           _load();
                         },
+                        // 관련 상품 보기는 음식 항목에만 의미가 있으므로, 운동·물
+                        // 항목은 onTap을 null로 둬서 탭해도 아무 반응이 없게 한다.
+                        onTap: e.type == LogType.food ? () => _showFoodDetail(context, e) : null,
                       );
                     },
                   ),
@@ -158,10 +211,14 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
           ? FloatingActionButton(
               heroTag: 'daily_log_fab',
               onPressed: _quickAddWater,
-              tooltip: '물 250ml 빠르게 추가',
+              tooltip: l10n.dailyLogQuickAddWaterTooltip,
               child: const Icon(Icons.water_drop),
             )
           : null,
+      // 배너는 이 화면 자신의 Scaffold가 아니라 HomeScreen(바깥쪽 Scaffold)의
+      // bottomNavigationBar에서 렌더링한다 — 그래야 HomeScreen의 운동/찍기 FAB도
+      // 배너 높이를 인식해서 겹치지 않게 위로 올라간다. 자세한 이유는
+      // home_screen.dart의 관련 주석 참고.
     );
   }
 }
@@ -172,6 +229,7 @@ class _SummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final intake = summary?.totalIntake ?? 0;
     final burned = summary?.totalBurned ?? 0;
     final net = summary?.netCalories ?? 0;
@@ -183,9 +241,9 @@ class _SummaryCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _StatColumn(label: '섭취', value: intake),
-            _StatColumn(label: '소모', value: burned),
-            _StatColumn(label: '순칼로리', value: net, highlight: true),
+            _StatColumn(label: l10n.dailyLogIntakeLabel, value: intake),
+            _StatColumn(label: l10n.dailyLogBurnedLabel, value: burned),
+            _StatColumn(label: l10n.netCaloriesLabel, value: net, highlight: true),
           ],
         ),
       ),
@@ -200,12 +258,17 @@ class _WeightLogEntryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       margin: const EdgeInsets.fromLTRB(12, 0, 12, 12),
       child: ListTile(
-        leading: const Icon(Icons.monitor_weight_outlined),
-        title: const Text('체중 기록'),
-        subtitle: const Text('날짜별 체중을 기록하고 추이를 확인해요'),
+        leading: const CircleAvatar(
+          backgroundColor: AppColors.weightTealBg,
+          foregroundColor: AppColors.weightTeal,
+          child: Icon(Icons.monitor_weight_outlined, color: AppColors.weightTeal),
+        ),
+        title: Text(l10n.weightLogAppBarTitle),
+        subtitle: Text(l10n.weightLogCardSubtitle),
         trailing: const Icon(Icons.chevron_right),
         onTap: onTap,
       ),
@@ -222,6 +285,7 @@ class _NutrientsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     double carbs = 0, protein = 0, fat = 0;
     for (final e in entries) {
       if (e.type != LogType.food) continue;
@@ -235,9 +299,11 @@ class _NutrientsCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Text(
-          '탄수화물 ${carbs.toStringAsFixed(0)}g · '
-          '단백질 ${protein.toStringAsFixed(0)}g · '
-          '지방 ${fat.toStringAsFixed(0)}g',
+          l10n.nutrientsSummary(
+            carbs.toStringAsFixed(0),
+            protein.toStringAsFixed(0),
+            fat.toStringAsFixed(0),
+          ),
           style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
         ),
       ),

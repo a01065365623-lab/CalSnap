@@ -1,36 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 import '../db/database_helper.dart';
 import '../services/user_profile_service.dart';
+import '../theme/app_colors.dart';
 import '../utils/bmr_calculator.dart';
+
+String _bmiCategoryLabel(AppLocalizations l10n, BmiCategory category) {
+  switch (category) {
+    case BmiCategory.underweight:
+      return l10n.bmiCategoryUnderweight;
+    case BmiCategory.normal:
+      return l10n.bmiCategoryNormal;
+    case BmiCategory.overweight:
+      return l10n.bmiCategoryOverweight;
+    case BmiCategory.obese:
+      return l10n.bmiCategoryObese;
+  }
+}
 
 /// 온보딩/프로필 체중(user_profile_service)과는 별개로, 날짜별 체중을 기록해
 /// 다이어트 추이를 확인하기 위한 캘린더 화면.
 class WeightLogScreen extends StatefulWidget {
-  const WeightLogScreen({super.key});
+  /// 지정하면 그 날짜가 속한 달을 열고, 곧바로 그 날짜의 체중 입력 다이얼로그를 띄운다.
+  /// 통계 화면의 체중 추이 그래프에서 특정 지점을 탭했을 때 바로 수정할 수 있도록 한다.
+  final DateTime? initialDate;
+
+  const WeightLogScreen({super.key, this.initialDate});
 
   @override
   State<WeightLogScreen> createState() => _WeightLogScreenState();
 }
 
 class _WeightLogScreenState extends State<WeightLogScreen> {
-  static const List<String> _weekdayLabels = ['일', '월', '화', '수', '목', '금', '토'];
-
   late DateTime _month; // 보고 있는 달의 1일
   Map<String, double> _weights = {};
   bool _loading = true;
 
-  // 최신 체중 기준 BMI 표시용(키는 온보딩 프로필 값 사용, 보고 있는 달과는 무관).
+  // 최신 체중/BMI/BMR 요약 표시용(키·성별·나이는 온보딩 프로필 값 사용, 보고 있는 달과는 무관).
   double? _latestWeightKg;
-  double? _heightCm;
+  UserProfile? _profile;
 
   @override
   void initState() {
     super.initState();
-    final now = DateTime.now();
-    _month = DateTime(now.year, now.month, 1);
+    final initialDate = widget.initialDate;
+    final base = initialDate ?? DateTime.now();
+    _month = DateTime(base.year, base.month, 1);
     _load();
     _loadBmiInputs();
+    if (initialDate != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _editWeight(initialDate);
+      });
+    }
   }
 
   Future<void> _loadBmiInputs() async {
@@ -38,19 +62,34 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
     final latestWeight = await DatabaseHelper.instance.getLatestWeight();
     if (mounted) {
       setState(() {
-        _heightCm = profile?.heightCm;
+        _profile = profile;
         _latestWeightKg = latestWeight;
       });
     }
   }
 
-  /// 키(프로필)와 최신 체중 기록이 모두 있어야 계산 가능. 없으면 null(표시 안 함).
-  String? get _bmiSummary {
-    final height = _heightCm;
+  /// 체중/키가 없으면 해당 항목만 생략하고 나머지를 표시한다(체중 자체가 없으면 전체 숨김).
+  String? _bmiSummary(AppLocalizations l10n) {
     final weight = _latestWeightKg;
-    if (height == null || weight == null) return null;
-    final bmi = calculateBmi(weightKg: weight, heightCm: height);
-    return '최신 체중 ${weight.toStringAsFixed(1)}kg · BMI ${bmi.toStringAsFixed(1)} (${getBmiCategory(bmi)})';
+    if (weight == null) return null;
+
+    final parts = <String>[l10n.weightLogRecentWeight(weight.toStringAsFixed(1))];
+
+    final profile = _profile;
+    if (profile != null) {
+      final bmi = calculateBmi(weightKg: weight, heightCm: profile.heightCm);
+      parts.add(l10n.weightLogBmiSummary(bmi.toStringAsFixed(1), _bmiCategoryLabel(l10n, getBmiCategory(bmi))));
+
+      final bmr = calculateBmr(
+        gender: profile.gender,
+        age: profile.age,
+        heightCm: profile.heightCm,
+        weightKg: weight,
+      );
+      parts.add(l10n.weightLogBmrSummary(NumberFormat('#,##0').format(bmr)));
+    }
+
+    return parts.join(' · ');
   }
 
   String _dateKey(DateTime d) =>
@@ -75,6 +114,7 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
   }
 
   Future<void> _editWeight(DateTime date) async {
+    final l10n = AppLocalizations.of(context)!;
     final key = _dateKey(date);
     final existing = _weights[key];
     final controller = TextEditingController(text: existing?.toStringAsFixed(1) ?? '');
@@ -82,7 +122,7 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
     final result = await showDialog<_WeightDialogResult>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('${date.month}월 ${date.day}일 체중'),
+        title: Text(l10n.weightLogEditDialogTitle(date.month, date.day)),
         content: TextField(
           controller: controller,
           autofocus: true,
@@ -97,16 +137,16 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
           if (existing != null)
             TextButton(
               onPressed: () => Navigator.pop(context, const _WeightDialogResult.deleted()),
-              child: const Text('삭제'),
+              child: Text(l10n.deleteButton),
             ),
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('취소')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(l10n.cancelButton)),
           TextButton(
             onPressed: () {
               final value = double.tryParse(controller.text.trim());
               if (value == null || value <= 0) return;
               Navigator.pop(context, _WeightDialogResult.saved(value));
             },
-            child: const Text('저장'),
+            child: Text(l10n.saveButton),
           ),
         ],
       ),
@@ -124,12 +164,30 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final weekdayLabels = [
+      l10n.weekdaySun,
+      l10n.weekdayMon,
+      l10n.weekdayTue,
+      l10n.weekdayWed,
+      l10n.weekdayThu,
+      l10n.weekdayFri,
+      l10n.weekdaySat,
+    ];
     final firstDayOffset = DateTime(_month.year, _month.month, 1).weekday % 7; // 일요일 시작 기준 빈칸 수
     final daysInMonth = DateTime(_month.year, _month.month + 1, 0).day;
     final now = DateTime.now();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('체중 기록')),
+      appBar: AppBar(
+        title: Row(
+          children: [
+            const Icon(Icons.monitor_weight_outlined, color: AppColors.weightTeal, size: 22),
+            const SizedBox(width: 8),
+            Text(l10n.weightLogAppBarTitle),
+          ],
+        ),
+      ),
       body: Column(
         children: [
           Padding(
@@ -142,7 +200,7 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
                   onPressed: () => _changeMonth(-1),
                 ),
                 Text(
-                  '${_month.year}년 ${_month.month}월',
+                  l10n.weightLogMonthHeader(_month.year, _month.month),
                   style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 IconButton(
@@ -152,17 +210,17 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
               ],
             ),
           ),
-          if (_bmiSummary != null)
+          if (_bmiSummary(l10n) != null)
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Text(
-                _bmiSummary!,
+                _bmiSummary(l10n)!,
                 style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
               ),
             ),
           Row(
             children: [
-              for (final label in _weekdayLabels)
+              for (final label in weekdayLabels)
                 Expanded(
                   child: Center(
                     child: Text(label, style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
@@ -197,7 +255,7 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
                           margin: const EdgeInsets.all(2),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            border: isToday ? Border.all(color: Colors.deepOrange, width: 1.5) : null,
+                            border: isToday ? Border.all(color: AppColors.weightTeal, width: 1.5) : null,
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -214,7 +272,7 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
                                 weight != null ? weight.toStringAsFixed(1) : '-',
                                 style: TextStyle(
                                   fontSize: 12,
-                                  color: weight != null ? Colors.deepOrange : Colors.grey.shade400,
+                                  color: weight != null ? AppColors.weightTeal : Colors.grey.shade400,
                                   fontWeight: weight != null ? FontWeight.bold : FontWeight.normal,
                                 ),
                               ),

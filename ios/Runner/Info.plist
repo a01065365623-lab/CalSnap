@@ -45,5 +45,10 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- AdMob 앱 ID. lib/config/ad_config.dart의 AdConfig.iosAppId와 반드시 같은 값이어야 한다.
+	     지금은 Google 공식 테스트 앱 ID가 들어있다 — 실제 배포 전 AdMob 콘솔에서 발급받은
+	     본인 앱 ID로 교체할 것. -->
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3940256099942544~1458002511</string>
 </dict>
 </plist>

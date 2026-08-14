@@ -56,7 +56,7 @@ Future<int> seedOneYearOfLogs({int days = 365}) async {
         entries.add(DailyLogEntry(
           datetime: datetime,
           type: LogType.exercise,
-          name: '$seedTag ${exercise.emoji} ${exercise.name}',
+          name: '$seedTag ${exercise.emoji} ${exercise.id}',
           calories: -calories,
           amount: minutes.toDouble(),
         ));
