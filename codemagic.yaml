@@ -8,7 +8,11 @@ workflows:
     # 되므로 mac_mini_m2로 무료 시간을 쓴다.
     instance_type: mac_mini_m2
     environment:
-      flutter: stable
+      # stable로 두면 Codemagic이 그때그때 최신 stable Flutter를 받아오는데, 로컬 개발
+      # SDK(3.29.3)와 버전이 어긋나면 flutter_localizations가 요구하는 intl 고정 버전이
+      # 서로 달라져 "version solving failed"가 난다(로컬 SDK는 intl 0.19.0을 정확히
+      # 고정 요구). 로컬과 정확히 같은 버전으로 고정해서 이 문제를 원천 차단한다.
+      flutter: 3.29.3
       # PROXY_API_KEY, PROXY_BASE_URL: Codemagic 웹 UI > Environment variables에서
       # "calsnap_secrets" 그룹으로 등록(Secure 체크)한 값을 여기서 그룹으로 불러온다.
       # firebase_service_account, FIREBASE_ANDROID_APP_ID도 같은 그룹에 등록해서 쓴다.
