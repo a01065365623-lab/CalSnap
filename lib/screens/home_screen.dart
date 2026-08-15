@@ -102,18 +102,23 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // centerDocked는 FAB을 bottomNavigationBar 슬롯의 "맨 위 가장자리"에 절반씩
+      // 걸치도록(straddle) 배치한다. BottomAppBar 혼자였다면 CircularNotchedRectangle이
+      // 그 부분을 실제로 오려내(notch) 겹침이 없었겠지만, 배너 광고는 notch 대상이
+      // 아니라서 FAB 하단 절반이 배너 위에 그대로 겹쳐 그려졌다 — 이게 "운동" FAB이
+      // 배너를 가리던 근본 원인이다. endFloat은 straddle 없이 bottomNavigationBar
+      // 슬롯 전체(배너 실제 높이 + 하단바 높이, ad.size.height 기준으로 동적 측정된 값)
+      // 위에 여백을 두고 완전히 위로 뜨므로 배너 크기가 기기별로 달라져도 항상 안전하다.
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       // 배너는 "오늘의 로그" 탭(_index == 0)에서만 보여준다. bottomNavigationBar
-      // 전체를 이 Column의 실제 높이로 Scaffold가 인식하므로, 위의 centerDocked FAB이
-      // 배너까지 포함한 높이 위로 자동으로 올라가 겹치지 않는다(이전에는 배너를
-      // DailyLogScreen 자신의 안쪽 Scaffold에 넣어서, 그 안쪽 FAB(물 추가 버튼)만
-      // 배너 위로 올라가고 바깥쪽 HomeScreen의 운동/찍기 FAB은 배너 존재를 몰라 겹쳤다).
+      // 전체를 이 Column의 실제 높이로 Scaffold가 인식해서 body 영역을 자동으로
+      // 줄여주므로, 배너의 실제 높이(BannerAdWidget이 ad.size.height로 동적 측정)를
+      // 수동으로 계산할 필요가 없다.
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           if (_index == 0) const BannerAdWidget(),
           BottomAppBar(
-            shape: const CircularNotchedRectangle(),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
