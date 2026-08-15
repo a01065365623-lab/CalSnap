@@ -1,0 +1,37 @@
+workflows:
+  android-debug-distribution:
+    name: CalSnap Android Debug (Firebase App Distribution)
+    max_build_duration: 30
+    instance_type: linux_x2
+    environment:
+      flutter: stable
+      # PROXY_API_KEY, PROXY_BASE_URL: Codemagic 웹 UI > Environment variables에서
+      # "calsnap_secrets" 그룹으로 등록(Secure 체크)한 값을 여기서 그룹으로 불러온다.
+      # firebase_service_account, FIREBASE_ANDROID_APP_ID도 같은 그룹에 등록해서 쓴다.
+      groups:
+        - calsnap_secrets
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
+    scripts:
+      - name: Get Flutter packages
+        script: |
+          flutter pub get
+      - name: Build debug APK
+        script: |
+          flutter build apk --debug \
+            --dart-define=PROXY_API_KEY="$PROXY_API_KEY" \
+            --dart-define=PROXY_BASE_URL="$PROXY_BASE_URL"
+    artifacts:
+      - build/app/outputs/flutter-apk/*.apk
+    publishing:
+      firebase:
+        firebase_service_account: $FIREBASE_SERVICE_ACCOUNT_JSON
+        android:
+          app_id: $FIREBASE_ANDROID_APP_ID
+          groups:
+            - testers
