@@ -2,7 +2,11 @@ workflows:
   android-debug-distribution:
     name: CalSnap Android Debug (Firebase App Distribution)
     max_build_duration: 30
-    instance_type: linux_x2
+    # 무료 플랜은 매달 500분의 무료 빌드 시간을 macOS M2 머신에만 제공한다
+    # (linux/linux_x2/windows 등은 인스턴스 종류와 무관하게 무료 플랜에 아예 포함되지
+    # 않고 결제 활성화가 필요함). Android APK 빌드 자체는 Mac 머신에서도 문제없이
+    # 되므로 mac_mini_m2로 무료 시간을 쓴다.
+    instance_type: mac_mini_m2
     environment:
       flutter: stable
       # PROXY_API_KEY, PROXY_BASE_URL: Codemagic 웹 UI > Environment variables에서
