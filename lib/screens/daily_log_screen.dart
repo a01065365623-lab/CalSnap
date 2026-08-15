@@ -9,6 +9,7 @@ import '../services/tts_service.dart';
 import '../services/user_profile_service.dart';
 import '../theme/app_colors.dart';
 import '../utils/unit_converter.dart';
+import '../widgets/banner_ad_widget.dart';
 import '../widgets/log_entry_tile.dart';
 import '../widgets/related_products_button.dart';
 import 'weight_log_screen.dart';
@@ -174,6 +175,13 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
       ),
       body: Column(
         children: [
+          // FAB(운동/찍기)와 물리적으로 겹칠 일이 없는 상단에 고정 배치한다. 예전에
+          // bottomNavigationBar 쪽에 뒀을 때는 FAB 도킹 위치 계산과 얽혀서 광고가
+          // 가려지는 문제가 반복됐다 — 자세한 배경은 git log 참고.
+          const Padding(
+            padding: EdgeInsets.only(top: 8),
+            child: BannerAdWidget(),
+          ),
           _SummaryCard(summary: _summary),
           _WeightLogEntryCard(
             onTap: () => Navigator.push(
@@ -215,10 +223,6 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
               child: const Icon(Icons.water_drop),
             )
           : null,
-      // 배너는 이 화면 자신의 Scaffold가 아니라 HomeScreen(바깥쪽 Scaffold)의
-      // bottomNavigationBar에서 렌더링한다 — 그래야 HomeScreen의 운동/찍기 FAB도
-      // 배너 높이를 인식해서 겹치지 않게 위로 올라간다. 자세한 이유는
-      // home_screen.dart의 관련 주석 참고.
     );
   }
 }

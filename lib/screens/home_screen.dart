@@ -9,7 +9,6 @@ import '../services/ad_service.dart';
 import '../services/tts_service.dart';
 import '../services/user_profile_service.dart';
 import '../theme/app_colors.dart';
-import '../widgets/banner_ad_widget.dart';
 import 'daily_log_screen.dart';
 import 'exercise_input_screen.dart';
 import 'quick_mode_screen.dart';
@@ -103,36 +102,25 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // 배너는 "오늘의 로그" 탭(_index == 0)에서만 보여준다. bottomNavigationBar
-      // 전체를 이 Column의 실제 높이로 Scaffold가 인식하므로, 위의 centerDocked FAB이
-      // 배너까지 포함한 높이 위로 자동으로 올라가 겹치지 않는다(이전에는 배너를
-      // DailyLogScreen 자신의 안쪽 Scaffold에 넣어서, 그 안쪽 FAB(물 추가 버튼)만
-      // 배너 위로 올라가고 바깥쪽 HomeScreen의 운동/찍기 FAB은 배너 존재를 몰라 겹쳤다).
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (_index == 0) const BannerAdWidget(),
-          BottomAppBar(
-            shape: const CircularNotchedRectangle(),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.list_alt, color: _index == 0 ? Colors.deepOrange : Colors.grey),
-                  onPressed: () => setState(() => _index = 0),
-                ),
-                IconButton(
-                  icon: Icon(Icons.bar_chart, color: _index == 1 ? AppColors.statsGray : Colors.grey),
-                  onPressed: () => setState(() => _index = 1),
-                ),
-                IconButton(
-                  icon: Icon(Icons.settings, color: _index == 2 ? AppColors.statsGray : Colors.grey),
-                  onPressed: () => setState(() => _index = 2),
-                ),
-              ],
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: Icon(Icons.list_alt, color: _index == 0 ? Colors.deepOrange : Colors.grey),
+              onPressed: () => setState(() => _index = 0),
             ),
-          ),
-        ],
+            IconButton(
+              icon: Icon(Icons.bar_chart, color: _index == 1 ? AppColors.statsGray : Colors.grey),
+              onPressed: () => setState(() => _index = 1),
+            ),
+            IconButton(
+              icon: Icon(Icons.settings, color: _index == 2 ? AppColors.statsGray : Colors.grey),
+              onPressed: () => setState(() => _index = 2),
+            ),
+          ],
+        ),
       ),
     );
   }

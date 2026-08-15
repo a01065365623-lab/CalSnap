@@ -50,6 +50,10 @@ class CalSnapApp extends StatelessWidget {
         colorSchemeSeed: Colors.deepOrange,
         useMaterial3: true,
         fontFamily: 'Pretendard',
+        // 스낵바가 body/bottomNavigationBar를 밀어 올리지 않고 그 위에 오버레이되게 한다.
+        // fixed(기본값)였다면 스낵바가 뜰 때만 하단 배너 광고가 가려짐/드러남이 달라져
+        // 평소 상태와 레이아웃이 달라 보이는 문제가 있었다.
+        snackBarTheme: const SnackBarThemeData(behavior: SnackBarBehavior.floating),
       ),
       home: !onboardingComplete
           ? const OnboardingScreen()
