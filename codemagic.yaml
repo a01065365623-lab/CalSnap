@@ -29,9 +29,15 @@ workflows:
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
     publishing:
+      # firebase_service_account / FIREBASE_ANDROID_APP_ID는 여기 문법이 아니라, Codemagic
+      # 웹 UI > Environment variables에서 "calsnap_secrets" 그룹에 그 이름 그대로 변수가
+      # 등록돼 있어야 통과한다("Environment variable ... used in workflows > ... but not
+      # defined" 에러는 문법 오류가 아니라 그 변수가 아직 등록 안 됐거나 다른 그룹에
+      # 들어있을 때 뜬다).
       firebase:
         firebase_service_account: $FIREBASE_SERVICE_ACCOUNT_JSON
         android:
           app_id: $FIREBASE_ANDROID_APP_ID
+          artifact_type: apk
           groups:
             - testers
