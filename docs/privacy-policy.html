@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CalSnap Privacy Policy / 개인정보처리방침</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1c1c1e;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #d97757;
+    --card: #f9fafb;
+    --code-bg: #f3f4f6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16171a;
+      --fg: #e8e8ea;
+      --muted: #9aa0a6;
+      --border: #2c2d31;
+      --accent: #e2986f;
+      --card: #1e1f23;
+      --code-bg: #232428;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.65;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+  header.page-head {
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-size: 1.6rem;
+    margin: 0 0 6px;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .lang-toggle {
+    display: inline-flex;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 16px;
+  }
+  .lang-toggle label {
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--muted);
+    user-select: none;
+  }
+  .lang-toggle input { display: none; }
+  #lang-ko:checked ~ .lang-toggle label[for="lang-ko"],
+  #lang-en:checked ~ .lang-toggle label[for="lang-en"] {
+    background: var(--accent);
+    color: #fff;
+  }
+  section.doc { display: none; }
+  #lang-ko:checked ~ section.doc-ko,
+  #lang-en:checked ~ section.doc-en {
+    display: block;
+  }
+  h2 {
+    font-size: 1.15rem;
+    margin: 32px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 1rem;
+    margin: 20px 0 8px;
+  }
+  p { margin: 8px 0; }
+  ul { margin: 8px 0; padding-left: 22px; }
+  li { margin: 4px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 0.92rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: var(--card);
+    font-weight: 600;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 12px 0;
+    font-size: 0.92rem;
+  }
+  code {
+    background: var(--code-bg);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  a { color: var(--accent); }
+  footer {
+    margin-top: 48px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<input type="radio" name="lang" id="lang-ko" checked style="display:none">
+<input type="radio" name="lang" id="lang-en" style="display:none">
+
+<div class="wrap">
+  <header class="page-head">
+    <h1>CalSnap 개인정보처리방침 / Privacy Policy</h1>
+    <div class="meta">시행일 / Effective date: 2026-08-16</div>
+    <div class="lang-toggle">
+      <label for="lang-ko">한국어</label><label for="lang-en">English</label>
+    </div>
+  </header>
+
+  <section class="doc doc-ko">
+    <p>
+      <strong>CalSnap</strong>(이하 "앱")은 <strong>K-Brain Games Lab</strong>(이하 "개발자")이 개발 및 운영합니다.
+      본 개인정보처리방침은 앱 이용 과정에서 수집되는 정보와 그 처리 방식을 설명합니다.
+    </p>
+
+    <h2>1. 수집하는 정보</h2>
+    <table>
+      <thead><tr><th>항목</th><th>수집 목적</th><th>저장 위치</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>음식 사진</td>
+          <td>사진 속 음식 종류·칼로리 인식을 위해 서버로 전송되며, 서버는 Google Gemini API를 통해 분석합니다.</td>
+          <td>인식 처리 목적으로만 전송 (기기에는 사용자가 저장한 사진만 남음)</td>
+        </tr>
+        <tr>
+          <td>식사·운동·체중·물 섭취 기록</td>
+          <td>일일/기간별 칼로리·영양소·운동량·체중 통계 제공</td>
+          <td>기기 내부(로컬 데이터베이스)</td>
+        </tr>
+        <tr>
+          <td>신체 정보 (성별, 나이, 키, 체중)</td>
+          <td>기초대사량(BMR) 및 권장 칼로리 계산</td>
+          <td>기기 내부(로컬 저장소)</td>
+        </tr>
+        <tr>
+          <td>광고 식별자 (Advertising ID)</td>
+          <td>Google AdMob을 통한 광고 게재 및 성과 측정</td>
+          <td>Google AdMob(제3자)에 제공</td>
+        </tr>
+        <tr>
+          <td>임시 사용자 식별자 (UUID)</td>
+          <td>회원가입 없이 기기별 설정을 구분하기 위해 앱 설치 시 자동 생성되는 임의의 식별값. 이름·이메일 등 개인 식별정보와 연결되지 않음</td>
+          <td>기기 내부(로컬 저장소)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>앱은 회원가입을 요구하지 않으며, 이름·이메일 주소·전화번호 등 사용자를 직접 식별할 수 있는 정보를 수집하지 않습니다.</p>
+
+    <h2>2. 제3자 서비스</h2>
+    <p>앱은 다음 서비스를 이용하며, 각 서비스는 자체 개인정보처리방침에 따라 정보를 처리합니다.</p>
+    <ul>
+      <li><strong>Google Gemini API</strong> — 촬영한 음식 사진을 분석하여 음식 종류와 칼로리를 인식하는 데 사용됩니다.</li>
+      <li><strong>Google AdMob</strong> — 앱 내 배너·전면 광고 게재에 사용되며, 광고 식별자 등 기기 정보를 수집할 수 있습니다.</li>
+      <li><strong>쿠팡파트너스, 네이버 커넥트(네이버쇼핑), Amazon Associates</strong> — 상품 추천 화면에서 이용자가 직접 링크를 선택했을 때만 해당 쇼핑몰로 연결되는 제휴 링크입니다. 링크 클릭 전 실제 이동 URL을 확인창으로 안내하며, 클릭 시에만 각 플랫폼에 방문 사실이 전달됩니다.</li>
+    </ul>
+    <div class="card">
+      각 서비스의 개인정보 처리에 대해서는 아래 문서를 참고해주세요.
+      <ul>
+        <li>Google Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
+        <li>AdMob 개인정보 및 데이터 보안: <a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener">support.google.com/admob</a></li>
+      </ul>
+    </div>
+
+    <h2>3. 데이터 저장 및 보안</h2>
+    <ul>
+      <li>식사·운동·체중·물 섭취 기록과 신체 정보는 <strong>기기 내부 로컬 데이터베이스</strong>에만 저장되며, 개발자의 서버에 별도로 업로드·저장되지 않습니다.</li>
+      <li>앱 잠금(시크릿 모드) 기능에 사용되는 PIN 번호는 <strong>평문으로 저장되지 않으며</strong>, 기기별로 무작위 생성된 salt 값과 함께 SHA-256으로 해시하여 저장합니다. 따라서 개발자를 포함한 누구도 저장된 값으로부터 원래 PIN 번호를 알아낼 수 없습니다.</li>
+      <li>음식 사진은 인식 처리를 위해 서버로 전송되는 순간에만 네트워크를 거치며, 인식 결과 반환 후에는 별도 목적으로 보관하지 않습니다.</li>
+      <li>앱을 삭제하면 기기에 저장된 모든 로컬 데이터(기록, 신체 정보, 임시 식별자, PIN 해시)가 함께 삭제됩니다.</li>
+    </ul>
+
+    <h2>4. 광고</h2>
+    <p>
+      앱은 Google AdMob을 통해 배너 및 전면 광고를 게재하며, 이 과정에서 광고 식별자(Advertising ID) 등
+      기기 정보가 Google에 제공될 수 있습니다. 맞춤형 광고 수신을 원하지 않는 경우 기기의 설정에서
+      광고 개인 최적화를 제한할 수 있습니다.
+    </p>
+    <ul>
+      <li>Android: 설정 &gt; 개인정보 보호 &gt; 광고 &gt; 광고 개인 최적화 선택 해제</li>
+      <li>iOS: 설정 &gt; 개인정보 보호 및 보안 &gt; 추적 &gt; 앱이 추적하도록 허용 끄기</li>
+    </ul>
+
+    <h2>5. 아동의 개인정보</h2>
+    <p>본 앱은 만 14세 미만 아동을 대상으로 하지 않으며, 아동으로부터 고의로 개인정보를 수집하지 않습니다.</p>
+
+    <h2>6. 이용자 권리 및 데이터 삭제</h2>
+    <p>
+      모든 기록·신체 정보는 기기 내부에 저장되므로, 앱의 설정 화면에서 항목을 직접 삭제하거나
+      앱을 기기에서 삭제하는 방식으로 모든 데이터를 즉시 제거할 수 있습니다. 별도 서버에 남는
+      개인 식별 데이터가 없으므로 개발자에게 별도 삭제 요청을 할 필요가 없습니다.
+    </p>
+
+    <h2>7. 개인정보처리방침의 변경</h2>
+    <p>
+      본 방침은 법령이나 서비스 변경 사항을 반영하기 위해 개정될 수 있으며, 변경 시 본 페이지를 통해
+      게시합니다. 페이지 상단의 시행일을 통해 최신 개정 여부를 확인할 수 있습니다.
+    </p>
+
+    <h2>8. 문의처</h2>
+    <p>개인정보처리방침에 대한 문의는 아래 이메일로 연락해주세요.</p>
+    <div class="card">
+      개발자: K-Brain Games Lab<br>
+      이메일: <a href="mailto:teeth07@naver.com">teeth07@naver.com</a>
+    </div>
+  </section>
+
+  <section class="doc doc-en">
+    <p>
+      <strong>CalSnap</strong> (the "App") is developed and operated by <strong>K-Brain Games Lab</strong> (the "Developer").
+      This Privacy Policy explains what information is collected while using the App and how it is handled.
+    </p>
+
+    <h2>1. Information We Collect</h2>
+    <table>
+      <thead><tr><th>Data</th><th>Purpose</th><th>Storage</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Food photos</td>
+          <td>Sent to our server to identify the food and estimate calories via the Google Gemini API.</td>
+          <td>Transmitted only for recognition (only the photos you choose to keep remain on your device)</td>
+        </tr>
+        <tr>
+          <td>Meal, exercise, weight, and water logs</td>
+          <td>Providing daily/period calorie, nutrient, exercise, and weight statistics</td>
+          <td>Local database on your device</td>
+        </tr>
+        <tr>
+          <td>Body information (gender, age, height, weight)</td>
+          <td>Calculating Basal Metabolic Rate (BMR) and recommended calorie targets</td>
+          <td>Local storage on your device</td>
+        </tr>
+        <tr>
+          <td>Advertising ID</td>
+          <td>Serving and measuring ads via Google AdMob</td>
+          <td>Shared with Google AdMob (third party)</td>
+        </tr>
+        <tr>
+          <td>Temporary user identifier (UUID)</td>
+          <td>A random ID generated on install to distinguish per-device settings without requiring an account. Not linked to your name, email, or other identifying information</td>
+          <td>Local storage on your device</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>The App does not require account registration and does not collect directly identifying information such as your name, email address, or phone number.</p>
+
+    <h2>2. Third-Party Services</h2>
+    <p>The App uses the following services, each governed by its own privacy policy:</p>
+    <ul>
+      <li><strong>Google Gemini API</strong> — used to analyze photos of food you capture to identify the food type and estimate calories.</li>
+      <li><strong>Google AdMob</strong> — used to display banner and interstitial ads within the App, and may collect device information such as the advertising identifier.</li>
+      <li><strong>Coupang Partners, Naver Connect (Naver Shopping), and Amazon Associates</strong> — affiliate links shown on product-recommendation screens. You are taken to the retailer's site only when you tap a link, after a confirmation dialog shows you the destination URL; the visit is reported to the relevant platform only at that point.</li>
+    </ul>
+    <div class="card">
+      For details on how each service handles data, see:
+      <ul>
+        <li>Google Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
+        <li>AdMob data & privacy: <a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener">support.google.com/admob</a></li>
+      </ul>
+    </div>
+
+    <h2>3. Data Storage & Security</h2>
+    <ul>
+      <li>Your meal, exercise, weight, and water logs, along with your body information, are stored <strong>only in a local database on your device</strong> and are not uploaded to or stored on the Developer's servers.</li>
+      <li>The PIN used for the App Lock (Secret Mode) feature is <strong>never stored in plain text</strong>. It is hashed with SHA-256 together with a per-device random salt before being saved, so no one — including the Developer — can recover the original PIN from the stored value.</li>
+      <li>Food photos pass over the network only at the moment they are sent for recognition, and are not retained for any other purpose after the recognition result is returned.</li>
+      <li>Uninstalling the App removes all locally stored data (logs, body information, the temporary identifier, and the PIN hash) from your device.</li>
+    </ul>
+
+    <h2>4. Advertising</h2>
+    <p>
+      The App displays banner and interstitial ads through Google AdMob, which may share device information
+      such as the advertising identifier with Google. If you do not want personalized ads, you can limit ad
+      personalization in your device settings:
+    </p>
+    <ul>
+      <li>Android: Settings &gt; Privacy &gt; Ads &gt; Opt out of Ads Personalization</li>
+      <li>iOS: Settings &gt; Privacy &amp; Security &gt; Tracking &gt; turn off "Allow Apps to Request to Track"</li>
+    </ul>
+
+    <h2>5. Children's Privacy</h2>
+    <p>The App is not directed at children under 14, and we do not knowingly collect personal information from children.</p>
+
+    <h2>6. Your Rights & Data Deletion</h2>
+    <p>
+      Because all logs and body information are stored locally on your device, you can delete individual
+      entries from within the App's settings, or remove all data instantly by uninstalling the App. Since no
+      personally identifying data is retained on a remote server, there is no separate deletion request needed
+      from the Developer.
+    </p>
+
+    <h2>7. Changes to This Policy</h2>
+    <p>
+      This Privacy Policy may be updated to reflect changes in law or in the App's features. Any changes will
+      be posted on this page, and the effective date at the top of the page indicates the latest revision.
+    </p>
+
+    <h2>8. Contact</h2>
+    <p>If you have questions about this Privacy Policy, please contact us at:</p>
+    <div class="card">
+      Developer: K-Brain Games Lab<br>
+      Email: <a href="mailto:teeth07@naver.com">teeth07@naver.com</a>
+    </div>
+  </section>
+
+  <footer>
+    CalSnap &middot; K-Brain Games Lab &middot; teeth07@naver.com
+  </footer>
+</div>
+</body>
+</html>
