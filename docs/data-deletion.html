@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CalSnap 데이터 삭제 안내 / Data Deletion Instructions</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", Arial, sans-serif;
+    line-height: 1.7;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    color: #2b2b2b;
+    background: #fff;
+  }
+  h1 { font-size: 1.6em; margin-bottom: 0.2em; }
+  h2 { font-size: 1.2em; margin-top: 2em; border-bottom: 2px solid #f0f0f0; padding-bottom: 0.3em; }
+  .meta { color: #888; font-size: 0.9em; margin-bottom: 2em; }
+  ol, ul { padding-left: 1.4em; }
+  li { margin-bottom: 0.5em; }
+  a { color: #0a58ca; }
+  .lang-divider { margin: 4em 0; border: none; border-top: 3px solid #333; }
+  .note {
+    background: #fafafa;
+    border-left: 4px solid #ccc;
+    padding: 12px 16px;
+    margin: 1.2em 0;
+    font-size: 0.95em;
+  }
+</style>
+</head>
+<body>
+
+<h1>CalSnap 데이터 삭제 안내</h1>
+<p class="meta">앱: CalSnap | 개발자: K-Brain Games Lab | 문의: <a href="mailto:teeth07@naver.com">teeth07@naver.com</a></p>
+
+<p>CalSnap은 회원가입 없이 임시 사용자 ID(UUID) 기반으로 동작하는 앱이며, 모든 기록은 서버가 아닌 <strong>기기 내부 로컬 데이터베이스</strong>에만 저장됩니다. 이용자는 별도의 승인 절차 없이 앱 내에서 직접, 그리고 언제든지 본인의 데이터를 삭제할 수 있습니다.</p>
+
+<h2>1. 앱 내에서 직접 삭제하는 방법</h2>
+<ol>
+<li><strong>특정 날짜의 기록만 삭제</strong>: 홈 화면에서 원하는 날짜의 상세 기록 화면으로 들어간 뒤, 상단의 삭제 아이콘(휴지통)을 누르면 그 날짜의 식사·운동·체중·물 섭취 기록이 즉시 삭제됩니다.</li>
+<li><strong>신체 프로필만 초기화</strong>: 설정 화면의 <strong>프로필 초기화</strong> 항목을 선택하면 성별·나이·키·체중·목표 칼로리 등 온보딩 시 입력한 신체 정보가 초기화됩니다. 이미 저장된 일일 기록에는 영향을 주지 않습니다.</li>
+<li><strong>모든 기록을 한 번에 삭제</strong>: 설정 화면에서 <strong>앱 잠금(시크릿 모드)</strong>을 켠 뒤 잠금 화면에서 <strong>"비밀번호를 잊으셨나요?"</strong>를 선택하고 초기화를 진행하면, 저장된 모든 기록(식사·운동·체중·물 섭취)과 신체 프로필, 잠금 설정(PIN 해시)까지 한 번에 삭제되고 온보딩 화면으로 돌아갑니다. 현재 이 방법이 앱 내에서 전체 데이터를 한 번에 지울 수 있는 유일한 경로입니다.</li>
+</ol>
+<p>위 방법 모두 즉시 반영되며, 별도의 승인 절차나 대기 시간이 없습니다.</p>
+
+<h2>2. 앱 삭제(제거) 시</h2>
+<p>앱을 기기에서 삭제(언인스톨)하면 기기에 저장되어 있던 모든 로컬 데이터(기록, 신체 정보, 임시 사용자 ID, PIN 해시)가 함께 제거됩니다. CalSnap은 이 데이터를 별도 서버에 보관하지 않으므로, 언인스톨만으로 데이터 삭제가 완료됩니다.</p>
+
+<h2>3. 이메일 문의</h2>
+<p>CalSnap은 이용자의 기록을 서버에 별도로 저장하지 않으므로, 저희 쪽에서 대신 삭제해 드려야 할 서버 데이터가 없습니다. 다만 위 방법으로 삭제가 어렵거나 문의사항이 있으시면 아래 이메일로 연락해주세요.</p>
+<div class="note">
+이메일: <a href="mailto:teeth07@naver.com">teeth07@naver.com</a><br>
+합리적인 기간 내에 답변드립니다.
+</div>
+
+<h2>4. 삭제되는 데이터 항목</h2>
+<ul>
+<li>온보딩 시 입력한 신체 정보(성별, 나이, 키, 체중, 목표 칼로리)</li>
+<li>식사·운동·체중·물 섭취 기록 전체</li>
+<li>앱 잠금(PIN) 해시값</li>
+<li>기기 내에 저장된 임시 사용자 ID</li>
+</ul>
+<p>단, Google AdMob을 통해 수집되는 광고 식별자 등은 Google의 자체 정책에 따라 별도로 관리되며, 관련 삭제는 <a href="https://myadcenter.google.com" target="_blank">Google 광고 설정</a>에서 가능합니다.</p>
+
+<hr class="lang-divider">
+
+<h1 lang="en">CalSnap Data Deletion Instructions</h1>
+<p class="meta">App: CalSnap | Developer: K-Brain Games Lab | Contact: <a href="mailto:teeth07@naver.com">teeth07@naver.com</a></p>
+
+<p>CalSnap operates without user registration, using a temporary user ID (UUID) per device, and every record is stored <strong>only in a local database on your device</strong> — never on a server. Users can delete their own data directly within the app at any time, with no approval process required.</p>
+
+<h2>1. Deleting Data Directly in the App</h2>
+<ol>
+<li><strong>Delete records for a single date</strong>: open a date's detail screen from the home screen and tap the trash icon at the top to instantly delete that date's meal, exercise, weight, and water logs.</li>
+<li><strong>Reset your body profile only</strong>: in Settings, select <strong>Reset Profile</strong> to clear the sex, age, height, weight, and calorie-goal information entered during onboarding. This does not affect your saved daily logs.</li>
+<li><strong>Delete everything at once</strong>: in Settings, turn on <strong>App Lock (Secret Mode)</strong>, then on the lock screen choose <strong>"Forgot your password?"</strong> and confirm the reset. This deletes all saved logs (meals, exercise, weight, water), your body profile, and the lock settings (PIN hash) together, and returns you to onboarding. This is currently the only in-app path that wipes all data in one step.</li>
+</ol>
+<p>All of the above take effect immediately, with no approval process or waiting period.</p>
+
+<h2>2. When Uninstalling the App</h2>
+<p>Uninstalling the app removes all locally stored data (logs, body information, the temporary user ID, and the PIN hash) from the device. CalSnap does not keep this data on any server, so uninstalling alone completes the deletion.</p>
+
+<h2>3. Contact by Email</h2>
+<p>Because CalSnap does not store your records on a server, there is no server-side data for us to delete on your behalf. If you have trouble deleting data using the steps above, or have any questions, feel free to reach out.</p>
+<div class="note">
+Email: <a href="mailto:teeth07@naver.com">teeth07@naver.com</a><br>
+We'll respond within a reasonable timeframe.
+</div>
+
+<h2>4. Data Covered by Deletion</h2>
+<ul>
+<li>Body information entered during onboarding (sex, age, height, weight, calorie goal)</li>
+<li>All meal, exercise, weight, and water intake logs</li>
+<li>App lock (PIN) hash value</li>
+<li>The temporary user ID stored on your device</li>
+</ul>
+<p>Advertising identifiers collected via Google AdMob are managed under Google's own policies and can be managed separately via <a href="https://myadcenter.google.com" target="_blank">Google Ad Settings</a>.</p>
+
+</body>
+</html>
