@@ -1,8 +1,8 @@
 """Gemini 프록시 백엔드.
 
-CalSnap Flutter 앱의 HybridFoodRecognitionService가 온디바이스 매칭에 실패했을 때
-호출하는 폴백 서버. Gemini API 키를 서버에만 보관해 클라이언트 바이너리에
-키가 노출되지 않도록 한다.
+CalSnap Flutter 앱(GeminiFoodRecognitionService)이 사진 기반/텍스트 기반 음식 인식을
+위해 호출하는 서버. Gemini API 키를 서버에만 보관해 클라이언트 바이너리에 키가
+노출되지 않도록 한다.
 
 환경변수
   GEMINI_API_KEY : Google AI Studio(https://aistudio.google.com/apikey)에서 발급받은
@@ -34,6 +34,36 @@ _PROMPT = (
     "리조또와 아란치니처럼 조리법이 다른 유사 음식을 헷갈리지 않도록, "
     "재료·조리 형태·모양을 꼼꼼히 살펴 최대한 구체적인 이름으로 답해줘."
 )
+
+
+_TEXT_PROMPT = (
+    "사용자가 사진 없이 음식 이름과 양을 직접 입력했어. 이 정보만으로 100g당 예상 "
+    "칼로리(kcal), 입력된 양을 그램(g)으로 환산한 추정 총 중량, 100g당 예상 "
+    "탄수화물(g)/단백질(g)/지방(g)을 JSON으로만 답해줘: "
+    "{foodName, caloriesPer100g, estimatedWeightG, carbsG, proteinG, fatG}. "
+    "foodName은 사용자가 입력한 이름을 더 명확하게 다듬어서(오탈자 교정 등) 반환해줘. "
+    "estimatedWeightG는 사용자가 입력한 '양+단위'를 그 음식의 일반적인 밀도/구성을 "
+    "고려해 그램(g) 단위로 환산한 값이어야 해(예: 단위가 'piece'면 그 음식 1개의 "
+    "평균 중량 x 개수, 'serving'이면 일반적인 1인분 중량 x 인분 수, 'ml'이면 그 "
+    "음식의 비중을 고려해 g으로 환산, 'g'이면 입력값을 그대로 사용)."
+)
+
+
+def _build_text_prompt(food_name: str, amount: float, unit: str, language: str | None) -> str:
+    unit_label = {"g": "그램(g)", "ml": "밀리리터(ml)", "serving": "인분", "piece": "개"}.get(
+        unit, unit
+    )
+    prompt = (
+        f"{_TEXT_PROMPT} 사용자 입력 — 음식 이름: '{food_name}', 양: {amount}{unit_label}."
+    )
+    if language:
+        prompt += (
+            f" 응답 중 foodName 값은 반드시 언어 코드 '{language}'에 해당하는 언어로 답해줘. "
+            "이 언어 코드를 모르거나 지원하지 않는다면 영어로 답해줘. "
+            "caloriesPer100g, estimatedWeightG, carbsG, proteinG, fatG는 언어와 무관하게 "
+            "숫자만 그대로 반환하고, 단위나 설명 문구는 붙이지 마."
+        )
+    return prompt
 
 
 def _build_prompt(hint: str | None, language: str | None) -> str:
@@ -165,6 +195,49 @@ def recognize():
     try:
         response = _model.generate_content(
             [_build_prompt(hint, language), {"mime_type": "image/jpeg", "data": image_bytes}]
+        )
+    except Exception as exc:  # Gemini SDK의 다양한 예외를 502로 통일해 전달
+        return jsonify(error=f"Gemini 호출 실패: {exc}"), 502
+
+    parsed = _parse_food_json(response.text or "")
+    if parsed is None:
+        return jsonify(error=f"Gemini 응답 파싱 실패: {response.text!r}"), 502
+
+    return jsonify(parsed)
+
+
+@app.post("/recognize-text")
+def recognize_text():
+    """빠른측정모드 "직접 입력" 경로: 사진 없이 음식 이름+양만으로 추정한다."""
+    if _PROXY_API_KEY and request.headers.get("X-API-Key") != _PROXY_API_KEY:
+        return jsonify(error="unauthorized"), 401
+
+    payload = request.get_json(silent=True)
+    if not payload:
+        return jsonify(error="요청 본문이 필요합니다."), 400
+
+    food_name = payload.get("foodName")
+    if not isinstance(food_name, str) or not food_name.strip():
+        return jsonify(error="'foodName' 필드(문자열)가 필요합니다."), 400
+    food_name = food_name.strip()[:100]
+
+    amount = payload.get("amount")
+    if not isinstance(amount, (int, float)) or amount <= 0:
+        return jsonify(error="'amount' 필드(0보다 큰 숫자)가 필요합니다."), 400
+
+    unit = payload.get("unit")
+    if unit not in ("g", "ml", "serving", "piece"):
+        return jsonify(error="'unit' 필드는 g/ml/serving/piece 중 하나여야 합니다."), 400
+
+    language = payload.get("language")
+    if not isinstance(language, str):
+        language = None
+    else:
+        language = language.strip()[:10] or None
+
+    try:
+        response = _model.generate_content(
+            _build_text_prompt(food_name, amount, unit, language)
         )
     except Exception as exc:  # Gemini SDK의 다양한 예외를 502로 통일해 전달
         return jsonify(error=f"Gemini 호출 실패: {exc}"), 502
