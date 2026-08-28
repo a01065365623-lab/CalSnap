@@ -206,5 +206,9 @@
   "settingsFullResetSubtitle": "Tutti i pasti, gli esercizi e i pesi registrati verranno eliminati",
   "settingsFullResetDialogTitle": "Reset completo",
   "settingsFullResetDialogContent": "Tutti i dati verranno eliminati definitivamente e non potranno essere recuperati. Continuare?",
-  "settingsFullResetConfirmButton": "Elimina"
+  "settingsFullResetConfirmButton": "Elimina",
+
+  "onboardingCompleteTitle": "Tutto pronto!",
+  "onboardingCompleteSecretModeButton": "Configura modalità segreta",
+  "onboardingCompleteStartButton": "Inizia il registro di oggi"
 }

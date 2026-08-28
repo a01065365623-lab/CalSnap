@@ -206,5 +206,9 @@
   "settingsFullResetSubtitle": "将删除所有饮食、运动和体重记录",
   "settingsFullResetDialogTitle": "完全重置",
   "settingsFullResetDialogContent": "所有记录将被永久删除且无法恢复。是否继续？",
-  "settingsFullResetConfirmButton": "删除"
+  "settingsFullResetConfirmButton": "删除",
+
+  "onboardingCompleteTitle": "设置完成！",
+  "onboardingCompleteSecretModeButton": "设置隐私模式",
+  "onboardingCompleteStartButton": "开始今日日志"
 }

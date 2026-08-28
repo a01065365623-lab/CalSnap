@@ -206,5 +206,9 @@
   "settingsFullResetSubtitle": "Se eliminarán todos los registros de comidas, ejercicio y peso",
   "settingsFullResetDialogTitle": "Restablecimiento completo",
   "settingsFullResetDialogContent": "Todos los registros se eliminarán permanentemente y no podrán recuperarse. ¿Continuar?",
-  "settingsFullResetConfirmButton": "Eliminar"
+  "settingsFullResetConfirmButton": "Eliminar",
+
+  "onboardingCompleteTitle": "¡Todo listo!",
+  "onboardingCompleteSecretModeButton": "Configurar modo secreto",
+  "onboardingCompleteStartButton": "Iniciar el registro de hoy"
 }

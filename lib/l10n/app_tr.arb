@@ -206,5 +206,9 @@
   "settingsFullResetSubtitle": "Tüm öğün, egzersiz ve kilo kayıtları silinecek",
   "settingsFullResetDialogTitle": "Tam sıfırlama",
   "settingsFullResetDialogContent": "Tüm kayıtlar kalıcı olarak silinecek ve geri alınamayacak. Devam edilsin mi?",
-  "settingsFullResetConfirmButton": "Sil"
+  "settingsFullResetConfirmButton": "Sil",
+
+  "onboardingCompleteTitle": "Her şey hazır!",
+  "onboardingCompleteSecretModeButton": "Gizli modu ayarla",
+  "onboardingCompleteStartButton": "Bugünün günlüğünü başlat"
 }

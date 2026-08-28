@@ -5,7 +5,7 @@ import '../services/user_profile_service.dart';
 import '../utils/bmr_calculator.dart';
 import '../utils/unit_converter.dart';
 import '../widgets/labeled_number_field.dart';
-import 'home_screen.dart';
+import 'onboarding_complete_screen.dart';
 
 /// 회원가입 없이, 목표 칼로리 계산에 필요한 최소 정보(성별/나이/키/체중)만 받는 온보딩.
 class OnboardingScreen extends StatefulWidget {
@@ -69,7 +69,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     ));
     if (mounted) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
+        MaterialPageRoute(builder: (_) => const OnboardingCompleteScreen()),
       );
     }
   }

@@ -206,5 +206,9 @@
   "settingsFullResetSubtitle": "سيتم حذف جميع سجلات الوجبات والتمارين والوزن",
   "settingsFullResetDialogTitle": "إعادة تعيين شاملة",
   "settingsFullResetDialogContent": "سيتم حذف جميع السجلات نهائيًا ولا يمكن استعادتها. هل تريد المتابعة؟",
-  "settingsFullResetConfirmButton": "حذف"
+  "settingsFullResetConfirmButton": "حذف",
+
+  "onboardingCompleteTitle": "اكتمل الإعداد!",
+  "onboardingCompleteSecretModeButton": "إعداد الوضع السري",
+  "onboardingCompleteStartButton": "بدء سجل اليوم"
 }

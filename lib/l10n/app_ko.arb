@@ -310,5 +310,9 @@
   "settingsFullResetSubtitle": "식사, 운동, 체중 기록이 모두 삭제됩니다",
   "settingsFullResetDialogTitle": "전체 초기화",
   "settingsFullResetDialogContent": "모든 기록이 영구 삭제되며 되돌릴 수 없습니다. 계속하시겠습니까?",
-  "settingsFullResetConfirmButton": "삭제"
+  "settingsFullResetConfirmButton": "삭제",
+
+  "onboardingCompleteTitle": "설정이 끝났어요!",
+  "onboardingCompleteSecretModeButton": "시크릿 모드 설정하기",
+  "onboardingCompleteStartButton": "오늘의 로그 시작하기"
 }

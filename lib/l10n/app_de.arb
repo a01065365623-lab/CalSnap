@@ -206,5 +206,9 @@
   "settingsFullResetSubtitle": "Alle Mahlzeiten-, Trainings- und Gewichtseinträge werden gelöscht",
   "settingsFullResetDialogTitle": "Vollständig zurücksetzen",
   "settingsFullResetDialogContent": "Alle Einträge werden dauerhaft gelöscht und können nicht wiederhergestellt werden. Fortfahren?",
-  "settingsFullResetConfirmButton": "Löschen"
+  "settingsFullResetConfirmButton": "Löschen",
+
+  "onboardingCompleteTitle": "Alles eingerichtet!",
+  "onboardingCompleteSecretModeButton": "Geheimmodus einrichten",
+  "onboardingCompleteStartButton": "Heutiges Protokoll starten"
 }

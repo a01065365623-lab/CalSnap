@@ -206,5 +206,9 @@
   "settingsFullResetSubtitle": "食事・運動・体重の記録がすべて削除されます",
   "settingsFullResetDialogTitle": "全体を初期化",
   "settingsFullResetDialogContent": "すべての記録が完全に削除され、元に戻せません。続けますか？",
-  "settingsFullResetConfirmButton": "削除"
+  "settingsFullResetConfirmButton": "削除",
+
+  "onboardingCompleteTitle": "設定が完了しました！",
+  "onboardingCompleteSecretModeButton": "シークレットモードを設定する",
+  "onboardingCompleteStartButton": "今日のログを始める"
 }

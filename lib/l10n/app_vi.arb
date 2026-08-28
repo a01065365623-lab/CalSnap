@@ -206,5 +206,9 @@
   "settingsFullResetSubtitle": "Tất cả nhật ký bữa ăn, tập luyện và cân nặng sẽ bị xóa",
   "settingsFullResetDialogTitle": "Đặt lại toàn bộ",
   "settingsFullResetDialogContent": "Toàn bộ dữ liệu sẽ bị xóa vĩnh viễn và không thể khôi phục. Tiếp tục?",
-  "settingsFullResetConfirmButton": "Xóa"
+  "settingsFullResetConfirmButton": "Xóa",
+
+  "onboardingCompleteTitle": "Đã thiết lập xong!",
+  "onboardingCompleteSecretModeButton": "Thiết lập chế độ bí mật",
+  "onboardingCompleteStartButton": "Bắt đầu nhật ký hôm nay"
 }

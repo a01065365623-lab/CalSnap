@@ -207,5 +207,9 @@
   "settingsFullResetSubtitle": "This deletes all meal, exercise, and weight records",
   "settingsFullResetDialogTitle": "Full reset",
   "settingsFullResetDialogContent": "All records will be permanently deleted and cannot be recovered. Continue?",
-  "settingsFullResetConfirmButton": "Delete"
+  "settingsFullResetConfirmButton": "Delete",
+
+  "onboardingCompleteTitle": "You're all set!",
+  "onboardingCompleteSecretModeButton": "Set up secret mode",
+  "onboardingCompleteStartButton": "Start today's log"
 }

@@ -206,5 +206,9 @@
   "settingsFullResetSubtitle": "Будут удалены все записи о питании, тренировках и весе",
   "settingsFullResetDialogTitle": "Полный сброс",
   "settingsFullResetDialogContent": "Все записи будут безвозвратно удалены. Продолжить?",
-  "settingsFullResetConfirmButton": "Удалить"
+  "settingsFullResetConfirmButton": "Удалить",
+
+  "onboardingCompleteTitle": "Всё готово!",
+  "onboardingCompleteSecretModeButton": "Настроить секретный режим",
+  "onboardingCompleteStartButton": "Начать дневник за сегодня"
 }
