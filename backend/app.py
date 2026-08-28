@@ -13,12 +13,18 @@ CalSnap Flutter 앱(GeminiFoodRecognitionService)이 사진 기반/텍스트 기
 import base64
 import binascii
 import json
+import logging
 import os
+import time
 
 import google.generativeai as genai
+from google.api_core.exceptions import GoogleAPICallError, ResourceExhausted
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+logger = logging.getLogger("calsnap-proxy")
 
 _MAX_IMAGE_BYTES = 8 * 1024 * 1024  # 8MB
 _PROXY_API_KEY = os.environ.get("PROXY_API_KEY")
@@ -100,6 +106,52 @@ def _init_model() -> genai.GenerativeModel:
 
 
 _model = _init_model()
+
+
+class _GeminiCallError(Exception):
+    """Gemini 호출 실패를 엔드포인트 핸들러까지 (HTTP 상태 코드, 사용자용 메시지)로
+    들고 올라간다. rate limit(429)과 그 외 API 오류를 구분해 응답 상태 코드와
+    로그 모두에 반영하기 위함 — 이전에는 둘 다 502로 뭉개져서 로그만 봐서는
+    "Gemini가 느려서 실패"인지 "쿼터를 다 써서 실패"인지 구분할 수 없었다."""
+
+    def __init__(self, status_code: int, message: str):
+        super().__init__(message)
+        self.status_code = status_code
+        self.message = message
+
+
+def _call_gemini(content, *, endpoint: str):
+    """Gemini 호출 + 결과 로깅을 한 곳에 모은다. outcome(success/rate_limited/
+    api_error/unexpected_error)과 소요시간을 남겨서, 나중에 로그만으로 실패
+    원인별 비율(특히 429 비율)을 집계할 수 있게 한다."""
+    start = time.monotonic()
+    try:
+        response = _model.generate_content(content)
+    except ResourceExhausted as exc:
+        elapsed_ms = (time.monotonic() - start) * 1000
+        logger.warning(
+            "gemini_call endpoint=%s outcome=rate_limited elapsed_ms=%.0f error=%s",
+            endpoint, elapsed_ms, exc,
+        )
+        raise _GeminiCallError(429, "Gemini 요청 한도(rate limit)에 도달했습니다. 잠시 후 다시 시도해주세요.") from exc
+    except GoogleAPICallError as exc:
+        elapsed_ms = (time.monotonic() - start) * 1000
+        logger.error(
+            "gemini_call endpoint=%s outcome=api_error status=%s elapsed_ms=%.0f error=%s",
+            endpoint, getattr(exc, "code", None), elapsed_ms, exc,
+        )
+        raise _GeminiCallError(502, f"Gemini 호출 실패: {exc}") from exc
+    except Exception as exc:
+        elapsed_ms = (time.monotonic() - start) * 1000
+        logger.error(
+            "gemini_call endpoint=%s outcome=unexpected_error elapsed_ms=%.0f error=%s",
+            endpoint, elapsed_ms, exc,
+        )
+        raise _GeminiCallError(502, f"Gemini 호출 실패: {exc}") from exc
+
+    elapsed_ms = (time.monotonic() - start) * 1000
+    logger.info("gemini_call endpoint=%s outcome=success elapsed_ms=%.0f", endpoint, elapsed_ms)
+    return response
 
 
 def _parse_food_json(text: str) -> dict | None:
@@ -193,14 +245,16 @@ def recognize():
         language = language.strip()[:10] or None
 
     try:
-        response = _model.generate_content(
-            [_build_prompt(hint, language), {"mime_type": "image/jpeg", "data": image_bytes}]
+        response = _call_gemini(
+            [_build_prompt(hint, language), {"mime_type": "image/jpeg", "data": image_bytes}],
+            endpoint="recognize",
         )
-    except Exception as exc:  # Gemini SDK의 다양한 예외를 502로 통일해 전달
-        return jsonify(error=f"Gemini 호출 실패: {exc}"), 502
+    except _GeminiCallError as exc:
+        return jsonify(error=exc.message), exc.status_code
 
     parsed = _parse_food_json(response.text or "")
     if parsed is None:
+        logger.error("gemini_call endpoint=recognize outcome=parse_failed raw=%r", response.text)
         return jsonify(error=f"Gemini 응답 파싱 실패: {response.text!r}"), 502
 
     return jsonify(parsed)
@@ -236,14 +290,16 @@ def recognize_text():
         language = language.strip()[:10] or None
 
     try:
-        response = _model.generate_content(
-            _build_text_prompt(food_name, amount, unit, language)
+        response = _call_gemini(
+            _build_text_prompt(food_name, amount, unit, language),
+            endpoint="recognize-text",
         )
-    except Exception as exc:  # Gemini SDK의 다양한 예외를 502로 통일해 전달
-        return jsonify(error=f"Gemini 호출 실패: {exc}"), 502
+    except _GeminiCallError as exc:
+        return jsonify(error=exc.message), exc.status_code
 
     parsed = _parse_food_json(response.text or "")
     if parsed is None:
+        logger.error("gemini_call endpoint=recognize-text outcome=parse_failed raw=%r", response.text)
         return jsonify(error=f"Gemini 응답 파싱 실패: {response.text!r}"), 502
 
     return jsonify(parsed)
