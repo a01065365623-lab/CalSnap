@@ -200,5 +200,11 @@
   "shopPlatformCoupang": "Coupang",
   "shopPlatformNaver": "Naver",
   "shopPlatformAmazon": "Amazon",
-  "shopLinkOpenFailed": "Impossible d'ouvrir le lien"
+  "shopLinkOpenFailed": "Impossible d'ouvrir le lien",
+
+  "settingsFullResetTile": "Supprimer tous les enregistrements et recommencer",
+  "settingsFullResetSubtitle": "Tous les repas, exercices et poids enregistrés seront supprimés",
+  "settingsFullResetDialogTitle": "Réinitialisation complète",
+  "settingsFullResetDialogContent": "Tous les enregistrements seront définitivement supprimés et ne pourront pas être récupérés. Continuer ?",
+  "settingsFullResetConfirmButton": "Supprimer"
 }

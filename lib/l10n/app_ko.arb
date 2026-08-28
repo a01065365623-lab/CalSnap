@@ -304,5 +304,11 @@
   "shopPlatformCoupang": "쿠팡",
   "shopPlatformNaver": "네이버",
   "shopPlatformAmazon": "아마존",
-  "shopLinkOpenFailed": "링크를 열 수 없어요"
+  "shopLinkOpenFailed": "링크를 열 수 없어요",
+
+  "settingsFullResetTile": "모든 기록 삭제하고 처음부터 시작",
+  "settingsFullResetSubtitle": "식사, 운동, 체중 기록이 모두 삭제됩니다",
+  "settingsFullResetDialogTitle": "전체 초기화",
+  "settingsFullResetDialogContent": "모든 기록이 영구 삭제되며 되돌릴 수 없습니다. 계속하시겠습니까?",
+  "settingsFullResetConfirmButton": "삭제"
 }

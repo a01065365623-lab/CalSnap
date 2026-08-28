@@ -200,5 +200,11 @@
   "shopPlatformCoupang": "Coupang",
   "shopPlatformNaver": "Naver",
   "shopPlatformAmazon": "Amazon",
-  "shopLinkOpenFailed": "लिंक नहीं खोला जा सका"
+  "shopLinkOpenFailed": "लिंक नहीं खोला जा सका",
+
+  "settingsFullResetTile": "सभी रिकॉर्ड हटाएं और फिर से शुरू करें",
+  "settingsFullResetSubtitle": "सभी भोजन, व्यायाम और वज़न रिकॉर्ड हटा दिए जाएंगे",
+  "settingsFullResetDialogTitle": "पूर्ण रीसेट",
+  "settingsFullResetDialogContent": "सभी रिकॉर्ड स्थायी रूप से हटा दिए जाएंगे और वापस नहीं लाए जा सकते। जारी रखें?",
+  "settingsFullResetConfirmButton": "हटाएं"
 }

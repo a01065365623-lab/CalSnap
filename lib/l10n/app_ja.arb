@@ -200,5 +200,11 @@
   "shopPlatformCoupang": "Coupang",
   "shopPlatformNaver": "Naver",
   "shopPlatformAmazon": "Amazon",
-  "shopLinkOpenFailed": "リンクを開けませんでした"
+  "shopLinkOpenFailed": "リンクを開けませんでした",
+
+  "settingsFullResetTile": "すべての記録を削除して最初からやり直す",
+  "settingsFullResetSubtitle": "食事・運動・体重の記録がすべて削除されます",
+  "settingsFullResetDialogTitle": "全体を初期化",
+  "settingsFullResetDialogContent": "すべての記録が完全に削除され、元に戻せません。続けますか？",
+  "settingsFullResetConfirmButton": "削除"
 }

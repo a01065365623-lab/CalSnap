@@ -201,5 +201,11 @@
   "shopPlatformCoupang": "Coupang",
   "shopPlatformNaver": "Naver",
   "shopPlatformAmazon": "Amazon",
-  "shopLinkOpenFailed": "Couldn't open the link"
+  "shopLinkOpenFailed": "Couldn't open the link",
+
+  "settingsFullResetTile": "Delete all records and start over",
+  "settingsFullResetSubtitle": "This deletes all meal, exercise, and weight records",
+  "settingsFullResetDialogTitle": "Full reset",
+  "settingsFullResetDialogContent": "All records will be permanently deleted and cannot be recovered. Continue?",
+  "settingsFullResetConfirmButton": "Delete"
 }

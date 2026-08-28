@@ -296,6 +296,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  /// 프로필뿐 아니라 식사·운동·체중 기록과 사진, 시크릿 모드 설정까지 전부 지우고
+  /// 온보딩부터 다시 시작한다(app_lock_screen의 "비밀번호를 잊으셨나요?" 초기화
+  /// 흐름과 동일한 로직).
+  Future<void> _fullReset() async {
+    final l10n = AppLocalizations.of(context)!;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.settingsFullResetDialogTitle),
+        content: Text(l10n.settingsFullResetDialogContent),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(l10n.cancelButton)),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(l10n.settingsFullResetConfirmButton, style: const TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+
+    await DatabaseHelper.instance.resetAllData();
+    await UserProfileService.instance.resetProfile();
+    await AppLockService.instance.disable();
+    if (!mounted) return;
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => const OnboardingScreen()),
+      (route) => false,
+    );
+  }
+
   Future<void> _run(Future<String> Function() action) async {
     setState(() => _busy = true);
     try {
@@ -382,6 +413,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             subtitle: Text(l10n.settingsResetProfileSubtitle),
             trailing: const Icon(Icons.chevron_right),
             onTap: _resetProfile,
+          ),
+          ListTile(
+            leading: const Icon(Icons.delete_forever, color: Colors.red),
+            title: Text(l10n.settingsFullResetTile, style: const TextStyle(color: Colors.red)),
+            subtitle: Text(l10n.settingsFullResetSubtitle),
+            onTap: _fullReset,
           ),
           ListTile(
             title: Text(l10n.settingsUserIdTile),

@@ -200,5 +200,11 @@
   "shopPlatformCoupang": "Coupang",
   "shopPlatformNaver": "Naver",
   "shopPlatformAmazon": "Amazon",
-  "shopLinkOpenFailed": "Não foi possível abrir o link"
+  "shopLinkOpenFailed": "Não foi possível abrir o link",
+
+  "settingsFullResetTile": "Excluir todos os registros e recomeçar",
+  "settingsFullResetSubtitle": "Todos os registros de refeições, exercícios e peso serão excluídos",
+  "settingsFullResetDialogTitle": "Redefinição completa",
+  "settingsFullResetDialogContent": "Todos os registros serão excluídos permanentemente e não poderão ser recuperados. Continuar?",
+  "settingsFullResetConfirmButton": "Excluir"
 }

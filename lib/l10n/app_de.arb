@@ -200,5 +200,11 @@
   "shopPlatformCoupang": "Coupang",
   "shopPlatformNaver": "Naver",
   "shopPlatformAmazon": "Amazon",
-  "shopLinkOpenFailed": "Der Link konnte nicht geöffnet werden"
+  "shopLinkOpenFailed": "Der Link konnte nicht geöffnet werden",
+
+  "settingsFullResetTile": "Alle Einträge löschen und neu starten",
+  "settingsFullResetSubtitle": "Alle Mahlzeiten-, Trainings- und Gewichtseinträge werden gelöscht",
+  "settingsFullResetDialogTitle": "Vollständig zurücksetzen",
+  "settingsFullResetDialogContent": "Alle Einträge werden dauerhaft gelöscht und können nicht wiederhergestellt werden. Fortfahren?",
+  "settingsFullResetConfirmButton": "Löschen"
 }

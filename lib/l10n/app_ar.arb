@@ -200,5 +200,11 @@
   "shopPlatformCoupang": "Coupang",
   "shopPlatformNaver": "Naver",
   "shopPlatformAmazon": "Amazon",
-  "shopLinkOpenFailed": "تعذر فتح الرابط"
+  "shopLinkOpenFailed": "تعذر فتح الرابط",
+
+  "settingsFullResetTile": "حذف جميع السجلات والبدء من جديد",
+  "settingsFullResetSubtitle": "سيتم حذف جميع سجلات الوجبات والتمارين والوزن",
+  "settingsFullResetDialogTitle": "إعادة تعيين شاملة",
+  "settingsFullResetDialogContent": "سيتم حذف جميع السجلات نهائيًا ولا يمكن استعادتها. هل تريد المتابعة؟",
+  "settingsFullResetConfirmButton": "حذف"
 }

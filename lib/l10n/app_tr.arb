@@ -200,5 +200,11 @@
   "shopPlatformCoupang": "Coupang",
   "shopPlatformNaver": "Naver",
   "shopPlatformAmazon": "Amazon",
-  "shopLinkOpenFailed": "Bağlantı açılamadı"
+  "shopLinkOpenFailed": "Bağlantı açılamadı",
+
+  "settingsFullResetTile": "Tüm kayıtları sil ve baştan başla",
+  "settingsFullResetSubtitle": "Tüm öğün, egzersiz ve kilo kayıtları silinecek",
+  "settingsFullResetDialogTitle": "Tam sıfırlama",
+  "settingsFullResetDialogContent": "Tüm kayıtlar kalıcı olarak silinecek ve geri alınamayacak. Devam edilsin mi?",
+  "settingsFullResetConfirmButton": "Sil"
 }

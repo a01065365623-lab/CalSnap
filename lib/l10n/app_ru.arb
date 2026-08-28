@@ -200,5 +200,11 @@
   "shopPlatformCoupang": "Coupang",
   "shopPlatformNaver": "Naver",
   "shopPlatformAmazon": "Amazon",
-  "shopLinkOpenFailed": "Не удалось открыть ссылку"
+  "shopLinkOpenFailed": "Не удалось открыть ссылку",
+
+  "settingsFullResetTile": "Удалить все записи и начать заново",
+  "settingsFullResetSubtitle": "Будут удалены все записи о питании, тренировках и весе",
+  "settingsFullResetDialogTitle": "Полный сброс",
+  "settingsFullResetDialogContent": "Все записи будут безвозвратно удалены. Продолжить?",
+  "settingsFullResetConfirmButton": "Удалить"
 }
