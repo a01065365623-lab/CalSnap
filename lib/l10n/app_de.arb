@@ -210,5 +210,18 @@
 
   "onboardingCompleteTitle": "Alles eingerichtet!",
   "onboardingCompleteSecretModeButton": "Geheimmodus einrichten",
-  "onboardingCompleteStartButton": "Heutiges Protokoll starten"
+  "onboardingCompleteStartButton": "Heutiges Protokoll starten",
+
+  "weightLogPhotoAddButton": "Kamera",
+  "weightLogPhotoGalleryButton": "Galerie",
+  "weightLogPhotoRemoveButton": "Foto entfernen",
+  "weightLogComparePhotosTooltip": "Fotos vergleichen",
+  "weightPhotoCompareAppBarTitle": "Gewichtsfotos vergleichen",
+  "weightPhotoCompareEmptyMessage": "Für einen Vergleich werden mindestens 2 Gewichtseinträge mit Fotos benötigt",
+  "weightPhotoComparePickBeforeLabel": "Vorher",
+  "weightPhotoComparePickAfterLabel": "Nachher",
+  "weightPhotoComparePickDateHint": "Datum wählen",
+  "weightPhotoCompareNoPhotoPlaceholder": "Kein Foto",
+
+  "weightLogBmiBmrLegend": "BMI (Body-Mass-Index) · BMR (Grundumsatz)"
 }

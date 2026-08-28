@@ -210,5 +210,18 @@
 
   "onboardingCompleteTitle": "Her şey hazır!",
   "onboardingCompleteSecretModeButton": "Gizli modu ayarla",
-  "onboardingCompleteStartButton": "Bugünün günlüğünü başlat"
+  "onboardingCompleteStartButton": "Bugünün günlüğünü başlat",
+
+  "weightLogPhotoAddButton": "Kamera",
+  "weightLogPhotoGalleryButton": "Galeri",
+  "weightLogPhotoRemoveButton": "Fotoğrafı kaldır",
+  "weightLogComparePhotosTooltip": "Fotoğrafları karşılaştır",
+  "weightPhotoCompareAppBarTitle": "Kilo fotoğraflarını karşılaştır",
+  "weightPhotoCompareEmptyMessage": "Karşılaştırmak için fotoğraflı en az 2 kilo kaydı gerekir",
+  "weightPhotoComparePickBeforeLabel": "Öncesi",
+  "weightPhotoComparePickAfterLabel": "Sonrası",
+  "weightPhotoComparePickDateHint": "Tarih seç",
+  "weightPhotoCompareNoPhotoPlaceholder": "Fotoğraf yok",
+
+  "weightLogBmiBmrLegend": "VKİ (vücut kitle indeksi) · BMH (bazal metabolizma hızı)"
 }

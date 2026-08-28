@@ -1,11 +1,33 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart' show compute;
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../models/daily_log_entry.dart';
+import '../models/food_db_item.dart';
+
+/// assets/food_db_seed.json(19,495건, 약 8MB) 파싱은 CPU 바운드 작업이라 메인 isolate에서
+/// 돌리면 첫 실행 시 UI가 잠깐 멈출 수 있다. compute()로 별도 isolate에서 실행하기 위해
+/// 최상위 함수로 뺐다(compute 콜백은 top-level/static 함수여야 함).
+List<Map<String, dynamic>> _parseFoodDbSeedJson(String raw) {
+  final decoded = jsonDecode(raw) as List<dynamic>;
+  return decoded.cast<Map<String, dynamic>>();
+}
 
 class DatabaseHelper {
   DatabaseHelper._internal();
   static final DatabaseHelper instance = DatabaseHelper._internal();
+
+  /// assets/food_db_seed.json 내용이 바뀌면 이 값을 올려서 재시딩을 트리거한다.
+  /// v2: 식약처 공식 데이터 19,495건으로 전체 교체. v3: seed 파일 갱신본으로 재교체.
+  static const String _foodDbSeedVersion = '3';
+
+  /// 배치 하나에 담을 최대 SQL 작업 수. 19,495건 전체를 배치 하나에 담으면 플랫폼
+  /// 채널 페이로드가 지나치게 커지므로, 이 크기로 잘라 여러 배치로 나눠 commit한다.
+  /// (트랜잭션 자체는 [_seedFoodDbIfNeeded]에서 db.transaction으로 하나로 묶어 원자성은 유지)
+  static const int _seedBatchOpThreshold = 3000;
 
   Database? _db;
 
@@ -17,9 +39,9 @@ class DatabaseHelper {
   Future<Database> _initDb() async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, 'calsnap.db');
-    return openDatabase(
+    final db = await openDatabase(
       path,
-      version: 3,
+      version: 6,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE daily_log (
@@ -32,7 +54,8 @@ class DatabaseHelper {
             mode TEXT,
             carbsG REAL,
             proteinG REAL,
-            fatG REAL
+            fatG REAL,
+            source TEXT
           )
         ''');
         await db.execute('''
@@ -46,9 +69,11 @@ class DatabaseHelper {
         await db.execute('''
           CREATE TABLE weight_log (
             date TEXT PRIMARY KEY,
-            weight_kg REAL NOT NULL
+            weight_kg REAL NOT NULL,
+            photo_path TEXT
           )
         ''');
+        await _createFoodDbTables(db);
       },
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -68,12 +93,167 @@ class DatabaseHelper {
             )
           ''');
         }
+        if (oldVersion < 4) {
+          // 빠른측정모드 "직접 입력" 경로 추가: 사진 기반(photo)인지 사진 없이
+          // 직접 입력(manual)했는지 구분한다. 기존 행은 전부 NULL로 남고,
+          // log_entry_tile은 null을 "구분 표시 없음(과거 기록)"으로 취급한다.
+          await db.execute('ALTER TABLE daily_log ADD COLUMN source TEXT');
+        }
+        if (oldVersion < 5) {
+          // "직접입력" 모드 자동완성용 로컬 한식 음식 DB(food_db) + 검색 인덱스
+          // (food_search_terms LIKE 검색, food_search_fts FTS5 폴백) 추가.
+          await _createFoodDbTables(db);
+        }
+        if (oldVersion < 6) {
+          // 체중 기록에 사진(전/후 비교용)을 함께 저장할 수 있도록 컬럼 추가.
+          // 기존 행은 전부 NULL.
+          await db.execute('ALTER TABLE weight_log ADD COLUMN photo_path TEXT');
+        }
       },
     );
+    await _seedFoodDbIfNeeded(db);
+    return db;
+  }
+
+  Future<void> _createFoodDbTables(Database db) async {
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS food_db (
+        id TEXT PRIMARY KEY,
+        name_ko TEXT NOT NULL,
+        name_en TEXT,
+        country TEXT,
+        category TEXT,
+        serving_size_g REAL,
+        calories REAL,
+        carbs_g REAL,
+        protein_g REAL,
+        fat_g REAL,
+        sodium_mg REAL,
+        main_ingredients TEXT,
+        image_url TEXT,
+        ai_recognized_name TEXT,
+        created_at TEXT
+      )
+    ''');
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS food_search_terms (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        food_id TEXT NOT NULL,
+        term TEXT NOT NULL,
+        FOREIGN KEY (food_id) REFERENCES food_db (id)
+      )
+    ''');
+    await db.execute(
+      'CREATE INDEX IF NOT EXISTS idx_food_search_terms_term ON food_search_terms (term)',
+    );
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS food_db_meta (
+        key TEXT PRIMARY KEY,
+        value TEXT
+      )
+    ''');
+    // 일부 구형 기기의 시스템 SQLite에는 FTS5가 빠져 있을 수 있어, 실패해도 앱 구동
+    // 자체는 막지 않는다(검색은 food_search_terms LIKE 매칭만으로도 동작).
+    try {
+      await db.execute(
+        'CREATE VIRTUAL TABLE IF NOT EXISTS food_search_fts USING fts5(food_id UNINDEXED, term)',
+      );
+    } catch (_) {
+      // FTS5 미지원 기기: fallback 검색만 비활성화되고 나머지는 정상 동작.
+    }
+  }
+
+  /// assets/food_db_seed.json(19,495건)을 읽어 food_db/food_search_terms/food_search_fts를
+  /// 채운다. food_db_meta.seed_version이 이미 [_foodDbSeedVersion]과 같으면 재실행하지 않는다.
+  ///
+  /// 건별 개별 트랜잭션은 19,495건 규모에서 매우 느려지므로, 전체를 db.transaction()
+  /// 하나로 묶어 원자적으로 처리한다. 다만 배치 하나에 전체(약 12만 건의 INSERT)를 담으면
+  /// 플랫폼 채널 페이로드가 지나치게 커져 오히려 느려지고 메모리를 많이 먹으므로,
+  /// [_seedBatchOpThreshold]건마다 잘라 여러 배치로 나눠 commit한다(트랜잭션은 유지).
+  Future<void> _seedFoodDbIfNeeded(Database db) async {
+    final metaRows = await db.query(
+      'food_db_meta',
+      where: 'key = ?',
+      whereArgs: ['seed_version'],
+    );
+    if (metaRows.isNotEmpty && metaRows.first['value'] == _foodDbSeedVersion) {
+      return;
+    }
+
+    final stopwatch = Stopwatch()..start();
+
+    final raw = await rootBundle.loadString('assets/food_db_seed.json');
+    // JSON 디코딩(8MB, 19,495건)은 CPU 바운드라 메인 isolate를 막을 수 있어 별도
+    // isolate(compute)에서 처리한다.
+    final items = await compute(_parseFoodDbSeedJson, raw);
+
+    // 일부 구형 기기는 시스템 SQLite에 FTS5가 없어 food_search_fts 테이블 생성 자체가
+    // 실패할 수 있다(_createFoodDbTables 참고) — 그런 기기에서는 fts 관련 배치 명령을
+    // 아예 큐에 넣지 않는다.
+    final ftsExists = (await db.query(
+      'sqlite_master',
+      where: "type = 'table' AND name = 'food_search_fts'",
+    ))
+        .isNotEmpty;
+
+    await db.transaction((txn) async {
+      final clearBatch = txn.batch();
+      clearBatch.delete('food_search_terms');
+      clearBatch.delete('food_db');
+      if (ftsExists) clearBatch.delete('food_search_fts');
+      await clearBatch.commit(noResult: true);
+
+      var batch = txn.batch();
+      var opsInBatch = 0;
+
+      Future<void> flushIfNeeded() async {
+        if (opsInBatch < _seedBatchOpThreshold) return;
+        await batch.commit(noResult: true);
+        batch = txn.batch();
+        opsInBatch = 0;
+      }
+
+      for (final map in items) {
+        final food = FoodDbItem.fromSeedJson(map);
+        batch.insert('food_db', food.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
+        opsInBatch++;
+
+        final terms = (map['search_terms'] as List<dynamic>? ?? [])
+            .map((t) => t.toString())
+            .toSet()
+          ..add(food.nameKo)
+          ..addAll(food.nameEn != null && food.nameEn!.isNotEmpty ? [food.nameEn!] : []);
+        for (final term in terms) {
+          batch.insert('food_search_terms', {'food_id': food.id, 'term': term});
+          opsInBatch++;
+          if (ftsExists) {
+            batch.insert('food_search_fts', {'food_id': food.id, 'term': term});
+            opsInBatch++;
+          }
+        }
+        await flushIfNeeded();
+      }
+      if (opsInBatch > 0) {
+        await batch.commit(noResult: true);
+      }
+
+      await txn.insert(
+        'food_db_meta',
+        {'key': 'seed_version', 'value': _foodDbSeedVersion},
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    });
+
+    stopwatch.stop();
+    // ignore: avoid_print
+    print('시딩 완료: ${stopwatch.elapsedMilliseconds}ms (${items.length}건)');
   }
 
   /// 식사·운동·물, 요약, 체중 기록을 전부 삭제한다. 시크릿 모드 "비밀번호를 잊으셨나요?"
-  /// 초기화 흐름 전용 — 스키마는 그대로 두고 데이터만 비운다.
+  /// 초기화 흐름과 설정 화면의 "전체 초기화" 버튼 전용 — 스키마는 그대로 두고 데이터만
+  /// 비운다. weight_log.photo_path가 가리키던 실제 이미지 파일은 여기서 지우지 않으므로
+  /// (파일 시스템은 DatabaseHelper의 책임이 아님), 호출부에서
+  /// WeightPhotoService.deleteAllPhotos()를 함께 호출해야 한다.
   Future<void> resetAllData() async {
     final db = await database;
     await db.delete('daily_log');
@@ -357,6 +537,72 @@ class DatabaseHelper {
     final rows = await db.query('weight_log', orderBy: 'date DESC', limit: 1);
     if (rows.isEmpty) return null;
     return (rows.first['weight_kg'] as num).toDouble();
+  }
+
+  /// [date] 이하(그날 포함)로 기록된 체중 중 가장 최근 값. 체중 기록 화면에서
+  /// "선택한 날짜에 기록이 없으면 그 이전 가장 가까운 기록"을 보여줄 때 쓴다
+  /// (그날 이후 미래 기록은 보지 않는다 — 과거 시점 화면에 미래 체중이 "최근"으로
+  /// 뜨면 시간 순서상 혼란스럽다).
+  Future<double?> getWeightOnOrBefore(DateTime date) async {
+    final db = await database;
+    final rows = await db.query(
+      'weight_log',
+      where: 'date <= ?',
+      whereArgs: [_dateKey(date)],
+      orderBy: 'date DESC',
+      limit: 1,
+    );
+    if (rows.isEmpty) return null;
+    return (rows.first['weight_kg'] as num).toDouble();
+  }
+
+  /// [date]에 이미 체중이 기록되어 있어야 사진을 붙일 수 있다(weight_log는 date가
+  /// PK이고 weight_kg가 NOT NULL이라 체중 없이 사진만 있는 행은 만들 수 없음). 그런
+  /// 날짜에 호출하면 0행이 갱신되고 조용히 무시된다.
+  Future<void> setWeightPhotoPath(DateTime date, String? photoPath) async {
+    final db = await database;
+    await db.update(
+      'weight_log',
+      {'photo_path': photoPath},
+      where: 'date = ?',
+      whereArgs: [_dateKey(date)],
+    );
+  }
+
+  Future<String?> getWeightPhotoPath(DateTime date) async {
+    final db = await database;
+    final rows = await db.query('weight_log', where: 'date = ?', whereArgs: [_dateKey(date)]);
+    if (rows.isEmpty) return null;
+    return rows.first['photo_path'] as String?;
+  }
+
+  /// 구간 내 사진이 있는 날짜만 반환한다(체중 기록 캘린더의 카메라 아이콘 표시용).
+  Future<Map<String, String>> getWeightPhotoPathsForRange(DateTime from, DateTime to) async {
+    final db = await database;
+    final rows = await db.query(
+      'weight_log',
+      columns: ['date', 'photo_path'],
+      where: 'date >= ? AND date <= ? AND photo_path IS NOT NULL',
+      whereArgs: [_dateKey(from), _dateKey(to)],
+    );
+    return {for (final r in rows) r['date'] as String: r['photo_path'] as String};
+  }
+
+  /// 사진이 있는 체중 기록 전체를 날짜순으로 반환한다(사진 비교 화면의 날짜 선택용).
+  Future<List<WeightPhotoRecord>> getWeightPhotoRecords() async {
+    final db = await database;
+    final rows = await db.query(
+      'weight_log',
+      where: 'photo_path IS NOT NULL',
+      orderBy: 'date ASC',
+    );
+    return rows
+        .map((r) => WeightPhotoRecord(
+              date: r['date'] as String,
+              weightKg: (r['weight_kg'] as num).toDouble(),
+              photoPath: r['photo_path'] as String,
+            ))
+        .toList();
   }
 
   String _dateKey(DateTime d) =>

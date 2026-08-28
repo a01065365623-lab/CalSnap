@@ -1,11 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../db/database_helper.dart';
 import '../services/user_profile_service.dart';
+import '../services/weight_photo_service.dart';
 import '../theme/app_colors.dart';
 import '../utils/bmr_calculator.dart';
+import 'weight_photo_compare_screen.dart';
 
 String _bmiCategoryLabel(AppLocalizations l10n, BmiCategory category) {
   switch (category) {
@@ -36,9 +41,15 @@ class WeightLogScreen extends StatefulWidget {
 class _WeightLogScreenState extends State<WeightLogScreen> {
   late DateTime _month; // 보고 있는 달의 1일
   Map<String, double> _weights = {};
+  Map<String, String> _photoPaths = {};
   bool _loading = true;
 
   // 최신 체중/BMI/BMR 요약 표시용(키·성별·나이는 온보딩 프로필 값 사용, 보고 있는 달과는 무관).
+  // "최근 체중"은 항상 전체 기록 중 최신값이 아니라, _referenceDate 기준으로 그날
+  // 기록이 있으면 그 값을, 없으면 그 이전 가장 가까운 기록을 보여준다. 화면을 처음
+  // 열 때는 오늘(또는 initialDate)이 기준이고, 캘린더에서 날짜를 눌러 체중을
+  // 입력/수정/삭제할 때마다 그 날짜로 기준이 바뀌면서 요약도 함께 갱신된다.
+  late DateTime _referenceDate;
   double? _latestWeightKg;
   UserProfile? _profile;
 
@@ -48,6 +59,7 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
     final initialDate = widget.initialDate;
     final base = initialDate ?? DateTime.now();
     _month = DateTime(base.year, base.month, 1);
+    _referenceDate = base;
     _load();
     _loadBmiInputs();
     if (initialDate != null) {
@@ -59,7 +71,8 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
 
   Future<void> _loadBmiInputs() async {
     final profile = await UserProfileService.instance.getProfile();
-    final latestWeight = await DatabaseHelper.instance.getLatestWeight();
+    final onDate = await DatabaseHelper.instance.getWeightForDate(_referenceDate);
+    final latestWeight = onDate ?? await DatabaseHelper.instance.getWeightOnOrBefore(_referenceDate);
     if (mounted) {
       setState(() {
         _profile = profile;
@@ -100,9 +113,11 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
     final from = _month;
     final to = DateTime(_month.year, _month.month + 1, 0); // 이번 달 마지막 날
     final weights = await DatabaseHelper.instance.getWeightsForRange(from, to);
+    final photoPaths = await DatabaseHelper.instance.getWeightPhotoPathsForRange(from, to);
     if (mounted) {
       setState(() {
         _weights = weights;
+        _photoPaths = photoPaths;
         _loading = false;
       });
     }
@@ -117,47 +132,123 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
     final l10n = AppLocalizations.of(context)!;
     final key = _dateKey(date);
     final existing = _weights[key];
+    final existingPhotoPath = _photoPaths[key];
     final controller = TextEditingController(text: existing?.toStringAsFixed(1) ?? '');
+    final picker = ImagePicker();
+
+    // 사진 선택/제거는 다이얼로그 안에서만 미리보기로 반영하고, 실제 파일 저장·삭제와
+    // DB 반영은 저장 버튼을 눌러 다이얼로그가 닫힌 뒤에 한 번에 처리한다.
+    XFile? pickedPhoto;
+    var photoCleared = false;
 
     final result = await showDialog<_WeightDialogResult>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.weightLogEditDialogTitle(date.month, date.day)),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          decoration: const InputDecoration(
-            suffixText: 'kg',
-            border: OutlineInputBorder(),
-            isDense: true,
-          ),
-        ),
-        actions: [
-          if (existing != null)
-            TextButton(
-              onPressed: () => Navigator.pop(context, const _WeightDialogResult.deleted()),
-              child: Text(l10n.deleteButton),
+      builder: (context) => StatefulBuilder(
+        builder: (context, setDialogState) {
+          final hasPhoto = pickedPhoto != null || (existingPhotoPath != null && !photoCleared);
+
+          Future<void> pick(ImageSource source) async {
+            final picked = await picker.pickImage(source: source);
+            if (picked != null) {
+              setDialogState(() {
+                pickedPhoto = picked;
+                photoCleared = false;
+              });
+            }
+          }
+
+          return AlertDialog(
+            title: Text(l10n.weightLogEditDialogTitle(date.month, date.day)),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    controller: controller,
+                    autofocus: true,
+                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                    decoration: const InputDecoration(
+                      suffixText: 'kg',
+                      border: OutlineInputBorder(),
+                      isDense: true,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  if (hasPhoto)
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.file(
+                        File(pickedPhoto?.path ?? existingPhotoPath!),
+                        height: 120,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  const SizedBox(height: 4),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton.icon(
+                        icon: const Icon(Icons.camera_alt_outlined, size: 18),
+                        label: Text(l10n.weightLogPhotoAddButton),
+                        onPressed: () => pick(ImageSource.camera),
+                      ),
+                      TextButton.icon(
+                        icon: const Icon(Icons.photo_library_outlined, size: 18),
+                        label: Text(l10n.weightLogPhotoGalleryButton),
+                        onPressed: () => pick(ImageSource.gallery),
+                      ),
+                      if (hasPhoto)
+                        IconButton(
+                          icon: const Icon(Icons.close, size: 18),
+                          tooltip: l10n.weightLogPhotoRemoveButton,
+                          onPressed: () => setDialogState(() {
+                            pickedPhoto = null;
+                            photoCleared = true;
+                          }),
+                        ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          TextButton(onPressed: () => Navigator.pop(context), child: Text(l10n.cancelButton)),
-          TextButton(
-            onPressed: () {
-              final value = double.tryParse(controller.text.trim());
-              if (value == null || value <= 0) return;
-              Navigator.pop(context, _WeightDialogResult.saved(value));
-            },
-            child: Text(l10n.saveButton),
-          ),
-        ],
+            actions: [
+              if (existing != null)
+                TextButton(
+                  onPressed: () => Navigator.pop(context, const _WeightDialogResult.deleted()),
+                  child: Text(l10n.deleteButton),
+                ),
+              TextButton(onPressed: () => Navigator.pop(context), child: Text(l10n.cancelButton)),
+              TextButton(
+                onPressed: () {
+                  final value = double.tryParse(controller.text.trim());
+                  if (value == null || value <= 0) return;
+                  Navigator.pop(context, _WeightDialogResult.saved(value));
+                },
+                child: Text(l10n.saveButton),
+              ),
+            ],
+          );
+        },
       ),
     );
     if (result == null) return;
 
     if (result.isDelete) {
+      if (existingPhotoPath != null) {
+        await WeightPhotoService.instance.deletePhoto(existingPhotoPath);
+      }
       await DatabaseHelper.instance.deleteWeightForDate(date);
     } else if (result.value != null) {
       await DatabaseHelper.instance.setWeightForDate(date, result.value!);
+      if (pickedPhoto != null) {
+        final savedPath = await WeightPhotoService.instance.savePhoto(pickedPhoto!, date);
+        await DatabaseHelper.instance.setWeightPhotoPath(date, savedPath);
+      } else if (photoCleared && existingPhotoPath != null) {
+        await WeightPhotoService.instance.deletePhoto(existingPhotoPath);
+        await DatabaseHelper.instance.setWeightPhotoPath(date, null);
+      }
     }
+    _referenceDate = date; // 방금 입력/수정/삭제한 날짜 기준으로 상단 요약을 다시 계산한다.
     _load();
     _loadBmiInputs();
   }
@@ -187,6 +278,16 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
             Text(l10n.weightLogAppBarTitle),
           ],
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.compare),
+            tooltip: l10n.weightLogComparePhotosTooltip,
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const WeightPhotoCompareScreen()),
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -212,12 +313,29 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
           ),
           if (_bmiSummary(l10n) != null)
             Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Text(
-                _bmiSummary(l10n)!,
-                style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // 아래 캘린더의 날짜/체중 텍스트(13/12px)보다 눈에 띄게 크고, 체중
+                  // 카테고리 컬러(틸)를 써서 이 화면에서 가장 중요한 정보임을 드러낸다.
+                  Text(
+                    _bmiSummary(l10n)!,
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.weightTeal,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    l10n.weightLogBmiBmrLegend,
+                    style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
+                  ),
+                ],
               ),
             ),
+          const SizedBox(height: 8),
           Row(
             children: [
               for (final label in weekdayLabels)
@@ -276,6 +394,11 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
                                   fontWeight: weight != null ? FontWeight.bold : FontWeight.normal,
                                 ),
                               ),
+                              if (_photoPaths.containsKey(key))
+                                const Padding(
+                                  padding: EdgeInsets.only(top: 1),
+                                  child: Icon(Icons.photo_camera, size: 10, color: AppColors.weightTeal),
+                                ),
                             ],
                           ),
                         ),

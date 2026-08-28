@@ -210,5 +210,18 @@
 
   "onboardingCompleteTitle": "सब तैयार है!",
   "onboardingCompleteSecretModeButton": "सीक्रेट मोड सेट करें",
-  "onboardingCompleteStartButton": "आज का लॉग शुरू करें"
+  "onboardingCompleteStartButton": "आज का लॉग शुरू करें",
+
+  "weightLogPhotoAddButton": "कैमरा",
+  "weightLogPhotoGalleryButton": "गैलरी",
+  "weightLogPhotoRemoveButton": "फ़ोटो हटाएं",
+  "weightLogComparePhotosTooltip": "फ़ोटो तुलना करें",
+  "weightPhotoCompareAppBarTitle": "वज़न फ़ोटो तुलना",
+  "weightPhotoCompareEmptyMessage": "तुलना के लिए फ़ोटो वाले कम से कम 2 वज़न रिकॉर्ड होने चाहिए",
+  "weightPhotoComparePickBeforeLabel": "पहले",
+  "weightPhotoComparePickAfterLabel": "बाद में",
+  "weightPhotoComparePickDateHint": "तारीख़ चुनें",
+  "weightPhotoCompareNoPhotoPlaceholder": "कोई फ़ोटो नहीं",
+
+  "weightLogBmiBmrLegend": "BMI (बॉडी मास इंडेक्स) · BMR (बेसल मेटाबॉलिक रेट)"
 }

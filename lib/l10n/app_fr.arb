@@ -210,5 +210,18 @@
 
   "onboardingCompleteTitle": "Tout est prêt !",
   "onboardingCompleteSecretModeButton": "Configurer le mode secret",
-  "onboardingCompleteStartButton": "Démarrer le journal du jour"
+  "onboardingCompleteStartButton": "Démarrer le journal du jour",
+
+  "weightLogPhotoAddButton": "Appareil photo",
+  "weightLogPhotoGalleryButton": "Galerie",
+  "weightLogPhotoRemoveButton": "Supprimer la photo",
+  "weightLogComparePhotosTooltip": "Comparer les photos",
+  "weightPhotoCompareAppBarTitle": "Comparer les photos de poids",
+  "weightPhotoCompareEmptyMessage": "Il faut au moins 2 relevés de poids avec photo pour comparer",
+  "weightPhotoComparePickBeforeLabel": "Avant",
+  "weightPhotoComparePickAfterLabel": "Après",
+  "weightPhotoComparePickDateHint": "Choisir une date",
+  "weightPhotoCompareNoPhotoPlaceholder": "Aucune photo",
+
+  "weightLogBmiBmrLegend": "IMC (indice de masse corporelle) · MB (métabolisme de base)"
 }

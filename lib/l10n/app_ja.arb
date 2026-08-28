@@ -210,5 +210,18 @@
 
   "onboardingCompleteTitle": "設定が完了しました！",
   "onboardingCompleteSecretModeButton": "シークレットモードを設定する",
-  "onboardingCompleteStartButton": "今日のログを始める"
+  "onboardingCompleteStartButton": "今日のログを始める",
+
+  "weightLogPhotoAddButton": "撮影",
+  "weightLogPhotoGalleryButton": "ギャラリー",
+  "weightLogPhotoRemoveButton": "写真を削除",
+  "weightLogComparePhotosTooltip": "写真を比較",
+  "weightPhotoCompareAppBarTitle": "体重写真の比較",
+  "weightPhotoCompareEmptyMessage": "比較するには写真付きの体重記録が2件以上必要です",
+  "weightPhotoComparePickBeforeLabel": "ビフォー",
+  "weightPhotoComparePickAfterLabel": "アフター",
+  "weightPhotoComparePickDateHint": "日付を選択",
+  "weightPhotoCompareNoPhotoPlaceholder": "写真なし",
+
+  "weightLogBmiBmrLegend": "BMI（体格指数）・BMR（基礎代謝量）"
 }

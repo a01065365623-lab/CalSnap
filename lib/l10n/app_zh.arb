@@ -210,5 +210,18 @@
 
   "onboardingCompleteTitle": "设置完成！",
   "onboardingCompleteSecretModeButton": "设置隐私模式",
-  "onboardingCompleteStartButton": "开始今日日志"
+  "onboardingCompleteStartButton": "开始今日日志",
+
+  "weightLogPhotoAddButton": "拍照",
+  "weightLogPhotoGalleryButton": "相册",
+  "weightLogPhotoRemoveButton": "删除照片",
+  "weightLogComparePhotosTooltip": "对比照片",
+  "weightPhotoCompareAppBarTitle": "体重照片对比",
+  "weightPhotoCompareEmptyMessage": "需要至少2条带照片的体重记录才能对比",
+  "weightPhotoComparePickBeforeLabel": "之前",
+  "weightPhotoComparePickAfterLabel": "之后",
+  "weightPhotoComparePickDateHint": "选择日期",
+  "weightPhotoCompareNoPhotoPlaceholder": "暂无照片",
+
+  "weightLogBmiBmrLegend": "BMI（体质指数）· BMR（基础代谢率）"
 }

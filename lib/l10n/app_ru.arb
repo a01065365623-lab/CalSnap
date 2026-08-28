@@ -210,5 +210,18 @@
 
   "onboardingCompleteTitle": "Всё готово!",
   "onboardingCompleteSecretModeButton": "Настроить секретный режим",
-  "onboardingCompleteStartButton": "Начать дневник за сегодня"
+  "onboardingCompleteStartButton": "Начать дневник за сегодня",
+
+  "weightLogPhotoAddButton": "Камера",
+  "weightLogPhotoGalleryButton": "Галерея",
+  "weightLogPhotoRemoveButton": "Удалить фото",
+  "weightLogComparePhotosTooltip": "Сравнить фото",
+  "weightPhotoCompareAppBarTitle": "Сравнение фото веса",
+  "weightPhotoCompareEmptyMessage": "Для сравнения нужно минимум 2 записи веса с фото",
+  "weightPhotoComparePickBeforeLabel": "До",
+  "weightPhotoComparePickAfterLabel": "После",
+  "weightPhotoComparePickDateHint": "Выбрать дату",
+  "weightPhotoCompareNoPhotoPlaceholder": "Нет фото",
+
+  "weightLogBmiBmrLegend": "ИМТ (индекс массы тела) · БОО (базовый обмен веществ)"
 }

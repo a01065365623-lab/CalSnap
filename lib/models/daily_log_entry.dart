@@ -100,3 +100,16 @@ class NutrientSummary {
     required this.fatG,
   });
 }
+
+/// 사진과 함께 저장된 체중 기록 한 건(사진 비교 화면의 날짜 선택용).
+class WeightPhotoRecord {
+  final String date; // yyyy-MM-dd
+  final double weightKg;
+  final String photoPath;
+
+  const WeightPhotoRecord({
+    required this.date,
+    required this.weightKg,
+    required this.photoPath,
+  });
+}

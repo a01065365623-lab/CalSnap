@@ -314,5 +314,18 @@
 
   "onboardingCompleteTitle": "설정이 끝났어요!",
   "onboardingCompleteSecretModeButton": "시크릿 모드 설정하기",
-  "onboardingCompleteStartButton": "오늘의 로그 시작하기"
+  "onboardingCompleteStartButton": "오늘의 로그 시작하기",
+
+  "weightLogPhotoAddButton": "촬영",
+  "weightLogPhotoGalleryButton": "갤러리",
+  "weightLogPhotoRemoveButton": "사진 삭제",
+  "weightLogComparePhotosTooltip": "사진 비교",
+  "weightPhotoCompareAppBarTitle": "체중 사진 비교",
+  "weightPhotoCompareEmptyMessage": "사진과 함께 저장한 체중 기록이 2개 이상 있어야 비교할 수 있어요",
+  "weightPhotoComparePickBeforeLabel": "이전",
+  "weightPhotoComparePickAfterLabel": "이후",
+  "weightPhotoComparePickDateHint": "날짜 선택",
+  "weightPhotoCompareNoPhotoPlaceholder": "사진 없음",
+
+  "weightLogBmiBmrLegend": "BMI(체질량지수) · BMR(기초대사량)"
 }

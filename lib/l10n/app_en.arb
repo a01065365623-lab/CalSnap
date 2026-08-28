@@ -211,5 +211,18 @@
 
   "onboardingCompleteTitle": "You're all set!",
   "onboardingCompleteSecretModeButton": "Set up secret mode",
-  "onboardingCompleteStartButton": "Start today's log"
+  "onboardingCompleteStartButton": "Start today's log",
+
+  "weightLogPhotoAddButton": "Camera",
+  "weightLogPhotoGalleryButton": "Gallery",
+  "weightLogPhotoRemoveButton": "Remove photo",
+  "weightLogComparePhotosTooltip": "Compare photos",
+  "weightPhotoCompareAppBarTitle": "Compare weight photos",
+  "weightPhotoCompareEmptyMessage": "You need at least 2 weight records with photos to compare",
+  "weightPhotoComparePickBeforeLabel": "Before",
+  "weightPhotoComparePickAfterLabel": "After",
+  "weightPhotoComparePickDateHint": "Pick a date",
+  "weightPhotoCompareNoPhotoPlaceholder": "No photo",
+
+  "weightLogBmiBmrLegend": "BMI (Body Mass Index) · BMR (Basal Metabolic Rate)"
 }

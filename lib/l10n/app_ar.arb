@@ -210,5 +210,18 @@
 
   "onboardingCompleteTitle": "اكتمل الإعداد!",
   "onboardingCompleteSecretModeButton": "إعداد الوضع السري",
-  "onboardingCompleteStartButton": "بدء سجل اليوم"
+  "onboardingCompleteStartButton": "بدء سجل اليوم",
+
+  "weightLogPhotoAddButton": "كاميرا",
+  "weightLogPhotoGalleryButton": "المعرض",
+  "weightLogPhotoRemoveButton": "إزالة الصورة",
+  "weightLogComparePhotosTooltip": "مقارنة الصور",
+  "weightPhotoCompareAppBarTitle": "مقارنة صور الوزن",
+  "weightPhotoCompareEmptyMessage": "تحتاج إلى سجلّي وزن على الأقل بصور للمقارنة",
+  "weightPhotoComparePickBeforeLabel": "قبل",
+  "weightPhotoComparePickAfterLabel": "بعد",
+  "weightPhotoComparePickDateHint": "اختر تاريخًا",
+  "weightPhotoCompareNoPhotoPlaceholder": "لا توجد صورة",
+
+  "weightLogBmiBmrLegend": "مؤشر كتلة الجسم (BMI) · معدل الأيض الأساسي (BMR)"
 }

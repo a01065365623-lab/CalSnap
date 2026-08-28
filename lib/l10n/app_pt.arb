@@ -210,5 +210,18 @@
 
   "onboardingCompleteTitle": "Tudo pronto!",
   "onboardingCompleteSecretModeButton": "Configurar modo secreto",
-  "onboardingCompleteStartButton": "Iniciar o registro de hoje"
+  "onboardingCompleteStartButton": "Iniciar o registro de hoje",
+
+  "weightLogPhotoAddButton": "Câmera",
+  "weightLogPhotoGalleryButton": "Galeria",
+  "weightLogPhotoRemoveButton": "Remover foto",
+  "weightLogComparePhotosTooltip": "Comparar fotos",
+  "weightPhotoCompareAppBarTitle": "Comparar fotos de peso",
+  "weightPhotoCompareEmptyMessage": "São necessários pelo menos 2 registros de peso com fotos para comparar",
+  "weightPhotoComparePickBeforeLabel": "Antes",
+  "weightPhotoComparePickAfterLabel": "Depois",
+  "weightPhotoComparePickDateHint": "Escolher data",
+  "weightPhotoCompareNoPhotoPlaceholder": "Sem foto",
+
+  "weightLogBmiBmrLegend": "IMC (índice de massa corporal) · TMB (taxa metabólica basal)"
 }
