@@ -21,4 +21,12 @@ class AppColors {
 
   static const Color statsGray = Color(0xFF5F5E5A);
   static const Color statsGrayBg = Color(0xFFEBEAE7);
+
+  // 목표 칼로리(오렌지)·권장 수분 섭취량(블루) 칩 전용. foodCoral(탄수화물)·
+  // exerciseTeal(단백질/운동/수분과 다른 계열)과 겹치지 않는 색으로 골랐다.
+  static const Color goalOrange = Color(0xFFEF6C00);
+  static const Color goalOrangeBg = Color(0xFFFDE7D2);
+
+  static const Color waterBlue = Color(0xFF2E86DE);
+  static const Color waterBlueBg = Color(0xFFDDEBFC);
 }

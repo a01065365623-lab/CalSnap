@@ -1,7 +1,6 @@
 import 'dart:io';
 
-import 'food_recognition/on_device_food_matcher.dart';
-import 'gemini_food_recognition_service.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// 사진 한 장을 분석해 음식 카테고리와 추정 칼로리를 반환하는 서비스.
 class FoodRecognitionResult {
@@ -27,6 +26,14 @@ class FoodRecognitionResult {
 abstract class FoodRecognitionService {
   /// [hint]: 사용자가 알고 있는 음식 이름(선택). 인식 정확도를 높이는 참고용이며 비어있어도 된다.
   Future<FoodRecognitionResult> recognize(File imageFile, {String? hint});
+
+  /// 사진 없이 음식 이름과 양(직접 입력 모드)만으로 칼로리/영양소를 추정한다.
+  /// [unit]은 [ManualAmountUnitX.apiValue] 값('g'/'ml'/'serving'/'piece')을 그대로 받는다.
+  Future<FoodRecognitionResult> recognizeFromText({
+    required String foodName,
+    required double amount,
+    required String unit,
+  });
 }
 
 enum FoodRecognitionFailure {
@@ -38,6 +45,11 @@ enum FoodRecognitionFailure {
 
   /// 소켓/DNS/연결 실패 등 요청 자체가 서버에 도달하지 못함.
   network,
+
+  /// 프록시가 429를 반환 — Gemini 쪽 rate limit(쿼터 소진)에 걸림. 서버측 문제인
+  /// server/unknown과 구분해야 "지금 다시 시도해도 될지"를 사용자에게 정확히
+  /// 안내할 수 있다.
+  rateLimited,
 
   /// 프록시가 4xx/5xx(401 제외)를 반환 — Gemini 호출 실패, 응답 파싱 실패 등 서버측 문제.
   server,
@@ -56,6 +68,26 @@ class FoodRecognitionException implements Exception {
   String toString() => message;
 }
 
+/// 사진 기반/텍스트 기반 인식 화면 양쪽에서 공유하는 에러 메시지 매핑.
+String friendlyRecognitionErrorMessage(AppLocalizations l10n, Object error) {
+  if (error is FoodRecognitionException) {
+    switch (error.failure) {
+      case FoodRecognitionFailure.unauthorized:
+        return l10n.recognitionErrorUnauthorized;
+      case FoodRecognitionFailure.timeout:
+        return l10n.recognitionErrorTimeout;
+      case FoodRecognitionFailure.network:
+        return l10n.recognitionErrorNetwork;
+      case FoodRecognitionFailure.rateLimited:
+        return l10n.recognitionErrorRateLimited;
+      case FoodRecognitionFailure.server:
+      case FoodRecognitionFailure.unknown:
+        return l10n.recognitionErrorGeneric;
+    }
+  }
+  return l10n.recognitionErrorGeneric;
+}
+
 /// 실제 API 연동 전까지 사용할 더미 구현.
 class MockFoodRecognitionService implements FoodRecognitionService {
   @override
@@ -71,47 +103,22 @@ class MockFoodRecognitionService implements FoodRecognitionService {
       fatG: 5,
     );
   }
-}
-
-/// 1차: 온디바이스 MobileNetV2 임베딩 매칭. 유사도가 낮으면 Gemini로 폴백한다.
-class HybridFoodRecognitionService implements FoodRecognitionService {
-  /// 코사인 유사도가 이 값 미만이면 온디바이스 매칭 결과를 신뢰하지 않고 폴백한다.
-  static const double similarityThreshold = 0.75;
-
-  /// 온디바이스 매칭은 중량을 추정하지 않으므로 사용하는 기본 1인분 중량(g).
-  static const double _defaultEstimatedWeightG = 300;
-
-  final OnDeviceFoodMatcher _onDeviceMatcher;
-  final GeminiFoodRecognitionService _geminiFallback;
-
-  HybridFoodRecognitionService({
-    GeminiFoodRecognitionService? geminiFallback,
-    OnDeviceFoodMatcher? onDeviceMatcher,
-  })  : _geminiFallback = geminiFallback ?? GeminiFoodRecognitionService(),
-        _onDeviceMatcher = onDeviceMatcher ?? OnDeviceFoodMatcher();
 
   @override
-  Future<FoodRecognitionResult> recognize(File imageFile, {String? hint}) async {
-    // 사용자가 힌트를 제공한 경우, 이름을 확신할 수 없는 온디바이스 매칭보다
-    // 힌트를 반영할 수 있는 Gemini 폴백이 더 정확하므로 곧바로 폴백한다.
-    if (hint == null || hint.trim().isEmpty) {
-      try {
-        final match = await _onDeviceMatcher.match(imageFile);
-        if (match != null && match.similarity >= similarityThreshold) {
-          // 온디바이스 참조 DB(FoodEmbedding)에는 탄단지 정보가 없어 0으로 채운다.
-          return FoodRecognitionResult(
-            foodName: match.food.foodName,
-            caloriesPer100g: match.food.caloriesPer100g,
-            estimatedWeightG: _defaultEstimatedWeightG,
-            confidence: match.similarity,
-          );
-        }
-      } catch (_) {
-        // 모델/DB 로드 실패 등 온디바이스 매칭 불가 시에도 앱이 죽지 않고 폴백한다.
-      }
-    }
-    return _geminiFallback.recognize(imageFile, hint: hint);
+  Future<FoodRecognitionResult> recognizeFromText({
+    required String foodName,
+    required double amount,
+    required String unit,
+  }) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return FoodRecognitionResult(
+      foodName: foodName,
+      caloriesPer100g: 90,
+      estimatedWeightG: amount,
+      confidence: 0.75,
+      carbsG: 8,
+      proteinG: 7,
+      fatG: 5,
+    );
   }
-
-  void dispose() => _onDeviceMatcher.dispose();
 }

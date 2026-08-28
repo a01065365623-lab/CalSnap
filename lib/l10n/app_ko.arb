@@ -27,6 +27,17 @@
   "@profileEditAutoCalculatedHint": {
     "placeholders": { "value": { "type": "String" } }
   },
+  "profileEditWaterGoalLabel": "권장 수분 섭취량 (직접 수정 가능)",
+  "profileEditWaterGoalAutoCalculatedHint": "체중 × 32ml 기준: {value}ml/일",
+  "@profileEditWaterGoalAutoCalculatedHint": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "profileEditWaterFactorsTitle": "수분 섭취량에 영향을 주는 요인",
+  "profileEditWaterFactorExercise": "운동량",
+  "profileEditWaterFactorClimate": "날씨/기후",
+  "profileEditWaterFactorFoodMoisture": "식사로 섭취하는 수분",
+  "profileEditWaterFactorCaffeineAlcohol": "카페인/알코올 섭취",
+  "profileEditWaterFactorHealthCondition": "개인 건강 상태(신장질환 등)",
 
   "homeExerciseFabLabel": "운동",
   "homeCameraFabLabel": "찍기",
@@ -84,6 +95,8 @@
   "weekdayFri": "금",
   "weekdaySat": "토",
 
+  "dailyLogGoalCaloriesChipLabel": "목표 칼로리",
+  "dailyLogWaterGoalChipLabel": "수분 섭취",
   "weightLogAppBarTitle": "체중 기록",
   "weightLogMonthHeader": "{year}년 {month}월",
   "@weightLogMonthHeader": {
@@ -114,6 +127,14 @@
   "@weightLogBmrSummary": {
     "placeholders": { "bmr": { "type": "String" } }
   },
+  "weightLogBmiBmrLegend": "BMI(체질량지수) · BMR(기초대사량)",
+  "@weightLogBmiBmrLegend": {
+    "description": "BMI/BMR 약어가 무엇의 줄임말인지 설명하는 작은 캡션"
+  },
+  "statsLoadErrorMessage": "통계를 불러오지 못했어요. 다시 시도해주세요.",
+  "@statsLoadErrorMessage": {
+    "description": "통계 화면 데이터 로딩 실패 시 보여주는 안내 문구"
+  },
 
   "dailyLogTodayTitle": "오늘의 로그",
   "dailyLogDateTitle": "{month}월 {day}일 로그",
@@ -131,6 +152,9 @@
   "dailyLogQuickAddWaterTooltip": "물 250ml 빠르게 추가",
   "dailyLogWaterEntryName": "물",
   "@dailyLogWaterEntryName": { "description": "물 빠른 추가 시 로그 항목의 이름으로 저장되는 값" },
+  "dailyLogWaterAmountDialogTitle": "물 섭취 기록",
+  "dailyLogWaterAmountDialogAddButton": "추가",
+  "dailyLogWaterQuickAdd250Button": "250ml 바로 추가",
   "dailyLogDeleteAllDialogTitle": "전체 삭제",
   "dailyLogDeleteAllDialogContent": "이 날짜의 모든 기록을 삭제하시겠습니까?",
   "dailyLogIntakeLabel": "섭취",
@@ -195,10 +219,25 @@
   "quickModeHintFieldPlaceholder": "음식 이름을 알고 있다면 적어주세요 (선택)",
   "quickModeCameraButton": "촬영",
   "quickModeGalleryButton": "갤러리",
+  "quickModeManualEntryButton": "직접 입력",
+  "manualEntryAppBarTitle": "직접 입력",
+  "manualEntryFoodNameLabel": "음식 이름",
+  "manualEntryFoodNameHint": "예: 김치찌개",
+  "manualEntryAmountLabel": "양",
+  "manualEntryUnitGram": "g",
+  "manualEntryUnitMl": "ml",
+  "manualEntryUnitServing": "인분",
+  "manualEntryUnitPiece": "개",
+  "manualEntryEstimateButton": "AI로 칼로리 추정",
+  "manualEntryFoodNameRequiredError": "음식 이름을 입력해주세요",
+  "manualEntryAmountRequiredError": "양을 올바르게 입력해주세요",
+  "manualEntrySourceLabel": "직접 입력한 기록",
   "recognitionErrorUnauthorized": "인식 서버 인증에 실패했어요. 앱 설정을 확인해주세요.",
   "recognitionErrorTimeout": "서버 응답이 지연되고 있어요. 잠시 후 다시 시도해주세요.",
   "recognitionErrorNetwork": "네트워크 연결을 확인하고 다시 시도해주세요.",
   "recognitionErrorGeneric": "인식에 실패했어요. 다시 시도해주세요.",
+  "recognitionErrorRateLimited": "지금 요청이 많아 잠시 지연되고 있어요. 잠시 후 다시 시도해주세요.",
+  "quickModePrivateTestQuotaNotice": "※ 테스트 기간 중 일일 인식 횟수 제한(20회)에 도달했을 수 있어요. 내일 다시 시도해주세요!",
   "quickModeConfidence": "추정 정확도 {value}%",
   "@quickModeConfidence": {
     "placeholders": { "value": { "type": "String" } }
@@ -325,7 +364,5 @@
   "weightPhotoComparePickBeforeLabel": "이전",
   "weightPhotoComparePickAfterLabel": "이후",
   "weightPhotoComparePickDateHint": "날짜 선택",
-  "weightPhotoCompareNoPhotoPlaceholder": "사진 없음",
-
-  "weightLogBmiBmrLegend": "BMI(체질량지수) · BMR(기초대사량)"
+  "weightPhotoCompareNoPhotoPlaceholder": "사진 없음"
 }

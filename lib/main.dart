@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'db/database_helper.dart';
 import 'screens/app_lock_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/onboarding_screen.dart';
@@ -26,6 +27,13 @@ class CalSnapApp extends StatelessWidget {
   final bool locked;
 
   const CalSnapApp({super.key, required this.onboardingComplete, required this.locked});
+
+  /// 앱 전체 텍스트를 이 비율만큼 키운다(약 15~20% 확대 요청 중 중간값). 코드 곳곳이
+  /// ThemeData.textTheme이 아니라 TextStyle(fontSize: ...)를 직접 지정하고 있어서,
+  /// textTheme만 키워서는 대부분의 화면에 반영되지 않는다. 대신 MediaQuery의
+  /// textScaler를 곱해주면 테마 참조 여부와 무관하게 모든 Text에 일괄 적용되고,
+  /// 상대적 크기 비율(작은 라벨 vs 큰 강조 숫자)도 그대로 유지된다.
+  static const double _textScaleFactor = 1.18;
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +63,61 @@ class CalSnapApp extends StatelessWidget {
         // 평소 상태와 레이아웃이 달라 보이는 문제가 있었다.
         snackBarTheme: const SnackBarThemeData(behavior: SnackBarBehavior.floating),
       ),
-      home: !onboardingComplete
-          ? const OnboardingScreen()
-          : locked
-              ? const AppLockScreen()
-              : const HomeScreen(),
+      builder: (context, child) {
+        final mediaQuery = MediaQuery.of(context);
+        // 기기 접근성 글자 크기 설정(mediaQuery.textScaler)에 앱 자체 확대 비율을
+        // 곱한다 — 곱셈이라 사용자가 시스템 글자 크기를 더 키워둔 경우에도 그 설정을
+        // 무시하지 않고 함께 반영된다.
+        final currentScale = mediaQuery.textScaler.scale(1.0);
+        return MediaQuery(
+          data: mediaQuery.copyWith(
+            textScaler: TextScaler.linear(currentScale * _textScaleFactor),
+          ),
+          child: child!,
+        );
+      },
+      home: _AppStartupGate(
+        child: !onboardingComplete
+            ? const OnboardingScreen()
+            : locked
+                ? const AppLockScreen()
+                : const HomeScreen(),
+      ),
     );
+  }
+}
+
+/// 첫 프레임은 즉시 그리되(로딩 인디케이터), 음식 DB 시딩(최초 실행/버전업 시 최대 수 초
+/// 소요될 수 있음)이 끝날 때까지는 온보딩/잠금/홈 화면을 보여주지 않는다. 시딩이 이미
+/// 끝난 이후(=대부분의 실행)에는 database getter가 즉시 반환되어 사실상 순간적으로 지나간다.
+class _AppStartupGate extends StatefulWidget {
+  final Widget child;
+
+  const _AppStartupGate({required this.child});
+
+  @override
+  State<_AppStartupGate> createState() => _AppStartupGateState();
+}
+
+class _AppStartupGateState extends State<_AppStartupGate> {
+  bool _ready = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _init();
+  }
+
+  Future<void> _init() async {
+    await DatabaseHelper.instance.database;
+    if (mounted) setState(() => _ready = true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_ready) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+    return widget.child;
   }
 }

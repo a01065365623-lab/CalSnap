@@ -2,6 +2,10 @@ enum LogType { food, exercise, water }
 
 enum LogMode { quick, precision }
 
+/// 음식 기록이 사진(카메라/갤러리) 기반인지, 사진 없이 직접 입력했는지 구분한다.
+/// food 전용 필드이며, exercise/water나 이 필드가 생기기 전(구버전) 기록은 null이다.
+enum LogSource { photo, manual }
+
 class DailyLogEntry {
   final int? id;
   final DateTime datetime;
@@ -15,6 +19,7 @@ class DailyLogEntry {
   final double? carbsG;
   final double? proteinG;
   final double? fatG;
+  final LogSource? source;
 
   const DailyLogEntry({
     this.id,
@@ -27,6 +32,7 @@ class DailyLogEntry {
     this.carbsG,
     this.proteinG,
     this.fatG,
+    this.source,
   });
 
   Map<String, dynamic> toMap() {
@@ -41,6 +47,7 @@ class DailyLogEntry {
       'carbsG': carbsG,
       'proteinG': proteinG,
       'fatG': fatG,
+      'source': source?.name,
     };
   }
 
@@ -56,6 +63,7 @@ class DailyLogEntry {
       carbsG: (map['carbsG'] as num?)?.toDouble(),
       proteinG: (map['proteinG'] as num?)?.toDouble(),
       fatG: (map['fatG'] as num?)?.toDouble(),
+      source: map['source'] != null ? LogSource.values.byName(map['source'] as String) : null,
     );
   }
 }

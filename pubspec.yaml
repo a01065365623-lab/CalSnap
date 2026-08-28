@@ -1,7 +1,7 @@
 name: calsnap
 description: 사진 한 장으로 칼로리를 기록하는 데일리 칼로리 트래커
 publish_to: 'none'
-version: 0.1.0+1
+version: 0.1.2+6
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -31,9 +31,6 @@ dependencies:
   # 네트워크 (식약처 식품영양성분DB, AI 인식 API 연동)
   http: ^1.2.1
 
-  # 온디바이스 음식 인식 1차 매칭 (TFLite MobileNetV2 특징 추출)
-  tflite_flutter: ^0.11.0
-
   # 상황별 격려 멘트 실시간 음성 안내 (wedi_app과 동일한 파이프라인: 사전 녹음 없이 기기 TTS 엔진 사용)
   flutter_tts: ^4.0.0
 
@@ -56,11 +53,20 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.3
 
 flutter:
   uses-material-design: true
   generate: true
   assets:
     - assets/
-    - assets/models/
     - assets/calsnap_phrases.json
+    - assets/food_db_seed.json
+
+# Android mipmap-mdpi ~ xxxhdpi용 ic_launcher를 assets/icon/icon.png(512x512)로부터
+# 생성한다. `dart run flutter_launcher_icons`로 실행.
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: false
+  image_path: "assets/icon/icon.png"
+  min_sdk_android: 24

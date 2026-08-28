@@ -27,6 +27,17 @@ double calculateGoalCalories({
   return calculateBmr(gender: gender, age: age, heightCm: heightCm, weightKg: weightKg) * activityFactor;
 }
 
+/// 체중(kg) 기준 하루 권장 수분 섭취량(ml) 계수. "체중 × 32ml"이 흔히 쓰이는 기준.
+const double defaultWaterGoalMlPerKg = 32;
+
+/// 체중 × [mlPerKg]로 계산한 하루 권장 수분 섭취량(ml).
+double calculateWaterGoalMl({
+  required double weightKg,
+  double mlPerKg = defaultWaterGoalMlPerKg,
+}) {
+  return weightKg * mlPerKg;
+}
+
 /// 체질량지수(BMI, kg/m²)를 계산한다.
 double calculateBmi({required double weightKg, required double heightCm}) {
   final heightM = heightCm / 100;

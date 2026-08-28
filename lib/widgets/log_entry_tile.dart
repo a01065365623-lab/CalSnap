@@ -78,10 +78,34 @@ class LogEntryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: _iconBackground,
-        foregroundColor: _iconColor,
-        child: Icon(_icon, color: _iconColor),
+      leading: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          CircleAvatar(
+            backgroundColor: _iconBackground,
+            foregroundColor: _iconColor,
+            child: Icon(_icon, color: _iconColor),
+          ),
+          // 카메라로 찍은 기록과 구분할 수 있도록, 직접 입력한 기록에만 작은 편집
+          // 아이콘 배지를 붙인다(사진 기반 기록은 배지 없음).
+          if (entry.source == LogSource.manual)
+            Positioned(
+              right: -2,
+              bottom: -2,
+              child: Tooltip(
+                message: l10n.manualEntrySourceLabel,
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.white, width: 1.5),
+                  ),
+                  child: const Icon(Icons.edit, size: 10, color: Colors.grey),
+                ),
+              ),
+            ),
+        ],
       ),
       title: Text(entry.name),
       subtitle: Text(_subtitle(l10n)),

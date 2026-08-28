@@ -87,6 +87,22 @@ class TtsService {
 
   final FlutterTts _tts = FlutterTts();
   final Random _random = Random();
+  bool _awaitCompletionConfigured = false;
+
+  /// flutter_tts는 기본적으로 speak() 호출 즉시(재생 시작만 확인하고) Future를
+  /// 완료시켜서, 호출부가 "실제로 다 읽었는지"는 알 수 없다. 앱 오픈 시 TTS와
+  /// 전면광고 소리가 겹치는 문제(HomeScreen에서 TTS가 끝난 뒤 광고를 띄우려면
+  /// 진짜 완료 시점이 필요함)를 풀려면 이 설정이 꼭 필요해서, 첫 speak() 호출 전에
+  /// 한 번만 켠다.
+  Future<void> _ensureAwaitCompletionConfigured() async {
+    if (_awaitCompletionConfigured) return;
+    _awaitCompletionConfigured = true;
+    try {
+      await _tts.awaitSpeakCompletion(true);
+    } catch (_) {
+      // 일부 기기/엔진은 미지원일 수 있음 — 그런 경우 그냥 기존처럼 즉시 반환된다.
+    }
+  }
 
   /// 카테고리 → 그 카테고리에 속한 멘트들(각 멘트는 언어 코드 → 텍스트 맵).
   Map<String, List<Map<String, String>>>? _cache;
@@ -167,6 +183,7 @@ class TtsService {
 
     try {
       await _tts.stop();
+      await _ensureAwaitCompletionConfigured();
       await _setTtsLanguageWithFallback(langKey);
       await _tts.speak(text);
     } catch (_) {

@@ -32,6 +32,8 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
   List<DailyLogEntry> _entries = [];
   DailySummary? _summary;
   UnitSystem _unitSystem = UnitSystem.metric;
+  double? _goalCalories;
+  double? _waterGoalMl;
 
   bool get _isToday {
     final now = DateTime.now();
@@ -53,10 +55,16 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
     final entries = await _db.getLogsForDate(_selectedDate);
     final summary = await _db.getSummary(_selectedDate);
     final unitSystem = await UserProfileService.instance.getUnitSystem();
+    // 목표 칼로리/권장 수분 섭취량은 온보딩·설정 화면에서 이미 저장해 둔 값을 그대로
+    // 읽기만 한다(여기서 새로 계산하지 않음).
+    final goalCalories = await UserProfileService.instance.getGoalCalories();
+    final waterGoalMl = await UserProfileService.instance.getDailyWaterGoalMl();
     setState(() {
       _entries = entries;
       _summary = summary;
       _unitSystem = unitSystem;
+      _goalCalories = goalCalories;
+      _waterGoalMl = waterGoalMl;
     });
   }
 
@@ -77,14 +85,29 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
     _load();
   }
 
-  Future<void> _quickAddWater() async {
+  /// 물방울 FAB를 탭하면 뜨는 선택 다이얼로그. "250ml 바로 추가"는 즉시, "직접
+  /// 입력"은 같은 다이얼로그 안에서 숫자 입력 화면으로 전환된다(별도 다이얼로그를
+  /// 닫고 새로 여는 방식이 아니다 — showDialog를 연달아 호출하면 첫 다이얼로그
+  /// 라우트의 InheritedElement가 언마운트되는 도중 두 번째 다이얼로그가 끼어들어
+  /// "_dependents.isEmpty" assertion이 나서, 하나의 다이얼로그 내부 상태 전환으로
+  /// 바꿔 그 문제 자체를 없앴다).
+  Future<void> _openWaterQuickAddOptions() async {
+    final amount = await showDialog<double>(
+      context: context,
+      builder: (context) => const _WaterQuickAddDialog(),
+    );
+    if (amount == null) return;
+    await _insertWaterLog(amount);
+  }
+
+  Future<void> _insertWaterLog(double amountMl) async {
     final l10n = AppLocalizations.of(context)!;
     await _db.insertLog(DailyLogEntry(
       datetime: DateTime.now(),
       type: LogType.water,
       name: l10n.dailyLogWaterEntryName,
       calories: 0,
-      amount: 250,
+      amount: amountMl,
     ));
     unawaited(TtsService.instance.speak(TtsCategory.waterLog));
     _load();
@@ -183,6 +206,7 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
             child: BannerAdWidget(),
           ),
           _SummaryCard(summary: _summary),
+          _GoalChipsCard(goalCalories: _goalCalories, waterGoalMl: _waterGoalMl),
           _WeightLogEntryCard(
             onTap: () => Navigator.push(
               context,
@@ -218,11 +242,79 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
       floatingActionButton: _isToday
           ? FloatingActionButton(
               heroTag: 'daily_log_fab',
-              onPressed: _quickAddWater,
+              onPressed: _openWaterQuickAddOptions,
               tooltip: l10n.dailyLogQuickAddWaterTooltip,
               child: const Icon(Icons.water_drop),
             )
           : null,
+    );
+  }
+}
+
+/// 물방울 FAB 다이얼로그. 처음엔 "250ml 바로 추가"/"직접 입력" 선택지를 보여주고,
+/// "직접 입력"을 누르면 같은 다이얼로그(같은 Route) 안에서 숫자 입력 화면으로
+/// setState 전환한다 — 다이얼로그를 닫고 새로 여는 방식이 아니라서, 두 개의
+/// showDialog를 연달아 호출할 때 생기는 InheritedElement 언마운트 타이밍 문제가
+/// 애초에 발생하지 않는다. 최종적으로 Navigator.pop(context, amountMl) 한 번으로
+/// 닫히며, 취소 시 null을 반환한다.
+class _WaterQuickAddDialog extends StatefulWidget {
+  const _WaterQuickAddDialog();
+
+  @override
+  State<_WaterQuickAddDialog> createState() => _WaterQuickAddDialogState();
+}
+
+class _WaterQuickAddDialogState extends State<_WaterQuickAddDialog> {
+  bool _showAmountInput = false;
+  final _controller = TextEditingController(text: '250');
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    if (!_showAmountInput) {
+      return SimpleDialog(
+        title: Text(l10n.dailyLogWaterAmountDialogTitle),
+        children: [
+          SimpleDialogOption(
+            onPressed: () => Navigator.pop(context, 250.0),
+            child: Text(l10n.dailyLogWaterQuickAdd250Button),
+          ),
+          SimpleDialogOption(
+            onPressed: () => setState(() => _showAmountInput = true),
+            child: Text(l10n.quickModeManualEntryButton),
+          ),
+        ],
+      );
+    }
+
+    return AlertDialog(
+      title: Text(l10n.dailyLogWaterAmountDialogTitle),
+      content: TextField(
+        controller: _controller,
+        autofocus: true,
+        keyboardType: const TextInputType.numberWithOptions(decimal: false),
+        decoration: const InputDecoration(suffixText: 'ml'),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(l10n.cancelButton),
+        ),
+        TextButton(
+          onPressed: () {
+            final value = double.tryParse(_controller.text.trim());
+            Navigator.pop(context, (value != null && value > 0) ? value : null);
+          },
+          child: Text(l10n.dailyLogWaterAmountDialogAddButton),
+        ),
+      ],
     );
   }
 }
@@ -280,9 +372,10 @@ class _WeightLogEntryCard extends StatelessWidget {
   }
 }
 
-/// 그날 음식 기록들의 탄수화물/단백질/지방 합계를 보여준다. 각 항목의 값은 이미
+/// 그날 음식 기록들의 탄수화물/단백질/지방 합계를 칩 3개로 보여준다. 각 항목의 값은 이미
 /// 실제 섭취량 기준으로 환산되어 저장돼 있으므로(calories와 동일한 방식) 그대로 더하면 된다.
 /// 운동/물 기록은 영양소와 무관하므로 집계에서 제외하고, 값이 없는(null) 과거 기록은 0으로 취급한다.
+/// 색상은 통계 화면의 매크로 비율 차트(stats_screen.dart)와 동일하게 맞췄다.
 class _NutrientsCard extends StatelessWidget {
   final List<DailyLogEntry> entries;
   const _NutrientsCard({required this.entries});
@@ -301,15 +394,112 @@ class _NutrientsCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.fromLTRB(12, 0, 12, 12),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        child: Text(
-          l10n.nutrientsSummary(
-            carbs.toStringAsFixed(0),
-            protein.toStringAsFixed(0),
-            fat.toStringAsFixed(0),
-          ),
-          style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        child: Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          alignment: WrapAlignment.spaceEvenly,
+          children: [
+            _StatChip(
+              icon: Icons.grain,
+              label: '${l10n.macroCarbsLabel} ${carbs.toStringAsFixed(0)}g',
+              color: AppColors.foodCoral,
+              backgroundColor: AppColors.foodCoralBg,
+            ),
+            _StatChip(
+              icon: Icons.set_meal,
+              label: '${l10n.macroProteinLabel} ${protein.toStringAsFixed(0)}g',
+              color: AppColors.exerciseTeal,
+              backgroundColor: AppColors.exerciseTealBg,
+            ),
+            _StatChip(
+              icon: Icons.opacity,
+              label: '${l10n.macroFatLabel} ${fat.toStringAsFixed(0)}g',
+              color: AppColors.statsGray,
+              backgroundColor: AppColors.statsGrayBg,
+            ),
+          ],
         ),
+      ),
+    );
+  }
+}
+
+/// "체중 기록" 진입 카드 바로 위에, 설정에 이미 저장된 목표 칼로리/권장 수분
+/// 섭취량을 탄단지 칩(_NutrientsCard)과 동일한 스타일로 보여준다. 여기서는 저장된
+/// 값을 읽기만 하고 새로 계산하지 않는다 — 계산은 온보딩/프로필 수정 화면
+/// (user_profile_service.dart)의 몫이다. 아직 값이 없으면(온보딩 전 등) 그 칩만 숨긴다.
+class _GoalChipsCard extends StatelessWidget {
+  final double? goalCalories;
+  final double? waterGoalMl;
+  const _GoalChipsCard({required this.goalCalories, required this.waterGoalMl});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final chips = [
+      if (goalCalories != null)
+        _StatChip(
+          icon: Icons.local_fire_department,
+          label: '${l10n.dailyLogGoalCaloriesChipLabel} ${goalCalories!.toStringAsFixed(0)}kcal',
+          color: AppColors.goalOrange,
+          backgroundColor: AppColors.goalOrangeBg,
+        ),
+      if (waterGoalMl != null)
+        _StatChip(
+          icon: Icons.water_drop,
+          label: '${l10n.dailyLogWaterGoalChipLabel} ${waterGoalMl!.toStringAsFixed(0)}ml',
+          color: AppColors.waterBlue,
+          backgroundColor: AppColors.waterBlueBg,
+        ),
+    ];
+    if (chips.isEmpty) return const SizedBox.shrink();
+
+    return Card(
+      margin: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        child: Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          alignment: WrapAlignment.spaceEvenly,
+          children: chips,
+        ),
+      ),
+    );
+  }
+}
+
+/// 오늘의 로그 상단 칩(탄단지/목표 칼로리/권장 수분)에 공통으로 쓰는 필(pill) 스타일
+/// 위젯. 색상만 카테고리별로 다르고 모양·패딩·폰트 크기는 항상 동일하다.
+class _StatChip extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color color;
+  final Color backgroundColor;
+
+  const _StatChip({
+    required this.icon,
+    required this.label,
+    required this.color,
+    required this.backgroundColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 16, color: color),
+          const SizedBox(width: 4),
+          Text(label, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: color)),
+        ],
       ),
     );
   }

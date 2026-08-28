@@ -94,6 +94,10 @@ class _StatsScreenState extends State<StatsScreen> with SingleTickerProviderStat
   List<ExerciseSummary> _exerciseData = [];
   List<NutrientSummary> _nutrientData = [];
   bool _loading = true;
+  // 통계 화면이 "안 열림"으로 보이는 가장 흔한 원인은 _load() 안에서 발생한 예외를
+  // 잡지 않아 _loading이 영원히 true로 남는 것이었다. 예외를 잡아 화면에 보여주고
+  // 재시도할 수 있게 한다.
+  Object? _loadError;
 
   /// null이면 "오늘 기준 최근 N일". 값이 있으면 이 날짜부터 시작하는 구간을 본다.
   /// 연간 뷰는 구간 직접 선택을 지원하지 않는다(항상 최근 365일).
@@ -116,33 +120,48 @@ class _StatsScreenState extends State<StatsScreen> with SingleTickerProviderStat
   }
 
   Future<void> _load() async {
-    setState(() => _loading = true);
+    setState(() {
+      _loading = true;
+      _loadError = null;
+    });
     final now = DateTime.now();
     final from = (_period != _Period.year && _rangeStart != null)
         ? _rangeStart!
         : now.subtract(Duration(days: _period.days - 1));
     final to = from.add(Duration(days: _period.days - 1));
 
-    final calorieFuture = DatabaseHelper.instance.getSummaryRange(from, to);
-    final weightFuture = DatabaseHelper.instance.getWeightsForRange(from, to);
-    final exerciseFuture = DatabaseHelper.instance.getExerciseSummaryRange(from, to);
-    final nutrientFuture = DatabaseHelper.instance.getNutrientSummaryRange(from, to);
+    try {
+      final calorieFuture = DatabaseHelper.instance.getSummaryRange(from, to);
+      final weightFuture = DatabaseHelper.instance.getWeightsForRange(from, to);
+      final exerciseFuture = DatabaseHelper.instance.getExerciseSummaryRange(from, to);
+      final nutrientFuture = DatabaseHelper.instance.getNutrientSummaryRange(from, to);
 
-    final calorieData = await calorieFuture;
-    final weightMap = await weightFuture;
-    final exerciseData = await exerciseFuture;
-    final nutrientData = await nutrientFuture;
+      final calorieData = await calorieFuture;
+      final weightMap = await weightFuture;
+      final exerciseData = await exerciseFuture;
+      final nutrientData = await nutrientFuture;
 
-    if (!mounted) return;
-    setState(() {
-      _calorieData = calorieData;
-      _weightMap = weightMap;
-      _exerciseData = exerciseData;
-      _nutrientData = nutrientData;
-      _rangeFrom = from;
-      _rangeTo = to;
-      _loading = false;
-    });
+      if (!mounted) return;
+      setState(() {
+        _calorieData = calorieData;
+        _weightMap = weightMap;
+        _exerciseData = exerciseData;
+        _nutrientData = nutrientData;
+        _rangeFrom = from;
+        _rangeTo = to;
+        _loading = false;
+      });
+    } catch (e, st) {
+      // 예외를 그냥 흘려보내면 이 Future는 아무도 await하지 않으므로(initState에서
+      // _load()를 fire-and-forget으로 호출) 조용히 사라지고 _loading만 영원히 true로
+      // 남아 화면이 "안 열림/멈춤"처럼 보인다. 반드시 잡아서 에러 상태로 보여준다.
+      debugPrint('[StatsScreen] _load() 실패: $e\n$st');
+      if (!mounted) return;
+      setState(() {
+        _loadError = e;
+        _loading = false;
+      });
+    }
   }
 
   void _changePeriod(_Period period) {
@@ -253,7 +272,10 @@ class _StatsScreenState extends State<StatsScreen> with SingleTickerProviderStat
                     ),
                   ],
                   const SizedBox(height: 8),
-                  if (!_loading)
+                  // _rangeFrom/_rangeTo는 _load()가 성공했을 때만 채워지는 late 필드라,
+                  // 로딩 실패 시(_loadError != null)에도 !_loading만 보고 접근하면
+                  // LateInitializationError로 또 다른 크래시가 난다.
+                  if (!_loading && _loadError == null)
                     Text(
                       _rangeHeaderText(l10n),
                       style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -267,10 +289,18 @@ class _StatsScreenState extends State<StatsScreen> with SingleTickerProviderStat
                   Expanded(
                     child: _loading
                         ? const Center(child: CircularProgressIndicator())
-                        : TabBarView(
+                        : _loadError != null
+                            ? _StatsLoadErrorView(error: _loadError!, onRetry: _load)
+                            : TabBarView(
                             controller: _tabController,
                             children: [
-                              _CalorieTab(data: _calorieData, period: _period, onTapDate: _openDayDetail),
+                              _CalorieTab(
+                                data: _calorieData,
+                                from: _rangeFrom,
+                                to: _rangeTo,
+                                period: _period,
+                                onTapDate: _openDayDetail,
+                              ),
                               _WeightTab(
                                 weights: _weightMap,
                                 from: _rangeFrom,
@@ -305,6 +335,35 @@ class _StatsScreenState extends State<StatsScreen> with SingleTickerProviderStat
   }
 }
 
+/// 통계 데이터 로딩이 실패했을 때 무한 로딩 대신 보여주는 화면. 재시도 버튼 제공.
+class _StatsLoadErrorView extends StatelessWidget {
+  final Object error;
+  final VoidCallback onRetry;
+
+  const _StatsLoadErrorView({required this.error, required this.onRetry});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.error_outline, color: Colors.grey, size: 36),
+          const SizedBox(height: 8),
+          Text(l10n.statsLoadErrorMessage, textAlign: TextAlign.center),
+          const SizedBox(height: 12),
+          ElevatedButton.icon(
+            onPressed: onRetry,
+            icon: const Icon(Icons.refresh),
+            label: Text(l10n.retryButton),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 String _shortDate(String yyyyMMdd) {
   final parts = yyyyMMdd.split('-');
   return '${int.parse(parts[1])}/${int.parse(parts[2])}';
@@ -319,37 +378,43 @@ List<DateTime> _dateRange(DateTime from, DateTime to) {
   return [for (int i = 0; i < days; i++) DateTime(from.year, from.month, from.day + i)];
 }
 
-/// 월요일 시작 순서(date.weekday와 인덱스가 1:1 대응하도록 월~일).
-List<String> _weekdayNames(AppLocalizations l10n) => [
-      l10n.weekdayMon,
-      l10n.weekdayTue,
-      l10n.weekdayWed,
-      l10n.weekdayThu,
-      l10n.weekdayFri,
-      l10n.weekdaySat,
-      l10n.weekdaySun,
-    ];
-
-String _dateWithWeekday(AppLocalizations l10n, DateTime date) =>
-    l10n.statsDateWithWeekday(date.month, date.day, _weekdayNames(l10n)[date.weekday - 1]);
-
 // ── 칼로리 탭 (기존 로직 그대로) ──────────────────────────────
 
 class _CalorieTab extends StatelessWidget {
   final List<DailySummary> data;
+  final DateTime from;
+  final DateTime to;
   final _Period period;
   final void Function(DateTime date) onTapDate;
 
-  const _CalorieTab({required this.data, required this.period, required this.onTapDate});
+  const _CalorieTab({
+    required this.data,
+    required this.from,
+    required this.to,
+    required this.period,
+    required this.onTapDate,
+  });
 
   @override
   Widget build(BuildContext context) {
     if (data.isEmpty) {
       return Center(child: Text(AppLocalizations.of(context)!.statsInsufficientData));
     }
-    return period == _Period.year
-        ? _SummaryList(data: data, onTapDate: onTapDate)
-        : _SummaryBarChart(data: data, period: period, onTapDate: onTapDate);
+    if (period == _Period.year) {
+      final dates = _dateRange(from, to);
+      final byDate = {for (final s in data) s.date: s};
+      return _YearLineChart(
+        dates: dates,
+        series: [
+          _YearSeries(
+            values: [for (final d in dates) byDate[_dateKeyOf(d)]?.netCalories],
+            color: AppColors.statsGray,
+          ),
+        ],
+        onTapDate: onTapDate,
+      );
+    }
+    return _SummaryBarChart(data: data, period: period, onTapDate: onTapDate);
   }
 }
 
@@ -417,41 +482,112 @@ class _SummaryBarChart extends StatelessWidget {
   }
 }
 
-/// 연간(365일) 뷰: 막대 365개나 선 하나로는 눈이 아프니 날짜별 텍스트 리스트로 보여준다.
-/// 각 행을 탭하면 그날 상세로 이동.
-class _SummaryList extends StatelessWidget {
-  final List<DailySummary> data;
+/// [_YearLineChart]에 그릴 선 하나(값 배열 + 색상). 나눠진 세그먼트 계산은
+/// [_YearLineChart]가 공통으로 처리한다.
+class _YearSeries {
+  final List<double?> values;
+  final Color color;
+
+  const _YearSeries({required this.values, required this.color});
+
+  List<List<FlSpot>> _segments() {
+    final segments = <List<FlSpot>>[];
+    List<FlSpot>? current;
+    for (int i = 0; i < values.length; i++) {
+      final v = values[i];
+      if (v == null) {
+        current = null;
+        continue;
+      }
+      if (current == null) {
+        current = [];
+        segments.add(current);
+      }
+      current.add(FlSpot(i.toDouble(), v));
+    }
+    return segments;
+  }
+}
+
+/// 연간(365일) 뷰 공용 선그래프: 365개 포인트를 하나(또는 여러 개)의 이어진
+/// 선으로 그리되, 기록이 없는 날짜에서는 구간을 나눠 선을 끊는다. x축은 라벨이
+/// 겹치지 않도록 월이 바뀌는 날짜에만 표시한다. 포인트를 탭하면 그날 상세로 이동.
+class _YearLineChart extends StatelessWidget {
+  final List<DateTime> dates;
+  final List<_YearSeries> series;
   final void Function(DateTime date) onTapDate;
 
-  const _SummaryList({required this.data, required this.onTapDate});
+  const _YearLineChart({
+    required this.dates,
+    required this.series,
+    required this.onTapDate,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    final reversed = data.reversed.toList(); // 최신 날짜가 위로
-    return ListView.separated(
-      itemCount: reversed.length,
-      separatorBuilder: (_, __) => const Divider(height: 1),
-      itemBuilder: (context, i) {
-        final s = reversed[i];
-        final date = DateTime.parse(s.date);
-        return ListTile(
-          dense: true,
-          title: Text(_dateWithWeekday(l10n, date)),
-          subtitle: Text(
-            '${l10n.dailyLogIntakeLabel} ${s.totalIntake.toStringAsFixed(0)} · '
-            '${l10n.dailyLogBurnedLabel} ${s.totalBurned.toStringAsFixed(0)}',
-          ),
-          trailing: Text(
-            '${s.netCalories >= 0 ? '+' : ''}${s.netCalories.toStringAsFixed(0)} kcal',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: s.netCalories >= 0 ? Colors.deepOrange : Colors.teal,
+    final recorded = [for (final s in series) ...s.values.whereType<double>()];
+    if (recorded.isEmpty) {
+      // 호출부에서 이미 데이터 존재 여부를 확인하지만, 날짜 범위 확장 과정에서
+      // 값이 하나도 안 남는 예외적인 경우를 대비한 방어 코드.
+      return const SizedBox.shrink();
+    }
+    final minVal = recorded.reduce((a, b) => a < b ? a : b);
+    final maxVal = recorded.reduce((a, b) => a > b ? a : b);
+    final pad = ((maxVal - minVal) * 0.1).clamp(1.0, double.infinity);
+    final minY = (minVal - pad).floorToDouble();
+    final maxY = (maxVal + pad).ceilToDouble();
+
+    return LineChart(
+      LineChartData(
+        minY: minY,
+        maxY: maxY,
+        lineTouchData: LineTouchData(
+          touchCallback: (event, response) {
+            if (event is! FlTapUpEvent) return;
+            final spots = response?.lineBarSpots;
+            if (spots == null || spots.isEmpty) return;
+            final index = spots.first.x.toInt();
+            if (index < 0 || index >= dates.length) return;
+            onTapDate(dates[index]);
+          },
+        ),
+        lineBarsData: [
+          for (final s in series)
+            for (final segment in s._segments())
+              LineChartBarData(
+                spots: segment,
+                isCurved: true,
+                color: s.color,
+                barWidth: 2,
+                dotData: const FlDotData(show: false),
+                belowBarData: BarAreaData(show: false),
+              ),
+        ],
+        titlesData: FlTitlesData(
+          leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 40)),
+          rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              reservedSize: 28,
+              getTitlesWidget: (value, meta) {
+                final i = value.toInt();
+                if (i < 0 || i >= dates.length) return const SizedBox.shrink();
+                // 365개를 다 라벨링하면 겹치므로 월이 바뀌는 날에만 표시한다.
+                final isMonthMark = i == 0 || dates[i].day == 1;
+                if (!isMonthMark) return const SizedBox.shrink();
+                return Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text('${dates[i].month}', style: const TextStyle(fontSize: 10)),
+                );
+              },
             ),
           ),
-          onTap: () => onTapDate(date),
-        );
-      },
+        ),
+        borderData: FlBorderData(show: false),
+        gridData: const FlGridData(show: true, drawVerticalLine: false),
+      ),
     );
   }
 }
@@ -480,7 +616,16 @@ class _WeightTab extends StatelessWidget {
     }
     final dates = _dateRange(from, to);
     return period == _Period.year
-        ? _WeightList(dates: dates, weights: weights, onTapDate: onTapDate)
+        ? _YearLineChart(
+            dates: dates,
+            series: [
+              _YearSeries(
+                values: [for (final d in dates) weights[_dateKeyOf(d)]],
+                color: AppColors.weightTeal,
+              ),
+            ],
+            onTapDate: onTapDate,
+          )
         : _WeightLineChart(dates: dates, weights: weights, period: period, onTapDate: onTapDate);
   }
 }
@@ -519,6 +664,12 @@ class _WeightLineChart extends StatelessWidget {
     }
 
     final recorded = values.whereType<double>().toList();
+    if (recorded.isEmpty) {
+      // weights는 [from, to] 범위로 DB에서 가져온 것과 dates가 같은 범위여야 정상이지만,
+      // 방어적으로 한 번 더 확인한다 — 비어있으면 reduce()가 StateError를 던져 통계
+      // 화면 전체가 크래시하기 때문이다.
+      return Center(child: Text(AppLocalizations.of(context)!.statsNoWeightRecorded));
+    }
     final minY = (recorded.reduce((a, b) => a < b ? a : b) - 1).floorToDouble();
     final maxY = (recorded.reduce((a, b) => a > b ? a : b) + 1).ceilToDouble();
     final labelInterval = period == _Period.month ? 5 : 1;
@@ -576,39 +727,6 @@ class _WeightLineChart extends StatelessWidget {
   }
 }
 
-class _WeightList extends StatelessWidget {
-  final List<DateTime> dates;
-  final Map<String, double> weights;
-  final void Function(DateTime date) onTapDate;
-
-  const _WeightList({required this.dates, required this.weights, required this.onTapDate});
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    final recordedDates =
-        dates.where((d) => weights.containsKey(_dateKeyOf(d))).toList().reversed.toList();
-    if (recordedDates.isEmpty) return Center(child: Text(l10n.statsNoWeightRecorded));
-    return ListView.separated(
-      itemCount: recordedDates.length,
-      separatorBuilder: (_, __) => const Divider(height: 1),
-      itemBuilder: (context, i) {
-        final date = recordedDates[i];
-        final weight = weights[_dateKeyOf(date)]!;
-        return ListTile(
-          dense: true,
-          title: Text(_dateWithWeekday(l10n, date)),
-          trailing: Text(
-            '${weight.toStringAsFixed(1)} kg',
-            style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.weightTeal),
-          ),
-          onTap: () => onTapDate(date),
-        );
-      },
-    );
-  }
-}
-
 // ── 운동량 탭 ──────────────────────────────────────────────
 
 enum _ExerciseMetric { calories, minutes }
@@ -660,7 +778,23 @@ class _ExerciseTabState extends State<_ExerciseTab> {
         const SizedBox(height: 12),
         Expanded(
           child: widget.period == _Period.year
-              ? _ExerciseList(dates: dates, byDate: byDate, metric: _metric, onTapDate: widget.onTapDate)
+              ? _YearLineChart(
+                  dates: dates,
+                  series: [
+                    _YearSeries(
+                      values: [
+                        for (final d in dates)
+                          byDate[_dateKeyOf(d)] == null
+                              ? null
+                              : (_metric == _ExerciseMetric.calories
+                                  ? byDate[_dateKeyOf(d)]!.caloriesBurned
+                                  : byDate[_dateKeyOf(d)]!.minutes),
+                      ],
+                      color: AppColors.exerciseTeal,
+                    ),
+                  ],
+                  onTapDate: widget.onTapDate,
+                )
               : _ExerciseBarChart(
                   dates: dates,
                   byDate: byDate,
@@ -750,47 +884,6 @@ class _ExerciseBarChart extends StatelessWidget {
   }
 }
 
-class _ExerciseList extends StatelessWidget {
-  final List<DateTime> dates;
-  final Map<String, ExerciseSummary> byDate;
-  final _ExerciseMetric metric;
-  final void Function(DateTime date) onTapDate;
-
-  const _ExerciseList({
-    required this.dates,
-    required this.byDate,
-    required this.metric,
-    required this.onTapDate,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    final recorded = dates.where((d) => byDate.containsKey(_dateKeyOf(d))).toList().reversed.toList();
-    if (recorded.isEmpty) return Center(child: Text(l10n.statsNoExerciseRecorded));
-    return ListView.separated(
-      itemCount: recorded.length,
-      separatorBuilder: (_, __) => const Divider(height: 1),
-      itemBuilder: (context, i) {
-        final date = recorded[i];
-        final e = byDate[_dateKeyOf(date)]!;
-        return ListTile(
-          dense: true,
-          title: Text(_dateWithWeekday(l10n, date)),
-          subtitle: Text('${e.caloriesBurned.toStringAsFixed(0)}kcal · ${e.minutes.toStringAsFixed(0)}${l10n.minutesSuffix}'),
-          trailing: Text(
-            metric == _ExerciseMetric.calories
-                ? '${e.caloriesBurned.toStringAsFixed(0)}kcal'
-                : '${e.minutes.toStringAsFixed(0)}${l10n.minutesSuffix}',
-            style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.exerciseTeal),
-          ),
-          onTap: () => onTapDate(date),
-        );
-      },
-    );
-  }
-}
-
 // ── 영양소 탭 ──────────────────────────────────────────────
 
 class _NutritionTab extends StatelessWidget {
@@ -841,7 +934,24 @@ class _NutritionTab extends StatelessWidget {
         const SizedBox(height: 16),
         Expanded(
           child: period == _Period.year
-              ? _NutritionList(dates: dates, byDate: byDate, onTapDate: onTapDate)
+              ? _YearLineChart(
+                  dates: dates,
+                  series: [
+                    _YearSeries(
+                      values: [for (final d in dates) byDate[_dateKeyOf(d)]?.carbsG],
+                      color: AppColors.foodCoral,
+                    ),
+                    _YearSeries(
+                      values: [for (final d in dates) byDate[_dateKeyOf(d)]?.proteinG],
+                      color: AppColors.exerciseTeal,
+                    ),
+                    _YearSeries(
+                      values: [for (final d in dates) byDate[_dateKeyOf(d)]?.fatG],
+                      color: AppColors.statsGray,
+                    ),
+                  ],
+                  onTapDate: onTapDate,
+                )
               : _NutritionStackedBarChart(dates: dates, byDate: byDate, period: period, onTapDate: onTapDate),
         ),
       ],
@@ -1016,37 +1126,3 @@ class _NutritionStackedBarChart extends StatelessWidget {
   }
 }
 
-class _NutritionList extends StatelessWidget {
-  final List<DateTime> dates;
-  final Map<String, NutrientSummary> byDate;
-  final void Function(DateTime date) onTapDate;
-
-  const _NutritionList({required this.dates, required this.byDate, required this.onTapDate});
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    final recorded = dates.where((d) => byDate.containsKey(_dateKeyOf(d))).toList().reversed.toList();
-    if (recorded.isEmpty) return Center(child: Text(l10n.statsNoFoodRecorded));
-    return ListView.separated(
-      itemCount: recorded.length,
-      separatorBuilder: (_, __) => const Divider(height: 1),
-      itemBuilder: (context, i) {
-        final date = recorded[i];
-        final n = byDate[_dateKeyOf(date)]!;
-        return ListTile(
-          dense: true,
-          title: Text(_dateWithWeekday(l10n, date)),
-          subtitle: Text(
-            l10n.statsNutritionListSummary(
-              n.carbsG.toStringAsFixed(0),
-              n.proteinG.toStringAsFixed(0),
-              n.fatG.toStringAsFixed(0),
-            ),
-          ),
-          onTap: () => onTapDate(date),
-        );
-      },
-    );
-  }
-}

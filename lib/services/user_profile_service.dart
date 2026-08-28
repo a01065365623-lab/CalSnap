@@ -19,7 +19,8 @@ class UserProfile {
 }
 
 /// 회원가입 없이 로컬(SharedPreferences)에만 저장되는 최소 프로필.
-/// 온보딩 완료 여부, 임시 사용자 ID(UUID), 성별/나이/키/체중, 계산된 목표 칼로리를 보관한다.
+/// 온보딩 완료 여부, 임시 사용자 ID(UUID), 성별/나이/키/체중, 계산된 목표 칼로리/
+/// 목표 수분 섭취량을 보관한다.
 class UserProfileService {
   UserProfileService._internal();
   static final UserProfileService instance = UserProfileService._internal();
@@ -31,6 +32,7 @@ class UserProfileService {
   static const _keyHeightCm = 'profile_height_cm';
   static const _keyWeightKg = 'profile_weight_kg';
   static const _keyGoalCalories = 'profile_goal_calories';
+  static const _keyDailyWaterGoalMl = 'profile_daily_water_goal_ml';
   static const _keyUnitSystem = 'unit_system';
   static const _keyTtsEnabled = 'tts_enabled';
 
@@ -49,8 +51,13 @@ class UserProfileService {
 
   /// 성별/나이/키/체중을 저장한다.
   /// [goalCaloriesOverride]를 주면 그 값을 목표 칼로리로 그대로 저장하고(사용자가 직접 수정한 값),
-  /// 생략하면 BMR 공식으로 계산한 값을 저장한다.
-  Future<void> saveProfile(UserProfile profile, {double? goalCaloriesOverride}) async {
+  /// 생략하면 BMR 공식으로 계산한 값을 저장한다. [waterGoalMlOverride]도 같은 패턴으로
+  /// 동작한다(생략 시 체중 × [defaultWaterGoalMlPerKg]로 계산).
+  Future<void> saveProfile(
+    UserProfile profile, {
+    double? goalCaloriesOverride,
+    double? waterGoalMlOverride,
+  }) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_keyGender, profile.gender.name);
     await prefs.setInt(_keyAge, profile.age);
@@ -65,6 +72,10 @@ class UserProfileService {
             heightCm: profile.heightCm,
             weightKg: profile.weightKg,
           ),
+    );
+    await prefs.setDouble(
+      _keyDailyWaterGoalMl,
+      waterGoalMlOverride ?? calculateWaterGoalMl(weightKg: profile.weightKg),
     );
   }
 
@@ -88,6 +99,11 @@ class UserProfileService {
     return prefs.getDouble(_keyGoalCalories);
   }
 
+  Future<double?> getDailyWaterGoalMl() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getDouble(_keyDailyWaterGoalMl);
+  }
+
   Future<String?> getUserId() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(_keyUserId);
@@ -109,6 +125,7 @@ class UserProfileService {
     await prefs.remove(_keyHeightCm);
     await prefs.remove(_keyWeightKg);
     await prefs.remove(_keyGoalCalories);
+    await prefs.remove(_keyDailyWaterGoalMl);
   }
 
   /// 화면 표시 단위(g/kg 미터법 vs oz/lb 야드파운드법). 저장은 항상 metric 기준으로

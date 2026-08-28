@@ -21,6 +21,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final _heightController = TextEditingController();
   final _weightController = TextEditingController();
   final _goalCaloriesController = TextEditingController();
+  final _waterGoalController = TextEditingController();
   bool _loading = true;
   bool _saving = false;
   UnitSystem _unitSystem = UnitSystem.metric;
@@ -32,6 +33,11 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   // 그 변경을 "사용자가 직접 수정함"으로 오인하지 않기 위한 가드.
   bool _isSyncingGoalCalories = false;
 
+  // 목표 칼로리와 동일한 패턴: 사용자가 직접 수정하면 그 이후로는 체중이 바뀌어도
+  // 자동 계산값(체중 × 32ml)으로 덮어쓰지 않는다.
+  bool _waterGoalManuallyEdited = false;
+  bool _isSyncingWaterGoal = false;
+
   @override
   void initState() {
     super.initState();
@@ -39,18 +45,26 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       c.addListener(_onBasicFieldChanged);
     }
     _goalCaloriesController.addListener(_onGoalCaloriesFieldChanged);
+    _waterGoalController.addListener(_onWaterGoalFieldChanged);
     _loadCurrent();
   }
 
   void _onBasicFieldChanged() {
     setState(() {
       if (!_goalCaloriesManuallyEdited) _syncGoalCaloriesToAutoCalculated();
+      if (!_waterGoalManuallyEdited) _syncWaterGoalToAutoCalculated();
     });
   }
 
   void _onGoalCaloriesFieldChanged() {
     if (_isSyncingGoalCalories) return;
     _goalCaloriesManuallyEdited = true;
+    setState(() {});
+  }
+
+  void _onWaterGoalFieldChanged() {
+    if (_isSyncingWaterGoal) return;
+    _waterGoalManuallyEdited = true;
     setState(() {});
   }
 
@@ -63,9 +77,19 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     _isSyncingGoalCalories = false;
   }
 
+  /// 현재 체중 기준 계산값(체중 × 32ml)으로 수분 목표 필드를 갱신한다.
+  void _syncWaterGoalToAutoCalculated() {
+    final value = _autoCalculatedWaterGoalMl;
+    if (value == null) return;
+    _isSyncingWaterGoal = true;
+    _waterGoalController.text = value.toStringAsFixed(0);
+    _isSyncingWaterGoal = false;
+  }
+
   Future<void> _loadCurrent() async {
     final profile = await UserProfileService.instance.getProfile();
     final storedGoalCalories = await UserProfileService.instance.getGoalCalories();
+    final storedWaterGoalMl = await UserProfileService.instance.getDailyWaterGoalMl();
     _unitSystem = await UserProfileService.instance.getUnitSystem();
 
     if (profile != null) {
@@ -94,6 +118,21 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       _isSyncingGoalCalories = false;
     }
 
+    // 수분 목표도 동일한 패턴: 저장값이 계산값과 다르면 사용자가 직접 수정한 것으로 본다.
+    final autoCalculatedWater = _autoCalculatedWaterGoalMl;
+    if (storedWaterGoalMl != null &&
+        autoCalculatedWater != null &&
+        (storedWaterGoalMl - autoCalculatedWater).abs() > 0.5) {
+      _waterGoalManuallyEdited = true;
+    }
+
+    final initialWaterGoalMl = storedWaterGoalMl ?? autoCalculatedWater;
+    if (initialWaterGoalMl != null) {
+      _isSyncingWaterGoal = true;
+      _waterGoalController.text = initialWaterGoalMl.toStringAsFixed(0);
+      _isSyncingWaterGoal = false;
+    }
+
     if (mounted) setState(() => _loading = false);
   }
 
@@ -103,12 +142,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     _heightController.dispose();
     _weightController.dispose();
     _goalCaloriesController.dispose();
+    _waterGoalController.dispose();
     super.dispose();
   }
 
   int? get _age => int.tryParse(_ageController.text.trim());
   double? get _height => double.tryParse(_heightController.text.trim());
   double? get _goalCalories => double.tryParse(_goalCaloriesController.text.trim());
+  double? get _waterGoalMl => double.tryParse(_waterGoalController.text.trim());
 
   /// 체중 입력 필드는 현재 표시 단위(kg 또는 lb) 기준 값을 담고 있으므로
   /// 저장/계산에 쓸 때는 항상 kg로 변환한다.
@@ -123,7 +164,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       (_age ?? 0) > 0 &&
       (_height ?? 0) > 0 &&
       (_weightKg ?? 0) > 0 &&
-      (_goalCalories ?? 0) > 0;
+      (_goalCalories ?? 0) > 0 &&
+      (_waterGoalMl ?? 0) > 0;
 
   /// 성별/나이/키/체중 기준 BMR 공식 계산값(참고용). 목표 칼로리 필드는 이 값과
   /// 별개로 사용자가 직접 수정해 저장할 수 있다.
@@ -137,6 +179,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     return calculateGoalCalories(gender: gender, age: age, heightCm: height, weightKg: weight);
   }
 
+  /// 체중 기준 계산값(참고용, 체중 × 32ml). 수분 목표 필드는 이 값과 별개로
+  /// 사용자가 직접 수정해 저장할 수 있다.
+  double? get _autoCalculatedWaterGoalMl {
+    final weight = _weightKg;
+    if (weight == null || weight <= 0) return null;
+    return calculateWaterGoalMl(weightKg: weight);
+  }
+
   void _applyAutoCalculated() {
     final value = _autoCalculatedGoalCalories;
     if (value == null) return;
@@ -148,12 +198,24 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     });
   }
 
+  void _applyAutoCalculatedWater() {
+    final value = _autoCalculatedWaterGoalMl;
+    if (value == null) return;
+    setState(() {
+      _waterGoalManuallyEdited = false;
+      _isSyncingWaterGoal = true;
+      _waterGoalController.text = value.toStringAsFixed(0);
+      _isSyncingWaterGoal = false;
+    });
+  }
+
   Future<void> _save() async {
     if (!_isValid || _saving) return;
     setState(() => _saving = true);
     await UserProfileService.instance.saveProfile(
       UserProfile(gender: _gender!, age: _age!, heightCm: _height!, weightKg: _weightKg!),
       goalCaloriesOverride: _goalCalories!,
+      waterGoalMlOverride: _waterGoalMl!,
     );
     if (mounted) Navigator.pop(context, true);
   }
@@ -162,6 +224,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final autoCalculated = _autoCalculatedGoalCalories;
+    final autoCalculatedWater = _autoCalculatedWaterGoalMl;
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.profileEditAppBarTitle)),
@@ -235,6 +298,62 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
                     ),
                   ],
+                  const SizedBox(height: 24),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: LabeledNumberField(
+                          label: l10n.profileEditWaterGoalLabel,
+                          suffix: 'ml',
+                          controller: _waterGoalController,
+                        ),
+                      ),
+                      if (autoCalculatedWater != null)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8, bottom: 2),
+                          child: TextButton(
+                            onPressed: _applyAutoCalculatedWater,
+                            child: Text(l10n.profileEditApplyAutoCalculated),
+                          ),
+                        ),
+                    ],
+                  ),
+                  if (autoCalculatedWater != null) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      l10n.profileEditWaterGoalAutoCalculatedHint(autoCalculatedWater.toStringAsFixed(0)),
+                      style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                    ),
+                  ],
+                  const SizedBox(height: 16),
+                  Text(
+                    l10n.profileEditWaterFactorsTitle,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                  ),
+                  const SizedBox(height: 6),
+                  for (final factor in [
+                    l10n.profileEditWaterFactorExercise,
+                    l10n.profileEditWaterFactorClimate,
+                    l10n.profileEditWaterFactorFoodMoisture,
+                    l10n.profileEditWaterFactorCaffeineAlcohol,
+                    l10n.profileEditWaterFactorHealthCondition,
+                  ])
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 4),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('•  ', style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
+                          Expanded(
+                            child: Text(
+                              factor,
+                              style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   const SizedBox(height: 24),
                   SizedBox(
                     width: double.infinity,
