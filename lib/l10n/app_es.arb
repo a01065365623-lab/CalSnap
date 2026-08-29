@@ -251,5 +251,13 @@
   "weightPhotoComparePickBeforeLabel": "Antes",
   "weightPhotoComparePickAfterLabel": "Después",
   "weightPhotoComparePickDateHint": "Elegir fecha",
-  "weightPhotoCompareNoPhotoPlaceholder": "Sin foto"
+  "weightPhotoCompareNoPhotoPlaceholder": "Sin foto",
+
+  "appUpdateAvailableTitle": "Actualización disponible",
+  "appUpdateAvailableDesc": "Hay una nueva versión disponible. ¿Actualizar ahora?",
+  "appUpdateBtnNow": "Actualizar ahora",
+  "appUpdateBtnLater": "Más tarde",
+  "appUpdateReadyTitle": "Actualización lista",
+  "appUpdateReadyDesc": "Se descargó la nueva versión. ¿Reiniciar ahora para aplicarla?",
+  "appUpdateBtnRestart": "Reiniciar"
 }

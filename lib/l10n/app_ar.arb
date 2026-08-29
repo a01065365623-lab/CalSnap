@@ -251,5 +251,13 @@
   "weightPhotoComparePickBeforeLabel": "قبل",
   "weightPhotoComparePickAfterLabel": "بعد",
   "weightPhotoComparePickDateHint": "اختر تاريخًا",
-  "weightPhotoCompareNoPhotoPlaceholder": "لا توجد صورة"
+  "weightPhotoCompareNoPhotoPlaceholder": "لا توجد صورة",
+
+  "appUpdateAvailableTitle": "يتوفر تحديث",
+  "appUpdateAvailableDesc": "يتوفر إصدار جديد. هل تريد التحديث الآن؟",
+  "appUpdateBtnNow": "تحديث الآن",
+  "appUpdateBtnLater": "لاحقًا",
+  "appUpdateReadyTitle": "التحديث جاهز",
+  "appUpdateReadyDesc": "تم تنزيل الإصدار الجديد. هل تريد إعادة التشغيل الآن لتطبيقه؟",
+  "appUpdateBtnRestart": "إعادة التشغيل"
 }

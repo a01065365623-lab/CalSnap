@@ -47,5 +47,8 @@
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
         </intent>
+        <!-- 인앱 업데이트 불가 시 스토어 페이지로 안내하는 market:// 링크가
+             Android 11+ 패키지 가시성 제한에 걸리지 않도록 Play 스토어 앱을 명시한다. -->
+        <package android:name="com.android.vending"/>
     </queries>
 </manifest>

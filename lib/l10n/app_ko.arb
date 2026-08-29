@@ -364,5 +364,13 @@
   "weightPhotoComparePickBeforeLabel": "이전",
   "weightPhotoComparePickAfterLabel": "이후",
   "weightPhotoComparePickDateHint": "날짜 선택",
-  "weightPhotoCompareNoPhotoPlaceholder": "사진 없음"
+  "weightPhotoCompareNoPhotoPlaceholder": "사진 없음",
+
+  "appUpdateAvailableTitle": "업데이트 안내",
+  "appUpdateAvailableDesc": "새로운 버전이 있어요. 지금 업데이트할까요?",
+  "appUpdateBtnNow": "지금 업데이트",
+  "appUpdateBtnLater": "나중에",
+  "appUpdateReadyTitle": "업데이트 준비 완료",
+  "appUpdateReadyDesc": "새 버전이 다운로드됐어요. 지금 재시작하고 적용할까요?",
+  "appUpdateBtnRestart": "재시작"
 }

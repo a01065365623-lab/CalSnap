@@ -1,7 +1,7 @@
 name: calsnap
 description: 사진 한 장으로 칼로리를 기록하는 데일리 칼로리 트래커
 publish_to: 'none'
-version: 0.1.2+6
+version: 0.1.2+8
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -48,6 +48,9 @@ dependencies:
 
   # AdMob 배너/전면 광고
   google_mobile_ads: ^6.0.0
+
+  # Google Play 인앱 업데이트 (Flexible 우선, 불가능하면 스토어 페이지 안내)
+  in_app_update: ^4.2.5
 
 dev_dependencies:
   flutter_test:

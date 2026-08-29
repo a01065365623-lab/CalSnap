@@ -251,5 +251,13 @@
   "weightPhotoComparePickBeforeLabel": "Öncesi",
   "weightPhotoComparePickAfterLabel": "Sonrası",
   "weightPhotoComparePickDateHint": "Tarih seç",
-  "weightPhotoCompareNoPhotoPlaceholder": "Fotoğraf yok"
+  "weightPhotoCompareNoPhotoPlaceholder": "Fotoğraf yok",
+
+  "appUpdateAvailableTitle": "Güncelleme mevcut",
+  "appUpdateAvailableDesc": "Yeni bir sürüm var. Şimdi güncellensin mi?",
+  "appUpdateBtnNow": "Şimdi güncelle",
+  "appUpdateBtnLater": "Daha sonra",
+  "appUpdateReadyTitle": "Güncelleme hazır",
+  "appUpdateReadyDesc": "Yeni sürüm indirildi. Uygulamak için şimdi yeniden başlatılsın mı?",
+  "appUpdateBtnRestart": "Yeniden başlat"
 }

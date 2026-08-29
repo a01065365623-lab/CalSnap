@@ -251,5 +251,13 @@
   "weightPhotoComparePickBeforeLabel": "ビフォー",
   "weightPhotoComparePickAfterLabel": "アフター",
   "weightPhotoComparePickDateHint": "日付を選択",
-  "weightPhotoCompareNoPhotoPlaceholder": "写真なし"
+  "weightPhotoCompareNoPhotoPlaceholder": "写真なし",
+
+  "appUpdateAvailableTitle": "アップデートのお知らせ",
+  "appUpdateAvailableDesc": "新しいバージョンがあります。今すぐアップデートしますか？",
+  "appUpdateBtnNow": "今すぐアップデート",
+  "appUpdateBtnLater": "あとで",
+  "appUpdateReadyTitle": "アップデートの準備完了",
+  "appUpdateReadyDesc": "新しいバージョンのダウンロードが完了しました。再起動して適用しますか？",
+  "appUpdateBtnRestart": "再起動"
 }

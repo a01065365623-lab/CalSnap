@@ -251,5 +251,13 @@
   "weightPhotoComparePickBeforeLabel": "Trước",
   "weightPhotoComparePickAfterLabel": "Sau",
   "weightPhotoComparePickDateHint": "Chọn ngày",
-  "weightPhotoCompareNoPhotoPlaceholder": "Không có ảnh"
+  "weightPhotoCompareNoPhotoPlaceholder": "Không có ảnh",
+
+  "appUpdateAvailableTitle": "Có bản cập nhật",
+  "appUpdateAvailableDesc": "Đã có phiên bản mới. Cập nhật ngay bây giờ?",
+  "appUpdateBtnNow": "Cập nhật ngay",
+  "appUpdateBtnLater": "Để sau",
+  "appUpdateReadyTitle": "Đã sẵn sàng cập nhật",
+  "appUpdateReadyDesc": "Phiên bản mới đã tải xong. Khởi động lại ngay để áp dụng?",
+  "appUpdateBtnRestart": "Khởi động lại"
 }

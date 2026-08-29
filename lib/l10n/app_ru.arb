@@ -251,5 +251,13 @@
   "weightPhotoComparePickBeforeLabel": "До",
   "weightPhotoComparePickAfterLabel": "После",
   "weightPhotoComparePickDateHint": "Выбрать дату",
-  "weightPhotoCompareNoPhotoPlaceholder": "Нет фото"
+  "weightPhotoCompareNoPhotoPlaceholder": "Нет фото",
+
+  "appUpdateAvailableTitle": "Доступно обновление",
+  "appUpdateAvailableDesc": "Доступна новая версия. Обновить сейчас?",
+  "appUpdateBtnNow": "Обновить сейчас",
+  "appUpdateBtnLater": "Позже",
+  "appUpdateReadyTitle": "Обновление готово",
+  "appUpdateReadyDesc": "Новая версия загружена. Перезапустить сейчас, чтобы применить?",
+  "appUpdateBtnRestart": "Перезапустить"
 }

@@ -251,5 +251,13 @@
   "weightPhotoComparePickBeforeLabel": "पहले",
   "weightPhotoComparePickAfterLabel": "बाद में",
   "weightPhotoComparePickDateHint": "तारीख़ चुनें",
-  "weightPhotoCompareNoPhotoPlaceholder": "कोई फ़ोटो नहीं"
+  "weightPhotoCompareNoPhotoPlaceholder": "कोई फ़ोटो नहीं",
+
+  "appUpdateAvailableTitle": "अपडेट उपलब्ध है",
+  "appUpdateAvailableDesc": "एक नया वर्शन उपलब्ध है। अभी अपडेट करें?",
+  "appUpdateBtnNow": "अभी अपडेट करें",
+  "appUpdateBtnLater": "बाद में",
+  "appUpdateReadyTitle": "अपडेट तैयार है",
+  "appUpdateReadyDesc": "नया वर्शन डाउनलोड हो चुका है। इसे लागू करने के लिए अभी रीस्टार्ट करें?",
+  "appUpdateBtnRestart": "रीस्टार्ट करें"
 }

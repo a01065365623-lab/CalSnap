@@ -251,5 +251,13 @@
   "weightPhotoComparePickBeforeLabel": "之前",
   "weightPhotoComparePickAfterLabel": "之后",
   "weightPhotoComparePickDateHint": "选择日期",
-  "weightPhotoCompareNoPhotoPlaceholder": "暂无照片"
+  "weightPhotoCompareNoPhotoPlaceholder": "暂无照片",
+
+  "appUpdateAvailableTitle": "有可用更新",
+  "appUpdateAvailableDesc": "有新版本可用，现在更新吗？",
+  "appUpdateBtnNow": "立即更新",
+  "appUpdateBtnLater": "稍后",
+  "appUpdateReadyTitle": "更新已就绪",
+  "appUpdateReadyDesc": "新版本已下载完成。现在重启以应用更新吗？",
+  "appUpdateBtnRestart": "重启"
 }

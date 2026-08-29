@@ -351,7 +351,10 @@ class _WeightLogScreenState extends State<WeightLogScreen> {
             child: _loading
                 ? const Center(child: CircularProgressIndicator())
                 : GridView.builder(
-                    padding: const EdgeInsets.all(8),
+                    // 아래쪽은 그리드 셀(터치 영역)이 화면 맨 끝까지 채워지므로, 고정 8
+                    // 대신 시스템 제스처 내비게이션 바 높이를 더해 마지막 줄이 그 바에
+                    // 가려 눌리지 않도록 한다.
+                    padding: EdgeInsets.fromLTRB(8, 8, 8, 8 + MediaQuery.of(context).padding.bottom),
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 7,
                       childAspectRatio: 0.8,

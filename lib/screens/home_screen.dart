@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:in_app_update/in_app_update.dart';
 
 import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
 import '../services/ad_service.dart';
+import '../services/app_update_service.dart';
 import '../services/tts_service.dart';
 import '../services/user_profile_service.dart';
 import '../theme/app_colors.dart';
@@ -22,14 +24,128 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   int _index = 0;
   int _dailyLogRefreshTick = 0;
+
+  // 업데이트 안내/재시작 다이얼로그가 동시에 두 개 뜨는 걸 막는 가드. 다이얼로그가
+  // 닫히면 다시 false로 돌아가 다음 체크에서 필요하면 또 뜰 수 있다.
+  bool _updatePopupShown = false;
+  StreamSubscription<InstallStatus>? _updateStatusSub;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    // Flexible 업데이트 다운로드가 (다른 다이얼로그가 떠 있지 않을 때) 백그라운드에서
+    // 완료되면 재시작 안내로 자연스럽게 이어지도록 앱 생명주기 내내 구독해 둔다.
+    _updateStatusSub = AppUpdateService.instance.installStatusStream.listen((status) {
+      if (status == InstallStatus.downloaded) _showUpdateReadyDialog();
+    });
     unawaited(_playAppOpenTtsThenMaybeShowAd());
+    unawaited(_checkForAppUpdate());
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    unawaited(_updateStatusSub?.cancel());
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // lexfall(js/app_update.js)과 동일하게, 앱이 백그라운드에 있다가 다시 포그라운드로
+    // 돌아올 때마다도 체크한다 — 예를 들어 다운로드만 되고 재시작 전에 앱이 종료됐다가
+    // 다시 열린 경우에도 재시작 안내가 뜨도록.
+    if (state == AppLifecycleState.resumed) {
+      unawaited(_checkForAppUpdate());
+    }
+  }
+
+  /// 앱 실행 시 1회 + 포그라운드 복귀 시마다 호출된다. Flexible 업데이트를 우선하고,
+  /// 불가능한 상황(즉시 업데이트만 허용)에는 기록 흐름을 막지 않도록 강제 즉시 업데이트
+  /// 대신 스토어 페이지로만 안내한다 — lexfall의 인앱 업데이트 정책과 동일하다.
+  Future<void> _checkForAppUpdate() async {
+    if (_updatePopupShown) return;
+    final info = await AppUpdateService.instance.checkForUpdate();
+    if (info == null || !mounted) return;
+
+    // 지난 실행에서 다운로드만 되고 재시작 전에 앱이 종료된 경우, 업데이트 가능 여부와
+    // 무관하게 재시작부터 안내한다.
+    if (info.installStatus == InstallStatus.downloaded) {
+      _showUpdateReadyDialog();
+      return;
+    }
+    if (info.updateAvailability != UpdateAvailability.updateAvailable) return;
+
+    if (info.flexibleUpdateAllowed) {
+      _showUpdateAvailableDialog(storeOnly: false);
+    } else if (info.immediateUpdateAllowed) {
+      // Flexible 불가 → 스토어로만 안내(별도 합의 없이는 화면을 막는 즉시 업데이트를
+      // 쓰지 않는다).
+      _showUpdateAvailableDialog(storeOnly: true);
+    }
+  }
+
+  Future<void> _showUpdateAvailableDialog({required bool storeOnly}) async {
+    if (_updatePopupShown || !mounted) return;
+    _updatePopupShown = true;
+    final l10n = AppLocalizations.of(context)!;
+    await showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.appUpdateAvailableTitle),
+        content: Text(l10n.appUpdateAvailableDesc),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(l10n.appUpdateBtnLater),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(context);
+              if (storeOnly) {
+                await AppUpdateService.instance.openStoreListing();
+              } else {
+                // 다운로드는 백그라운드에서 진행된다 — 완료되면 initState에서 구독해 둔
+                // installStatusStream 리스너가 재시작 안내 다이얼로그를 띄운다.
+                await AppUpdateService.instance.startFlexibleUpdate();
+              }
+            },
+            child: Text(l10n.appUpdateBtnNow),
+          ),
+        ],
+      ),
+    );
+    _updatePopupShown = false;
+  }
+
+  Future<void> _showUpdateReadyDialog() async {
+    if (_updatePopupShown || !mounted) return;
+    _updatePopupShown = true;
+    final l10n = AppLocalizations.of(context)!;
+    await showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.appUpdateReadyTitle),
+        content: Text(l10n.appUpdateReadyDesc),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(l10n.appUpdateBtnLater),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(context);
+              await AppUpdateService.instance.completeFlexibleUpdate();
+            },
+            child: Text(l10n.appUpdateBtnRestart),
+          ),
+        ],
+      ),
+    );
+    _updatePopupShown = false;
   }
 
   /// TTS 앱 오픈 멘트와 전면광고가 동시에 트리거되면 소리가 겹쳐서, TTS가 (실제로)
@@ -152,8 +268,16 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // Material 3의 BottomAppBar는 기본 높이가 80으로 고정돼 있고, 제스처 내비게이션
+      // 바 높이(MediaQuery.padding.bottom)는 그 고정 높이 "안에서" SafeArea로 깎아
+      // 먹는 방식이라, 갤럭시 S23처럼 제스처 바가 두꺼운 기기에서는 아이콘 3개가 들어갈
+      // 여백이 부족해져 탭 아이콘이 제스처 바 쪽으로 밀리며 눌리지 않는 문제가 있었다.
+      // 콘텐츠 높이(kBottomNavigationBarHeight)에 시스템 인셋을 더해 항상 충분한 높이를
+      // 확보하도록 고정값 대신 동적으로 계산한다.
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
+        padding: EdgeInsets.zero,
+        height: kBottomNavigationBarHeight + MediaQuery.of(context).padding.bottom,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
