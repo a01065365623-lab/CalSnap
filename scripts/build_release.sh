@@ -12,6 +12,15 @@
 # 사용법:
 #   scripts/build_release.sh          # appbundle (기본값, Play 스토어 업로드용)
 #   scripts/build_release.sh apk      # apk (사이드로드/수동 테스트용)
+#   scripts/build_release.sh install  # apk 빌드 후 연결된 기기에 adb install -r
+#
+# install은 매번 android/key.properties의 고정 release keystore로 서명하므로, USB로
+# 반복 사이드로드해도 서명이 항상 같아 기존 데이터가 유지된 채 업데이트된다(디버그
+# 빌드로 설치하면 debug keystore와 서명이 달라 기존 release 앱 위에 덮어쓸 수 없어
+# 매번 강제 삭제 후 재설치돼야 했음). 단, 기기에 Play 스토어에서 설치된 버전이 있다면
+# 그건 Google Play 앱 서명 키로 재서명된 것이라 이 로컬 release 키와도 서명이 다르므로
+# 최초 1회는 여전히 기존 앱 제거가 필요하다 — 그 이후부터는 이 install 경로로만
+# 사이드로드하면 서명이 계속 고정된다.
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -36,5 +45,21 @@ if [[ -z "$api_key" || "$api_key" == "your-secret-key" ]]; then
   exit 1
 fi
 
-echo "release 빌드 시작 — target=$target, env=$env_file (PROXY_API_KEY=${api_key:0:4}****)"
-flutter build "$target" --release --dart-define-from-file="$env_file"
+if [[ "$target" == "install" ]]; then
+  build_target="apk"
+else
+  build_target="$target"
+fi
+
+echo "release 빌드 시작 — target=$build_target, env=$env_file (PROXY_API_KEY=${api_key:0:4}****)"
+flutter build "$build_target" --release --dart-define-from-file="$env_file"
+
+if [[ "$target" == "install" ]]; then
+  apk_path="build/app/outputs/flutter-apk/app-release.apk"
+  if [[ ! -f "$apk_path" ]]; then
+    echo "오류: $apk_path 를 찾을 수 없습니다." >&2
+    exit 1
+  fi
+  echo "연결된 기기에 설치 중 (release keystore 고정 서명 — 기존 데이터 유지)..."
+  adb install -r "$apk_path"
+fi
