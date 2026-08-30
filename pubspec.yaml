@@ -1,7 +1,7 @@
 name: calsnap
 description: 사진 한 장으로 칼로리를 기록하는 데일리 칼로리 트래커
 publish_to: 'none'
-version: 0.1.2+8
+version: 0.1.2+9
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
