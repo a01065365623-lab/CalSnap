@@ -63,13 +63,20 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     }
   }
 
+  /// HomeScreen이 지금 화면 맨 위(현재 라우트)일 때만 true. 카메라(QuickModeScreen)처럼
+  /// 위에 push된 화면이 있는 동안에는 HomeScreen이 dispose되지 않고 살아있어서 앱
+  /// 라이프사이클 리스너가 계속 동작하는데, 그 상태로 업데이트 다이얼로그를 띄우면 같은
+  /// Navigator에 다이얼로그가 push되어 카메라 왕복(image_picker의 네이티브 카메라 실행 →
+  /// paused/resumed) 타이밍과 겹쳐 화면이 깨지는(회색 빈 화면) 문제가 있었다.
+  bool get _isTopmostRoute => mounted && (ModalRoute.of(context)?.isCurrent ?? false);
+
   /// 앱 실행 시 1회 + 포그라운드 복귀 시마다 호출된다. Flexible 업데이트를 우선하고,
   /// 불가능한 상황(즉시 업데이트만 허용)에는 기록 흐름을 막지 않도록 강제 즉시 업데이트
   /// 대신 스토어 페이지로만 안내한다 — lexfall의 인앱 업데이트 정책과 동일하다.
   Future<void> _checkForAppUpdate() async {
-    if (_updatePopupShown) return;
+    if (_updatePopupShown || !_isTopmostRoute) return;
     final info = await AppUpdateService.instance.checkForUpdate();
-    if (info == null || !mounted) return;
+    if (info == null || !_isTopmostRoute) return;
 
     // 지난 실행에서 다운로드만 되고 재시작 전에 앱이 종료된 경우, 업데이트 가능 여부와
     // 무관하게 재시작부터 안내한다.
@@ -89,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   }
 
   Future<void> _showUpdateAvailableDialog({required bool storeOnly}) async {
-    if (_updatePopupShown || !mounted) return;
+    if (_updatePopupShown || !_isTopmostRoute) return;
     _updatePopupShown = true;
     final l10n = AppLocalizations.of(context)!;
     await showDialog<void>(
@@ -122,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   }
 
   Future<void> _showUpdateReadyDialog() async {
-    if (_updatePopupShown || !mounted) return;
+    if (_updatePopupShown || !_isTopmostRoute) return;
     _updatePopupShown = true;
     final l10n = AppLocalizations.of(context)!;
     await showDialog<void>(
@@ -196,7 +203,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
   Future<void> _pushAndRefreshDailyLog(Widget screen) async {
     await Navigator.push(context, MaterialPageRoute(builder: (_) => screen));
-    if (mounted) setState(() => _dailyLogRefreshTick++);
+    if (!mounted) return;
+    setState(() => _dailyLogRefreshTick++);
+    // 카메라 등 위에 push됐던 화면이 떠 있는 동안 억눌러 둔 업데이트 체크(또는 다운로드
+    // 완료 안내)가 있었다면, HomeScreen으로 돌아온 지금 바로 다시 시도한다.
+    unawaited(_checkForAppUpdate());
   }
 
   @override
