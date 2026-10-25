@@ -52,6 +52,8 @@ _DAILY_LIMITS = {
 _DAILY_LIMIT_PHOTO_PREMIUM = int(os.environ.get("DAILY_LIMIT_PHOTO_PREMIUM", "30"))
 _CACHE_MAX_ENTRIES = int(os.environ.get("CACHE_MAX_ENTRIES", "5000"))
 _KST = datetime.timezone(datetime.timedelta(hours=9))
+# daily_usage 행(기기 ID 해시 + 날짜별 횟수) 보관 일수. 개인정보처리방침의 "7일"과 맞춰야 한다.
+_USAGE_RETENTION_DAYS = 7
 _GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "").strip() or "gemini-3.8-flash"
 
 _PROMPT = (
@@ -227,8 +229,10 @@ class _PostgresUsageStore:
             database_url, min_size=1, max_size=4, open=True, timeout=5,
             kwargs={"autocommit": True},
         )
+        self._last_cleanup_day: datetime.date | None = None
         try:
             self._create_table()
+            self._cleanup(_today_kst())
         except Exception:
             # 풀을 닫지 않으면 백그라운드 워커가 접속을 계속 재시도한다.
             self._pool.close()
@@ -247,10 +251,20 @@ class _PostgresUsageStore:
                 )
                 """
             )
-            # 한도 판정에는 당일 행만 필요하므로 오래된 행은 기동 시 정리한다.
-            conn.execute("DELETE FROM daily_usage WHERE usage_date < CURRENT_DATE - 7")
+
+    def _cleanup(self, day: datetime.date) -> None:
+        """보관 기간(_USAGE_RETENTION_DAYS)이 지난 행을 지운다. 개인정보처리방침에 "해시는
+        7일 뒤 삭제"라고 안내하므로, 기동 시뿐 아니라 날짜가 바뀐 뒤 첫 요청 때도 실행한다."""
+        with self._pool.connection() as conn:
+            conn.execute(
+                "DELETE FROM daily_usage WHERE usage_date <= %s",
+                (day - datetime.timedelta(days=_USAGE_RETENTION_DAYS),),
+            )
+        self._last_cleanup_day = day
 
     def try_acquire(self, client_key: str, day: datetime.date, kind: str, limit: int) -> bool:
+        if day != self._last_cleanup_day:
+            self._cleanup(day)
         with self._pool.connection() as conn:
             row = conn.execute(
                 """
