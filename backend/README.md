@@ -27,7 +27,7 @@ X-User-Id: <선택, 앱 온보딩 때 생성된 임의 UUID. 일일 제한 집�
 { "foodName": "김치찌개", "caloriesPer100g": 90, "estimatedWeightG": 400, "carbsG": 6, "proteinG": 8, "fatG": 4 }
 ```
 
-내부적으로 gemini-2.0-flash에 이미지와 함께
+내부적으로 GEMINI_MODEL(기본 gemini-3.8-flash)에 이미지와 함께
 "이 사진 속 음식의 정확한 이름, 100g당 예상 칼로리(kcal), 추정 총 중량(g),
 100g당 예상 탄수화물(g)/단백질(g)/지방(g)을 JSON으로만 답해줘:
 {foodName, caloriesPer100g, estimatedWeightG, carbsG, proteinG, fatG}" 프롬프트를 보내고,
@@ -70,6 +70,7 @@ python app.py
    - 프로젝트에 **PostgreSQL 플러그인 추가** 후, 백엔드 서비스 Variables에
      `DATABASE_URL=${{Postgres.DATABASE_URL}}` 참조 변수 등록(일일 사용 횟수 카운터 저장용,
      `daily_usage` 테이블은 서버 기동 시 자동 생성). 미설정 시 메모리 카운터로 대체된다.
+   - 선택: `GEMINI_MODEL`(기본 `gemini-3.8-flash`, 모델을 바꿀 때 재배포 없이 변수만 수정).
    - 선택: `DAILY_LIMIT_PHOTO`(기본 3), `DAILY_LIMIT_TEXT`(기본 20),
      `DAILY_LIMIT_PHOTO_PREMIUM`(기본 30, 구독 연결 전이라 미사용), `CACHE_MAX_ENTRIES`(기본 5000).
    - 한도는 기기(`X-User-Id`, 없으면 IP)별·KST 자정 기준. 초과 시

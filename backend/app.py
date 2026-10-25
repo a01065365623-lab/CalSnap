@@ -7,6 +7,9 @@ CalSnap Flutter 앱(GeminiFoodRecognitionService)이 사진 기반/텍스트 기
 환경변수
   GEMINI_API_KEY : Google AI Studio(https://aistudio.google.com/apikey)에서 발급받은
                     Gemini API 키 (무료 티어 가능).
+  GEMINI_MODEL   : 사용할 Gemini 모델 ID(기본 gemini-3.8-flash). 'gemini-flash-latest' 같은
+                    별칭은 새 모델이 나오면 예고 없이 바뀌어 응답 형식·품질이 흔들릴 수 있어서,
+                    기본값은 정식(stable) 버전명으로 고정한다.
   PROXY_API_KEY  : 클라이언트가 X-API-Key 헤더로 보내야 하는 공유 시크릿.
                     미설정 시 인증 없이 열려있으니 배포 전 반드시 설정할 것.
   DATABASE_URL   : 일일 사용 횟수 카운터를 저장할 PostgreSQL 접속 URL(Railway Postgres
@@ -49,6 +52,7 @@ _DAILY_LIMITS = {
 _DAILY_LIMIT_PHOTO_PREMIUM = int(os.environ.get("DAILY_LIMIT_PHOTO_PREMIUM", "30"))
 _CACHE_MAX_ENTRIES = int(os.environ.get("CACHE_MAX_ENTRIES", "5000"))
 _KST = datetime.timezone(datetime.timedelta(hours=9))
+_GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "").strip() or "gemini-3.8-flash"
 
 _PROMPT = (
     "이 사진 속 음식의 정확한 이름, 100g당 예상 칼로리(kcal), 추정 총 중량(g), "
@@ -123,7 +127,8 @@ def _init_model() -> genai.GenerativeModel:
     if not api_key:
         raise RuntimeError("GEMINI_API_KEY 환경변수가 설정되지 않았습니다.")
     genai.configure(api_key=api_key)
-    return genai.GenerativeModel("gemini-flash-latest")
+    logger.info("Gemini 모델: %s", _GEMINI_MODEL)
+    return genai.GenerativeModel(_GEMINI_MODEL)
 
 
 _model = _init_model()
