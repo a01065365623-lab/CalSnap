@@ -238,6 +238,8 @@
   "recognitionErrorGeneric": "인식에 실패했어요. 다시 시도해주세요.",
   "recognitionErrorRateLimited": "지금 요청이 많아 잠시 지연되고 있어요. 잠시 후 다시 시도해주세요.",
   "recognitionErrorDailyLimitExceeded": "오늘 사용 횟수를 모두 사용했어요. 내일 다시 이용해 주세요.",
+  "recognitionErrorPhotoDailyLimitExceeded": "오늘 사진 인식 횟수를 모두 사용했어요. 내일 다시 이용해 주세요.",
+  "quickModeManualEntryStillAvailable": "직접 입력은 계속 이용할 수 있어요.",
   "quickModePhotoQuotaRemaining": "오늘 남은 사진 인식 {remaining}/{limit}",
   "@quickModePhotoQuotaRemaining": {
     "placeholders": { "remaining": { "type": "int" }, "limit": { "type": "int" } }
@@ -247,7 +249,6 @@
     "placeholders": { "remaining": { "type": "int" }, "limit": { "type": "int" } }
   },
   "quickModeLaunchFreeNotice": "출시 기념 무료 이용 중 (이후 유료 전환 예정)",
-  "quickModePrivateTestQuotaNotice": "※ 테스트 기간 중 일일 인식 횟수 제한(20회)에 도달했을 수 있어요. 내일 다시 시도해주세요!",
   "quickModeConfidence": "추정 정확도 {value}%",
   "@quickModeConfidence": {
     "placeholders": { "value": { "type": "String" } }

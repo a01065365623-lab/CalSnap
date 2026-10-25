@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../config/feature_flags.dart';
 import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
 import '../services/food_recognition_service.dart';
@@ -39,6 +38,9 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
   UnitSystem _unitSystem = UnitSystem.metric;
   // 사진 없이 "직접 입력" 경로로 얻은 결과인지 구분해서 저장 시 source에 반영한다.
   bool _isManualEntry = false;
+  // 서버가 사진 인식 일일 한도 초과(daily_limit_exceeded)를 알려온 상태. 재시도해도
+  // 소용없으므로 재시도 버튼 대신 아직 쓸 수 있는 "직접 입력"을 안내한다.
+  bool _photoLimitReached = false;
 
   @override
   void initState() {
@@ -122,6 +124,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
     setState(() {
       _loading = true;
       _errorMessage = null;
+      _photoLimitReached = false;
     });
 
     final hint = _hintController.text.trim();
@@ -139,15 +142,22 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
     } catch (e) {
       if (!mounted) return;
       final l10n = AppLocalizations.of(context)!;
-      final message = friendlyRecognitionErrorMessage(l10n, e);
+      final limitReached = e is FoodRecognitionException &&
+          e.failure == FoodRecognitionFailure.dailyLimitExceeded;
+      final message = limitReached
+          ? l10n.recognitionErrorPhotoDailyLimitExceeded
+          : friendlyRecognitionErrorMessage(l10n, e);
       setState(() {
         _loading = false;
         _errorMessage = message;
+        _photoLimitReached = limitReached;
       });
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(message),
-          action: SnackBarAction(label: l10n.retryButton, onPressed: () => _recognize(image)),
+          action: limitReached
+              ? null
+              : SnackBarAction(label: l10n.retryButton, onPressed: () => _recognize(image)),
         ),
       );
     }
@@ -163,6 +173,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
       _portionMultiplier = 1.0;
       _loading = false;
       _isManualEntry = false;
+      _photoLimitReached = false;
     });
   }
 
@@ -289,20 +300,38 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
             const SizedBox(height: 24),
             if (_loading) const CircularProgressIndicator(),
             if (!_loading && _errorMessage != null) ...[
-              Text(_errorMessage!, style: const TextStyle(color: Colors.red)),
-              if (kShowPrivateTestQuotaNotice) ...[
-                const SizedBox(height: 4),
-                Text(
-                  l10n.quickModePrivateTestQuotaNotice,
-                  style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
-                ),
-              ],
-              const SizedBox(height: 8),
-              ElevatedButton.icon(
-                onPressed: _image == null ? null : () => _recognize(_image!),
-                icon: const Icon(Icons.refresh),
-                label: Text(l10n.retryButton),
+              Text(
+                _errorMessage!,
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.red),
               ),
+              const SizedBox(height: 8),
+              if (_photoLimitReached) ...[
+                Text(
+                  l10n.quickModeManualEntryStillAvailable,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 13, color: Colors.grey.shade700),
+                ),
+                const SizedBox(height: 8),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    onPressed: _openManualEntry,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.foodCoral,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                    icon: const Icon(Icons.edit_note),
+                    label: Text(l10n.quickModeManualEntryButton),
+                  ),
+                ),
+              ] else
+                ElevatedButton.icon(
+                  onPressed: _image == null ? null : () => _recognize(_image!),
+                  icon: const Icon(Icons.refresh),
+                  label: Text(l10n.retryButton),
+                ),
             ],
             if (_result != null) ...[
               TextField(
