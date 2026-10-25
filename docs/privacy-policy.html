@@ -134,7 +134,7 @@
 <div class="wrap">
   <header class="page-head">
     <h1>CalSnap 개인정보처리방침 / Privacy Policy</h1>
-    <div class="meta">시행일 / Effective date: 2026-08-16</div>
+    <div class="meta">시행일 / Effective date: 2026-10-25</div>
     <div class="lang-toggle">
       <label for="lang-ko">한국어</label><label for="lang-en">English</label>
     </div>
@@ -152,8 +152,18 @@
       <tbody>
         <tr>
           <td>음식 사진</td>
-          <td>사진 속 음식 종류·칼로리 인식을 위해 서버로 전송되며, 서버는 Google Gemini API를 통해 분석합니다.</td>
-          <td>인식 처리 목적으로만 전송 (기기에는 사용자가 저장한 사진만 남음)</td>
+          <td>사진 속 음식 종류·칼로리·영양소 추정. 서버로 전송되며, 서버는 Google Gemini API를 통해 분석합니다.</td>
+          <td>서버에 저장하지 않음. 인식 처리 중에만 서버 메모리에서 다루고 결과 반환 후 폐기 (기기에는 사용자가 저장한 사진만 남음)</td>
+        </tr>
+        <tr>
+          <td>직접 입력한 음식 이름·양, 음식명 힌트</td>
+          <td>사진 없이 칼로리·영양소 추정, 사진 인식 정확도 향상. 서버를 거쳐 Google Gemini API로 전송됩니다.</td>
+          <td>서버에 원문을 저장하지 않음</td>
+        </tr>
+        <tr>
+          <td>인식 결과 (음식명·칼로리·영양소)</td>
+          <td>같은 사진·같은 입력에 대한 반복 요청에 빠르게 응답(캐시)</td>
+          <td>사용자와 연결되지 않는 형태로 서버 메모리에 일시 보관, 서버 재시작 또는 용량 초과 시 삭제</td>
         </tr>
         <tr>
           <td>식사·운동·체중·물 섭취 기록</td>
@@ -172,8 +182,8 @@
         </tr>
         <tr>
           <td>임시 사용자 식별자 (UUID)</td>
-          <td>회원가입 없이 기기별 설정을 구분하기 위해 앱 설치 시 자동 생성되는 임의의 식별값. 이름·이메일 등 개인 식별정보와 연결되지 않음</td>
-          <td>기기 내부(로컬 저장소)</td>
+          <td>회원가입 없이 기기별 설정을 구분하고, 기기별 하루 인식 이용 횟수를 제한하기 위해 앱 설치 시 자동 생성되는 임의의 식별값. 이름·이메일 등 개인 식별정보와 연결되지 않음</td>
+          <td>기기 내부(로컬 저장소). 인식 요청 시 서버로 전송되며, 서버에는 원래 값을 알 수 없는 해시값과 날짜별 이용 횟수로만 보관하고 7일이 지나면 삭제</td>
         </tr>
       </tbody>
     </table>
@@ -182,7 +192,7 @@
     <h2>2. 제3자 서비스</h2>
     <p>앱은 다음 서비스를 이용하며, 각 서비스는 자체 개인정보처리방침에 따라 정보를 처리합니다.</p>
     <ul>
-      <li><strong>Google Gemini API</strong> — 촬영한 음식 사진을 분석하여 음식 종류와 칼로리를 인식하는 데 사용됩니다.</li>
+      <li><strong>Google Gemini API (Google LLC)</strong> — 음식 사진, 음식명 힌트 또는 직접 입력한 음식 이름·양, 기기 언어 코드를 분석하여 음식 종류·칼로리·영양소를 추정하는 데 사용됩니다. 이용자가 인식을 요청할 때에만 HTTPS로 전송되며, 미국 등 Google 데이터센터가 있는 국가에서 처리될 수 있습니다. 앱은 유료 Gemini API를 사용하며, Google은 유료 API 약관에 따라 전송된 내용을 자사 제품 개선에 사용하지 않습니다. 다만 법령 준수 및 서비스 악용 방지를 위해 Google이 제한된 기간 동안 보관할 수 있습니다.</li>
       <li><strong>Google AdMob</strong> — 앱 내 배너·전면 광고 게재에 사용되며, 광고 식별자 등 기기 정보를 수집할 수 있습니다.</li>
       <li><strong>쿠팡파트너스, 네이버 커넥트(네이버쇼핑), Amazon Associates</strong> — 상품 추천 화면에서 이용자가 직접 링크를 선택했을 때만 해당 쇼핑몰로 연결되는 제휴 링크입니다. 링크 클릭 전 실제 이동 URL을 확인창으로 안내하며, 클릭 시에만 각 플랫폼에 방문 사실이 전달됩니다.</li>
     </ul>
@@ -198,7 +208,10 @@
     <ul>
       <li>식사·운동·체중·물 섭취 기록과 신체 정보는 <strong>기기 내부 로컬 데이터베이스</strong>에만 저장되며, 개발자의 서버에 별도로 업로드·저장되지 않습니다.</li>
       <li>앱 잠금(시크릿 모드) 기능에 사용되는 PIN 번호는 <strong>평문으로 저장되지 않으며</strong>, 기기별로 무작위 생성된 salt 값과 함께 SHA-256으로 해시하여 저장합니다. 따라서 개발자를 포함한 누구도 저장된 값으로부터 원래 PIN 번호를 알아낼 수 없습니다.</li>
-      <li>음식 사진은 인식 처리를 위해 서버로 전송되는 순간에만 네트워크를 거치며, 인식 결과 반환 후에는 별도 목적으로 보관하지 않습니다.</li>
+      <li>음식 사진과 직접 입력한 내용은 인식 처리를 위해 서버로 전송되는 동안에만 다뤄지며, <strong>서버의 디스크나 데이터베이스에 저장되지 않습니다.</strong></li>
+      <li>서버 데이터베이스에는 기기별 하루 이용 횟수 제한을 위해 임시 사용자 식별자의 해시값(원래 값으로 되돌릴 수 없음), 날짜, 이용 종류(사진/직접 입력), 횟수만 저장되며 <strong>7일이 지나면 자동으로 삭제</strong>됩니다. 식별자를 보내지 않는 구버전 앱의 경우 IP 주소의 해시값이 같은 방식으로 사용됩니다.</li>
+      <li>서버 운영 과정에서 요청 시각, 처리 결과, IP 주소 등의 접속 기록이 호스팅 제공업체(Railway)의 로그에 일정 기간 남을 수 있으며, 장애 대응과 서비스 악용 방지 목적으로만 사용합니다.</li>
+      <li>앱과 서버 사이, 서버와 Google Gemini API 사이의 통신은 모두 HTTPS로 암호화됩니다.</li>
       <li>앱을 삭제하면 기기에 저장된 모든 로컬 데이터(기록, 신체 정보, 임시 식별자, PIN 해시)가 함께 삭제됩니다.</li>
     </ul>
 
@@ -219,8 +232,10 @@
     <h2>6. 이용자 권리 및 데이터 삭제</h2>
     <p>
       모든 기록·신체 정보는 기기 내부에 저장되므로, 앱의 설정 화면에서 항목을 직접 삭제하거나
-      앱을 기기에서 삭제하는 방식으로 모든 데이터를 즉시 제거할 수 있습니다. 별도 서버에 남는
-      개인 식별 데이터가 없으므로 개발자에게 별도 삭제 요청을 할 필요가 없습니다.
+      앱을 기기에서 삭제하는 방식으로 모든 데이터를 즉시 제거할 수 있습니다. 서버에는 음식 사진이나
+      입력 내용이 남지 않으며, 이용 횟수 집계용 해시값은 7일이 지나면 자동으로 삭제되므로 개발자에게
+      별도 삭제 요청을 할 필요가 없습니다. 자세한 방법은
+      <a href="data-deletion.html">데이터 삭제 안내</a>를 참고해주세요.
     </p>
 
     <h2>7. 개인정보처리방침의 변경</h2>
@@ -249,8 +264,18 @@
       <tbody>
         <tr>
           <td>Food photos</td>
-          <td>Sent to our server to identify the food and estimate calories via the Google Gemini API.</td>
-          <td>Transmitted only for recognition (only the photos you choose to keep remain on your device)</td>
+          <td>Identifying the food and estimating calories and nutrients. Sent to our server, which analyzes them via the Google Gemini API.</td>
+          <td>Not stored on our server. Handled in server memory only during recognition and discarded once the result is returned (only the photos you choose to keep remain on your device)</td>
+        </tr>
+        <tr>
+          <td>Food name and amount you enter, optional food-name hint</td>
+          <td>Estimating calories and nutrients without a photo, and improving photo recognition. Sent through our server to the Google Gemini API.</td>
+          <td>The original text is not stored on our server</td>
+        </tr>
+        <tr>
+          <td>Recognition results (food name, calories, nutrients)</td>
+          <td>Answering repeated requests for the same photo or input quickly (cache)</td>
+          <td>Kept briefly in server memory in a form not linked to you; cleared when the server restarts or the cache is full</td>
         </tr>
         <tr>
           <td>Meal, exercise, weight, and water logs</td>
@@ -269,8 +294,8 @@
         </tr>
         <tr>
           <td>Temporary user identifier (UUID)</td>
-          <td>A random ID generated on install to distinguish per-device settings without requiring an account. Not linked to your name, email, or other identifying information</td>
-          <td>Local storage on your device</td>
+          <td>A random ID generated on install to distinguish per-device settings without requiring an account and to enforce a per-device daily recognition limit. Not linked to your name, email, or other identifying information</td>
+          <td>Local storage on your device. Sent to our server with recognition requests; the server keeps only a one-way hash with daily usage counts and deletes them after 7 days</td>
         </tr>
       </tbody>
     </table>
@@ -279,7 +304,7 @@
     <h2>2. Third-Party Services</h2>
     <p>The App uses the following services, each governed by its own privacy policy:</p>
     <ul>
-      <li><strong>Google Gemini API</strong> — used to analyze photos of food you capture to identify the food type and estimate calories.</li>
+      <li><strong>Google Gemini API (Google LLC)</strong> — used to analyze food photos, the optional food-name hint or the food name and amount you enter, and your device language code, to identify the food and estimate calories and nutrients. Data is sent over HTTPS only when you request recognition and may be processed in countries where Google operates data centers, including the United States. The App uses the paid Gemini API; under Google's paid API terms, submitted content is not used to improve Google's products, although Google may retain it for a limited period for legal compliance and abuse prevention.</li>
       <li><strong>Google AdMob</strong> — used to display banner and interstitial ads within the App, and may collect device information such as the advertising identifier.</li>
       <li><strong>Coupang Partners, Naver Connect (Naver Shopping), and Amazon Associates</strong> — affiliate links shown on product-recommendation screens. You are taken to the retailer's site only when you tap a link, after a confirmation dialog shows you the destination URL; the visit is reported to the relevant platform only at that point.</li>
     </ul>
@@ -295,7 +320,10 @@
     <ul>
       <li>Your meal, exercise, weight, and water logs, along with your body information, are stored <strong>only in a local database on your device</strong> and are not uploaded to or stored on the Developer's servers.</li>
       <li>The PIN used for the App Lock (Secret Mode) feature is <strong>never stored in plain text</strong>. It is hashed with SHA-256 together with a per-device random salt before being saved, so no one — including the Developer — can recover the original PIN from the stored value.</li>
-      <li>Food photos pass over the network only at the moment they are sent for recognition, and are not retained for any other purpose after the recognition result is returned.</li>
+      <li>Food photos and text you enter are handled only while being processed for recognition and are <strong>not written to our server's disk or database</strong>.</li>
+      <li>To enforce the per-device daily limit, our server database stores only a one-way hash of the temporary user identifier (which cannot be reversed), the date, the request type (photo or manual entry), and a count. These rows are <strong>automatically deleted after 7 days</strong>. For older app versions that do not send the identifier, a hash of the IP address is used in the same way.</li>
+      <li>Operating the server may leave access records such as request time, outcome, and IP address in our hosting provider's (Railway) logs for a limited period. These are used only for troubleshooting and abuse prevention.</li>
+      <li>Traffic between the App and our server, and between our server and the Google Gemini API, is encrypted with HTTPS.</li>
       <li>Uninstalling the App removes all locally stored data (logs, body information, the temporary identifier, and the PIN hash) from your device.</li>
     </ul>
 
@@ -316,9 +344,10 @@
     <h2>6. Your Rights & Data Deletion</h2>
     <p>
       Because all logs and body information are stored locally on your device, you can delete individual
-      entries from within the App's settings, or remove all data instantly by uninstalling the App. Since no
-      personally identifying data is retained on a remote server, there is no separate deletion request needed
-      from the Developer.
+      entries from within the App's settings, or remove all data instantly by uninstalling the App. No food
+      photos or entered text remain on our server, and the hashed usage counts are deleted automatically after
+      7 days, so there is no separate deletion request needed from the Developer. See the
+      <a href="data-deletion.html">data deletion instructions</a> for details.
     </p>
 
     <h2>7. Changes to This Policy</h2>

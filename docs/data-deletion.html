@@ -35,7 +35,7 @@
 <h1>CalSnap 데이터 삭제 안내</h1>
 <p class="meta">앱: CalSnap | 개발자: K-Brain Games Lab | 문의: <a href="mailto:teeth07@naver.com">teeth07@naver.com</a></p>
 
-<p>CalSnap은 회원가입 없이 임시 사용자 ID(UUID) 기반으로 동작하는 앱이며, 모든 기록은 서버가 아닌 <strong>기기 내부 로컬 데이터베이스</strong>에만 저장됩니다. 이용자는 별도의 승인 절차 없이 앱 내에서 직접, 그리고 언제든지 본인의 데이터를 삭제할 수 있습니다.</p>
+<p>CalSnap은 회원가입 없이 임시 사용자 ID(UUID) 기반으로 동작하는 앱이며, 모든 기록은 서버가 아닌 <strong>기기 내부 로컬 데이터베이스</strong>에만 저장됩니다. 음식 인식을 위해 서버로 보내는 사진과 입력 내용도 서버에 저장되지 않습니다. 이용자는 별도의 승인 절차 없이 앱 내에서 직접, 그리고 언제든지 본인의 데이터를 삭제할 수 있습니다.</p>
 
 <h2>1. 앱 내에서 직접 삭제하는 방법</h2>
 <ol>
@@ -47,9 +47,15 @@
 
 <h2>2. 앱 삭제(제거) 시</h2>
 <p>앱을 기기에서 삭제(언인스톨)하면 기기에 저장되어 있던 모든 로컬 데이터(기록, 신체 정보, 임시 사용자 ID, PIN 해시)가 함께 제거됩니다. CalSnap은 이 데이터를 별도 서버에 보관하지 않으므로, 언인스톨만으로 데이터 삭제가 완료됩니다.</p>
+<h2>서버에 남는 정보</h2>
+<ul>
+<li><strong>음식 사진·입력 내용</strong>: 인식 처리 중에만 서버 메모리에서 다루며 서버에 저장되지 않습니다.</li>
+<li><strong>이용 횟수 집계</strong>: 기기별 하루 이용 횟수 제한을 위해 임시 사용자 ID의 해시값(원래 ID로 되돌릴 수 없음)과 날짜별 횟수만 서버에 저장되며, <strong>7일이 지나면 자동으로 삭제</strong>됩니다. 별도 요청 없이 삭제가 이루어집니다.</li>
+<li><strong>인식 결과 캐시</strong>: 음식명·칼로리 등 인식 결과가 사용자와 연결되지 않는 형태로 서버 메모리에 잠시 보관되며, 서버 재시작 시 삭제됩니다.</li>
+</ul>
 
 <h2>3. 이메일 문의</h2>
-<p>CalSnap은 이용자의 기록을 서버에 별도로 저장하지 않으므로, 저희 쪽에서 대신 삭제해 드려야 할 서버 데이터가 없습니다. 다만 위 방법으로 삭제가 어렵거나 문의사항이 있으시면 아래 이메일로 연락해주세요.</p>
+<p>CalSnap은 이용자의 기록·사진·입력 내용을 서버에 저장하지 않고, 이용 횟수 집계용 해시값도 7일 뒤 자동 삭제되므로, 저희 쪽에서 대신 삭제해 드려야 할 서버 데이터가 없습니다. 다만 위 방법으로 삭제가 어렵거나 문의사항이 있으시면 아래 이메일로 연락해주세요.</p>
 <div class="note">
 이메일: <a href="mailto:teeth07@naver.com">teeth07@naver.com</a><br>
 합리적인 기간 내에 답변드립니다.
@@ -69,7 +75,7 @@
 <h1 lang="en">CalSnap Data Deletion Instructions</h1>
 <p class="meta">App: CalSnap | Developer: K-Brain Games Lab | Contact: <a href="mailto:teeth07@naver.com">teeth07@naver.com</a></p>
 
-<p>CalSnap operates without user registration, using a temporary user ID (UUID) per device, and every record is stored <strong>only in a local database on your device</strong> — never on a server. Users can delete their own data directly within the app at any time, with no approval process required.</p>
+<p>CalSnap operates without user registration, using a temporary user ID (UUID) per device, and every record is stored <strong>only in a local database on your device</strong> — never on a server. Photos and text sent to our server for food recognition are not stored there either. Users can delete their own data directly within the app at any time, with no approval process required.</p>
 
 <h2>1. Deleting Data Directly in the App</h2>
 <ol>
@@ -81,9 +87,15 @@
 
 <h2>2. When Uninstalling the App</h2>
 <p>Uninstalling the app removes all locally stored data (logs, body information, the temporary user ID, and the PIN hash) from the device. CalSnap does not keep this data on any server, so uninstalling alone completes the deletion.</p>
+<h2>What Remains on Our Server</h2>
+<ul>
+<li><strong>Food photos and entered text</strong>: handled in server memory only during recognition and never stored.</li>
+<li><strong>Usage counts</strong>: to enforce the per-device daily limit, the server stores only a one-way hash of the temporary user ID (which cannot be reversed) and daily counts. These are <strong>deleted automatically after 7 days</strong>, with no request needed.</li>
+<li><strong>Recognition result cache</strong>: results such as food name and calories are kept briefly in server memory in a form not linked to you, and are cleared when the server restarts.</li>
+</ul>
 
 <h2>3. Contact by Email</h2>
-<p>Because CalSnap does not store your records on a server, there is no server-side data for us to delete on your behalf. If you have trouble deleting data using the steps above, or have any questions, feel free to reach out.</p>
+<p>Because CalSnap does not store your records, photos, or entered text on a server, and the hashed usage counts are deleted automatically after 7 days, there is no server-side data for us to delete on your behalf. If you have trouble deleting data using the steps above, or have any questions, feel free to reach out.</p>
 <div class="note">
 Email: <a href="mailto:teeth07@naver.com">teeth07@naver.com</a><br>
 We'll respond within a reasonable timeframe.
