@@ -10,6 +10,7 @@ Gemini API 키를 서버에만 보관하고, 클라이언트(CalSnap Flutter 앱
 ```
 Content-Type: application/json
 X-API-Key: <PROXY_API_KEY와 동일한 값, PROXY_API_KEY 설정 시 필수>
+X-User-Id: <선택, 앱 온보딩 때 생성된 임의 UUID. 일일 제한 집계용(없으면 IP로 집계)>
 ```
 
 요청 바디
@@ -66,6 +67,16 @@ python app.py
 1. Railway에서 이 `backend/` 디렉터리를 루트로 새 프로젝트 생성 (Root Directory: `backend`).
 2. `requirements.txt` + `Procfile`을 자동 인식해 Nixpacks로 빌드됨.
 3. Variables 탭에 `GEMINI_API_KEY`, `PROXY_API_KEY` 등록.
+   - 프로젝트에 **PostgreSQL 플러그인 추가** 후, 백엔드 서비스 Variables에
+     `DATABASE_URL=${{Postgres.DATABASE_URL}}` 참조 변수 등록(일일 사용 횟수 카운터 저장용,
+     `daily_usage` 테이블은 서버 기동 시 자동 생성). 미설정 시 메모리 카운터로 대체된다.
+   - 선택: `DAILY_LIMIT_PHOTO`(기본 3), `DAILY_LIMIT_TEXT`(기본 20),
+     `DAILY_LIMIT_PHOTO_PREMIUM`(기본 30, 구독 연결 전이라 미사용), `CACHE_MAX_ENTRIES`(기본 5000).
+   - 한도는 기기(`X-User-Id`, 없으면 IP)별·KST 자정 기준. 초과 시
+     `403 {"code": "daily_limit_exceeded", "error": "...", "usage": {...}}`.
+   - 같은 사진(바이트 해시)·같은 음식명+양 요청은 메모리 캐시로 바로 응답하며 횟수에서 빠진다.
+   - 모든 인식 응답과 `GET /usage`는
+     `"usage": {"photo": {"used", "limit", "remaining"}, "text": {...}}`를 포함한다.
 4. 배포 완료 후 발급된 URL을 Flutter 쪽 `GeminiFoodRecognitionService`의
    `proxyBaseUrl`(`lib/services/gemini_food_recognition_service.dart`)에
    `--dart-define=PROXY_BASE_URL=...`로 반영.
