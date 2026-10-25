@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// 사진 한 장을 분석해 음식 카테고리와 추정 칼로리를 반환하는 서비스.
@@ -23,7 +24,56 @@ class FoodRecognitionResult {
   });
 }
 
+/// 서버가 기기별로 집계하는 오늘(KST) 사용량 중 한 종류(사진 또는 직접 입력).
+class UsageQuota {
+  final int used;
+  final int limit;
+
+  /// 남은 횟수. 서버 한도가 0 이하(무제한)면 null.
+  final int? remaining;
+
+  const UsageQuota({required this.used, required this.limit, this.remaining});
+
+  bool get isLimited => limit > 0 && remaining != null;
+
+  static UsageQuota? fromJson(Object? json) {
+    if (json is! Map) return null;
+    final used = json['used'];
+    final limit = json['limit'];
+    if (used is! num || limit is! num) return null;
+    final remaining = json['remaining'];
+    return UsageQuota(
+      used: used.toInt(),
+      limit: limit.toInt(),
+      remaining: remaining is num ? remaining.toInt() : null,
+    );
+  }
+}
+
+/// 인식 응답/`GET /usage`의 `usage` 필드: {"photo": {...}, "text": {...}}.
+class RecognitionUsage {
+  final UsageQuota? photo;
+  final UsageQuota? text;
+
+  const RecognitionUsage({this.photo, this.text});
+
+  static RecognitionUsage? fromJson(Object? json) {
+    if (json is! Map) return null;
+    return RecognitionUsage(
+      photo: UsageQuota.fromJson(json['photo']),
+      text: UsageQuota.fromJson(json['text']),
+    );
+  }
+}
+
 abstract class FoodRecognitionService {
+  /// 가장 최근에 서버에서 받은 오늘 사용량. 아직 모르면 null.
+  ValueListenable<RecognitionUsage?> get usage;
+
+  /// 서버에서 오늘 사용량만 조회해 [usage]를 갱신한다(차감 없음). 실패해도 예외를 던지지 않는다.
+  Future<void> refreshUsage();
+
+
   /// [hint]: 사용자가 알고 있는 음식 이름(선택). 인식 정확도를 높이는 참고용이며 비어있어도 된다.
   Future<FoodRecognitionResult> recognize(File imageFile, {String? hint});
 
@@ -50,6 +100,11 @@ enum FoodRecognitionFailure {
   /// server/unknown과 구분해야 "지금 다시 시도해도 될지"를 사용자에게 정확히
   /// 안내할 수 있다.
   rateLimited,
+
+  /// 프록시가 403 + code=daily_limit_exceeded를 반환 — 이 기기의 하루 사용 횟수
+  /// (서버 DAILY_LIMIT)를 다 씀. 오늘 안에는 재시도해도 소용없으므로 rateLimited와
+  /// 다른 문구("내일 다시")로 안내한다.
+  dailyLimitExceeded,
 
   /// 프록시가 4xx/5xx(401 제외)를 반환 — Gemini 호출 실패, 응답 파싱 실패 등 서버측 문제.
   server,
@@ -80,6 +135,8 @@ String friendlyRecognitionErrorMessage(AppLocalizations l10n, Object error) {
         return l10n.recognitionErrorNetwork;
       case FoodRecognitionFailure.rateLimited:
         return l10n.recognitionErrorRateLimited;
+      case FoodRecognitionFailure.dailyLimitExceeded:
+        return l10n.recognitionErrorDailyLimitExceeded;
       case FoodRecognitionFailure.server:
       case FoodRecognitionFailure.unknown:
         return l10n.recognitionErrorGeneric;
@@ -90,6 +147,12 @@ String friendlyRecognitionErrorMessage(AppLocalizations l10n, Object error) {
 
 /// 실제 API 연동 전까지 사용할 더미 구현.
 class MockFoodRecognitionService implements FoodRecognitionService {
+  @override
+  final ValueListenable<RecognitionUsage?> usage = ValueNotifier(null);
+
+  @override
+  Future<void> refreshUsage() async {}
+
   @override
   Future<FoodRecognitionResult> recognize(File imageFile, {String? hint}) async {
     await Future.delayed(const Duration(milliseconds: 500));

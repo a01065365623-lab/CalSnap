@@ -4,11 +4,12 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' show PlatformDispatcher;
 
-import 'package:flutter/foundation.dart' show debugPrint, kReleaseMode;
+import 'package:flutter/foundation.dart' show ValueListenable, ValueNotifier, debugPrint, kReleaseMode;
 import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as img;
 
 import 'food_recognition_service.dart';
+import 'user_profile_service.dart';
 
 /// Gemini(gemini-2.0-flash)를 클라이언트에서 직접 호출하지 않고, API 키를 보관하는
 /// 자체 백엔드 프록시(backend/, Flask + Railway)를 거쳐 결과를 받아온다.
@@ -19,7 +20,11 @@ import 'food_recognition_service.dart';
 /// 업로드+응답 소요 시간을 debugPrint로 남기니 flutter run 로그로 확인 가능.
 ///
 /// 프록시 계약 — POST {proxyBaseUrl}/recognize
-///   헤더: Content-Type: application/json, X-API-Key: <apiKey>
+///   헤더: Content-Type: application/json, X-API-Key: <apiKey>,
+///         X-User-Id: <온보딩 때 생성된 임의 UUID — 서버의 기기별 일일 사용 제한 집계용>
+///   기기별 일일 한도 초과 시: 403 {"code": "daily_limit_exceeded", "usage": {...}, ...}
+///   성공 응답과 한도 초과 응답에는 오늘 사용량 "usage": {"photo": {"used", "limit",
+///   "remaining"}, "text": {...}}가 함께 오고, [usage]로 화면에 노출한다.
 ///   요청 바디: {"image": "<base64 인코딩 이미지>", "hint": "<선택, 사용자가 아는 음식 이름>",
 ///             "language": "<선택, 기기 언어 코드(예: ko/en/ja). foodName만 이 언어로 응답>"}
 ///   응답 예시: {"foodName": "김치찌개", "caloriesPer100g": 90, "estimatedWeightG": 400,
@@ -46,7 +51,7 @@ class GeminiFoodRecognitionService implements FoodRecognitionService {
   /// 업로드 전 리사이즈 기준 최대 가로/세로 픽셀. 최신 폰 카메라 원본(가로 3000px+,
   /// 수 MB)을 그대로 올리면 업로드 자체가 인식 지연의 주 원인이 되는데, 음식 인식은
   /// 이 정도 해상도로도 충분해서 체감 속도 개선 대비 정확도 손실이 거의 없다.
-  static const int _maxUploadDimension = 1024;
+  static const int _maxUploadDimension = 768;
 
   /// 리사이즈 후 JPEG 재인코딩 품질(0~100). 80%는 육안으로는 화질 차이가 거의 없으면서
   /// 파일 크기를 크게 줄여주는 통상적인 절충값.
@@ -64,6 +69,10 @@ class GeminiFoodRecognitionService implements FoodRecognitionService {
   final String proxyBaseUrl;
   final String apiKey;
   final http.Client _client;
+  final ValueNotifier<RecognitionUsage?> _usage = ValueNotifier(null);
+
+  @override
+  ValueListenable<RecognitionUsage?> get usage => _usage;
 
   GeminiFoodRecognitionService({
     this.proxyBaseUrl = _defaultProxyBaseUrl,
@@ -111,10 +120,7 @@ class GeminiFoodRecognitionService implements FoodRecognitionService {
       res = await _client
           .post(
             uri,
-            headers: {
-              'Content-Type': 'application/json',
-              'X-API-Key': apiKey,
-            },
+            headers: await _headers(),
             body: jsonEncode({
               'image': base64Image,
               if (trimmedHint != null && trimmedHint.isNotEmpty) 'hint': trimmedHint,
@@ -143,6 +149,13 @@ class GeminiFoodRecognitionService implements FoodRecognitionService {
       throw const FoodRecognitionException(
         FoodRecognitionFailure.unauthorized,
         'Gemini 프록시 인증 실패 (401) — PROXY_API_KEY 불일치',
+      );
+    }
+    _updateUsageFrom(res);
+    if (_isDailyLimitExceeded(res)) {
+      throw FoodRecognitionException(
+        FoodRecognitionFailure.dailyLimitExceeded,
+        '일일 사용 한도 초과: ${res.body}',
       );
     }
     if (res.statusCode == 429) {
@@ -198,10 +211,7 @@ class GeminiFoodRecognitionService implements FoodRecognitionService {
       res = await _client
           .post(
             uri,
-            headers: {
-              'Content-Type': 'application/json',
-              'X-API-Key': apiKey,
-            },
+            headers: await _headers(),
             body: jsonEncode({
               'foodName': foodName,
               'amount': amount,
@@ -227,6 +237,13 @@ class GeminiFoodRecognitionService implements FoodRecognitionService {
         'Gemini 프록시 인증 실패 (401) — PROXY_API_KEY 불일치',
       );
     }
+    _updateUsageFrom(res);
+    if (_isDailyLimitExceeded(res)) {
+      throw FoodRecognitionException(
+        FoodRecognitionFailure.dailyLimitExceeded,
+        '일일 사용 한도 초과: ${res.body}',
+      );
+    }
     if (res.statusCode == 429) {
       throw FoodRecognitionException(
         FoodRecognitionFailure.rateLimited,
@@ -250,6 +267,54 @@ class GeminiFoodRecognitionService implements FoodRecognitionService {
       proteinG: (data['proteinG'] as num?)?.toDouble() ?? 0,
       fatG: (data['fatG'] as num?)?.toDouble() ?? 0,
     );
+  }
+
+  /// 프록시 계약 — GET {proxyBaseUrl}/usage → {"usage": {"photo": {...}, "text": {...}}}
+  @override
+  Future<void> refreshUsage() async {
+    try {
+      final res = await _client
+          .get(Uri.parse('$proxyBaseUrl/usage'), headers: await _headers())
+          .timeout(const Duration(seconds: 10));
+      _updateUsageFrom(res);
+    } catch (e) {
+      // 남은 횟수 표시는 부가 정보라 실패해도 조용히 넘어간다(표시만 생략됨).
+      debugPrint('[GeminiFoodRecognitionService] 사용량 조회 실패: $e');
+    }
+  }
+
+  void _updateUsageFrom(http.Response res) {
+    if (res.statusCode != 200 && res.statusCode != 403) return;
+    try {
+      final data = jsonDecode(res.body);
+      if (data is! Map) return;
+      final usage = RecognitionUsage.fromJson(data['usage']);
+      if (usage != null) _usage.value = usage;
+    } on FormatException {
+      // 본문 파싱 실패는 아래 상태 코드 처리에서 다룬다.
+    }
+  }
+
+  Future<Map<String, String>> _headers() async {
+    // 온보딩 전이라 ID가 없으면 헤더를 생략한다 — 서버는 그 경우 IP 기준으로 센다.
+    final userId = await UserProfileService.instance.getUserId();
+    return {
+      'Content-Type': 'application/json',
+      'X-API-Key': apiKey,
+      if (userId != null && userId.isNotEmpty) 'X-User-Id': userId,
+    };
+  }
+
+  /// 서버의 기기별 일일 한도 초과 응답(403 + code=daily_limit_exceeded)인지 판별한다.
+  /// Gemini 쿼터 소진(429, 잠시 후 재시도 가능)과는 안내 문구가 달라 따로 구분한다.
+  static bool _isDailyLimitExceeded(http.Response res) {
+    if (res.statusCode != 403) return false;
+    try {
+      final data = jsonDecode(res.body);
+      return data is Map && data['code'] == 'daily_limit_exceeded';
+    } on FormatException {
+      return false;
+    }
   }
 
   /// 가로/세로 중 긴 쪽이 [_maxUploadDimension]을 넘으면 비율을 유지한 채 줄이고,

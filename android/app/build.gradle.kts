@@ -42,6 +42,9 @@ android {
         targetSdk = 36
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        // AdMob 앱 ID: 기본은 실제 ID, debug 빌드만 Google 테스트 앱 ID로 덮어쓴다
+        // (lib/config/ad_config.dart의 kDebugMode 분기와 같은 기준, 값은 lib/config/ad_ids.dart와 동일).
+        manifestPlaceholders["admobAppId"] = "ca-app-pub-9075706979713157~1512052827"
     }
 
     signingConfigs {
@@ -54,6 +57,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            manifestPlaceholders["admobAppId"] = "ca-app-pub-3940256099942544~3347511713"
+        }
         release {
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")

@@ -242,6 +242,20 @@ class _ManualFoodEntryScreenState extends State<ManualFoodEntryScreen> {
                 ),
               ],
             ),
+            ValueListenableBuilder<RecognitionUsage?>(
+              valueListenable: widget.recognitionService.usage,
+              builder: (context, usage, _) {
+                final text = usage?.text;
+                if (text == null || !text.isLimited) return const SizedBox.shrink();
+                return Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: Text(
+                    l10n.manualEntryTextQuotaRemaining(text.remaining!, text.limit),
+                    style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
+                  ),
+                );
+              },
+            ),
             const SizedBox(height: 24),
             if (_loading) const Center(child: CircularProgressIndicator()),
             if (!_loading && _errorMessage != null) ...[

@@ -44,6 +44,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
   void initState() {
     super.initState();
     _loadUnitSystem();
+    _recognitionService.refreshUsage();
   }
 
   Future<void> _loadUnitSystem() async {
@@ -264,6 +265,26 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
                   ),
                 ),
               ],
+            ),
+            ValueListenableBuilder<RecognitionUsage?>(
+              valueListenable: _recognitionService.usage,
+              builder: (context, usage, _) {
+                final photo = usage?.photo;
+                if (photo == null || !photo.isLimited) return const SizedBox.shrink();
+                return Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(
+                    l10n.quickModePhotoQuotaRemaining(photo.remaining!, photo.limit),
+                    style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 4),
+            Text(
+              l10n.quickModeLaunchFreeNotice,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 11, color: AppColors.foodCoral),
             ),
             const SizedBox(height: 24),
             if (_loading) const CircularProgressIndicator(),

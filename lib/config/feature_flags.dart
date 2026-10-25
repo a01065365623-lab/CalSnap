@@ -3,4 +3,4 @@
 
 /// 빠른측정모드에서 인식 실패 메시지 아래에 "일일 인식 횟수 제한(Gemini 무료 티어
 /// 20회/일)에 도달했을 수 있다"는 안내 문구를 함께 보여줄지 여부.
-const bool kShowPrivateTestQuotaNotice = true;
+const bool kShowPrivateTestQuotaNotice = false;
