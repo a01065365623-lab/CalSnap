@@ -55,6 +55,7 @@
   "settingsVoiceGuideSubtitle": "استمع إلى رسالة صوتية قصيرة حسب الموقف، مثل الحفظ أو تحقيق هدفك",
   "settingsAffiliateTile": "إظهار توصيات التسوق التابعة",
   "settingsAffiliateSubtitle": "قريبًا",
+  "settingsPrivacyPolicyTile": "سياسة الخصوصية",
   "settingsResetProfileDialogTitle": "إعادة تعيين الملف الشخصي",
   "settingsResetProfileDialogContent": "سيؤدي هذا إلى مسح جميع معلومات الملف الشخصي مثل الجنس والعمر والطول والوزن والسعرات الحرارية المستهدفة، وإعادة بدء الإعداد الأولي من الصفر. ستبقى سجلات وجباتك وتمارينك كما هي. هل تريد المتابعة؟",
   "settingsResetProfileConfirmButton": "إعادة تعيين",

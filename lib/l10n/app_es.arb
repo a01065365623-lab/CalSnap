@@ -55,6 +55,7 @@
   "settingsVoiceGuideSubtitle": "Escucha un breve mensaje de voz según la situación, como al guardar o alcanzar tu objetivo",
   "settingsAffiliateTile": "Mostrar recomendaciones de compras afiliadas",
   "settingsAffiliateSubtitle": "Próximamente",
+  "settingsPrivacyPolicyTile": "Política de privacidad",
   "settingsResetProfileDialogTitle": "Restablecer perfil",
   "settingsResetProfileDialogContent": "Borra toda la información del perfil (sexo, edad, estatura, peso, calorías objetivo) y reinicia la configuración inicial desde cero. Tus registros de comidas y ejercicio se mantienen intactos. ¿Continuar?",
   "settingsResetProfileConfirmButton": "Restablecer",

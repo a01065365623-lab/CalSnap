@@ -10,9 +10,8 @@
     --fg: #1c1c1e;
     --muted: #6b7280;
     --border: #e5e7eb;
-    --accent: #d97757;
+    --accent: #b85a3a;
     --card: #f9fafb;
-    --code-bg: #f3f4f6;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -22,7 +21,6 @@
       --border: #2c2d31;
       --accent: #e2986f;
       --card: #1e1f23;
-      --code-bg: #232428;
     }
   }
   * { box-sizing: border-box; }
@@ -30,335 +28,336 @@
     margin: 0;
     background: var(--bg);
     color: var(--fg);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.65;
   }
-  .wrap {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 40px 20px 80px;
-  }
-  header.page-head {
-    margin-bottom: 24px;
-  }
-  h1 {
-    font-size: 1.6rem;
-    margin: 0 0 6px;
-  }
-  .meta {
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-  .lang-toggle {
-    display: inline-flex;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    overflow: hidden;
-    margin-top: 16px;
-  }
-  .lang-toggle label {
-    padding: 6px 16px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    color: var(--muted);
-    user-select: none;
-  }
-  .lang-toggle input { display: none; }
-  #lang-ko:checked ~ .lang-toggle label[for="lang-ko"],
-  #lang-en:checked ~ .lang-toggle label[for="lang-en"] {
-    background: var(--accent);
-    color: #fff;
-  }
-  section.doc { display: none; }
-  #lang-ko:checked ~ section.doc-ko,
-  #lang-en:checked ~ section.doc-en {
-    display: block;
-  }
-  h2 {
-    font-size: 1.15rem;
-    margin: 32px 0 10px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
-  }
-  h3 {
-    font-size: 1rem;
-    margin: 20px 0 8px;
-  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 16px 80px; }
+  h1 { font-size: 1.6rem; margin: 0 0 6px; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  nav.lang { margin-top: 12px; font-size: 0.95rem; }
+  h2 { font-size: 1.15rem; margin: 32px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
   p { margin: 8px 0; }
   ul { margin: 8px 0; padding-left: 22px; }
   li { margin: 4px 0; }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 12px 0;
-    font-size: 0.92rem;
-  }
-  th, td {
-    text-align: left;
-    padding: 8px 10px;
-    border: 1px solid var(--border);
-    vertical-align: top;
-  }
-  th {
-    background: var(--card);
-    font-weight: 600;
-  }
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin: 12px 0;
-    font-size: 0.92rem;
-  }
-  code {
-    background: var(--code-bg);
-    padding: 1px 5px;
-    border-radius: 4px;
-    font-size: 0.9em;
-  }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 8px 10px; border: 1px solid var(--border); vertical-align: top; }
+  th { background: var(--card); font-weight: 600; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin: 12px 0; font-size: 0.92rem; }
   a { color: var(--accent); }
-  footer {
-    margin-top: 48px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
+  hr.lang-divider { margin: 56px 0 24px; border: none; border-top: 3px solid var(--border); }
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
 </style>
 </head>
 <body>
-<input type="radio" name="lang" id="lang-ko" checked style="display:none">
-<input type="radio" name="lang" id="lang-en" style="display:none">
-
 <div class="wrap">
-  <header class="page-head">
+  <header>
     <h1>CalSnap 개인정보처리방침 / Privacy Policy</h1>
-    <div class="meta">시행일 / Effective date: 2026-10-25</div>
-    <div class="lang-toggle">
-      <label for="lang-ko">한국어</label><label for="lang-en">English</label>
-    </div>
+    <div class="meta">시행일 / Effective date: 2026-10-27</div>
+    <nav class="lang"><a href="#ko">한국어</a> · <a href="#en">English</a></nav>
   </header>
 
-  <section class="doc doc-ko">
+  <!-- ===================== 한국어 ===================== -->
+  <section id="ko" lang="ko">
+    <h2>1. 앱 및 개발자 정보</h2>
+    <ul>
+      <li>앱 이름: <strong>CalSnap</strong></li>
+      <li>개발자: <strong>K-Brain Games Lab</strong></li>
+      <li>연락처: <a href="mailto:teeth07@naver.com">teeth07@naver.com</a></li>
+      <li>시행일: 2026년 10월 27일</li>
+    </ul>
     <p>
-      <strong>CalSnap</strong>(이하 "앱")은 <strong>K-Brain Games Lab</strong>(이하 "개발자")이 개발 및 운영합니다.
-      본 개인정보처리방침은 앱 이용 과정에서 수집되는 정보와 그 처리 방식을 설명합니다.
+      본 개인정보처리방침은 CalSnap(이하 "앱") 이용 과정에서 수집·처리되는 정보와 그 목적, 제3자 제공, 보관 및 삭제 방법을 설명합니다.
+      앱은 회원가입을 요구하지 않으며, 이름·이메일 주소·전화번호 등 사용자를 직접 식별할 수 있는 정보를 수집하지 않습니다.
     </p>
 
-    <h2>1. 수집하는 정보</h2>
+    <h2>2. 수집하는 정보와 수집 목적</h2>
+    <div class="table-wrap">
     <table>
-      <thead><tr><th>항목</th><th>수집 목적</th><th>저장 위치</th></tr></thead>
+      <thead><tr><th>항목</th><th>수집 목적</th><th>처리·저장 위치</th></tr></thead>
       <tbody>
         <tr>
           <td>음식 사진</td>
-          <td>사진 속 음식 종류·칼로리·영양소 추정. 서버로 전송되며, 서버는 Google Gemini API를 통해 분석합니다.</td>
-          <td>서버에 저장하지 않음. 인식 처리 중에만 서버 메모리에서 다루고 결과 반환 후 폐기 (기기에는 사용자가 저장한 사진만 남음)</td>
+          <td>사진 속 음식 종류·칼로리·영양소 추정</td>
+          <td>이용자가 인식을 요청할 때만 서버로 전송되어 Google Gemini API로 분석. 서버에 저장하지 않고 결과 반환 후 폐기</td>
         </tr>
         <tr>
-          <td>직접 입력한 음식 이름·양, 음식명 힌트</td>
-          <td>사진 없이 칼로리·영양소 추정, 사진 인식 정확도 향상. 서버를 거쳐 Google Gemini API로 전송됩니다.</td>
-          <td>서버에 원문을 저장하지 않음</td>
+          <td>직접 입력한 음식명·양, 음식명 힌트</td>
+          <td>사진 없이 칼로리·영양소 추정, 사진 인식 정확도 향상</td>
+          <td>서버를 거쳐 Google Gemini API로 전송. 서버에 원문을 저장하지 않음</td>
         </tr>
         <tr>
-          <td>인식 결과 (음식명·칼로리·영양소)</td>
-          <td>같은 사진·같은 입력에 대한 반복 요청에 빠르게 응답(캐시)</td>
-          <td>사용자와 연결되지 않는 형태로 서버 메모리에 일시 보관, 서버 재시작 또는 용량 초과 시 삭제</td>
+          <td>임시 사용자 ID (앱 설치 시 자동 생성되는 무작위 UUID)</td>
+          <td>회원가입 없이 기기별 설정을 구분하고, 기기별 하루 인식 이용 횟수를 제한</td>
+          <td>기기에 저장. 인식 요청 시 서버로 전송되며, 서버에는 되돌릴 수 없는 해시값과 날짜별 이용 횟수만 7일간 보관</td>
         </tr>
         <tr>
-          <td>식사·운동·체중·물 섭취 기록</td>
-          <td>일일/기간별 칼로리·영양소·운동량·체중 통계 제공</td>
-          <td>기기 내부(로컬 데이터베이스)</td>
+          <td>광고 ID (Advertising ID)</td>
+          <td>광고 게재, 광고 성과 측정, 부정 광고 방지</td>
+          <td>Google AdMob SDK가 수집·처리</td>
         </tr>
         <tr>
-          <td>신체 정보 (성별, 나이, 키, 체중)</td>
-          <td>기초대사량(BMR) 및 권장 칼로리 계산</td>
-          <td>기기 내부(로컬 저장소)</td>
+          <td>충돌·진단 정보 (앱 오류, 성능 관련 기기 정보)</td>
+          <td>광고 SDK의 안정적 동작, 오류 분석 및 서비스 품질 개선</td>
+          <td>Google AdMob SDK가 수집·처리. 앱 자체에는 별도 충돌 보고 도구가 없음</td>
         </tr>
         <tr>
-          <td>광고 식별자 (Advertising ID)</td>
-          <td>Google AdMob을 통한 광고 게재 및 성과 측정</td>
-          <td>Google AdMob(제3자)에 제공</td>
-        </tr>
-        <tr>
-          <td>임시 사용자 식별자 (UUID)</td>
-          <td>회원가입 없이 기기별 설정을 구분하고, 기기별 하루 인식 이용 횟수를 제한하기 위해 앱 설치 시 자동 생성되는 임의의 식별값. 이름·이메일 등 개인 식별정보와 연결되지 않음</td>
-          <td>기기 내부(로컬 저장소). 인식 요청 시 서버로 전송되며, 서버에는 원래 값을 알 수 없는 해시값과 날짜별 이용 횟수로만 보관하고 7일이 지나면 삭제</td>
+          <td>앱 상호작용 (광고 노출·클릭 등)</td>
+          <td>광고 게재 및 성과 측정, 부정 클릭 방지</td>
+          <td>Google AdMob SDK가 수집·처리</td>
         </tr>
       </tbody>
     </table>
-    <p>앱은 회원가입을 요구하지 않으며, 이름·이메일 주소·전화번호 등 사용자를 직접 식별할 수 있는 정보를 수집하지 않습니다.</p>
-
-    <h2>2. 제3자 서비스</h2>
-    <p>앱은 다음 서비스를 이용하며, 각 서비스는 자체 개인정보처리방침에 따라 정보를 처리합니다.</p>
-    <ul>
-      <li><strong>Google Gemini API (Google LLC)</strong> — 음식 사진, 음식명 힌트 또는 직접 입력한 음식 이름·양, 기기 언어 코드를 분석하여 음식 종류·칼로리·영양소를 추정하는 데 사용됩니다. 이용자가 인식을 요청할 때에만 HTTPS로 전송되며, 미국 등 Google 데이터센터가 있는 국가에서 처리될 수 있습니다. 앱은 유료 Gemini API를 사용하며, Google은 유료 API 약관에 따라 전송된 내용을 자사 제품 개선에 사용하지 않습니다. 다만 법령 준수 및 서비스 악용 방지를 위해 Google이 제한된 기간 동안 보관할 수 있습니다.</li>
-      <li><strong>Google AdMob</strong> — 앱 내 배너·전면 광고 게재에 사용되며, 광고 식별자 등 기기 정보를 수집할 수 있습니다.</li>
-      <li><strong>쿠팡파트너스, 네이버 커넥트(네이버쇼핑), Amazon Associates</strong> — 상품 추천 화면에서 이용자가 직접 링크를 선택했을 때만 해당 쇼핑몰로 연결되는 제휴 링크입니다. 링크 클릭 전 실제 이동 URL을 확인창으로 안내하며, 클릭 시에만 각 플랫폼에 방문 사실이 전달됩니다.</li>
-    </ul>
-    <div class="card">
-      각 서비스의 개인정보 처리에 대해서는 아래 문서를 참고해주세요.
-      <ul>
-        <li>Google Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
-        <li>AdMob 개인정보 및 데이터 보안: <a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener">support.google.com/admob</a></li>
-      </ul>
     </div>
+    <p>
+      이 밖에 체중·운동·식사·물 섭취 기록과 신체 정보(성별, 나이, 키, 체중)는 앱 기능 제공을 위해 <strong>기기 내부에만</strong> 저장되며
+      개발자에게 전송되지 않습니다(7항 참고).
+    </p>
 
-    <h2>3. 데이터 저장 및 보안</h2>
+    <h2>3. 정보 사용 방법</h2>
     <ul>
-      <li>식사·운동·체중·물 섭취 기록과 신체 정보는 <strong>기기 내부 로컬 데이터베이스</strong>에만 저장되며, 개발자의 서버에 별도로 업로드·저장되지 않습니다.</li>
-      <li>앱 잠금(시크릿 모드) 기능에 사용되는 PIN 번호는 <strong>평문으로 저장되지 않으며</strong>, 기기별로 무작위 생성된 salt 값과 함께 SHA-256으로 해시하여 저장합니다. 따라서 개발자를 포함한 누구도 저장된 값으로부터 원래 PIN 번호를 알아낼 수 없습니다.</li>
-      <li>음식 사진과 직접 입력한 내용은 인식 처리를 위해 서버로 전송되는 동안에만 다뤄지며, <strong>서버의 디스크나 데이터베이스에 저장되지 않습니다.</strong></li>
-      <li>서버 데이터베이스에는 기기별 하루 이용 횟수 제한을 위해 임시 사용자 식별자의 해시값(원래 값으로 되돌릴 수 없음), 날짜, 이용 종류(사진/직접 입력), 횟수만 저장되며 <strong>7일이 지나면 자동으로 삭제</strong>됩니다. 식별자를 보내지 않는 구버전 앱의 경우 IP 주소의 해시값이 같은 방식으로 사용됩니다.</li>
-      <li>서버 운영 과정에서 요청 시각, 처리 결과, IP 주소 등의 접속 기록이 호스팅 제공업체(Railway)의 로그에 일정 기간 남을 수 있으며, 장애 대응과 서비스 악용 방지 목적으로만 사용합니다.</li>
-      <li>앱과 서버 사이, 서버와 Google Gemini API 사이의 통신은 모두 HTTPS로 암호화됩니다.</li>
-      <li>앱을 삭제하면 기기에 저장된 모든 로컬 데이터(기록, 신체 정보, 임시 식별자, PIN 해시)가 함께 삭제됩니다.</li>
+      <li>음식 사진·입력 내용: 음식 종류·칼로리·영양소 추정 결과를 이용자에게 보여주기 위해서만 사용합니다.</li>
+      <li>임시 사용자 ID: 기기별 하루 인식 횟수 제한(서비스 남용 방지)에만 사용하며, 광고·마케팅이나 개인 식별에 사용하지 않습니다.</li>
+      <li>광고 ID·충돌/진단 정보·앱 상호작용: Google AdMob이 광고 게재, 성과 측정, 부정 행위 방지, 오류 분석에 사용합니다.</li>
+      <li>기기 내 기록: 일일·기간별 칼로리·영양소·운동량·체중 통계 및 권장 칼로리 계산에 기기 안에서만 사용합니다.</li>
+      <li>개발자는 수집한 정보를 판매하지 않으며, 아래 4항에 명시된 목적 외로 제3자에게 제공하지 않습니다.</li>
     </ul>
 
-    <h2>4. 광고</h2>
-    <p>
-      앱은 Google AdMob을 통해 배너 및 전면 광고를 게재하며, 이 과정에서 광고 식별자(Advertising ID) 등
-      기기 정보가 Google에 제공될 수 있습니다. 맞춤형 광고 수신을 원하지 않는 경우 기기의 설정에서
-      광고 개인 최적화를 제한할 수 있습니다.
-    </p>
+    <h2>4. 제3자 공유 및 처리 위탁</h2>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>업체</th><th>목적</th><th>전달되는 항목</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Google Gemini API (Google LLC)</td>
+          <td>음식 인식 및 칼로리·영양소 추정</td>
+          <td>음식 사진, 직접 입력한 음식명·양, 음식명 힌트, 기기 언어 코드. 임시 사용자 ID는 전달하지 않음</td>
+        </tr>
+        <tr>
+          <td>Google AdMob (Google LLC)</td>
+          <td>배너·전면 광고 게재 및 성과 측정</td>
+          <td>광고 ID, 충돌·진단 정보, 앱 상호작용(광고 노출·클릭), IP 주소 등 기기 정보</td>
+        </tr>
+        <tr>
+          <td>Railway (Railway Corp.)</td>
+          <td>인식 서버 호스팅</td>
+          <td>서버로 전송되는 음식 사진·입력 내용(처리 중에만), 임시 사용자 ID의 해시값과 날짜별 이용 횟수, 요청 시각·IP 주소 등 접속 기록</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
     <ul>
-      <li>Android: 설정 &gt; 개인정보 보호 &gt; 광고 &gt; 광고 개인 최적화 선택 해제</li>
-      <li>iOS: 설정 &gt; 개인정보 보호 및 보안 &gt; 추적 &gt; 앱이 추적하도록 허용 끄기</li>
+      <li>Gemini API로 전송된 내용은 미국 등 Google 데이터센터가 있는 국가에서 처리될 수 있습니다. 앱은 유료 Gemini API를 사용하며, Google은 유료 API 약관에 따라 해당 내용을 자사 제품 개선에 사용하지 않습니다. 다만 법령 준수·악용 방지를 위해 제한된 기간 보관할 수 있습니다.</li>
+      <li>상품 추천 화면의 쿠팡파트너스, 네이버 커넥트(네이버쇼핑), Amazon Associates 제휴 링크는 이용자가 직접 선택했을 때만 해당 쇼핑몰로 연결되며, 그때에만 방문 사실이 해당 플랫폼에 전달됩니다.</li>
+      <li>참고: <a href="https://policies.google.com/privacy">Google 개인정보처리방침</a>, <a href="https://support.google.com/admob/answer/6128543">AdMob 개인정보 및 데이터 보안</a>, <a href="https://railway.com/legal/privacy">Railway 개인정보처리방침</a></li>
     </ul>
 
-    <h2>5. 아동의 개인정보</h2>
-    <p>본 앱은 만 14세 미만 아동을 대상으로 하지 않으며, 아동으로부터 고의로 개인정보를 수집하지 않습니다.</p>
+    <h2>5. 데이터 보안 조치</h2>
+    <ul>
+      <li><strong>암호화 전송</strong>: 앱과 서버 사이, 서버와 Google Gemini API 사이의 모든 통신은 HTTPS로 암호화됩니다.</li>
+      <li><strong>원문 미저장</strong>: 음식 사진과 직접 입력한 내용은 인식 처리 중에만 서버 메모리에서 다루며, 서버의 디스크나 데이터베이스에 저장하지 않습니다.</li>
+      <li><strong>해시 처리 및 자동 삭제</strong>: 임시 사용자 ID는 원래 값으로 되돌릴 수 없는 해시값으로만 서버에 저장되며, 날짜별 이용 횟수와 함께 7일이 지나면 자동으로 삭제됩니다. 식별자를 보내지 않는 구버전 앱의 경우 IP 주소의 해시값이 같은 방식으로 사용됩니다.</li>
+      <li><strong>접근 통제</strong>: 서버와 데이터베이스, API 키에는 개발자만 접근할 수 있으며, 호스팅 계정은 인증으로 보호됩니다.</li>
+      <li><strong>기기 내 보호</strong>: 앱 잠금(시크릿 모드) PIN은 평문으로 저장하지 않고, 기기별 무작위 salt와 함께 SHA-256으로 해시하여 저장합니다.</li>
+    </ul>
 
-    <h2>6. 이용자 권리 및 데이터 삭제</h2>
+    <h2>6. 보관 기간과 삭제 방법</h2>
+    <ul>
+      <li><strong>기기 내 기록</strong>: 식사·운동·체중·물 섭취 기록과 신체 정보는 기기에만 저장되며, 이용자가 삭제할 때까지 보관됩니다. 앱 안에서 날짜별 기록 삭제, 설정의 프로필 초기화·전체 초기화로 직접 삭제할 수 있고, 앱을 삭제하면 모든 로컬 데이터가 함께 제거됩니다.</li>
+      <li><strong>서버 데이터</strong>: 음식 사진·입력 원문은 저장하지 않습니다. 임시 사용자 ID 해시값과 날짜별 이용 횟수는 7일이 지나면 자동 삭제됩니다. 인식 결과 캐시(사용자와 연결되지 않은 음식명·칼로리 등)는 서버 메모리에만 잠시 머물며 서버 재시작 시 삭제됩니다.</li>
+      <li><strong>호스팅 접속 기록</strong>: Railway 로그에 남는 요청 시각·IP 주소 등은 장애 대응과 악용 방지 목적으로만 사용되며, 호스팅 제공업체의 보관 기간이 지나면 삭제됩니다.</li>
+      <li><strong>광고 데이터</strong>: Google AdMob이 수집한 정보는 Google 정책에 따라 관리되며, <a href="https://myadcenter.google.com">Google 내 광고 센터</a> 또는 기기 설정에서 광고 ID를 재설정·삭제할 수 있습니다.</li>
+      <li><strong>삭제 문의</strong>: 그 밖의 삭제 요청이나 문의는 <a href="mailto:teeth07@naver.com">teeth07@naver.com</a>으로 연락해주세요. 자세한 방법은 <a href="data-deletion.html">데이터 삭제 안내</a>에 있습니다.</li>
+    </ul>
+
+    <h2>7. 건강 관련 정보</h2>
     <p>
-      모든 기록·신체 정보는 기기 내부에 저장되므로, 앱의 설정 화면에서 항목을 직접 삭제하거나
-      앱을 기기에서 삭제하는 방식으로 모든 데이터를 즉시 제거할 수 있습니다. 서버에는 음식 사진이나
-      입력 내용이 남지 않으며, 이용 횟수 집계용 해시값은 7일이 지나면 자동으로 삭제되므로 개발자에게
-      별도 삭제 요청을 할 필요가 없습니다. 자세한 방법은
-      <a href="data-deletion.html">데이터 삭제 안내</a>를 참고해주세요.
+      체중·운동·식사(물 섭취 포함) 기록과 신체 정보(성별, 나이, 키, 체중), 체중 기록에 첨부한 사진은 <strong>기기 내부 저장소에만</strong> 저장되며
+      <strong>서버로 전송하지 않습니다.</strong> 개발자는 이 정보에 접근할 수 없습니다.
+      (음식 인식을 요청할 때 전송되는 음식 사진·음식명은 2항에 설명된 대로 인식에만 사용되고 저장되지 않습니다.)
     </p>
 
-    <h2>7. 개인정보처리방침의 변경</h2>
+    <h2>8. 광고 맞춤 설정</h2>
+    <p>맞춤형 광고를 원하지 않으면 기기 설정에서 광고 개인 최적화를 제한하거나 광고 ID를 삭제할 수 있습니다.</p>
+    <ul>
+      <li>Android: 설정 &gt; 개인정보 보호(또는 Google) &gt; 광고 &gt; 광고 ID 삭제</li>
+      <li>iOS: 설정 &gt; 개인정보 보호 및 보안 &gt; 추적 &gt; 앱이 추적을 요청하도록 허용 끄기</li>
+    </ul>
+
+    <h2>9. 아동의 개인정보</h2>
+    <p>앱은 만 14세 미만 아동을 대상으로 하지 않으며, 아동의 개인정보를 고의로 수집하지 않습니다. 만 14세 미만 아동의 정보가 처리된 사실을 알게 되면 위 연락처로 알려주세요. 지체 없이 삭제하겠습니다.</p>
+
+    <h2>10. 이용자의 권리</h2>
+    <ul>
+      <li>이용자는 언제든지 기기에 저장된 본인의 기록을 열람·수정·삭제할 수 있습니다.</li>
+      <li>음식 인식 기능을 사용하지 않으면 사진·입력 내용이 서버로 전송되지 않습니다.</li>
+      <li>광고 ID는 기기 설정에서 재설정·삭제하거나 맞춤 광고를 거부할 수 있습니다.</li>
+      <li>개인정보 처리에 관한 열람·정정·삭제·처리정지 요청이나 문의는 <a href="mailto:teeth07@naver.com">teeth07@naver.com</a>으로 보내주시면 합리적인 기간 내에 답변드립니다.</li>
+    </ul>
+
+    <h2>11. 개인정보처리방침의 변경</h2>
     <p>
-      본 방침은 법령이나 서비스 변경 사항을 반영하기 위해 개정될 수 있으며, 변경 시 본 페이지를 통해
-      게시합니다. 페이지 상단의 시행일을 통해 최신 개정 여부를 확인할 수 있습니다.
+      본 방침은 법령이나 서비스 변경을 반영하기 위해 개정될 수 있습니다. 변경 시 이 페이지에 게시하고 상단의 시행일을 갱신하며,
+      수집 항목이나 제3자 제공 등 중요한 변경은 앱 업데이트 안내 또는 이 페이지를 통해 시행 전에 알립니다.
     </p>
 
-    <h2>8. 문의처</h2>
-    <p>개인정보처리방침에 대한 문의는 아래 이메일로 연락해주세요.</p>
+    <h2>12. 문의처</h2>
     <div class="card">
+      앱: CalSnap<br>
       개발자: K-Brain Games Lab<br>
       이메일: <a href="mailto:teeth07@naver.com">teeth07@naver.com</a>
     </div>
   </section>
 
-  <section class="doc doc-en">
+  <hr class="lang-divider">
+
+  <!-- ===================== English ===================== -->
+  <section id="en" lang="en">
+    <h2>1. App and Developer Information</h2>
+    <ul>
+      <li>App name: <strong>CalSnap</strong></li>
+      <li>Developer: <strong>K-Brain Games Lab</strong></li>
+      <li>Contact: <a href="mailto:teeth07@naver.com">teeth07@naver.com</a></li>
+      <li>Effective date: October 27, 2026</li>
+    </ul>
     <p>
-      <strong>CalSnap</strong> (the "App") is developed and operated by <strong>K-Brain Games Lab</strong> (the "Developer").
-      This Privacy Policy explains what information is collected while using the App and how it is handled.
+      This Privacy Policy explains what information CalSnap (the "App") collects and processes, why, who it is shared with, and how it is retained and deleted.
+      The App does not require an account and does not collect directly identifying information such as your name, email address, or phone number.
     </p>
 
-    <h2>1. Information We Collect</h2>
+    <h2>2. Information We Collect and Why</h2>
+    <div class="table-wrap">
     <table>
-      <thead><tr><th>Data</th><th>Purpose</th><th>Storage</th></tr></thead>
+      <thead><tr><th>Data</th><th>Purpose</th><th>Where it is processed / stored</th></tr></thead>
       <tbody>
         <tr>
           <td>Food photos</td>
-          <td>Identifying the food and estimating calories and nutrients. Sent to our server, which analyzes them via the Google Gemini API.</td>
-          <td>Not stored on our server. Handled in server memory only during recognition and discarded once the result is returned (only the photos you choose to keep remain on your device)</td>
+          <td>Identifying the food and estimating calories and nutrients</td>
+          <td>Sent to our server only when you request recognition and analyzed via the Google Gemini API. Not stored on our server; discarded after the result is returned</td>
         </tr>
         <tr>
           <td>Food name and amount you enter, optional food-name hint</td>
-          <td>Estimating calories and nutrients without a photo, and improving photo recognition. Sent through our server to the Google Gemini API.</td>
-          <td>The original text is not stored on our server</td>
+          <td>Estimating calories and nutrients without a photo; improving photo recognition</td>
+          <td>Sent through our server to the Google Gemini API. The original text is not stored on our server</td>
         </tr>
         <tr>
-          <td>Recognition results (food name, calories, nutrients)</td>
-          <td>Answering repeated requests for the same photo or input quickly (cache)</td>
-          <td>Kept briefly in server memory in a form not linked to you; cleared when the server restarts or the cache is full</td>
-        </tr>
-        <tr>
-          <td>Meal, exercise, weight, and water logs</td>
-          <td>Providing daily/period calorie, nutrient, exercise, and weight statistics</td>
-          <td>Local database on your device</td>
-        </tr>
-        <tr>
-          <td>Body information (gender, age, height, weight)</td>
-          <td>Calculating Basal Metabolic Rate (BMR) and recommended calorie targets</td>
-          <td>Local storage on your device</td>
+          <td>Temporary user ID (a random UUID generated on install)</td>
+          <td>Distinguishing per-device settings without an account, and enforcing a per-device daily recognition limit</td>
+          <td>Stored on your device. Sent with recognition requests; our server keeps only an irreversible hash with daily usage counts, for 7 days</td>
         </tr>
         <tr>
           <td>Advertising ID</td>
-          <td>Serving and measuring ads via Google AdMob</td>
-          <td>Shared with Google AdMob (third party)</td>
+          <td>Serving ads, measuring ad performance, preventing ad fraud</td>
+          <td>Collected and processed by the Google AdMob SDK</td>
         </tr>
         <tr>
-          <td>Temporary user identifier (UUID)</td>
-          <td>A random ID generated on install to distinguish per-device settings without requiring an account and to enforce a per-device daily recognition limit. Not linked to your name, email, or other identifying information</td>
-          <td>Local storage on your device. Sent to our server with recognition requests; the server keeps only a one-way hash with daily usage counts and deletes them after 7 days</td>
+          <td>Crash and diagnostic information (app errors, performance-related device info)</td>
+          <td>Keeping the ad SDK stable, analyzing errors, improving service quality</td>
+          <td>Collected and processed by the Google AdMob SDK. The App itself has no separate crash-reporting tool</td>
+        </tr>
+        <tr>
+          <td>App interactions (ad impressions, clicks, etc.)</td>
+          <td>Serving and measuring ads, preventing invalid clicks</td>
+          <td>Collected and processed by the Google AdMob SDK</td>
         </tr>
       </tbody>
     </table>
-    <p>The App does not require account registration and does not collect directly identifying information such as your name, email address, or phone number.</p>
-
-    <h2>2. Third-Party Services</h2>
-    <p>The App uses the following services, each governed by its own privacy policy:</p>
-    <ul>
-      <li><strong>Google Gemini API (Google LLC)</strong> — used to analyze food photos, the optional food-name hint or the food name and amount you enter, and your device language code, to identify the food and estimate calories and nutrients. Data is sent over HTTPS only when you request recognition and may be processed in countries where Google operates data centers, including the United States. The App uses the paid Gemini API; under Google's paid API terms, submitted content is not used to improve Google's products, although Google may retain it for a limited period for legal compliance and abuse prevention.</li>
-      <li><strong>Google AdMob</strong> — used to display banner and interstitial ads within the App, and may collect device information such as the advertising identifier.</li>
-      <li><strong>Coupang Partners, Naver Connect (Naver Shopping), and Amazon Associates</strong> — affiliate links shown on product-recommendation screens. You are taken to the retailer's site only when you tap a link, after a confirmation dialog shows you the destination URL; the visit is reported to the relevant platform only at that point.</li>
-    </ul>
-    <div class="card">
-      For details on how each service handles data, see:
-      <ul>
-        <li>Google Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
-        <li>AdMob data & privacy: <a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener">support.google.com/admob</a></li>
-      </ul>
     </div>
+    <p>
+      Your weight, exercise, meal, and water logs and body information (sex, age, height, weight) are stored <strong>only on your device</strong>
+      to provide the App's features and are never sent to the Developer (see Section 7).
+    </p>
 
-    <h2>3. Data Storage & Security</h2>
+    <h2>3. How We Use Information</h2>
     <ul>
-      <li>Your meal, exercise, weight, and water logs, along with your body information, are stored <strong>only in a local database on your device</strong> and are not uploaded to or stored on the Developer's servers.</li>
-      <li>The PIN used for the App Lock (Secret Mode) feature is <strong>never stored in plain text</strong>. It is hashed with SHA-256 together with a per-device random salt before being saved, so no one — including the Developer — can recover the original PIN from the stored value.</li>
-      <li>Food photos and text you enter are handled only while being processed for recognition and are <strong>not written to our server's disk or database</strong>.</li>
-      <li>To enforce the per-device daily limit, our server database stores only a one-way hash of the temporary user identifier (which cannot be reversed), the date, the request type (photo or manual entry), and a count. These rows are <strong>automatically deleted after 7 days</strong>. For older app versions that do not send the identifier, a hash of the IP address is used in the same way.</li>
-      <li>Operating the server may leave access records such as request time, outcome, and IP address in our hosting provider's (Railway) logs for a limited period. These are used only for troubleshooting and abuse prevention.</li>
-      <li>Traffic between the App and our server, and between our server and the Google Gemini API, is encrypted with HTTPS.</li>
-      <li>Uninstalling the App removes all locally stored data (logs, body information, the temporary identifier, and the PIN hash) from your device.</li>
+      <li>Food photos and entered text: used only to show you the estimated food type, calories, and nutrients.</li>
+      <li>Temporary user ID: used only to enforce the per-device daily recognition limit (abuse prevention); never used for advertising, marketing, or identifying you.</li>
+      <li>Advertising ID, crash/diagnostic information, and app interactions: used by Google AdMob for ad delivery, measurement, fraud prevention, and error analysis.</li>
+      <li>On-device logs: used on your device only, for daily/period calorie, nutrient, exercise, and weight statistics and calorie targets.</li>
+      <li>We do not sell your information and do not share it with third parties except as described in Section 4.</li>
     </ul>
 
-    <h2>4. Advertising</h2>
-    <p>
-      The App displays banner and interstitial ads through Google AdMob, which may share device information
-      such as the advertising identifier with Google. If you do not want personalized ads, you can limit ad
-      personalization in your device settings:
-    </p>
+    <h2>4. Third-Party Sharing and Processors</h2>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Provider</th><th>Purpose</th><th>Data received</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Google Gemini API (Google LLC)</td>
+          <td>Food recognition and calorie/nutrient estimation</td>
+          <td>Food photos, food name and amount you enter, food-name hint, device language code. The temporary user ID is not sent</td>
+        </tr>
+        <tr>
+          <td>Google AdMob (Google LLC)</td>
+          <td>Banner and interstitial ads, ad measurement</td>
+          <td>Advertising ID, crash/diagnostic information, app interactions (ad impressions and clicks), device information such as IP address</td>
+        </tr>
+        <tr>
+          <td>Railway (Railway Corp.)</td>
+          <td>Hosting our recognition server</td>
+          <td>Food photos and entered text sent to our server (only while being processed), the hash of the temporary user ID with daily usage counts, and access records such as request time and IP address</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
     <ul>
-      <li>Android: Settings &gt; Privacy &gt; Ads &gt; Opt out of Ads Personalization</li>
+      <li>Content sent to the Gemini API may be processed in countries where Google operates data centers, including the United States. The App uses the paid Gemini API; under Google's paid API terms, this content is not used to improve Google's products, although Google may retain it for a limited period for legal compliance and abuse prevention.</li>
+      <li>Affiliate links on product-recommendation screens (Coupang Partners, Naver Connect / Naver Shopping, Amazon Associates) open the retailer's site only when you tap them, and only then is the visit reported to that platform.</li>
+      <li>See also: <a href="https://policies.google.com/privacy">Google Privacy Policy</a>, <a href="https://support.google.com/admob/answer/6128543">AdMob data &amp; privacy</a>, <a href="https://railway.com/legal/privacy">Railway Privacy Policy</a></li>
+    </ul>
+
+    <h2>5. Data Security</h2>
+    <ul>
+      <li><strong>Encryption in transit</strong>: all traffic between the App and our server, and between our server and the Google Gemini API, is encrypted with HTTPS.</li>
+      <li><strong>No storage of originals</strong>: food photos and text you enter are handled in server memory only during recognition and are never written to our server's disk or database.</li>
+      <li><strong>Hashing and automatic deletion</strong>: the temporary user ID is stored on our server only as an irreversible hash, together with daily usage counts, and is automatically deleted after 7 days. For older app versions that do not send the ID, a hash of the IP address is used in the same way.</li>
+      <li><strong>Access control</strong>: only the Developer can access the server, database, and API keys, and the hosting account is protected by authentication.</li>
+      <li><strong>On-device protection</strong>: the App Lock (Secret Mode) PIN is never stored in plain text; it is hashed with SHA-256 and a per-device random salt.</li>
+    </ul>
+
+    <h2>6. Retention and Deletion</h2>
+    <ul>
+      <li><strong>On-device records</strong>: meal, exercise, weight, and water logs and body information are stored only on your device and kept until you delete them. You can delete records by date, or use Reset Profile / Full Reset in Settings; uninstalling the App removes all local data.</li>
+      <li><strong>Server data</strong>: food photos and entered text are not stored. The hashed temporary user ID and daily usage counts are deleted automatically after 7 days. The recognition result cache (food names, calories, etc., not linked to you) lives only in server memory and is cleared when the server restarts.</li>
+      <li><strong>Hosting access logs</strong>: request times, IP addresses, and similar records in Railway's logs are used only for troubleshooting and abuse prevention and are deleted when the hosting provider's retention period ends.</li>
+      <li><strong>Advertising data</strong>: data collected by Google AdMob is managed under Google's policies; you can reset or delete your advertising ID in your device settings or at <a href="https://myadcenter.google.com">Google My Ad Center</a>.</li>
+      <li><strong>Deletion requests</strong>: for any other deletion request or question, email <a href="mailto:teeth07@naver.com">teeth07@naver.com</a>. See the <a href="data-deletion.html">data deletion instructions</a> for details.</li>
+    </ul>
+
+    <h2>7. Health-Related Information</h2>
+    <p>
+      Your weight, exercise, and meal (including water) logs, body information (sex, age, height, weight), and photos attached to weight logs are stored
+      <strong>only in your device's local storage</strong> and are <strong>never sent to our server</strong>. The Developer has no access to this information.
+      (Food photos and food names sent when you request recognition are used only for recognition and are not stored, as described in Section 2.)
+    </p>
+
+    <h2>8. Ad Personalization</h2>
+    <p>If you do not want personalized ads, you can limit ad personalization or delete your advertising ID in your device settings:</p>
+    <ul>
+      <li>Android: Settings &gt; Privacy (or Google) &gt; Ads &gt; Delete advertising ID</li>
       <li>iOS: Settings &gt; Privacy &amp; Security &gt; Tracking &gt; turn off "Allow Apps to Request to Track"</li>
     </ul>
 
-    <h2>5. Children's Privacy</h2>
-    <p>The App is not directed at children under 14, and we do not knowingly collect personal information from children.</p>
+    <h2>9. Children's Privacy</h2>
+    <p>The App is not directed at children under 14, and we do not knowingly collect personal information from children. If you learn that a child under 14 has provided information, please contact us and we will delete it promptly.</p>
 
-    <h2>6. Your Rights & Data Deletion</h2>
+    <h2>10. Your Rights</h2>
+    <ul>
+      <li>You can view, edit, and delete your own records stored on your device at any time.</li>
+      <li>If you do not use food recognition, no photos or entered text are sent to our server.</li>
+      <li>You can reset or delete your advertising ID, or opt out of personalized ads, in your device settings.</li>
+      <li>For requests to access, correct, delete, or restrict processing of your information, or any other privacy question, email <a href="mailto:teeth07@naver.com">teeth07@naver.com</a>; we will respond within a reasonable time.</li>
+    </ul>
+
+    <h2>11. Changes to This Policy</h2>
     <p>
-      Because all logs and body information are stored locally on your device, you can delete individual
-      entries from within the App's settings, or remove all data instantly by uninstalling the App. No food
-      photos or entered text remain on our server, and the hashed usage counts are deleted automatically after
-      7 days, so there is no separate deletion request needed from the Developer. See the
-      <a href="data-deletion.html">data deletion instructions</a> for details.
+      This policy may be updated to reflect changes in law or in the App. Changes will be posted on this page with an updated effective date at the top,
+      and material changes (such as to the data collected or third-party sharing) will be announced through an app update notice or this page before they take effect.
     </p>
 
-    <h2>7. Changes to This Policy</h2>
-    <p>
-      This Privacy Policy may be updated to reflect changes in law or in the App's features. Any changes will
-      be posted on this page, and the effective date at the top of the page indicates the latest revision.
-    </p>
-
-    <h2>8. Contact</h2>
-    <p>If you have questions about this Privacy Policy, please contact us at:</p>
+    <h2>12. Contact</h2>
     <div class="card">
+      App: CalSnap<br>
       Developer: K-Brain Games Lab<br>
       Email: <a href="mailto:teeth07@naver.com">teeth07@naver.com</a>
     </div>

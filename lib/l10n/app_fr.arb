@@ -55,6 +55,7 @@
   "settingsVoiceGuideSubtitle": "Entendez un court message vocal selon la situation, comme l'enregistrement ou l'atteinte de votre objectif",
   "settingsAffiliateTile": "Afficher les recommandations shopping partenaires",
   "settingsAffiliateSubtitle": "Bientôt disponible",
+  "settingsPrivacyPolicyTile": "Politique de confidentialité",
   "settingsResetProfileDialogTitle": "Réinitialiser le profil",
   "settingsResetProfileDialogContent": "Efface toutes les informations de profil (sexe, âge, taille, poids, calories cibles) et relance l'accueil depuis le début. Vos journaux de repas et d'exercice restent intacts. Continuer ?",
   "settingsResetProfileConfirmButton": "Réinitialiser",

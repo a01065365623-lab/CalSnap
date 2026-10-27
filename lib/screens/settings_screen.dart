@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../db/database_helper.dart';
 import '../dev/seed_data.dart';
@@ -13,6 +14,8 @@ import '../utils/bmr_calculator.dart';
 import '../utils/unit_converter.dart';
 import 'onboarding_screen.dart';
 import 'profile_edit_screen.dart';
+
+const _privacyPolicyUrl = 'https://a01065365623-lab.github.io/CalSnap/privacy-policy.html';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -329,6 +332,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  /// 개인정보처리방침(GitHub Pages)을 외부 브라우저로 연다.
+  Future<void> _openPrivacyPolicy() async {
+    final opened = await launchUrl(Uri.parse(_privacyPolicyUrl), mode: LaunchMode.externalApplication);
+    if (!opened && mounted) {
+      final l10n = AppLocalizations.of(context)!;
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.settingsActionFailed(_privacyPolicyUrl))));
+    }
+  }
+
   Future<void> _run(Future<String> Function() action) async {
     setState(() => _busy = true);
     try {
@@ -449,6 +461,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onChanged: _onSecretModeToggle,
           ),
           ListTile(title: Text(l10n.settingsAffiliateTile), subtitle: Text(l10n.settingsAffiliateSubtitle)),
+          ListTile(
+            leading: const Icon(Icons.privacy_tip_outlined, color: AppColors.statsGray),
+            title: Text(l10n.settingsPrivacyPolicyTile),
+            trailing: const Icon(Icons.open_in_new),
+            onTap: _openPrivacyPolicy,
+          ),
           if (kDebugMode) ...[
             const Divider(),
             const Padding(

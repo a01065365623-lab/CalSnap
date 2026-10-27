@@ -56,6 +56,7 @@
   "settingsVoiceGuideSubtitle": "Hear a short voice message for things like saving and hitting your goal",
   "settingsAffiliateTile": "Show affiliate shopping picks",
   "settingsAffiliateSubtitle": "Coming soon",
+  "settingsPrivacyPolicyTile": "Privacy Policy",
   "settingsResetProfileDialogTitle": "Reset profile",
   "settingsResetProfileDialogContent": "This clears your gender, age, height, weight, and goal calories, and restarts onboarding from scratch. Your meal and exercise logs stay untouched. Continue?",
   "settingsResetProfileConfirmButton": "Reset",

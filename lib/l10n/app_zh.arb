@@ -55,6 +55,7 @@
   "settingsVoiceGuideSubtitle": "在保存、达成目标等情境下播放相应的语音提示",
   "settingsAffiliateTile": "显示联盟购物推荐",
   "settingsAffiliateSubtitle": "即将推出",
+  "settingsPrivacyPolicyTile": "隐私政策",
   "settingsResetProfileDialogTitle": "重置个人资料",
   "settingsResetProfileDialogContent": "将清除性别、年龄、身高、体重、目标卡路里等所有个人资料信息，并从头开始引导流程。饮食和运动记录将保持不变。要继续吗？",
   "settingsResetProfileConfirmButton": "重置",

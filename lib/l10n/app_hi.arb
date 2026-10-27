@@ -55,6 +55,7 @@
   "settingsVoiceGuideSubtitle": "सेव करने, लक्ष्य पूरा होने जैसी स्थितियों पर छोटा वॉइस संदेश सुनें",
   "settingsAffiliateTile": "सहबद्ध शॉपिंग सुझाव दिखाएं",
   "settingsAffiliateSubtitle": "जल्द आ रहा है",
+  "settingsPrivacyPolicyTile": "गोपनीयता नीति",
   "settingsResetProfileDialogTitle": "प्रोफ़ाइल रीसेट करें",
   "settingsResetProfileDialogContent": "लिंग, उम्र, कद, वज़न, लक्ष्य कैलोरी जैसी सभी प्रोफ़ाइल जानकारी मिटाकर ऑनबोर्डिंग को शुरुआत से फिर से शुरू करेगा। भोजन और व्यायाम का रिकॉर्ड वैसा ही रहेगा। जारी रखें?",
   "settingsResetProfileConfirmButton": "रीसेट करें",
