@@ -7,8 +7,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../db/database_helper.dart';
 import '../dev/seed_data.dart';
 import '../services/app_lock_service.dart';
+import '../services/meal_log_service.dart';
 import '../services/user_profile_service.dart';
-import '../services/weight_photo_service.dart';
 import '../theme/app_colors.dart';
 import '../utils/bmr_calculator.dart';
 import '../utils/unit_converter.dart';
@@ -321,8 +321,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
     if (confirmed != true) return;
 
-    await DatabaseHelper.instance.resetAllData();
-    await WeightPhotoService.instance.deleteAllPhotos();
+    await MealLogService.instance.resetAllData();
     await UserProfileService.instance.resetProfile();
     await AppLockService.instance.disable();
     if (!mounted) return;

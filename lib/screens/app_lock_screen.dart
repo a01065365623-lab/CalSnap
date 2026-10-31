@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../db/database_helper.dart';
 import '../services/app_lock_service.dart';
+import '../services/meal_log_service.dart';
 import '../services/user_profile_service.dart';
-import '../services/weight_photo_service.dart';
 import '../theme/app_colors.dart';
 import 'home_screen.dart';
 import 'onboarding_screen.dart';
@@ -74,8 +73,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
     if (confirmed != true) return;
 
     // 앱의 모든 흔적(기록·프로필·잠금 설정)을 지우고 온보딩부터 다시 시작한다.
-    await DatabaseHelper.instance.resetAllData();
-    await WeightPhotoService.instance.deleteAllPhotos();
+    await MealLogService.instance.resetAllData();
     await UserProfileService.instance.resetProfile();
     await AppLockService.instance.disable();
     if (!mounted) return;

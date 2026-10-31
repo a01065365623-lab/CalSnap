@@ -7,6 +7,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../models/daily_log_entry.dart';
 import '../models/food_db_item.dart';
+import '../models/my_food.dart';
 
 /// assets/food_db_seed.json(19,495건, 약 8MB) 파싱은 CPU 바운드 작업이라 메인 isolate에서
 /// 돌리면 첫 실행 시 UI가 잠깐 멈출 수 있다. compute()로 별도 isolate에서 실행하기 위해
@@ -41,7 +42,7 @@ class DatabaseHelper {
     final path = join(dbPath, 'calsnap.db');
     final db = await openDatabase(
       path,
-      version: 6,
+      version: 7,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE daily_log (
@@ -55,7 +56,8 @@ class DatabaseHelper {
             carbsG REAL,
             proteinG REAL,
             fatG REAL,
-            source TEXT
+            source TEXT,
+            photo_path TEXT
           )
         ''');
         await db.execute('''
@@ -74,6 +76,7 @@ class DatabaseHelper {
           )
         ''');
         await _createFoodDbTables(db);
+        await _createMyFoodsTable(db);
       },
       onUpgrade: (db, oldVersion, newVersion) async {
         if (oldVersion < 2) {
@@ -109,10 +112,39 @@ class DatabaseHelper {
           // 기존 행은 전부 NULL.
           await db.execute('ALTER TABLE weight_log ADD COLUMN photo_path TEXT');
         }
+        if (oldVersion < 7) {
+          // 식사 사진(기기 로컬 documents/food_photos, 서버 미전송) 경로와, Gemini 호출
+          // 없이 다시 기록할 수 있는 "내 음식 목록"(my_foods) 추가. 기존 행은 NULL.
+          await db.execute('ALTER TABLE daily_log ADD COLUMN photo_path TEXT');
+          await _createMyFoodsTable(db);
+        }
       },
     );
     await _seedFoodDbIfNeeded(db);
     return db;
+  }
+
+  /// name_key는 소문자·앞뒤 공백 제거한 음식명으로, 같은 음식이 대소문자/공백 차이로
+  /// 중복 등록되지 않게 하는 UNIQUE 키다.
+  Future<void> _createMyFoodsTable(Database db) async {
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS my_foods (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        name_key TEXT NOT NULL UNIQUE,
+        base_amount_g REAL,
+        calories REAL NOT NULL,
+        carbs_g REAL,
+        protein_g REAL,
+        fat_g REAL,
+        photo_path TEXT,
+        use_count INTEGER NOT NULL DEFAULT 0,
+        last_used_at TEXT NOT NULL
+      )
+    ''');
+    await db.execute(
+      'CREATE INDEX IF NOT EXISTS idx_my_foods_last_used ON my_foods (last_used_at)',
+    );
   }
 
   Future<void> _createFoodDbTables(Database db) async {
@@ -249,16 +281,17 @@ class DatabaseHelper {
     print('시딩 완료: ${stopwatch.elapsedMilliseconds}ms (${items.length}건)');
   }
 
-  /// 식사·운동·물, 요약, 체중 기록을 전부 삭제한다. 시크릿 모드 "비밀번호를 잊으셨나요?"
-  /// 초기화 흐름과 설정 화면의 "전체 초기화" 버튼 전용 — 스키마는 그대로 두고 데이터만
-  /// 비운다. weight_log.photo_path가 가리키던 실제 이미지 파일은 여기서 지우지 않으므로
-  /// (파일 시스템은 DatabaseHelper의 책임이 아님), 호출부에서
-  /// WeightPhotoService.deleteAllPhotos()를 함께 호출해야 한다.
+  /// 식사·운동·물, 요약, 체중 기록, 내 음식 목록을 전부 삭제한다. 시크릿 모드 "비밀번호를
+  /// 잊으셨나요?" 초기화 흐름과 설정 화면의 "전체 초기화" 버튼 전용 — 스키마는 그대로 두고
+  /// 데이터만 비운다. photo_path가 가리키던 실제 이미지 파일은 여기서 지우지 않으므로
+  /// (파일 시스템은 DatabaseHelper의 책임이 아님), 호출부는 MealLogService.resetAllData()를
+  /// 거쳐야 한다(사진 디렉터리까지 함께 삭제).
   Future<void> resetAllData() async {
     final db = await database;
     await db.delete('daily_log');
     await db.delete('daily_summary');
     await db.delete('weight_log');
+    await db.delete('my_foods');
   }
 
   // ── daily_log ──────────────────────────────────────────
@@ -282,20 +315,32 @@ class DatabaseHelper {
     return rows.map((r) => DailyLogEntry.fromMap(r)).toList();
   }
 
-  Future<void> deleteLog(int id, DateTime date) async {
+  /// 로그 한 건을 삭제하고, 그 기록에 붙어 있던 사진 경로(없으면 null)를 반환한다.
+  /// 파일 삭제는 호출부(MealLogService) 몫이다.
+  Future<String?> deleteLog(int id, DateTime date) async {
     final db = await database;
+    final rows = await db.query('daily_log', columns: ['photo_path'], where: 'id = ?', whereArgs: [id]);
+    final photoPath = rows.isEmpty ? null : rows.first['photo_path'] as String?;
     await db.delete('daily_log', where: 'id = ?', whereArgs: [id]);
     await _refreshDailySummary(_dateKey(date));
+    return photoPath;
   }
 
   /// 해당 날짜의 로그를 전부 삭제한다("오늘 기록 전체 초기화" 등). 삭제 후
-  /// daily_summary도 그 날짜 기준으로 다시 계산되어 0으로 갱신된다.
-  Future<int> deleteLogsForDate(DateTime date) async {
+  /// daily_summary도 그 날짜 기준으로 다시 계산되어 0으로 갱신된다. 삭제된 기록들에
+  /// 붙어 있던 사진 경로 목록을 반환한다(파일 삭제는 호출부 몫).
+  Future<List<String>> deleteLogsForDate(DateTime date) async {
     final db = await database;
     final key = _dateKey(date);
-    final count = await db.delete('daily_log', where: 'datetime LIKE ?', whereArgs: ['$key%']);
+    final rows = await db.query(
+      'daily_log',
+      columns: ['photo_path'],
+      where: 'datetime LIKE ? AND photo_path IS NOT NULL',
+      whereArgs: ['$key%'],
+    );
+    await db.delete('daily_log', where: 'datetime LIKE ?', whereArgs: ['$key%']);
     await _refreshDailySummary(key);
-    return count;
+    return rows.map((r) => r['photo_path'] as String).toList();
   }
 
   /// 여러 건을 한 번에 삽입한다 (트랜잭션 배치 + 날짜별 요약 1회씩만 갱신).
@@ -603,6 +648,66 @@ class DatabaseHelper {
               photoPath: r['photo_path'] as String,
             ))
         .toList();
+  }
+
+  // ── my_foods (내 음식 목록: Gemini 호출 없이 다시 기록하기) ──────
+
+  static String _myFoodKey(String name) => name.trim().toLowerCase();
+
+  /// 음식명 기준으로 내 음식 목록에 저장하거나 갱신하고 사용 횟수를 1 올린다. 영양 정보는
+  /// 항상 가장 최근 1회분으로 덮어쓴다. [photoPath]가 주어지면 썸네일을 교체하고 이전
+  /// 썸네일 경로를 반환한다(호출부가 파일을 지운다). null이면 기존 썸네일을 유지한다.
+  Future<String?> upsertMyFood({
+    required String name,
+    double? baseAmountG,
+    required double calories,
+    required double carbsG,
+    required double proteinG,
+    required double fatG,
+    String? photoPath,
+    DateTime? usedAt,
+  }) async {
+    final db = await database;
+    final key = _myFoodKey(name);
+    final now = (usedAt ?? DateTime.now()).toIso8601String();
+    return db.transaction((txn) async {
+      final rows = await txn.query('my_foods', where: 'name_key = ?', whereArgs: [key], limit: 1);
+      final values = <String, Object?>{
+        'name': name.trim(),
+        'name_key': key,
+        'base_amount_g': (baseAmountG != null && baseAmountG > 0) ? baseAmountG : null,
+        'calories': calories,
+        'carbs_g': carbsG,
+        'protein_g': proteinG,
+        'fat_g': fatG,
+        'last_used_at': now,
+        if (photoPath != null) 'photo_path': photoPath,
+      };
+      if (rows.isEmpty) {
+        await txn.insert('my_foods', {...values, 'use_count': 1});
+        return null;
+      }
+      final existing = rows.first;
+      await txn.update(
+        'my_foods',
+        {...values, 'use_count': ((existing['use_count'] as num?)?.toInt() ?? 0) + 1},
+        where: 'id = ?',
+        whereArgs: [existing['id']],
+      );
+      final oldPhoto = existing['photo_path'] as String?;
+      return (photoPath != null && oldPhoto != photoPath) ? oldPhoto : null;
+    });
+  }
+
+  /// 내 음식 목록. [byFrequency]가 false면 최근 먹은 순, true면 자주 먹은 순(동률이면 최근 순).
+  Future<List<MyFood>> getMyFoods({bool byFrequency = false, int limit = 20}) async {
+    final db = await database;
+    final rows = await db.query(
+      'my_foods',
+      orderBy: byFrequency ? 'use_count DESC, last_used_at DESC' : 'last_used_at DESC, use_count DESC',
+      limit: limit,
+    );
+    return rows.map(MyFood.fromMap).toList();
   }
 
   String _dateKey(DateTime d) =>

@@ -4,7 +4,8 @@ enum LogMode { quick, precision }
 
 /// 음식 기록이 사진(카메라/갤러리) 기반인지, 사진 없이 직접 입력했는지 구분한다.
 /// food 전용 필드이며, exercise/water나 이 필드가 생기기 전(구버전) 기록은 null이다.
-enum LogSource { photo, manual }
+/// myFood: "내 음식 목록"에서 AI 인식 없이 다시 기록한 항목.
+enum LogSource { photo, manual, myFood }
 
 class DailyLogEntry {
   final int? id;
@@ -20,6 +21,9 @@ class DailyLogEntry {
   final double? proteinG;
   final double? fatG;
   final LogSource? source;
+  // food 전용. 기기 로컬(documents/food_photos)에 축소 저장된 식사 사진 경로.
+  // 사진 없이 기록했거나 구버전 기록이면 null. 서버에는 올리지 않는다.
+  final String? photoPath;
 
   const DailyLogEntry({
     this.id,
@@ -33,6 +37,7 @@ class DailyLogEntry {
     this.proteinG,
     this.fatG,
     this.source,
+    this.photoPath,
   });
 
   Map<String, dynamic> toMap() {
@@ -48,6 +53,7 @@ class DailyLogEntry {
       'proteinG': proteinG,
       'fatG': fatG,
       'source': source?.name,
+      'photo_path': photoPath,
     };
   }
 
@@ -64,6 +70,7 @@ class DailyLogEntry {
       proteinG: (map['proteinG'] as num?)?.toDouble(),
       fatG: (map['fatG'] as num?)?.toDouble(),
       source: map['source'] != null ? LogSource.values.byName(map['source'] as String) : null,
+      photoPath: map['photo_path'] as String?,
     );
   }
 }

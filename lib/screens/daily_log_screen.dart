@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
+import '../services/meal_log_service.dart';
 import '../services/tts_service.dart';
 import '../services/user_profile_service.dart';
 import '../theme/app_colors.dart';
@@ -128,7 +129,7 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
     );
     if (confirmed != true) return;
 
-    await _db.deleteLogsForDate(_selectedDate);
+    await MealLogService.instance.deleteLogsForDate(_selectedDate);
     _load();
   }
 
@@ -227,7 +228,7 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
                         entry: e,
                         unitSystem: _unitSystem,
                         onDelete: () async {
-                          await _db.deleteLog(e.id!, _selectedDate);
+                          await MealLogService.instance.deleteLog(e.id!, _selectedDate);
                           _load();
                         },
                         // 관련 상품 보기는 음식 항목에만 의미가 있으므로, 운동·물
