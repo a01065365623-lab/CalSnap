@@ -272,5 +272,7 @@
   "myFoodsSortRecent": "Recenti",
   "myFoodsSortFrequent": "Frequenti",
   "myFoodUseCount": "{count, plural, =1{Registrato 1 volta} other{Registrato {count} volte}}",
-  "myFoodAmountSummary": "{weight} · {calories}kcal"
+  "myFoodAmountSummary": "{weight} · {calories}kcal",
+  "settingsPhotosLocalOnlyTile": "Le foto sono salvate solo su questo dispositivo",
+  "settingsPhotosLocalOnlySubtitle": "Le foto dei pasti e del peso restano su questo dispositivo e non vengono salvate sul nostro server. Vengono eliminate se disinstalli l'app o esegui un ripristino completo."
 }

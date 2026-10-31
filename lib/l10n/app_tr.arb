@@ -272,5 +272,7 @@
   "myFoodsSortRecent": "Son",
   "myFoodsSortFrequent": "Sık",
   "myFoodUseCount": "{count} kez kaydedildi",
-  "myFoodAmountSummary": "{weight} · {calories}kcal"
+  "myFoodAmountSummary": "{weight} · {calories}kcal",
+  "settingsPhotosLocalOnlyTile": "Fotoğraflar yalnızca bu cihazda saklanır",
+  "settingsPhotosLocalOnlySubtitle": "Öğün ve kilo fotoğrafları yalnızca bu cihazda kalır, sunucumuza yedeklenmez. Uygulamayı kaldırırsanız veya tamamen sıfırlarsanız silinir."
 }

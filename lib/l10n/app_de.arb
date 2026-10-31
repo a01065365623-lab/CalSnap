@@ -272,5 +272,7 @@
   "myFoodsSortRecent": "Zuletzt",
   "myFoodsSortFrequent": "Häufig",
   "myFoodUseCount": "{count, plural, =1{1-mal erfasst} other{{count}-mal erfasst}}",
-  "myFoodAmountSummary": "{weight} · {calories}kcal"
+  "myFoodAmountSummary": "{weight} · {calories}kcal",
+  "settingsPhotosLocalOnlyTile": "Fotos werden nur auf diesem Gerät gespeichert",
+  "settingsPhotosLocalOnlySubtitle": "Mahlzeiten- und Gewichtsfotos bleiben auf diesem Gerät und werden nicht auf unserem Server gesichert. Sie werden gelöscht, wenn du die App deinstallierst oder alles zurücksetzt."
 }

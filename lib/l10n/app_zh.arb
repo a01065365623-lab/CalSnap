@@ -272,5 +272,7 @@
   "myFoodsSortRecent": "最近",
   "myFoodsSortFrequent": "常吃",
   "myFoodUseCount": "已记录{count}次",
-  "myFoodAmountSummary": "{weight} · {calories}kcal"
+  "myFoodAmountSummary": "{weight} · {calories}kcal",
+  "settingsPhotosLocalOnlyTile": "照片仅保存在本设备上",
+  "settingsPhotosLocalOnlySubtitle": "饮食和体重照片仅保存在本设备上，不会备份到服务器。卸载应用或全部重置时将一并删除。"
 }

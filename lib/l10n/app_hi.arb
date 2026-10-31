@@ -272,5 +272,7 @@
   "myFoodsSortRecent": "हाल के",
   "myFoodsSortFrequent": "अक्सर खाए",
   "myFoodUseCount": "{count} बार दर्ज",
-  "myFoodAmountSummary": "{weight} · {calories}kcal"
+  "myFoodAmountSummary": "{weight} · {calories}kcal",
+  "settingsPhotosLocalOnlyTile": "फ़ोटो केवल इसी डिवाइस पर सहेजी जाती हैं",
+  "settingsPhotosLocalOnlySubtitle": "भोजन और वज़न की फ़ोटो केवल इसी डिवाइस पर रहती हैं और हमारे सर्वर पर बैकअप नहीं होतीं। ऐप हटाने या पूरा रीसेट करने पर ये भी हट जाती हैं।"
 }

@@ -393,5 +393,7 @@
   "myFoodUseCount": "{count}회 기록",
   "@myFoodUseCount": {"placeholders": {"count": {"type": "int"}}},
   "myFoodAmountSummary": "{weight} · {calories}kcal",
-  "@myFoodAmountSummary": {"placeholders": {"weight": {"type": "String"}, "calories": {"type": "String"}}}
+  "@myFoodAmountSummary": {"placeholders": {"weight": {"type": "String"}, "calories": {"type": "String"}}},
+  "settingsPhotosLocalOnlyTile": "사진은 이 기기에만 저장됩니다",
+  "settingsPhotosLocalOnlySubtitle": "식사·체중 사진은 이 기기에만 보관되며 서버에 백업되지 않아요. 앱을 삭제하거나 전체 초기화하면 함께 삭제돼요."
 }

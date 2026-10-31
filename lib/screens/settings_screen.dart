@@ -466,6 +466,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             trailing: const Icon(Icons.open_in_new),
             onTap: _openPrivacyPolicy,
           ),
+          // 식사·체중 사진은 documents/food_photos, weight_photos에만 저장되고 서버로
+          // 백업되지 않는다는 안내(앱 삭제·전체 초기화 시 함께 사라짐).
+          ListTile(
+            leading: const Icon(Icons.phone_android, color: AppColors.statsGray),
+            title: Text(l10n.settingsPhotosLocalOnlyTile),
+            subtitle: Text(l10n.settingsPhotosLocalOnlySubtitle),
+          ),
           if (kDebugMode) ...[
             const Divider(),
             const Padding(
