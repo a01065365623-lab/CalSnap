@@ -266,5 +266,12 @@
   "appUpdateBtnLater": "Later",
   "appUpdateReadyTitle": "Update ready",
   "appUpdateReadyDesc": "The new version has been downloaded. Restart now to apply it?",
-  "appUpdateBtnRestart": "Restart"
+  "appUpdateBtnRestart": "Restart",
+
+  "quickModeRecentFoodsTitle": "Recently eaten",
+  "quickModeRecentFoodsHint": "Tap to log instantly without AI analysis (doesn't count toward daily limit)",
+  "myFoodsSortRecent": "Recent",
+  "myFoodsSortFrequent": "Frequent",
+  "myFoodUseCount": "{count, plural, =1{Logged once} other{Logged {count} times}}",
+  "myFoodAmountSummary": "{weight} · {calories}kcal"
 }

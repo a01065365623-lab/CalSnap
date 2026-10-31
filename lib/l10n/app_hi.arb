@@ -265,5 +265,12 @@
   "appUpdateBtnLater": "बाद में",
   "appUpdateReadyTitle": "अपडेट तैयार है",
   "appUpdateReadyDesc": "नया वर्शन डाउनलोड हो चुका है। इसे लागू करने के लिए अभी रीस्टार्ट करें?",
-  "appUpdateBtnRestart": "रीस्टार्ट करें"
+  "appUpdateBtnRestart": "रीस्टार्ट करें",
+
+  "quickModeRecentFoodsTitle": "हाल ही में खाया",
+  "quickModeRecentFoodsHint": "AI विश्लेषण के बिना तुरंत दर्ज करने के लिए टैप करें (दैनिक सीमा में नहीं गिना जाता)",
+  "myFoodsSortRecent": "हाल के",
+  "myFoodsSortFrequent": "अक्सर खाए",
+  "myFoodUseCount": "{count} बार दर्ज",
+  "myFoodAmountSummary": "{weight} · {calories}kcal"
 }

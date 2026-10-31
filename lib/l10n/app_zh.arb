@@ -265,5 +265,12 @@
   "appUpdateBtnLater": "稍后",
   "appUpdateReadyTitle": "更新已就绪",
   "appUpdateReadyDesc": "新版本已下载完成。现在重启以应用更新吗？",
-  "appUpdateBtnRestart": "重启"
+  "appUpdateBtnRestart": "重启",
+
+  "quickModeRecentFoodsTitle": "最近吃过",
+  "quickModeRecentFoodsHint": "点击即可直接记录，无需AI分析（不计入每日次数）",
+  "myFoodsSortRecent": "最近",
+  "myFoodsSortFrequent": "常吃",
+  "myFoodUseCount": "已记录{count}次",
+  "myFoodAmountSummary": "{weight} · {calories}kcal"
 }

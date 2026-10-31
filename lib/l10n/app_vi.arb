@@ -265,5 +265,12 @@
   "appUpdateBtnLater": "Để sau",
   "appUpdateReadyTitle": "Đã sẵn sàng cập nhật",
   "appUpdateReadyDesc": "Phiên bản mới đã tải xong. Khởi động lại ngay để áp dụng?",
-  "appUpdateBtnRestart": "Khởi động lại"
+  "appUpdateBtnRestart": "Khởi động lại",
+
+  "quickModeRecentFoodsTitle": "Món ăn gần đây",
+  "quickModeRecentFoodsHint": "Chạm để ghi ngay mà không cần phân tích AI (không tính vào giới hạn hằng ngày)",
+  "myFoodsSortRecent": "Gần đây",
+  "myFoodsSortFrequent": "Thường ăn",
+  "myFoodUseCount": "Đã ghi {count} lần",
+  "myFoodAmountSummary": "{weight} · {calories}kcal"
 }

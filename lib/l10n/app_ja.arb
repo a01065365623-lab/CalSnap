@@ -265,5 +265,12 @@
   "appUpdateBtnLater": "あとで",
   "appUpdateReadyTitle": "アップデートの準備完了",
   "appUpdateReadyDesc": "新しいバージョンのダウンロードが完了しました。再起動して適用しますか？",
-  "appUpdateBtnRestart": "再起動"
+  "appUpdateBtnRestart": "再起動",
+
+  "quickModeRecentFoodsTitle": "最近食べたもの",
+  "quickModeRecentFoodsHint": "タップするとAI分析なしですぐ記録できます（1日の上限にカウントされません）",
+  "myFoodsSortRecent": "最近",
+  "myFoodsSortFrequent": "よく食べる",
+  "myFoodUseCount": "{count}回記録",
+  "myFoodAmountSummary": "{weight} · {calories}kcal"
 }

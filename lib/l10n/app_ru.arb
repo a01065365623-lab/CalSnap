@@ -265,5 +265,12 @@
   "appUpdateBtnLater": "Позже",
   "appUpdateReadyTitle": "Обновление готово",
   "appUpdateReadyDesc": "Новая версия загружена. Перезапустить сейчас, чтобы применить?",
-  "appUpdateBtnRestart": "Перезапустить"
+  "appUpdateBtnRestart": "Перезапустить",
+
+  "quickModeRecentFoodsTitle": "Недавно съеденное",
+  "quickModeRecentFoodsHint": "Нажмите, чтобы записать сразу без ИИ-анализа (не учитывается в дневном лимите)",
+  "myFoodsSortRecent": "Недавние",
+  "myFoodsSortFrequent": "Частые",
+  "myFoodUseCount": "{count, plural, one{Записано {count} раз} few{Записано {count} раза} many{Записано {count} раз} other{Записано {count} раза}}",
+  "myFoodAmountSummary": "{weight} · {calories} ккал"
 }

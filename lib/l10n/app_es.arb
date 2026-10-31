@@ -265,5 +265,12 @@
   "appUpdateBtnLater": "Más tarde",
   "appUpdateReadyTitle": "Actualización lista",
   "appUpdateReadyDesc": "Se descargó la nueva versión. ¿Reiniciar ahora para aplicarla?",
-  "appUpdateBtnRestart": "Reiniciar"
+  "appUpdateBtnRestart": "Reiniciar",
+
+  "quickModeRecentFoodsTitle": "Comidas recientes",
+  "quickModeRecentFoodsHint": "Toca para registrar al instante sin análisis de IA (no cuenta para el límite diario)",
+  "myFoodsSortRecent": "Recientes",
+  "myFoodsSortFrequent": "Frecuentes",
+  "myFoodUseCount": "{count, plural, =1{Registrado 1 vez} other{Registrado {count} veces}}",
+  "myFoodAmountSummary": "{weight} · {calories}kcal"
 }

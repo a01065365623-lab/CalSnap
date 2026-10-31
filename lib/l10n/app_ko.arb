@@ -384,5 +384,14 @@
   "appUpdateBtnLater": "나중에",
   "appUpdateReadyTitle": "업데이트 준비 완료",
   "appUpdateReadyDesc": "새 버전이 다운로드됐어요. 지금 재시작하고 적용할까요?",
-  "appUpdateBtnRestart": "재시작"
+  "appUpdateBtnRestart": "재시작",
+
+  "quickModeRecentFoodsTitle": "최근 먹은 음식",
+  "quickModeRecentFoodsHint": "탭하면 AI 분석 없이 바로 기록돼요 (일일 한도 미차감)",
+  "myFoodsSortRecent": "최근순",
+  "myFoodsSortFrequent": "자주 먹은 순",
+  "myFoodUseCount": "{count}회 기록",
+  "@myFoodUseCount": {"placeholders": {"count": {"type": "int"}}},
+  "myFoodAmountSummary": "{weight} · {calories}kcal",
+  "@myFoodAmountSummary": {"placeholders": {"weight": {"type": "String"}, "calories": {"type": "String"}}}
 }

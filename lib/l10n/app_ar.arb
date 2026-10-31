@@ -265,5 +265,12 @@
   "appUpdateBtnLater": "لاحقًا",
   "appUpdateReadyTitle": "التحديث جاهز",
   "appUpdateReadyDesc": "تم تنزيل الإصدار الجديد. هل تريد إعادة التشغيل الآن لتطبيقه؟",
-  "appUpdateBtnRestart": "إعادة التشغيل"
+  "appUpdateBtnRestart": "إعادة التشغيل",
+
+  "quickModeRecentFoodsTitle": "أطعمة تناولتها مؤخرًا",
+  "quickModeRecentFoodsHint": "اضغط للتسجيل فورًا دون تحليل بالذكاء الاصطناعي (لا يُحتسب من الحد اليومي)",
+  "myFoodsSortRecent": "الأحدث",
+  "myFoodsSortFrequent": "الأكثر تكرارًا",
+  "myFoodUseCount": "{count, plural, =1{سُجّل مرة واحدة} =2{سُجّل مرتين} other{سُجّل {count} مرات}}",
+  "myFoodAmountSummary": "{weight} · {calories} سعرة"
 }

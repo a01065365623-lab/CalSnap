@@ -7,12 +7,15 @@ import 'package:image_picker/image_picker.dart';
 
 import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
+import '../models/my_food.dart';
 import '../services/food_recognition_service.dart';
 import '../services/gemini_food_recognition_service.dart';
+import '../services/meal_log_service.dart';
 import '../services/tts_service.dart';
 import '../services/user_profile_service.dart';
 import '../theme/app_colors.dart';
 import '../utils/unit_converter.dart';
+import '../widgets/food_photo_thumbnail.dart';
 import '../widgets/related_products_button.dart';
 import 'manual_food_entry_screen.dart';
 
@@ -41,12 +44,57 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
   // 서버가 사진 인식 일일 한도 초과(daily_limit_exceeded)를 알려온 상태. 재시도해도
   // 소용없으므로 재시도 버튼 대신 아직 쓸 수 있는 "직접 입력"을 안내한다.
   bool _photoLimitReached = false;
+  bool _saving = false;
+
+  // "최근 먹은 음식"(my_foods). 탭하면 Gemini 호출 없이 양만 조정해 바로 기록한다.
+  List<MyFood> _myFoods = [];
+  bool _myFoodsByFrequency = false;
 
   @override
   void initState() {
     super.initState();
     _loadUnitSystem();
+    _loadMyFoods();
     _recognitionService.refreshUsage();
+  }
+
+  Future<void> _loadMyFoods() async {
+    final foods = await DatabaseHelper.instance.getMyFoods(byFrequency: _myFoodsByFrequency);
+    if (mounted) setState(() => _myFoods = foods);
+  }
+
+  void _toggleMyFoodsSort(bool byFrequency) {
+    if (byFrequency == _myFoodsByFrequency) return;
+    setState(() => _myFoodsByFrequency = byFrequency);
+    _loadMyFoods();
+  }
+
+  /// 최근 먹은 음식 탭: 양 슬라이더 시트를 띄우고, 저장하면 AI 인식 없이 바로 기록한다
+  /// (서버를 거치지 않으므로 일일 사진/직접입력 한도에도 포함되지 않는다).
+  Future<void> _openMyFood(MyFood food) async {
+    final multiplier = await showModalBottomSheet<double>(
+      context: context,
+      isScrollControlled: true,
+      builder: (_) => _MyFoodQuickSaveSheet(food: food, unitSystem: _unitSystem),
+    );
+    if (multiplier == null || !mounted || _saving) return;
+    setState(() => _saving = true);
+    try {
+      await MealLogService.instance.saveFromMyFood(food, multiplier);
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
+    _afterSaved();
+  }
+
+  void _afterSaved() {
+    unawaited(TtsService.instance.speakAfterSave(TtsCategory.mealSave));
+    if (!mounted) return;
+    final l10n = AppLocalizations.of(context)!;
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(l10n.savedSnackbarMessage)),
+    );
   }
 
   Future<void> _loadUnitSystem() async {
@@ -178,29 +226,29 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
   }
 
   Future<void> _save() async {
-    if (_result == null) return;
+    final result = _result;
+    if (result == null || _saving) return;
     final foodName = _foodNameController.text.trim().isEmpty
-        ? _result!.foodName
+        ? result.foodName
         : _foodNameController.text.trim();
-    await DatabaseHelper.instance.insertLog(DailyLogEntry(
-      datetime: DateTime.now(),
-      type: LogType.food,
-      name: foodName,
-      calories: _totalCalories,
-      mode: LogMode.quick,
-      carbsG: _totalCarbs,
-      proteinG: _totalProtein,
-      fatG: _totalFat,
-      source: _isManualEntry ? LogSource.manual : LogSource.photo,
-    ));
-    unawaited(TtsService.instance.speakAfterSave(TtsCategory.mealSave));
-    if (mounted) {
-      final l10n = AppLocalizations.of(context)!;
-      Navigator.pop(context);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.savedSnackbarMessage)),
+    // 사진 축소·저장에 잠깐 걸리므로 중복 탭으로 같은 기록이 두 번 저장되지 않게 막는다.
+    setState(() => _saving = true);
+    try {
+      await MealLogService.instance.saveMeal(
+        name: foodName,
+        calories: _totalCalories,
+        amountG: result.estimatedWeightG > 0 ? result.estimatedWeightG * _portionMultiplier : null,
+        carbsG: _totalCarbs,
+        proteinG: _totalProtein,
+        fatG: _totalFat,
+        source: _isManualEntry ? LogSource.manual : LogSource.photo,
+        // 사진은 축소해서 이 기기(documents/food_photos)에만 저장한다.
+        photo: _isManualEntry ? null : _image,
       );
+    } finally {
+      if (mounted) setState(() => _saving = false);
     }
+    _afterSaved();
   }
 
   @override
@@ -220,6 +268,15 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
+            if (_myFoods.isNotEmpty && _result == null && !_loading) ...[
+              _RecentFoodsStrip(
+                foods: _myFoods,
+                byFrequency: _myFoodsByFrequency,
+                onSortChanged: _toggleMyFoodsSort,
+                onTap: _openMyFood,
+              ),
+              const SizedBox(height: 16),
+            ],
             if (_image != null)
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
@@ -373,7 +430,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
                 style: const TextStyle(fontSize: 13, color: Colors.grey),
               ),
               const SizedBox(height: 16),
-              ElevatedButton(onPressed: _save, child: Text(l10n.saveButton)),
+              ElevatedButton(onPressed: _saving ? null : _save, child: Text(l10n.saveButton)),
               const SizedBox(height: 8),
               RelatedProductsButton(
                 queryBuilder: () => _foodNameController.text.trim().isEmpty
@@ -422,6 +479,179 @@ class _QuickModeActionButton extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// 빠른측정 화면 상단 "최근 먹은 음식" 가로 목록(썸네일 + 이름). 최근순/자주 먹은 순 전환.
+class _RecentFoodsStrip extends StatelessWidget {
+  final List<MyFood> foods;
+  final bool byFrequency;
+  final ValueChanged<bool> onSortChanged;
+  final ValueChanged<MyFood> onTap;
+
+  const _RecentFoodsStrip({
+    required this.foods,
+    required this.byFrequency,
+    required this.onSortChanged,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    Widget sortChip(String label, bool value) => ChoiceChip(
+          label: Text(label, style: const TextStyle(fontSize: 11)),
+          selected: byFrequency == value,
+          visualDensity: VisualDensity.compact,
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          onSelected: (_) => onSortChanged(value),
+        );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                l10n.quickModeRecentFoodsTitle,
+                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ),
+            ),
+            sortChip(l10n.myFoodsSortRecent, false),
+            const SizedBox(width: 4),
+            sortChip(l10n.myFoodsSortFrequent, true),
+          ],
+        ),
+        Text(
+          l10n.quickModeRecentFoodsHint,
+          style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
+        ),
+        const SizedBox(height: 8),
+        SizedBox(
+          height: 96,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: foods.length,
+            separatorBuilder: (_, __) => const SizedBox(width: 10),
+            itemBuilder: (context, i) {
+              final food = foods[i];
+              return InkWell(
+                borderRadius: BorderRadius.circular(10),
+                onTap: () => onTap(food),
+                child: SizedBox(
+                  width: 68,
+                  child: Column(
+                    children: [
+                      FoodPhotoThumbnail(path: food.photoPath, size: 60),
+                      const SizedBox(height: 4),
+                      Text(
+                        food.name,
+                        style: const TextStyle(fontSize: 11),
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// 내 음식 목록 항목을 탭했을 때 뜨는 시트: 양 슬라이더(0.5x~2.0x)로 조정 후 저장.
+/// 저장 버튼을 누르면 선택한 배율을 반환한다(실제 저장은 호출부에서).
+class _MyFoodQuickSaveSheet extends StatefulWidget {
+  final MyFood food;
+  final UnitSystem unitSystem;
+
+  const _MyFoodQuickSaveSheet({required this.food, required this.unitSystem});
+
+  @override
+  State<_MyFoodQuickSaveSheet> createState() => _MyFoodQuickSaveSheetState();
+}
+
+class _MyFoodQuickSaveSheetState extends State<_MyFoodQuickSaveSheet> {
+  double _multiplier = 1.0;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final food = widget.food;
+    final calories = (food.calories * _multiplier).toStringAsFixed(0);
+    final base = food.baseAmountG;
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 12),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                FoodPhotoThumbnail(path: food.photoPath, size: 64),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(food.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 2),
+                      Text(
+                        l10n.myFoodUseCount(food.useCount),
+                        style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Text(l10n.quickModePortionAdjust((_multiplier * 100).toStringAsFixed(0))),
+            Slider(
+              value: _multiplier,
+              min: 0.5,
+              max: 2.0,
+              divisions: 15,
+              label: '${(_multiplier * 100).toStringAsFixed(0)}%',
+              onChanged: (v) => setState(() => _multiplier = v),
+            ),
+            Text(
+              base != null
+                  ? l10n.myFoodAmountSummary(formatWeight(base * _multiplier, widget.unitSystem), calories)
+                  : '$calories kcal',
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              l10n.nutrientsSummary(
+                (food.carbsG * _multiplier).toStringAsFixed(0),
+                (food.proteinG * _multiplier).toStringAsFixed(0),
+                (food.fatG * _multiplier).toStringAsFixed(0),
+              ),
+              style: const TextStyle(fontSize: 13, color: Colors.grey),
+            ),
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => Navigator.pop(context, _multiplier),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.foodCoral,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
+                child: Text(l10n.saveButton),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

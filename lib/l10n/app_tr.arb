@@ -265,5 +265,12 @@
   "appUpdateBtnLater": "Daha sonra",
   "appUpdateReadyTitle": "Güncelleme hazır",
   "appUpdateReadyDesc": "Yeni sürüm indirildi. Uygulamak için şimdi yeniden başlatılsın mı?",
-  "appUpdateBtnRestart": "Yeniden başlat"
+  "appUpdateBtnRestart": "Yeniden başlat",
+
+  "quickModeRecentFoodsTitle": "Son yenenler",
+  "quickModeRecentFoodsHint": "Yapay zekâ analizi olmadan hemen kaydetmek için dokunun (günlük limite sayılmaz)",
+  "myFoodsSortRecent": "Son",
+  "myFoodsSortFrequent": "Sık",
+  "myFoodUseCount": "{count} kez kaydedildi",
+  "myFoodAmountSummary": "{weight} · {calories}kcal"
 }
