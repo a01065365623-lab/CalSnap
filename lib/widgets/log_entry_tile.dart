@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import '../models/daily_log_entry.dart';
 import '../theme/app_colors.dart';
 import '../utils/unit_converter.dart';
+import 'food_photo_thumbnail.dart';
 
 class LogEntryTile extends StatelessWidget {
   final DailyLogEntry entry;
@@ -81,11 +82,15 @@ class LogEntryTile extends StatelessWidget {
       leading: Stack(
         clipBehavior: Clip.none,
         children: [
-          CircleAvatar(
-            backgroundColor: _iconBackground,
-            foregroundColor: _iconColor,
-            child: Icon(_icon, color: _iconColor),
-          ),
+          // 사진과 함께 저장한 식사 기록은 아이콘 대신 그 사진 썸네일을 보여준다.
+          if (entry.type == LogType.food && entry.photoPath != null)
+            FoodPhotoThumbnail(path: entry.photoPath, size: 40)
+          else
+            CircleAvatar(
+              backgroundColor: _iconBackground,
+              foregroundColor: _iconColor,
+              child: Icon(_icon, color: _iconColor),
+            ),
           // 카메라로 찍은 기록과 구분할 수 있도록, 직접 입력한 기록에만 작은 편집
           // 아이콘 배지를 붙인다(사진 기반 기록은 배지 없음).
           if (entry.source == LogSource.manual)

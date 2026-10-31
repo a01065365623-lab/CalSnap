@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -133,23 +134,42 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
     _load();
   }
 
-  /// 음식 항목을 탭했을 때 상세 정보 + "관련 상품 보기" 버튼을 보여준다.
-  /// 운동/물 항목에는 이 상세 시트를 연결하지 않는다(build()에서 onTap을 null로 둠).
+  /// 음식 항목을 탭했을 때 (사진이 있으면 큰 사진과 함께) 상세 영양 정보 + "관련 상품
+  /// 보기" 버튼을 보여준다. 운동/물 항목에는 이 상세 시트를 연결하지 않는다(build()에서
+  /// onTap을 null로 둠).
   void _showFoodDetail(BuildContext context, DailyLogEntry entry) {
     final l10n = AppLocalizations.of(context)!;
+    final photoPath = entry.photoPath;
+    final amount = entry.amount;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (ctx) => Padding(
+      builder: (ctx) => SafeArea(
+        child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(20, 20, 20, 20 + MediaQuery.of(ctx).viewInsets.bottom),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (photoPath != null) ...[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.file(
+                  File(photoPath),
+                  width: double.infinity,
+                  height: MediaQuery.of(ctx).size.height * 0.4,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+                ),
+              ),
+              const SizedBox(height: 12),
+            ],
             Text(entry.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
             Text(
-              '${entry.calories.toStringAsFixed(0)} kcal',
+              amount != null
+                  ? '${formatWeight(amount, _unitSystem)} · ${entry.calories.toStringAsFixed(0)} kcal'
+                  : '${entry.calories.toStringAsFixed(0)} kcal',
               style: TextStyle(fontSize: 14, color: Colors.grey.shade700),
             ),
             if (entry.carbsG != null || entry.proteinG != null || entry.fatG != null) ...[
@@ -167,6 +187,7 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
             RelatedProductsButton(queryBuilder: () => entry.name),
           ],
         ),
+      ),
       ),
     );
   }
