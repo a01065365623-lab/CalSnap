@@ -6,8 +6,8 @@ import 'dart:ui' show PlatformDispatcher;
 
 import 'package:flutter/foundation.dart' show ValueListenable, ValueNotifier, debugPrint, kReleaseMode;
 import 'package:http/http.dart' as http;
-import 'package:image/image.dart' as img;
 
+import '../utils/image_compress.dart';
 import 'food_recognition_service.dart';
 import 'user_profile_service.dart';
 
@@ -320,19 +320,7 @@ class GeminiFoodRecognitionService implements FoodRecognitionService {
   /// 가로/세로 중 긴 쪽이 [_maxUploadDimension]을 넘으면 비율을 유지한 채 줄이고,
   /// JPEG 품질 [_jpegQuality]로 재인코딩한다. 디코딩에 실패하면(지원 안 하는 포맷 등)
   /// 원본을 그대로 반환해 인식 자체는 계속 시도할 수 있게 한다.
-  static Uint8List _compressForUpload(Uint8List originalBytes) {
-    final decoded = img.decodeImage(originalBytes);
-    if (decoded == null) return originalBytes;
-
-    final longestSide = decoded.width > decoded.height ? decoded.width : decoded.height;
-    final resized = longestSide > _maxUploadDimension
-        ? img.copyResize(
-            decoded,
-            width: decoded.width >= decoded.height ? _maxUploadDimension : null,
-            height: decoded.height > decoded.width ? _maxUploadDimension : null,
-          )
-        : decoded;
-
-    return Uint8List.fromList(img.encodeJpg(resized, quality: _jpegQuality));
-  }
+  static Uint8List _compressForUpload(Uint8List originalBytes) =>
+      compressJpeg(originalBytes, maxDimension: _maxUploadDimension, quality: _jpegQuality) ??
+      originalBytes;
 }
