@@ -274,5 +274,8 @@
   "myFoodUseCount": "{count, plural, =1{سُجّل مرة واحدة} =2{سُجّل مرتين} other{سُجّل {count} مرات}}",
   "myFoodAmountSummary": "{weight} · {calories} سعرة",
   "settingsPhotosLocalOnlyTile": "تُحفظ الصور على هذا الجهاز فقط",
-  "settingsPhotosLocalOnlySubtitle": "تبقى صور الوجبات والوزن على هذا الجهاز فقط ولا يتم نسخها احتياطيًا إلى خادمنا. تُحذف عند إلغاء تثبيت التطبيق أو إجراء إعادة ضبط كاملة."
+  "settingsPhotosLocalOnlySubtitle": "تبقى صور الوجبات والوزن على هذا الجهاز فقط ولا يتم نسخها احتياطيًا إلى خادمنا. تُحذف عند إلغاء تثبيت التطبيق أو إجراء إعادة ضبط كاملة.",
+  "mealCalendarTitle": "تقويم صور الوجبات",
+  "mealCalendarDayTitle": "وجبات {day}/{month}",
+  "mealCalendarDayTotal": "الإجمالي {calories} سعرة حرارية"
 }

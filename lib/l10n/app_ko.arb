@@ -395,5 +395,10 @@
   "myFoodAmountSummary": "{weight} · {calories}kcal",
   "@myFoodAmountSummary": {"placeholders": {"weight": {"type": "String"}, "calories": {"type": "String"}}},
   "settingsPhotosLocalOnlyTile": "사진은 이 기기에만 저장됩니다",
-  "settingsPhotosLocalOnlySubtitle": "식사·체중 사진은 이 기기에만 보관되며 서버에 백업되지 않아요. 앱을 삭제하거나 전체 초기화하면 함께 삭제돼요."
+  "settingsPhotosLocalOnlySubtitle": "식사·체중 사진은 이 기기에만 보관되며 서버에 백업되지 않아요. 앱을 삭제하거나 전체 초기화하면 함께 삭제돼요.",
+  "mealCalendarTitle": "식사 사진 달력",
+  "mealCalendarDayTitle": "{month}월 {day}일 식사",
+  "@mealCalendarDayTitle": {"placeholders": {"month": {"type": "int"}, "day": {"type": "int"}}},
+  "mealCalendarDayTotal": "합계 {calories} kcal",
+  "@mealCalendarDayTotal": {"placeholders": {"calories": {"type": "String"}}}
 }

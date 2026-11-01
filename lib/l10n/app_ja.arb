@@ -274,5 +274,8 @@
   "myFoodUseCount": "{count}回記録",
   "myFoodAmountSummary": "{weight} · {calories}kcal",
   "settingsPhotosLocalOnlyTile": "写真はこの端末にのみ保存されます",
-  "settingsPhotosLocalOnlySubtitle": "食事・体重の写真はこの端末にのみ保存され、サーバーにはバックアップされません。アプリの削除や全データ初期化で一緒に削除されます。"
+  "settingsPhotosLocalOnlySubtitle": "食事・体重の写真はこの端末にのみ保存され、サーバーにはバックアップされません。アプリの削除や全データ初期化で一緒に削除されます。",
+  "mealCalendarTitle": "食事写真カレンダー",
+  "mealCalendarDayTitle": "{month}月{day}日の食事",
+  "mealCalendarDayTotal": "合計 {calories} kcal"
 }

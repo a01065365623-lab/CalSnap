@@ -275,5 +275,8 @@
   "myFoodUseCount": "{count, plural, =1{Logged once} other{Logged {count} times}}",
   "myFoodAmountSummary": "{weight} · {calories}kcal",
   "settingsPhotosLocalOnlyTile": "Photos are stored only on this device",
-  "settingsPhotosLocalOnlySubtitle": "Meal and weight photos stay on this device and are not backed up to our server. They are deleted if you uninstall the app or do a full reset."
+  "settingsPhotosLocalOnlySubtitle": "Meal and weight photos stay on this device and are not backed up to our server. They are deleted if you uninstall the app or do a full reset.",
+  "mealCalendarTitle": "Meal Photo Calendar",
+  "mealCalendarDayTitle": "Meals on {month}/{day}",
+  "mealCalendarDayTotal": "Total {calories} kcal"
 }

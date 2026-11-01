@@ -274,5 +274,8 @@
   "myFoodUseCount": "{count, plural, =1{Enregistré 1 fois} other{Enregistré {count} fois}}",
   "myFoodAmountSummary": "{weight} · {calories}kcal",
   "settingsPhotosLocalOnlyTile": "Les photos sont stockées uniquement sur cet appareil",
-  "settingsPhotosLocalOnlySubtitle": "Les photos de repas et de poids restent sur cet appareil et ne sont pas sauvegardées sur notre serveur. Elles sont supprimées si vous désinstallez l'app ou effectuez une réinitialisation complète."
+  "settingsPhotosLocalOnlySubtitle": "Les photos de repas et de poids restent sur cet appareil et ne sont pas sauvegardées sur notre serveur. Elles sont supprimées si vous désinstallez l'app ou effectuez une réinitialisation complète.",
+  "mealCalendarTitle": "Calendrier photo des repas",
+  "mealCalendarDayTitle": "Repas du {day}/{month}",
+  "mealCalendarDayTotal": "Total {calories} kcal"
 }

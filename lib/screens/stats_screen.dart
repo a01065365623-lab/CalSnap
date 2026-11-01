@@ -6,6 +6,7 @@ import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
 import '../theme/app_colors.dart';
 import 'daily_log_screen.dart';
+import 'meal_calendar_screen.dart';
 import 'weight_log_screen.dart';
 
 enum _Period { week, month, year }
@@ -204,6 +205,11 @@ class _StatsScreenState extends State<StatsScreen> with SingleTickerProviderStat
     _load(); // 체중을 수정/삭제했을 수 있으니 그래프를 갱신한다.
   }
 
+  Future<void> _openMealCalendar() async {
+    await Navigator.push(context, MaterialPageRoute(builder: (_) => const MealCalendarScreen()));
+    _load(); // 달력에서 지난 식사를 오늘로 다시 기록했을 수 있다.
+  }
+
   String _rangeHeaderText(AppLocalizations l10n) {
     final base = l10n.statsDateRange(_rangeFrom.month, _rangeFrom.day, _rangeTo.month, _rangeTo.day);
     if (_Category.values[_tabController.index] == _Category.calorie) {
@@ -230,6 +236,13 @@ class _StatsScreenState extends State<StatsScreen> with SingleTickerProviderStat
             Text(l10n.statsAppBarTitle),
           ],
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.photo_library_outlined),
+            tooltip: l10n.mealCalendarTitle,
+            onPressed: _openMealCalendar,
+          ),
+        ],
       ),
       body: Column(
         children: [

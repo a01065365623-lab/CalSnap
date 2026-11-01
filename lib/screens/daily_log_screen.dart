@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -12,8 +11,9 @@ import '../services/user_profile_service.dart';
 import '../theme/app_colors.dart';
 import '../utils/unit_converter.dart';
 import '../widgets/banner_ad_widget.dart';
+import '../widgets/food_detail_sheet.dart';
 import '../widgets/log_entry_tile.dart';
-import '../widgets/related_products_button.dart';
+import 'meal_calendar_screen.dart';
 import 'weight_log_screen.dart';
 
 class DailyLogScreen extends StatefulWidget {
@@ -115,6 +115,11 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
     _load();
   }
 
+  Future<void> _openMealCalendar() async {
+    await Navigator.push(context, MaterialPageRoute(builder: (_) => const MealCalendarScreen()));
+    if (mounted) _load(); // 달력에서 지난 식사를 오늘로 다시 기록했을 수 있다.
+  }
+
   Future<void> _deleteAllForDate() async {
     final l10n = AppLocalizations.of(context)!;
     final confirmed = await showDialog<bool>(
@@ -134,64 +139,6 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
     _load();
   }
 
-  /// 음식 항목을 탭했을 때 (사진이 있으면 큰 사진과 함께) 상세 영양 정보 + "관련 상품
-  /// 보기" 버튼을 보여준다. 운동/물 항목에는 이 상세 시트를 연결하지 않는다(build()에서
-  /// onTap을 null로 둠).
-  void _showFoodDetail(BuildContext context, DailyLogEntry entry) {
-    final l10n = AppLocalizations.of(context)!;
-    final photoPath = entry.photoPath;
-    final amount = entry.amount;
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (ctx) => SafeArea(
-        child: SingleChildScrollView(
-        padding: EdgeInsets.fromLTRB(20, 20, 20, 20 + MediaQuery.of(ctx).viewInsets.bottom),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (photoPath != null) ...[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.file(
-                  File(photoPath),
-                  width: double.infinity,
-                  height: MediaQuery.of(ctx).size.height * 0.4,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => const SizedBox.shrink(),
-                ),
-              ),
-              const SizedBox(height: 12),
-            ],
-            Text(entry.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 4),
-            Text(
-              amount != null
-                  ? '${formatWeight(amount, _unitSystem)} · ${entry.calories.toStringAsFixed(0)} kcal'
-                  : '${entry.calories.toStringAsFixed(0)} kcal',
-              style: TextStyle(fontSize: 14, color: Colors.grey.shade700),
-            ),
-            if (entry.carbsG != null || entry.proteinG != null || entry.fatG != null) ...[
-              const SizedBox(height: 4),
-              Text(
-                l10n.nutrientsSummary(
-                  (entry.carbsG ?? 0).toStringAsFixed(0),
-                  (entry.proteinG ?? 0).toStringAsFixed(0),
-                  (entry.fatG ?? 0).toStringAsFixed(0),
-                ),
-                style: TextStyle(fontSize: 13, color: Colors.grey.shade600),
-              ),
-            ],
-            const SizedBox(height: 16),
-            RelatedProductsButton(queryBuilder: () => entry.name),
-          ],
-        ),
-      ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -205,6 +152,11 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
               tooltip: l10n.dailyLogBackToTodayTooltip,
               onPressed: _goToToday,
             ),
+          IconButton(
+            icon: const Icon(Icons.photo_library_outlined),
+            tooltip: l10n.mealCalendarTitle,
+            onPressed: _openMealCalendar,
+          ),
           IconButton(
             icon: const Icon(Icons.calendar_month),
             tooltip: l10n.dailyLogPickDateTooltip,
@@ -254,7 +206,7 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
                         },
                         // 관련 상품 보기는 음식 항목에만 의미가 있으므로, 운동·물
                         // 항목은 onTap을 null로 둬서 탭해도 아무 반응이 없게 한다.
-                        onTap: e.type == LogType.food ? () => _showFoodDetail(context, e) : null,
+                        onTap: e.type == LogType.food ? () => showFoodDetailSheet(context, e, _unitSystem) : null,
                       );
                     },
                   ),

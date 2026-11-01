@@ -274,5 +274,8 @@
   "myFoodUseCount": "{count, plural, one{Записано {count} раз} few{Записано {count} раза} many{Записано {count} раз} other{Записано {count} раза}}",
   "myFoodAmountSummary": "{weight} · {calories} ккал",
   "settingsPhotosLocalOnlyTile": "Фото хранятся только на этом устройстве",
-  "settingsPhotosLocalOnlySubtitle": "Фото еды и веса хранятся только на этом устройстве и не копируются на наш сервер. Они удаляются при удалении приложения или полном сбросе."
+  "settingsPhotosLocalOnlySubtitle": "Фото еды и веса хранятся только на этом устройстве и не копируются на наш сервер. Они удаляются при удалении приложения или полном сбросе.",
+  "mealCalendarTitle": "Календарь фото еды",
+  "mealCalendarDayTitle": "Еда за {day}.{month}",
+  "mealCalendarDayTotal": "Всего {calories} ккал"
 }
