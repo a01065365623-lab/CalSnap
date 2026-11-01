@@ -277,5 +277,11 @@
   "settingsPhotosLocalOnlySubtitle": "Öğün ve kilo fotoğrafları yalnızca bu cihazda kalır, sunucumuza yedeklenmez. Uygulamayı kaldırırsanız veya tamamen sıfırlarsanız silinir.",
   "mealCalendarTitle": "Yemek Fotoğrafı Takvimi",
   "mealCalendarDayTitle": "{day}.{month} öğünleri",
-  "mealCalendarDayTotal": "Toplam {calories} kcal"
+  "mealCalendarDayTotal": "Toplam {calories} kcal",
+  "mealCalendarRelogButton": "Bugün tekrar kaydet",
+  "mealCalendarRelogDone": "Bugünün kaydına eklendi",
+  "mealCalendarCopyDayButton": "Bu günün öğünlerini bugüne kopyala",
+  "mealCalendarCopyDayConfirm": "Bu günün {count} öğünü bugünün kaydına eklensin mi?",
+  "mealCalendarCopyConfirmButton": "Ekle",
+  "mealCalendarCopyDayDone": "Bugünün kaydına {count} öğe eklendi"
 }

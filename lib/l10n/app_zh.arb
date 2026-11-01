@@ -277,5 +277,11 @@
   "settingsPhotosLocalOnlySubtitle": "饮食和体重照片仅保存在本设备上，不会备份到服务器。卸载应用或全部重置时将一并删除。",
   "mealCalendarTitle": "餐食照片日历",
   "mealCalendarDayTitle": "{month}月{day}日的餐食",
-  "mealCalendarDayTotal": "合计 {calories} kcal"
+  "mealCalendarDayTotal": "合计 {calories} kcal",
+  "mealCalendarRelogButton": "再次记录到今天",
+  "mealCalendarRelogDone": "已添加到今天的记录",
+  "mealCalendarCopyDayButton": "将这天的全部餐食复制到今天",
+  "mealCalendarCopyDayConfirm": "要将这天的 {count} 项餐食添加到今天的记录吗？",
+  "mealCalendarCopyConfirmButton": "添加",
+  "mealCalendarCopyDayDone": "已将 {count} 项添加到今天的记录"
 }

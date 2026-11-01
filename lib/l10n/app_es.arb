@@ -277,5 +277,11 @@
   "settingsPhotosLocalOnlySubtitle": "Las fotos de comidas y peso se guardan solo en este dispositivo y no se respaldan en nuestro servidor. Se eliminan si desinstalas la app o haces un restablecimiento completo.",
   "mealCalendarTitle": "Calendario de fotos de comidas",
   "mealCalendarDayTitle": "Comidas del {day}/{month}",
-  "mealCalendarDayTotal": "Total {calories} kcal"
+  "mealCalendarDayTotal": "Total {calories} kcal",
+  "mealCalendarRelogButton": "Registrar de nuevo hoy",
+  "mealCalendarRelogDone": "Añadido al registro de hoy",
+  "mealCalendarCopyDayButton": "Copiar las comidas de este día a hoy",
+  "mealCalendarCopyDayConfirm": "¿Añadir {count} comidas de este día al registro de hoy?",
+  "mealCalendarCopyConfirmButton": "Añadir",
+  "mealCalendarCopyDayDone": "Se añadieron {count} elementos al registro de hoy"
 }

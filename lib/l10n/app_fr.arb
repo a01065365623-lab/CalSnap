@@ -277,5 +277,11 @@
   "settingsPhotosLocalOnlySubtitle": "Les photos de repas et de poids restent sur cet appareil et ne sont pas sauvegardées sur notre serveur. Elles sont supprimées si vous désinstallez l'app ou effectuez une réinitialisation complète.",
   "mealCalendarTitle": "Calendrier photo des repas",
   "mealCalendarDayTitle": "Repas du {day}/{month}",
-  "mealCalendarDayTotal": "Total {calories} kcal"
+  "mealCalendarDayTotal": "Total {calories} kcal",
+  "mealCalendarRelogButton": "Réenregistrer aujourd'hui",
+  "mealCalendarRelogDone": "Ajouté au journal d'aujourd'hui",
+  "mealCalendarCopyDayButton": "Copier les repas de ce jour à aujourd'hui",
+  "mealCalendarCopyDayConfirm": "Ajouter {count} repas de ce jour au journal d'aujourd'hui ?",
+  "mealCalendarCopyConfirmButton": "Ajouter",
+  "mealCalendarCopyDayDone": "{count} éléments ajoutés au journal d'aujourd'hui"
 }

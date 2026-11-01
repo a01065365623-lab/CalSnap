@@ -277,5 +277,11 @@
   "settingsPhotosLocalOnlySubtitle": "Le foto dei pasti e del peso restano su questo dispositivo e non vengono salvate sul nostro server. Vengono eliminate se disinstalli l'app o esegui un ripristino completo.",
   "mealCalendarTitle": "Calendario foto dei pasti",
   "mealCalendarDayTitle": "Pasti del {day}/{month}",
-  "mealCalendarDayTotal": "Totale {calories} kcal"
+  "mealCalendarDayTotal": "Totale {calories} kcal",
+  "mealCalendarRelogButton": "Registra di nuovo oggi",
+  "mealCalendarRelogDone": "Aggiunto al registro di oggi",
+  "mealCalendarCopyDayButton": "Copia i pasti di questo giorno su oggi",
+  "mealCalendarCopyDayConfirm": "Aggiungere {count} pasti di questo giorno al registro di oggi?",
+  "mealCalendarCopyConfirmButton": "Aggiungi",
+  "mealCalendarCopyDayDone": "{count} voci aggiunte al registro di oggi"
 }

@@ -400,5 +400,13 @@
   "mealCalendarDayTitle": "{month}월 {day}일 식사",
   "@mealCalendarDayTitle": {"placeholders": {"month": {"type": "int"}, "day": {"type": "int"}}},
   "mealCalendarDayTotal": "합계 {calories} kcal",
-  "@mealCalendarDayTotal": {"placeholders": {"calories": {"type": "String"}}}
+  "@mealCalendarDayTotal": {"placeholders": {"calories": {"type": "String"}}},
+  "mealCalendarRelogButton": "오늘로 다시 기록",
+  "mealCalendarRelogDone": "오늘 기록에 추가했어요",
+  "mealCalendarCopyDayButton": "이날 식단 전체를 오늘로 복사",
+  "mealCalendarCopyDayConfirm": "이날 식사 {count}개를 오늘 기록에 추가할까요?",
+  "@mealCalendarCopyDayConfirm": {"placeholders": {"count": {"type": "int"}}},
+  "mealCalendarCopyConfirmButton": "추가",
+  "mealCalendarCopyDayDone": "{count}개 항목을 오늘 기록에 추가했어요",
+  "@mealCalendarCopyDayDone": {"placeholders": {"count": {"type": "int"}}}
 }

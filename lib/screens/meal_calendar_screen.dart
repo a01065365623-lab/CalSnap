@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
+import '../services/meal_log_service.dart';
 import '../services/user_profile_service.dart';
 import '../theme/app_colors.dart';
 import '../utils/unit_converter.dart';
@@ -90,6 +91,8 @@ class _MealCalendarScreenState extends State<MealCalendarScreen> {
       isScrollControlled: true,
       builder: (_) => _MealDaySheet(date: date, day: day, unitSystem: _unitSystem),
     );
+    // 시트에서 오늘로 다시 기록했을 수 있으니, 오늘 칸(이번 달을 보고 있을 때)에 반영한다.
+    if (mounted) _load();
   }
 
   @override
@@ -168,8 +171,7 @@ class _MealCalendarScreenState extends State<MealCalendarScreen> {
                       final day = index - firstDayOffset + 1;
                       final date = DateTime(_month.year, _month.month, day);
                       final meals = _days[mealCalendarDateKey(date)];
-                      final isToday =
-                          date.year == now.year && date.month == now.month && date.day == now.day;
+                      final isToday = date.year == now.year && date.month == now.month && date.day == now.day;
                       return MealCalendarDayCell(
                         day: day,
                         meals: meals,
@@ -307,7 +309,9 @@ class _CalorieMark extends StatelessWidget {
 }
 
 /// 날짜를 탭하면 뜨는 그날 식사 목록. 항목을 탭하면 큰 사진과 영양 정보 시트를 연다.
-class _MealDaySheet extends StatelessWidget {
+/// 항목마다 "오늘로 다시 기록" 버튼이, 오늘이 아닌 날에는 그날 식단 전체를 오늘로
+/// 복사하는 버튼이 있다(둘 다 AI 인식 없이 저장).
+class _MealDaySheet extends StatefulWidget {
   final DateTime date;
   final MealCalendarDay day;
   final UnitSystem unitSystem;
@@ -315,8 +319,63 @@ class _MealDaySheet extends StatelessWidget {
   const _MealDaySheet({required this.date, required this.day, required this.unitSystem});
 
   @override
+  State<_MealDaySheet> createState() => _MealDaySheetState();
+}
+
+class _MealDaySheetState extends State<_MealDaySheet> {
+  final Set<int> _relogged = {}; // 이 시트에서 오늘로 다시 기록한 항목(목록 인덱스)
+  bool _saving = false;
+
+  bool get _isToday {
+    final now = DateTime.now();
+    final d = widget.date;
+    return d.year == now.year && d.month == now.month && d.day == now.day;
+  }
+
+  Future<void> _relog(int index) async {
+    if (_saving) return;
+    setState(() => _saving = true);
+    try {
+      await MealLogService.instance.relogToToday(widget.day.meals[index]);
+      _relogged.add(index);
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
+  }
+
+  Future<void> _copyDay() async {
+    final l10n = AppLocalizations.of(context)!;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Text(l10n.mealCalendarCopyDayConfirm(widget.day.meals.length)),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context, false), child: Text(l10n.cancelButton)),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(l10n.mealCalendarCopyConfirmButton),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted || _saving) return;
+    setState(() => _saving = true);
+    final int count;
+    try {
+      count = await MealLogService.instance.copyDayToToday(widget.date);
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
+    if (!mounted) return;
+    final messenger = ScaffoldMessenger.of(context);
+    Navigator.pop(context);
+    messenger.showSnackBar(SnackBar(content: Text(l10n.mealCalendarCopyDayDone(count))));
+  }
+
+  @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final day = widget.day;
     return SafeArea(
       child: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.7),
@@ -330,7 +389,7 @@ class _MealDaySheet extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    l10n.mealCalendarDayTitle(date.month, date.day),
+                    l10n.mealCalendarDayTitle(widget.date.month, widget.date.day),
                     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 2),
@@ -347,18 +406,38 @@ class _MealDaySheet extends StatelessWidget {
                 itemCount: day.meals.length,
                 itemBuilder: (context, i) {
                   final meal = day.meals[i];
+                  final done = _relogged.contains(i);
                   return ListTile(
                     leading: FoodPhotoThumbnail(path: meal.photoPath, size: 48),
                     title: Text(meal.name, maxLines: 1, overflow: TextOverflow.ellipsis),
                     subtitle: Text(
                       '${DateFormat('HH:mm').format(meal.datetime)} · ${meal.calories.toStringAsFixed(0)} kcal',
                     ),
-                    onTap: () => showFoodDetailSheet(context, meal, unitSystem),
+                    onTap: () => showFoodDetailSheet(context, meal, widget.unitSystem),
+                    // 긴 언어에서도 넘치지 않게 아이콘 버튼 + 툴팁으로 둔다. 다시 기록한 뒤에는
+                    // 체크로 바뀌어(같은 시트에서 중복 저장 방지) 저장됐음을 알린다.
+                    trailing: IconButton(
+                      key: ValueKey('relog-$i'),
+                      icon: Icon(done ? Icons.check_circle : Icons.replay, color: AppColors.foodCoral),
+                      tooltip: done ? l10n.mealCalendarRelogDone : l10n.mealCalendarRelogButton,
+                      onPressed: done || _saving ? null : () => _relog(i),
+                    ),
                   );
                 },
               ),
             ),
-            const SizedBox(height: 8),
+            if (!_isToday)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                child: FilledButton.icon(
+                  key: const ValueKey('copy-day'),
+                  style: FilledButton.styleFrom(backgroundColor: AppColors.foodCoral),
+                  icon: const Icon(Icons.content_copy, size: 18),
+                  label: Text(l10n.mealCalendarCopyDayButton, textAlign: TextAlign.center),
+                  onPressed: _saving ? null : _copyDay,
+                ),
+              ),
+            const SizedBox(height: 12),
           ],
         ),
       ),

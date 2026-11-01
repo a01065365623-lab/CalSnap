@@ -278,5 +278,11 @@
   "settingsPhotosLocalOnlySubtitle": "Meal and weight photos stay on this device and are not backed up to our server. They are deleted if you uninstall the app or do a full reset.",
   "mealCalendarTitle": "Meal Photo Calendar",
   "mealCalendarDayTitle": "Meals on {month}/{day}",
-  "mealCalendarDayTotal": "Total {calories} kcal"
+  "mealCalendarDayTotal": "Total {calories} kcal",
+  "mealCalendarRelogButton": "Log again today",
+  "mealCalendarRelogDone": "Added to today's log",
+  "mealCalendarCopyDayButton": "Copy this day's meals to today",
+  "mealCalendarCopyDayConfirm": "Add {count} meals from this day to today's log?",
+  "mealCalendarCopyConfirmButton": "Add",
+  "mealCalendarCopyDayDone": "Added {count} items to today's log"
 }

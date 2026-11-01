@@ -277,5 +277,11 @@
   "settingsPhotosLocalOnlySubtitle": "Mahlzeiten- und Gewichtsfotos bleiben auf diesem Gerät und werden nicht auf unserem Server gesichert. Sie werden gelöscht, wenn du die App deinstallierst oder alles zurücksetzt.",
   "mealCalendarTitle": "Mahlzeiten-Fotokalender",
   "mealCalendarDayTitle": "Mahlzeiten am {day}.{month}.",
-  "mealCalendarDayTotal": "Gesamt {calories} kcal"
+  "mealCalendarDayTotal": "Gesamt {calories} kcal",
+  "mealCalendarRelogButton": "Heute erneut erfassen",
+  "mealCalendarRelogDone": "Zum heutigen Protokoll hinzugefügt",
+  "mealCalendarCopyDayButton": "Mahlzeiten dieses Tages auf heute kopieren",
+  "mealCalendarCopyDayConfirm": "{count} Mahlzeiten dieses Tages zum heutigen Protokoll hinzufügen?",
+  "mealCalendarCopyConfirmButton": "Hinzufügen",
+  "mealCalendarCopyDayDone": "{count} Einträge zum heutigen Protokoll hinzugefügt"
 }

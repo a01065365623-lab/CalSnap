@@ -277,5 +277,11 @@
   "settingsPhotosLocalOnlySubtitle": "食事・体重の写真はこの端末にのみ保存され、サーバーにはバックアップされません。アプリの削除や全データ初期化で一緒に削除されます。",
   "mealCalendarTitle": "食事写真カレンダー",
   "mealCalendarDayTitle": "{month}月{day}日の食事",
-  "mealCalendarDayTotal": "合計 {calories} kcal"
+  "mealCalendarDayTotal": "合計 {calories} kcal",
+  "mealCalendarRelogButton": "今日にもう一度記録",
+  "mealCalendarRelogDone": "今日の記録に追加しました",
+  "mealCalendarCopyDayButton": "この日の食事をすべて今日にコピー",
+  "mealCalendarCopyDayConfirm": "この日の食事{count}件を今日の記録に追加しますか？",
+  "mealCalendarCopyConfirmButton": "追加",
+  "mealCalendarCopyDayDone": "{count}件を今日の記録に追加しました"
 }

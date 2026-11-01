@@ -277,5 +277,11 @@
   "settingsPhotosLocalOnlySubtitle": "Ảnh bữa ăn và cân nặng chỉ lưu trên thiết bị này và không được sao lưu lên máy chủ của chúng tôi. Ảnh sẽ bị xóa khi bạn gỡ ứng dụng hoặc đặt lại toàn bộ.",
   "mealCalendarTitle": "Lịch ảnh bữa ăn",
   "mealCalendarDayTitle": "Bữa ăn ngày {day}/{month}",
-  "mealCalendarDayTotal": "Tổng {calories} kcal"
+  "mealCalendarDayTotal": "Tổng {calories} kcal",
+  "mealCalendarRelogButton": "Ghi lại vào hôm nay",
+  "mealCalendarRelogDone": "Đã thêm vào nhật ký hôm nay",
+  "mealCalendarCopyDayButton": "Sao chép bữa ăn ngày này sang hôm nay",
+  "mealCalendarCopyDayConfirm": "Thêm {count} món của ngày này vào nhật ký hôm nay?",
+  "mealCalendarCopyConfirmButton": "Thêm",
+  "mealCalendarCopyDayDone": "Đã thêm {count} mục vào nhật ký hôm nay"
 }

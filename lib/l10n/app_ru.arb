@@ -277,5 +277,11 @@
   "settingsPhotosLocalOnlySubtitle": "Фото еды и веса хранятся только на этом устройстве и не копируются на наш сервер. Они удаляются при удалении приложения или полном сбросе.",
   "mealCalendarTitle": "Календарь фото еды",
   "mealCalendarDayTitle": "Еда за {day}.{month}",
-  "mealCalendarDayTotal": "Всего {calories} ккал"
+  "mealCalendarDayTotal": "Всего {calories} ккал",
+  "mealCalendarRelogButton": "Записать снова сегодня",
+  "mealCalendarRelogDone": "Добавлено в сегодняшний журнал",
+  "mealCalendarCopyDayButton": "Скопировать еду этого дня на сегодня",
+  "mealCalendarCopyDayConfirm": "Добавить приёмы пищи этого дня ({count}) в сегодняшний журнал?",
+  "mealCalendarCopyConfirmButton": "Добавить",
+  "mealCalendarCopyDayDone": "Добавлено в сегодняшний журнал: {count}"
 }

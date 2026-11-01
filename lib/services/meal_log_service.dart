@@ -92,6 +92,44 @@ class MealLogService {
     );
   }
 
+  /// 지난 식사 기록 한 건을 지금 시각의 새 기록으로 다시 남긴다(식사 사진 달력의 "오늘로
+  /// 다시 기록"). 내 음식 목록 재기록과 마찬가지로 AI 인식(Gemini)을 호출하지 않아 서버
+  /// 일일 한도에 포함되지 않고, 출처는 LogSource.myFood로 남긴다.
+  Future<void> relogToToday(DailyLogEntry meal) => _relogAll([meal]);
+
+  /// [date]의 음식 기록 전체를 오늘로 복사하고 복사한 개수를 반환한다. 운동·물 기록은
+  /// 식단이 아니므로 제외한다. 저장 방식은 [relogToToday]와 같다.
+  Future<int> copyDayToToday(DateTime date) async {
+    final meals = (await _db.getLogsForDate(date)).where((e) => e.type == LogType.food).toList();
+    await _relogAll(meals);
+    return meals.length;
+  }
+
+  Future<void> _relogAll(List<DailyLogEntry> meals) async {
+    if (meals.isEmpty) return;
+    final now = DateTime.now();
+    final copies = <DailyLogEntry>[];
+    for (var i = 0; i < meals.length; i++) {
+      // 사진은 새 파일로 복사해 둔다(원래 기록을 지워도 새 기록의 사진이 깨지지 않게).
+      final photoPath = await _photos.copyPhoto(meals[i].photoPath, prefix: 'meal');
+      // 같은 시각으로 넣으면 목록 순서가 섞일 수 있어, 원래 순서대로 1ms씩 벌린다.
+      copies.add(relogEntry(meals[i], now.add(Duration(milliseconds: i)), photoPath));
+    }
+    await _db.insertLogsBulk(copies);
+    for (final c in copies) {
+      await _upsertMyFood(
+        name: c.name,
+        amountG: c.amount,
+        calories: c.calories,
+        carbsG: c.carbsG ?? 0,
+        proteinG: c.proteinG ?? 0,
+        fatG: c.fatG ?? 0,
+        thumbPath: null, // 기존 썸네일 유지
+        usedAt: now,
+      );
+    }
+  }
+
   Future<void> _upsertMyFood({
     required String name,
     double? amountG,
@@ -135,3 +173,19 @@ class MealLogService {
     await WeightPhotoService.instance.deleteAllPhotos();
   }
 }
+
+/// [meal]과 같은 음식·양·영양 정보로 [at] 시각에 다시 기록할 항목을 만든다. id는 새로
+/// 매기고, 출처는 AI 인식 없이 다시 기록했다는 뜻의 LogSource.myFood로 바꾼다.
+DailyLogEntry relogEntry(DailyLogEntry meal, DateTime at, String? photoPath) => DailyLogEntry(
+      datetime: at,
+      type: LogType.food,
+      name: meal.name,
+      calories: meal.calories,
+      amount: meal.amount,
+      mode: meal.mode ?? LogMode.quick,
+      carbsG: meal.carbsG,
+      proteinG: meal.proteinG,
+      fatG: meal.fatG,
+      source: LogSource.myFood,
+      photoPath: photoPath,
+    );

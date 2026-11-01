@@ -277,5 +277,11 @@
   "settingsPhotosLocalOnlySubtitle": "भोजन और वज़न की फ़ोटो केवल इसी डिवाइस पर रहती हैं और हमारे सर्वर पर बैकअप नहीं होतीं। ऐप हटाने या पूरा रीसेट करने पर ये भी हट जाती हैं।",
   "mealCalendarTitle": "भोजन फ़ोटो कैलेंडर",
   "mealCalendarDayTitle": "{day}/{month} के भोजन",
-  "mealCalendarDayTotal": "कुल {calories} kcal"
+  "mealCalendarDayTotal": "कुल {calories} kcal",
+  "mealCalendarRelogButton": "आज फिर से दर्ज करें",
+  "mealCalendarRelogDone": "आज के लॉग में जोड़ा गया",
+  "mealCalendarCopyDayButton": "इस दिन के भोजन आज में कॉपी करें",
+  "mealCalendarCopyDayConfirm": "इस दिन के {count} भोजन आज के लॉग में जोड़ें?",
+  "mealCalendarCopyConfirmButton": "जोड़ें",
+  "mealCalendarCopyDayDone": "आज के लॉग में {count} आइटम जोड़े गए"
 }

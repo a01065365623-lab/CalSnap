@@ -277,5 +277,11 @@
   "settingsPhotosLocalOnlySubtitle": "تبقى صور الوجبات والوزن على هذا الجهاز فقط ولا يتم نسخها احتياطيًا إلى خادمنا. تُحذف عند إلغاء تثبيت التطبيق أو إجراء إعادة ضبط كاملة.",
   "mealCalendarTitle": "تقويم صور الوجبات",
   "mealCalendarDayTitle": "وجبات {day}/{month}",
-  "mealCalendarDayTotal": "الإجمالي {calories} سعرة حرارية"
+  "mealCalendarDayTotal": "الإجمالي {calories} سعرة حرارية",
+  "mealCalendarRelogButton": "سجّلها اليوم مرة أخرى",
+  "mealCalendarRelogDone": "تمت الإضافة إلى سجل اليوم",
+  "mealCalendarCopyDayButton": "نسخ وجبات هذا اليوم إلى اليوم",
+  "mealCalendarCopyDayConfirm": "هل تريد إضافة وجبات هذا اليوم ({count}) إلى سجل اليوم؟",
+  "mealCalendarCopyConfirmButton": "إضافة",
+  "mealCalendarCopyDayDone": "تمت الإضافة إلى سجل اليوم: {count}"
 }
