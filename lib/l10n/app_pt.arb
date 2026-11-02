@@ -283,5 +283,9 @@
   "mealCalendarCopyDayButton": "Copiar as refeições deste dia para hoje",
   "mealCalendarCopyDayConfirm": "Adicionar {count} refeições deste dia ao registro de hoje?",
   "mealCalendarCopyConfirmButton": "Adicionar",
-  "mealCalendarCopyDayDone": "{count} itens adicionados ao registro de hoje"
+  "mealCalendarCopyDayDone": "{count} itens adicionados ao registro de hoje",
+
+  "crossPromoSectionTitle": "Mais apps da K-Brain Games Lab",
+  "crossPromoWediTagline": "Seu guia diário de atividades com base no clima",
+  "crossPromoViewOnPlayButton": "Ver no Google Play"
 }

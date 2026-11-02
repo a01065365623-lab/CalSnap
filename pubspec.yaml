@@ -65,6 +65,7 @@ flutter:
     - assets/
     - assets/calsnap_phrases.json
     - assets/food_db_seed.json
+    - assets/promo/
 
 # Android mipmap-mdpi ~ xxxhdpi용 ic_launcher를 assets/icon/icon.png(512x512)로부터
 # 생성한다. `dart run flutter_launcher_icons`로 실행.

@@ -408,5 +408,9 @@
   "@mealCalendarCopyDayConfirm": {"placeholders": {"count": {"type": "int"}}},
   "mealCalendarCopyConfirmButton": "추가",
   "mealCalendarCopyDayDone": "{count}개 항목을 오늘 기록에 추가했어요",
-  "@mealCalendarCopyDayDone": {"placeholders": {"count": {"type": "int"}}}
+  "@mealCalendarCopyDayDone": {"placeholders": {"count": {"type": "int"}}},
+
+  "crossPromoSectionTitle": "K-Brain Games Lab의 다른 앱",
+  "crossPromoWediTagline": "날씨에 맞춘 오늘의 행동 가이드",
+  "crossPromoViewOnPlayButton": "Google Play에서 보기"
 }

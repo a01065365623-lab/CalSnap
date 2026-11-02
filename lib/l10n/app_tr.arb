@@ -283,5 +283,9 @@
   "mealCalendarCopyDayButton": "Bu günün öğünlerini bugüne kopyala",
   "mealCalendarCopyDayConfirm": "Bu günün {count} öğünü bugünün kaydına eklensin mi?",
   "mealCalendarCopyConfirmButton": "Ekle",
-  "mealCalendarCopyDayDone": "Bugünün kaydına {count} öğe eklendi"
+  "mealCalendarCopyDayDone": "Bugünün kaydına {count} öğe eklendi",
+
+  "crossPromoSectionTitle": "K-Brain Games Lab'in diğer uygulamaları",
+  "crossPromoWediTagline": "Hava durumuna göre günlük aktivite rehberi",
+  "crossPromoViewOnPlayButton": "Google Play'de görüntüle"
 }

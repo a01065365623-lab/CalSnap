@@ -283,5 +283,9 @@
   "mealCalendarCopyDayButton": "इस दिन के भोजन आज में कॉपी करें",
   "mealCalendarCopyDayConfirm": "इस दिन के {count} भोजन आज के लॉग में जोड़ें?",
   "mealCalendarCopyConfirmButton": "जोड़ें",
-  "mealCalendarCopyDayDone": "आज के लॉग में {count} आइटम जोड़े गए"
+  "mealCalendarCopyDayDone": "आज के लॉग में {count} आइटम जोड़े गए",
+
+  "crossPromoSectionTitle": "K-Brain Games Lab के अन्य ऐप",
+  "crossPromoWediTagline": "मौसम के अनुसार आज की गतिविधि गाइड",
+  "crossPromoViewOnPlayButton": "Google Play पर देखें"
 }

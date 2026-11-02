@@ -283,5 +283,9 @@
   "mealCalendarCopyDayButton": "将这天的全部餐食复制到今天",
   "mealCalendarCopyDayConfirm": "要将这天的 {count} 项餐食添加到今天的记录吗？",
   "mealCalendarCopyConfirmButton": "添加",
-  "mealCalendarCopyDayDone": "已将 {count} 项添加到今天的记录"
+  "mealCalendarCopyDayDone": "已将 {count} 项添加到今天的记录",
+
+  "crossPromoSectionTitle": "K-Brain Games Lab 的其他应用",
+  "crossPromoWediTagline": "根据天气提供每日行动指南",
+  "crossPromoViewOnPlayButton": "在 Google Play 上查看"
 }

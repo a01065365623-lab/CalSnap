@@ -283,5 +283,9 @@
   "mealCalendarCopyDayButton": "Sao chép bữa ăn ngày này sang hôm nay",
   "mealCalendarCopyDayConfirm": "Thêm {count} món của ngày này vào nhật ký hôm nay?",
   "mealCalendarCopyConfirmButton": "Thêm",
-  "mealCalendarCopyDayDone": "Đã thêm {count} mục vào nhật ký hôm nay"
+  "mealCalendarCopyDayDone": "Đã thêm {count} mục vào nhật ký hôm nay",
+
+  "crossPromoSectionTitle": "Ứng dụng khác của K-Brain Games Lab",
+  "crossPromoWediTagline": "Hướng dẫn hoạt động mỗi ngày theo thời tiết",
+  "crossPromoViewOnPlayButton": "Xem trên Google Play"
 }

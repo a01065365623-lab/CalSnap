@@ -283,5 +283,9 @@
   "mealCalendarCopyDayButton": "Скопировать еду этого дня на сегодня",
   "mealCalendarCopyDayConfirm": "Добавить приёмы пищи этого дня ({count}) в сегодняшний журнал?",
   "mealCalendarCopyConfirmButton": "Добавить",
-  "mealCalendarCopyDayDone": "Добавлено в сегодняшний журнал: {count}"
+  "mealCalendarCopyDayDone": "Добавлено в сегодняшний журнал: {count}",
+
+  "crossPromoSectionTitle": "Другие приложения K-Brain Games Lab",
+  "crossPromoWediTagline": "Ежедневный гид по делам с учётом погоды",
+  "crossPromoViewOnPlayButton": "Открыть в Google Play"
 }

@@ -283,5 +283,9 @@
   "mealCalendarCopyDayButton": "この日の食事をすべて今日にコピー",
   "mealCalendarCopyDayConfirm": "この日の食事{count}件を今日の記録に追加しますか？",
   "mealCalendarCopyConfirmButton": "追加",
-  "mealCalendarCopyDayDone": "{count}件を今日の記録に追加しました"
+  "mealCalendarCopyDayDone": "{count}件を今日の記録に追加しました",
+
+  "crossPromoSectionTitle": "K-Brain Games Labのほかのアプリ",
+  "crossPromoWediTagline": "天気に合わせた今日の行動ガイド",
+  "crossPromoViewOnPlayButton": "Google Playで見る"
 }

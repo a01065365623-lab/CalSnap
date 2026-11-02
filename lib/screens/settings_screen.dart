@@ -12,6 +12,7 @@ import '../services/user_profile_service.dart';
 import '../theme/app_colors.dart';
 import '../utils/bmr_calculator.dart';
 import '../utils/unit_converter.dart';
+import '../widgets/cross_promo_section.dart';
 import 'onboarding_screen.dart';
 import 'profile_edit_screen.dart';
 
@@ -473,6 +474,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: Text(l10n.settingsPhotosLocalOnlyTile),
             subtitle: Text(l10n.settingsPhotosLocalOnlySubtitle),
           ),
+          // K-Brain Games Lab 다른 앱 소개(lib/config/cross_promo.dart). 이 화면에는 광고가
+          // 없으며, 팝업이 아니라 설정 목록 안의 카드로만 보여준다.
+          const Divider(),
+          CrossPromoSection(),
           if (kDebugMode) ...[
             const Divider(),
             const Padding(
