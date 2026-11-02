@@ -412,5 +412,7 @@
 
   "crossPromoSectionTitle": "K-Brain Games Lab의 다른 앱",
   "crossPromoWediTagline": "날씨에 맞춘 오늘의 행동 가이드",
-  "crossPromoViewOnPlayButton": "Google Play에서 보기"
+  "crossPromoViewOnPlayButton": "Google Play에서 보기",
+
+  "recognitionErrorUnreadablePhoto": "사진을 읽을 수 없어요. 다시 시도하거나 다른 사진을 골라주세요."
 }

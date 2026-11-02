@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -74,8 +72,11 @@ abstract class FoodRecognitionService {
   Future<void> refreshUsage();
 
 
+  /// [uploadJpeg]: FoodPhotoService.prepare가 만든 업로드용 JPEG(768px/80%). 여기서는
+  /// 다시 디코딩·압축하지 않고 그대로 보낸다 — 같은 사진을 재시도하면 바이트가 같아
+  /// 서버 캐시 키(sha256)도 그대로 유지된다.
   /// [hint]: 사용자가 알고 있는 음식 이름(선택). 인식 정확도를 높이는 참고용이며 비어있어도 된다.
-  Future<FoodRecognitionResult> recognize(File imageFile, {String? hint});
+  Future<FoodRecognitionResult> recognize(Uint8List uploadJpeg, {String? hint});
 
   /// 사진 없이 음식 이름과 양(직접 입력 모드)만으로 칼로리/영양소를 추정한다.
   /// [unit]은 [ManualAmountUnitX.apiValue] 값('g'/'ml'/'serving'/'piece')을 그대로 받는다.
@@ -109,6 +110,10 @@ enum FoodRecognitionFailure {
   /// 프록시가 4xx/5xx(401 제외)를 반환 — Gemini 호출 실패, 응답 파싱 실패 등 서버측 문제.
   server,
 
+  /// 고른 사진을 디코딩할 수 없음(손상된 파일, 지원하지 않는 형식 등). 원본을 그대로
+  /// 올리지 않고 서버 요청 전에 멈추므로 일일 한도도 차감되지 않는다.
+  unreadablePhoto,
+
   /// 위에 해당하지 않는 예기치 못한 오류.
   unknown,
 }
@@ -137,6 +142,8 @@ String friendlyRecognitionErrorMessage(AppLocalizations l10n, Object error) {
         return l10n.recognitionErrorRateLimited;
       case FoodRecognitionFailure.dailyLimitExceeded:
         return l10n.recognitionErrorDailyLimitExceeded;
+      case FoodRecognitionFailure.unreadablePhoto:
+        return l10n.recognitionErrorUnreadablePhoto;
       case FoodRecognitionFailure.server:
       case FoodRecognitionFailure.unknown:
         return l10n.recognitionErrorGeneric;
@@ -154,7 +161,7 @@ class MockFoodRecognitionService implements FoodRecognitionService {
   Future<void> refreshUsage() async {}
 
   @override
-  Future<FoodRecognitionResult> recognize(File imageFile, {String? hint}) async {
+  Future<FoodRecognitionResult> recognize(Uint8List uploadJpeg, {String? hint}) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return const FoodRecognitionResult(
       foodName: '김치찌개 (추정)',

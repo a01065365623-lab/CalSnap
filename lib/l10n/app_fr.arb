@@ -287,5 +287,7 @@
 
   "crossPromoSectionTitle": "Autres apps de K-Brain Games Lab",
   "crossPromoWediTagline": "Votre guide d'activités du jour selon la météo",
-  "crossPromoViewOnPlayButton": "Voir sur Google Play"
+  "crossPromoViewOnPlayButton": "Voir sur Google Play",
+
+  "recognitionErrorUnreadablePhoto": "Impossible de lire cette photo. Réessayez ou choisissez une autre photo."
 }

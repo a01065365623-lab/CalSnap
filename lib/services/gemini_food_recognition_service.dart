@@ -7,17 +7,16 @@ import 'dart:ui' show PlatformDispatcher;
 import 'package:flutter/foundation.dart' show ValueListenable, ValueNotifier, debugPrint, kReleaseMode;
 import 'package:http/http.dart' as http;
 
-import '../utils/image_compress.dart';
 import 'food_recognition_service.dart';
 import 'user_profile_service.dart';
 
 /// Gemini(gemini-2.0-flash)를 클라이언트에서 직접 호출하지 않고, API 키를 보관하는
 /// 자체 백엔드 프록시(backend/, Flask + Railway)를 거쳐 결과를 받아온다.
 ///
-/// 업로드 전에 이미지를 최대 [_maxUploadDimension]px로 리사이즈하고 JPEG 품질
-/// [_jpegQuality]%로 재인코딩한다(원본 카메라 사진은 수 MB인데 인식에는 그럴
-/// 필요가 없어서, 이게 인식 왕복 시간의 주된 병목이었음). 압축 전/후 바이트 크기와
-/// 업로드+응답 소요 시간을 debugPrint로 남기니 flutter run 로그로 확인 가능.
+/// 업로드 이미지는 호출 전에 FoodPhotoService.prepare가 긴 변 768px · JPEG 80%로 줄여
+/// 둔 것이다([FoodPhotoSpec] — 원본 카메라 사진은 수 MB라 그대로 올리면 업로드가 인식
+/// 왕복 시간의 주된 병목이 됨). 변환 시간·크기는 FoodPhotoService가, 업로드+응답 소요
+/// 시간과 전송 크기는 여기서 debugPrint로 남긴다.
 ///
 /// 프록시 계약 — POST {proxyBaseUrl}/recognize
 ///   헤더: Content-Type: application/json, X-API-Key: <apiKey>,
@@ -47,15 +46,6 @@ class GeminiFoodRecognitionService implements FoodRecognitionService {
 
   /// Gemini의 JSON 텍스트 응답에는 확률적 신뢰도 점수가 없어 고정값을 사용한다.
   static const double _placeholderConfidence = 0.7;
-
-  /// 업로드 전 리사이즈 기준 최대 가로/세로 픽셀. 최신 폰 카메라 원본(가로 3000px+,
-  /// 수 MB)을 그대로 올리면 업로드 자체가 인식 지연의 주 원인이 되는데, 음식 인식은
-  /// 이 정도 해상도로도 충분해서 체감 속도 개선 대비 정확도 손실이 거의 없다.
-  static const int _maxUploadDimension = 768;
-
-  /// 리사이즈 후 JPEG 재인코딩 품질(0~100). 80%는 육안으로는 화질 차이가 거의 없으면서
-  /// 파일 크기를 크게 줄여주는 통상적인 절충값.
-  static const int _jpegQuality = 80;
 
   /// 프록시 서버(Railway 무료 티어 콜드스타트 포함)가 응답하지 않을 때 무한 대기하지
   /// 않도록 두는 상한. 이 시간을 넘기면 TimeoutException을 던져 호출자가 에러 처리를
@@ -96,18 +86,11 @@ class GeminiFoodRecognitionService implements FoodRecognitionService {
   }
 
   @override
-  Future<FoodRecognitionResult> recognize(File imageFile, {String? hint}) async {
+  Future<FoodRecognitionResult> recognize(Uint8List uploadBytes, {String? hint}) async {
     final uri = Uri.parse('$proxyBaseUrl/recognize');
 
-    final originalBytes = await imageFile.readAsBytes();
-    final compressStopwatch = Stopwatch()..start();
-    final uploadBytes = _compressForUpload(originalBytes);
-    compressStopwatch.stop();
-    debugPrint(
-      '[GeminiFoodRecognitionService] 이미지 압축: '
-      '${originalBytes.length}B → ${uploadBytes.length}B '
-      '(${compressStopwatch.elapsedMilliseconds}ms, 최대 ${_maxUploadDimension}px/품질 $_jpegQuality%)',
-    );
+    // 리사이즈·압축은 FoodPhotoService.prepare가 사진을 고를 때 한 번만 해 둔다
+    // (저장용과 같은 디코딩 결과에서 생성). 여기서는 받은 바이트를 그대로 보낸다.
     final base64Image = base64Encode(uploadBytes);
     final trimmedHint = hint?.trim();
     // 기기 언어 코드(예: 'ko', 'en', 'ja')만 보낸다. 지원 여부 판단·영어 폴백은
@@ -316,11 +299,4 @@ class GeminiFoodRecognitionService implements FoodRecognitionService {
       return false;
     }
   }
-
-  /// 가로/세로 중 긴 쪽이 [_maxUploadDimension]을 넘으면 비율을 유지한 채 줄이고,
-  /// JPEG 품질 [_jpegQuality]로 재인코딩한다. 디코딩에 실패하면(지원 안 하는 포맷 등)
-  /// 원본을 그대로 반환해 인식 자체는 계속 시도할 수 있게 한다.
-  static Uint8List _compressForUpload(Uint8List originalBytes) =>
-      compressJpeg(originalBytes, maxDimension: _maxUploadDimension, quality: _jpegQuality) ??
-      originalBytes;
 }

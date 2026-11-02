@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
 import '../models/my_food.dart';
+import '../services/food_photo_service.dart';
 import '../services/food_recognition_service.dart';
 import '../services/gemini_food_recognition_service.dart';
 import '../services/meal_log_service.dart';
@@ -34,6 +35,9 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
   final _hintController = TextEditingController();
 
   File? _image;
+  // _image를 한 번 디코딩해 만든 업로드용·저장용 JPEG. 재시도와 저장에 그대로 다시 써서
+  // 두 번 디코딩하지 않고, 재전송 시 서버 캐시 키(업로드 바이트 sha256)도 유지한다.
+  PreparedFoodPhoto? _prepared;
   FoodRecognitionResult? _result;
   double _portionMultiplier = 1.0; // 보정 슬라이더 (0.5x ~ 2.0x)
   bool _loading = false;
@@ -129,7 +133,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
   }
 
   Future<void> _pickImage(ImageSource source) async {
-    // 리사이즈/압축은 GeminiFoodRecognitionService가 업로드 직전에 한 번만 수행한다
+    // 리사이즈/압축은 _recognize에서 FoodPhotoService.prepare가 한 번만 수행한다
     // (여기서 imageQuality까지 지정하면 원본 미리보기 화질만 낮아지고 이중 압축이 됨).
     final picked = await _picker.pickImage(source: source);
     if (picked == null) return;
@@ -137,6 +141,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
     final image = File(picked.path);
     setState(() {
       _image = image;
+      _prepared = null;
       _result = null;
       _errorMessage = null;
       _isManualEntry = false;
@@ -160,6 +165,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
     if (result == null || !mounted) return;
     setState(() {
       _image = null;
+      _prepared = null;
       _errorMessage = null;
       _result = result;
       _foodNameController.text = result.foodName;
@@ -177,18 +183,30 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
 
     final hint = _hintController.text.trim();
     try {
+      // 사진 변환은 처음 한 번만. 재시도 때는 같은 바이트를 다시 보낸다.
+      final prepared = _prepared ?? await FoodPhotoService.instance.prepare(image);
+      // 변환 중에 다른 사진을 고르거나 초기화했다면 이 결과는 버린다.
+      if (!mounted || !identical(_image, image)) return;
+      if (prepared == null) {
+        // 원본을 그대로 올리지 않는다(서버 요청 전이라 일일 한도도 차감되지 않음).
+        throw const FoodRecognitionException(
+          FoodRecognitionFailure.unreadablePhoto,
+          '사진 디코딩 실패(image 패키지·플랫폼 디코더 모두)',
+        );
+      }
+      _prepared = prepared;
       final result = await _recognitionService.recognize(
-        image,
+        prepared.uploadJpeg,
         hint: hint.isEmpty ? null : hint,
       );
-      if (!mounted) return;
+      if (!mounted || !identical(_image, image)) return;
       setState(() {
         _result = result;
         _foodNameController.text = result.foodName;
         _loading = false;
       });
     } catch (e) {
-      if (!mounted) return;
+      if (!mounted || !identical(_image, image)) return;
       final l10n = AppLocalizations.of(context)!;
       final limitReached = e is FoodRecognitionException &&
           e.failure == FoodRecognitionFailure.dailyLimitExceeded;
@@ -215,6 +233,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
   void _reset() {
     setState(() {
       _image = null;
+      _prepared = null;
       _result = null;
       _errorMessage = null;
       _foodNameController.clear();
@@ -242,8 +261,8 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
         proteinG: _totalProtein,
         fatG: _totalFat,
         source: _isManualEntry ? LogSource.manual : LogSource.photo,
-        // 사진은 축소해서 이 기기(documents/food_photos)에만 저장한다.
-        photo: _isManualEntry ? null : _image,
+        // 사진은 이미 만들어 둔 저장용 축소본(800px)을 이 기기(documents/food_photos)에만 저장한다.
+        photoJpeg: _isManualEntry ? null : _prepared?.storageJpeg,
       );
     } finally {
       if (mounted) setState(() => _saving = false);

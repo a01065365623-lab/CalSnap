@@ -287,5 +287,7 @@
 
   "crossPromoSectionTitle": "K-Brain Games Lab'in diğer uygulamaları",
   "crossPromoWediTagline": "Hava durumuna göre günlük aktivite rehberi",
-  "crossPromoViewOnPlayButton": "Google Play'de görüntüle"
+  "crossPromoViewOnPlayButton": "Google Play'de görüntüle",
+
+  "recognitionErrorUnreadablePhoto": "Bu fotoğraf okunamadı. Tekrar deneyin veya başka bir fotoğraf seçin."
 }

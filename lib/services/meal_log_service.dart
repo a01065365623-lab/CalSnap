@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
@@ -17,7 +17,8 @@ class MealLogService {
   final _photos = FoodPhotoService.instance;
 
   /// 빠른측정(사진/직접입력) 결과를 식사 기록으로 저장하고 내 음식 목록을 갱신한다.
-  /// [photo]가 있으면 800px/JPEG 75%로 줄여 기기에만 저장한다.
+  /// [photoJpeg]는 FoodPhotoService.prepare가 이미 800px/JPEG 75%로 만들어 둔 저장용
+  /// 바이트다(다시 디코딩하지 않음). 서버에는 올리지 않고 기기에만 저장한다.
   Future<void> saveMeal({
     required String name,
     required double calories,
@@ -26,10 +27,10 @@ class MealLogService {
     required double proteinG,
     required double fatG,
     required LogSource source,
-    File? photo,
+    Uint8List? photoJpeg,
   }) async {
     final now = DateTime.now();
-    final photoPath = photo != null ? await _photos.saveMealPhoto(photo) : null;
+    final photoPath = photoJpeg != null ? await _photos.writeMealPhoto(photoJpeg) : null;
     await _db.insertLog(DailyLogEntry(
       datetime: now,
       type: LogType.food,
