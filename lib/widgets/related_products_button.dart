@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../services/affiliate_service.dart';
+import '../services/user_profile_service.dart';
 import '../theme/app_colors.dart';
 import 'shop_button.dart';
 
@@ -45,6 +46,14 @@ class RelatedProductsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 설정의 "제휴 쇼핑 추천 표시"를 끄면 즉시 숨긴다.
+    return ValueListenableBuilder<bool>(
+      valueListenable: UserProfileService.instance.affiliateEnabled,
+      builder: (context, enabled, _) => enabled ? _buildButton(context) : const SizedBox.shrink(),
+    );
+  }
+
+  Widget _buildButton(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     if (_linksFor(context, queryBuilder()).isEmpty) return const SizedBox.shrink();
     // 저장/닫기 버튼 등 기본 테마색 버튼들 사이에서 눈에 띄도록 코랄(음식 카테고리

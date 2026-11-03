@@ -45,6 +45,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   UnitSystem _unitSystem = UnitSystem.metric;
   UserProfile? _profile;
   bool _ttsEnabled = true;
+  bool _affiliateEnabled = true;
   bool _secretModeEnabled = false;
 
   @override
@@ -59,6 +60,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final unitSystem = await UserProfileService.instance.getUnitSystem();
     final profile = await UserProfileService.instance.getProfile();
     final ttsEnabled = await UserProfileService.instance.getTtsEnabled();
+    final affiliateEnabled = await UserProfileService.instance.getAffiliateEnabled();
     final secretModeEnabled = await AppLockService.instance.isEnabled();
     if (mounted) {
       setState(() {
@@ -67,6 +69,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         _unitSystem = unitSystem;
         _profile = profile;
         _ttsEnabled = ttsEnabled;
+        _affiliateEnabled = affiliateEnabled;
         _secretModeEnabled = secretModeEnabled;
       });
     }
@@ -75,6 +78,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _setTtsEnabled(bool enabled) async {
     await UserProfileService.instance.setTtsEnabled(enabled);
     if (mounted) setState(() => _ttsEnabled = enabled);
+  }
+
+  Future<void> _setAffiliateEnabled(bool enabled) async {
+    await UserProfileService.instance.setAffiliateEnabled(enabled);
+    if (mounted) setState(() => _affiliateEnabled = enabled);
   }
 
   Future<void> _onSecretModeToggle(bool enable) async {
@@ -460,7 +468,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             value: _secretModeEnabled,
             onChanged: _onSecretModeToggle,
           ),
-          ListTile(title: Text(l10n.settingsAffiliateTile), subtitle: Text(l10n.settingsAffiliateSubtitle)),
+          SwitchListTile(
+            secondary: const Icon(Icons.shopping_bag_outlined, color: AppColors.statsGray),
+            title: Text(l10n.settingsAffiliateTile),
+            subtitle: Text(l10n.settingsAffiliateSubtitle),
+            value: _affiliateEnabled,
+            onChanged: _setAffiliateEnabled,
+          ),
           ListTile(
             leading: const Icon(Icons.privacy_tip_outlined, color: AppColors.statsGray),
             title: Text(l10n.settingsPrivacyPolicyTile),

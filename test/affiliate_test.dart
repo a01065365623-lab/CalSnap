@@ -1,9 +1,12 @@
 import 'package:calsnap/config/affiliate_config.dart';
 import 'package:calsnap/services/affiliate_service.dart';
+import 'package:calsnap/services/user_profile_service.dart';
+import 'package:calsnap/widgets/related_products_button.dart';
 import 'package:calsnap/widgets/shop_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 List<AffiliatePlatform> platforms(List<AffiliateLink> links) => links.map((l) => l.platform).toList();
 
@@ -103,6 +106,39 @@ void main() {
         expect(lookupAppLocalizations(locale).shopAffiliateNotice, isNotEmpty, reason: locale.toString());
       }
       expect(lookupAppLocalizations(const Locale('ko')).shopAffiliateNotice, '제휴 링크이며 수수료를 받을 수 있습니다');
+    });
+  });
+
+  group('설정의 "제휴 쇼핑 추천 표시" 스위치', () {
+    final profile = UserProfileService.instance;
+    setUp(() => SharedPreferences.setMockInitialValues({}));
+    tearDown(() => profile.affiliateEnabled.value = true);
+
+    testWidgets('끄면 "관련 상품 보기"가 바로 사라지고, 켜면 다시 나온다', (tester) async {
+      final l10n = lookupAppLocalizations(const Locale('ko'));
+      await tester.pumpWidget(MaterialApp(
+        locale: const Locale('ko'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Scaffold(body: RelatedProductsButton(queryBuilder: () => '김밥')),
+      ));
+      expect(find.text(l10n.shopRelatedProductsButton), findsOneWidget);
+
+      await tester.runAsync(() => profile.setAffiliateEnabled(false));
+      await tester.pump();
+      expect(find.text(l10n.shopRelatedProductsButton), findsNothing);
+
+      await tester.runAsync(() => profile.setAffiliateEnabled(true));
+      await tester.pump();
+      expect(find.text(l10n.shopRelatedProductsButton), findsOneWidget);
+    });
+
+    test('기본값은 켜짐이고, 바꾼 값은 저장되어 다시 읽힌다', () async {
+      expect(await profile.getAffiliateEnabled(), isTrue);
+      await profile.setAffiliateEnabled(false);
+      profile.affiliateEnabled.value = true; // 앱 재시작을 흉내: 메모리 값은 초기화
+      expect(await profile.getAffiliateEnabled(), isFalse);
+      expect(profile.affiliateEnabled.value, isFalse);
     });
   });
 }

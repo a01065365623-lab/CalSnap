@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show ValueNotifier;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
@@ -35,6 +36,7 @@ class UserProfileService {
   static const _keyDailyWaterGoalMl = 'profile_daily_water_goal_ml';
   static const _keyUnitSystem = 'unit_system';
   static const _keyTtsEnabled = 'tts_enabled';
+  static const _keyAffiliateEnabled = 'affiliate_shopping_enabled';
 
   Future<bool> isOnboardingComplete() async {
     final prefs = await SharedPreferences.getInstance();
@@ -151,6 +153,24 @@ class UserProfileService {
   Future<void> setTtsEnabled(bool enabled) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_keyTtsEnabled, enabled);
+  }
+
+  /// 설정의 "제휴 쇼핑 추천 표시" 스위치. 켜져 있을 때만 음식 기록에 "관련 상품 보기"
+  /// (쿠팡·네이버 등 제휴 링크) 버튼을 보여준다. 기본값은 켜짐. 버튼 위젯이 바로
+  /// 반응하도록 값을 이 notifier에도 반영한다(앱 시작 시 [getAffiliateEnabled]로 로드).
+  final ValueNotifier<bool> affiliateEnabled = ValueNotifier(true);
+
+  Future<bool> getAffiliateEnabled() async {
+    final prefs = await SharedPreferences.getInstance();
+    final enabled = prefs.getBool(_keyAffiliateEnabled) ?? true;
+    affiliateEnabled.value = enabled;
+    return enabled;
+  }
+
+  Future<void> setAffiliateEnabled(bool enabled) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_keyAffiliateEnabled, enabled);
+    affiliateEnabled.value = enabled;
   }
 
   /// 저장된 체중이 있으면 그 값을, 없으면 [fallback]을 반환한다.

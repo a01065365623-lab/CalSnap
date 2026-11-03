@@ -54,7 +54,7 @@
   "settingsVoiceGuideTile": "Голосовые подсказки",
   "settingsVoiceGuideSubtitle": "Короткие голосовые сообщения в зависимости от ситуации, например при сохранении или достижении цели",
   "settingsAffiliateTile": "Показывать партнёрские рекомендации по покупкам",
-  "settingsAffiliateSubtitle": "Скоро появится",
+  "settingsAffiliateSubtitle": "Показывать «Смотреть похожие товары» (партнёрские ссылки, например Coupang и Naver) в записях о еде",
   "settingsPrivacyPolicyTile": "Политика конфиденциальности",
   "settingsResetProfileDialogTitle": "Сбросить профиль",
   "settingsResetProfileDialogContent": "Удалит все данные профиля (пол, возраст, рост, вес, целевые калории) и запустит онбординг заново с самого начала. Записи о приёмах пищи и тренировках сохранятся. Продолжить?",

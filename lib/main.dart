@@ -19,6 +19,8 @@ Future<void> main() async {
   final onboardingComplete = await UserProfileService.instance.isOnboardingComplete();
   // 온보딩 전이면 잠글 데이터 자체가 없으므로 시크릿 모드 여부와 무관하게 온보딩으로 보낸다.
   final locked = onboardingComplete && await AppLockService.instance.isEnabled();
+  // "관련 상품 보기" 버튼이 첫 화면부터 설정값을 따르도록 미리 읽어 둔다.
+  await UserProfileService.instance.getAffiliateEnabled();
   runApp(CalSnapApp(onboardingComplete: onboardingComplete, locked: locked));
 }
 

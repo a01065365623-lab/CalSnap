@@ -54,7 +54,7 @@
   "settingsVoiceGuideTile": "音声ガイド",
   "settingsVoiceGuideSubtitle": "保存や目標達成など、状況に合わせた音声メッセージを再生します",
   "settingsAffiliateTile": "提携ショッピングのおすすめを表示",
-  "settingsAffiliateSubtitle": "今後実装予定",
+  "settingsAffiliateSubtitle": "食事の記録に「関連商品を見る」（CoupangやNaverなどのアフィリエイトリンク）を表示します",
   "settingsPrivacyPolicyTile": "プライバシーポリシー",
   "settingsResetProfileDialogTitle": "プロフィール初期化",
   "settingsResetProfileDialogContent": "性別・年齢・身長・体重・目標カロリーなどのプロフィール情報をすべて削除し、オンボーディングを最初からやり直します。食事・運動記録はそのまま保持されます。続けますか？",
