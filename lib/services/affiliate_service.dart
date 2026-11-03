@@ -40,23 +40,35 @@ String _naverSearchUrl(String query) =>
 String _amazonSearchUrl(String query) =>
     'https://www.amazon.com/s?k=${Uri.encodeComponent(query)}&tag=${AffiliateConfig.amazonAssociateTag}';
 
+/// 한국 사용자로 볼지: 앱 언어가 한국어이거나 기기 지역 설정이 대한민국(KR)이면 한국.
+/// CalSnap은 위치 권한을 쓰지 않으므로 Wedi의 위치 기반 판정 대신 기기 지역을 쓴다.
+bool isKoreaRegion({required String languageCode, String? countryCode}) =>
+    languageCode == 'ko' || countryCode?.toUpperCase() == 'KR';
+
 class AffiliateService {
   AffiliateService._internal();
   static final AffiliateService instance = AffiliateService._internal();
 
-  /// 기기 locale에 따라 쇼핑 제휴 링크 후보를 만든다.
-  /// - 한국어(ko): 쿠팡 + 네이버 두 곳 중에서 고를 수 있게 반환.
-  /// - 그 외 언어: 아마존 검색 링크 하나만 반환(선택 단계 없이 바로 확인 후 이동).
-  List<AffiliateLink> shoppingLinksFor({required String query, required String languageCode}) {
+  /// 지역에 따라 쇼핑 제휴 링크 후보를 만든다(Wedi와 같은 분기).
+  /// - 한국([isKoreaRegion]): 쿠팡 + 네이버 두 곳 중에서 고를 수 있게 반환.
+  /// - 그 외: [amazonEnabled](기본 [kAmazonAffiliateEnabled])가 켜져 있으면 아마존 검색
+  ///   링크 하나, 꺼져 있으면 빈 목록 → 호출부는 "관련 상품 보기" 버튼을 숨긴다.
+  List<AffiliateLink> shoppingLinksFor({
+    required String query,
+    required String languageCode,
+    String? countryCode,
+    bool amazonEnabled = kAmazonAffiliateEnabled,
+  }) {
     final trimmed = query.trim();
     if (trimmed.isEmpty) return const [];
 
-    if (languageCode == 'ko') {
+    if (isKoreaRegion(languageCode: languageCode, countryCode: countryCode)) {
       return [
         AffiliateLink.coupang(label: 'Coupang', url: _coupangSearchUrl(trimmed)),
         AffiliateLink.naver(label: 'Naver', url: _naverSearchUrl(trimmed)),
       ];
     }
+    if (!amazonEnabled) return const [];
     return [AffiliateLink.amazon(label: 'Amazon', url: _amazonSearchUrl(trimmed))];
   }
 

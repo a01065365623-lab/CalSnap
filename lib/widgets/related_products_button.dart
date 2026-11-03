@@ -27,9 +27,10 @@ IconData _platformIcon(AffiliatePlatform platform) {
   }
 }
 
-/// "관련 상품 보기" 진입 버튼. 기기 locale에 따라:
-/// - 한국어면 쿠팡/네이버 중 고르는 바텀시트를 먼저 보여준다.
-/// - 그 외 언어면 후보가 아마존 하나뿐이라 고르는 단계 없이 바로 확인 흐름으로 넘어간다.
+/// "관련 상품 보기" 진입 버튼. 지역(AffiliateService.shoppingLinksFor)에 따라:
+/// - 한국(앱 언어 한국어 또는 기기 지역 KR)이면 쿠팡/네이버 중 고르는 바텀시트를 먼저 보여준다.
+/// - 그 외 지역이면 후보가 아마존 하나뿐이라 고르는 단계 없이 바로 확인 흐름으로 넘어간다.
+///   kAmazonAffiliateEnabled가 false면 후보가 없으므로 버튼 자체를 그리지 않는다.
 /// 두 경우 모두 실제 이동 URL을 보여주는 확인 바텀시트(confirmAndLaunchAffiliateLink)를
 /// 거친 뒤에만 실제로 이동한다.
 class RelatedProductsButton extends StatelessWidget {
@@ -45,7 +46,7 @@ class RelatedProductsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    if (queryBuilder().trim().isEmpty) return const SizedBox.shrink();
+    if (_linksFor(context, queryBuilder()).isEmpty) return const SizedBox.shrink();
     // 저장/닫기 버튼 등 기본 테마색 버튼들 사이에서 눈에 띄도록 코랄(음식 카테고리
     // 컬러)로 꽉 채운 버튼을 쓰고, 폭도 꽉 채워서 존재감을 키운다.
     return SizedBox(
@@ -63,10 +64,17 @@ class RelatedProductsButton extends StatelessWidget {
     );
   }
 
+  /// 앱 언어(Localizations)와 기기 지역(국가 코드)으로 링크 후보를 고른다. 지원 언어
+  /// 목록에는 국가 코드가 없어서, 지역은 기기 locale에서 직접 읽는다.
+  static List<AffiliateLink> _linksFor(BuildContext context, String query) =>
+      AffiliateService.instance.shoppingLinksFor(
+        query: query,
+        languageCode: Localizations.localeOf(context).languageCode,
+        countryCode: WidgetsBinding.instance.platformDispatcher.locale.countryCode,
+      );
+
   Future<void> _onPressed(BuildContext context) async {
-    final query = queryBuilder();
-    final languageCode = Localizations.localeOf(context).languageCode;
-    final links = AffiliateService.instance.shoppingLinksFor(query: query, languageCode: languageCode);
+    final links = _linksFor(context, queryBuilder());
     if (links.isEmpty) return;
 
     if (links.length == 1) {

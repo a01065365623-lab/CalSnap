@@ -4,6 +4,12 @@
 /// 그대로 이식했다. 실제 서비스 배포 전 아래 값을 전부 CalSnap 전용 계정의 실제
 /// 제휴 ID로 교체해야 한다(wedi_app 것을 그대로 쓰면 수익이 wedi_app 계정으로
 /// 잡히거나, 심하면 각 플랫폼 제휴 정책 위반이 될 수 있다).
+/// 아마존 어소시에이츠 버튼 노출 여부(Wedi의 kAmazonAffiliateEnabled와 같은 역할).
+/// 현재 아마존 계정이 비활성이라 false — 이때 한국 외 지역에서는 "관련 상품 보기"
+/// 버튼 자체가 숨겨진다. 계정을 되살리고 [AffiliateConfig.amazonAssociateTag]에 실제
+/// 태그를 넣은 뒤 true로 바꾸면 다시 켜진다.
+const bool kAmazonAffiliateEnabled = false;
+
 class AffiliateConfig {
   AffiliateConfig._();
 
