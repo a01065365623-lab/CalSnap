@@ -289,5 +289,7 @@
   "crossPromoWediTagline": "Ежедневный гид по делам с учётом погоды",
   "crossPromoViewOnPlayButton": "Открыть в Google Play",
 
-  "recognitionErrorUnreadablePhoto": "Не удалось прочитать фото. Попробуйте ещё раз или выберите другое фото."
+  "recognitionErrorUnreadablePhoto": "Не удалось прочитать фото. Попробуйте ещё раз или выберите другое фото.",
+
+  "shopAffiliateNotice": "Это партнёрская ссылка, мы можем получить комиссию"
 }

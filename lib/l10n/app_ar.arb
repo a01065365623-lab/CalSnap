@@ -289,5 +289,7 @@
   "crossPromoWediTagline": "دليلك اليومي للأنشطة حسب الطقس",
   "crossPromoViewOnPlayButton": "عرض على Google Play",
 
-  "recognitionErrorUnreadablePhoto": "تعذّرت قراءة هذه الصورة. حاول مرة أخرى أو اختر صورة أخرى."
+  "recognitionErrorUnreadablePhoto": "تعذّرت قراءة هذه الصورة. حاول مرة أخرى أو اختر صورة أخرى.",
+
+  "shopAffiliateNotice": "هذا رابط تسويق بالعمولة وقد نحصل على عمولة"
 }

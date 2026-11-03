@@ -289,5 +289,7 @@
   "crossPromoWediTagline": "Hava durumuna göre günlük aktivite rehberi",
   "crossPromoViewOnPlayButton": "Google Play'de görüntüle",
 
-  "recognitionErrorUnreadablePhoto": "Bu fotoğraf okunamadı. Tekrar deneyin veya başka bir fotoğraf seçin."
+  "recognitionErrorUnreadablePhoto": "Bu fotoğraf okunamadı. Tekrar deneyin veya başka bir fotoğraf seçin.",
+
+  "shopAffiliateNotice": "Bu bir satış ortaklığı bağlantısıdır, komisyon alabiliriz"
 }

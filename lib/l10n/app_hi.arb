@@ -289,5 +289,7 @@
   "crossPromoWediTagline": "मौसम के अनुसार आज की गतिविधि गाइड",
   "crossPromoViewOnPlayButton": "Google Play पर देखें",
 
-  "recognitionErrorUnreadablePhoto": "यह फ़ोटो पढ़ी नहीं जा सकी। फिर से कोशिश करें या कोई दूसरी फ़ोटो चुनें।"
+  "recognitionErrorUnreadablePhoto": "यह फ़ोटो पढ़ी नहीं जा सकी। फिर से कोशिश करें या कोई दूसरी फ़ोटो चुनें।",
+
+  "shopAffiliateNotice": "यह एक एफ़िलिएट लिंक है, हमें कमीशन मिल सकता है"
 }

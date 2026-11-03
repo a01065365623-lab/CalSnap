@@ -414,5 +414,7 @@
   "crossPromoWediTagline": "날씨에 맞춘 오늘의 행동 가이드",
   "crossPromoViewOnPlayButton": "Google Play에서 보기",
 
-  "recognitionErrorUnreadablePhoto": "사진을 읽을 수 없어요. 다시 시도하거나 다른 사진을 골라주세요."
+  "recognitionErrorUnreadablePhoto": "사진을 읽을 수 없어요. 다시 시도하거나 다른 사진을 골라주세요.",
+
+  "shopAffiliateNotice": "제휴 링크이며 수수료를 받을 수 있습니다"
 }

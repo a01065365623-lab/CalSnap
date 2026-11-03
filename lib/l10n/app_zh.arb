@@ -289,5 +289,7 @@
   "crossPromoWediTagline": "根据天气提供每日行动指南",
   "crossPromoViewOnPlayButton": "在 Google Play 上查看",
 
-  "recognitionErrorUnreadablePhoto": "无法读取这张照片。请重试或选择其他照片。"
+  "recognitionErrorUnreadablePhoto": "无法读取这张照片。请重试或选择其他照片。",
+
+  "shopAffiliateNotice": "这是联盟推广链接，我们可能会获得佣金"
 }

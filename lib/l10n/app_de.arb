@@ -289,5 +289,7 @@
   "crossPromoWediTagline": "Dein täglicher Aktivitäts-Guide passend zum Wetter",
   "crossPromoViewOnPlayButton": "Bei Google Play ansehen",
 
-  "recognitionErrorUnreadablePhoto": "Dieses Foto konnte nicht gelesen werden. Versuche es erneut oder wähle ein anderes Foto."
+  "recognitionErrorUnreadablePhoto": "Dieses Foto konnte nicht gelesen werden. Versuche es erneut oder wähle ein anderes Foto.",
+
+  "shopAffiliateNotice": "Dies ist ein Affiliate-Link; wir erhalten möglicherweise eine Provision"
 }

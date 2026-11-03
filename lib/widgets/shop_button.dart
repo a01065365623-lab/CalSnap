@@ -13,31 +13,65 @@ Future<void> confirmAndLaunchAffiliateLink(BuildContext context, AffiliateLink l
     return;
   }
 
+  // 바텀시트는 루트 Navigator 아래에 뜨므로, 시트 안의 문구가 이 화면과 같은 언어로
+  // 나오도록 호출한 위젯의 context에서 l10n을 미리 가져온다(Wedi에서 고친 방식과 동일).
   final l10n = AppLocalizations.of(context)!;
   final confirmed = await showModalBottomSheet<bool>(
     context: context,
-    builder: (ctx) => Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(l10n.shopLinkConfirmTitle, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-          const SizedBox(height: 8),
-          Text(link.url, style: const TextStyle(color: Colors.blueGrey)),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(l10n.cancelButton)),
-              const SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: () => Navigator.pop(ctx, true),
-                child: Text(l10n.shopLinkGoButton),
+    builder: (ctx) => SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(l10n.shopLinkConfirmTitle, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const SizedBox(height: 10),
+            // 실제로 이동할 URL을 그대로 보여준다(쿠팡파트너스 심사 요건).
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(8),
               ),
-            ],
-          ),
-        ],
+              child: SelectableText(link.url, style: const TextStyle(fontSize: 13, color: Colors.black87)),
+            ),
+            const SizedBox(height: 10),
+            // 제휴 링크 고지(수수료를 받을 수 있음).
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(Icons.info_outline, size: 14, color: Colors.grey.shade600),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    l10n.shopAffiliateNotice,
+                    style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.pop(ctx, false),
+                    child: Text(l10n.cancelButton),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(ctx, true),
+                    child: Text(l10n.shopLinkGoButton),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     ),
   );

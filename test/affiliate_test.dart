@@ -1,5 +1,8 @@
 import 'package:calsnap/config/affiliate_config.dart';
 import 'package:calsnap/services/affiliate_service.dart';
+import 'package:calsnap/widgets/shop_button.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 List<AffiliatePlatform> platforms(List<AffiliateLink> links) => links.map((l) => l.platform).toList();
@@ -53,5 +56,53 @@ void main() {
     const encoded = '%EB%8B%AD%EA%B0%80%EC%8A%B4%EC%82%B4%20%EC%83%90%EB%9F%AC%EB%93%9C%26%EC%86%8C%EC%8A%A4';
     expect(links[0].url, 'https://www.coupang.com/np/search?q=$encoded');
     expect(links[1].url, 'https://search.shopping.naver.com/search/all?query=$encoded');
+  });
+
+  group('이동 전 확인 시트', () {
+    Future<void> openSheet(WidgetTester tester, Locale locale, AffiliateLink link) async {
+      await tester.pumpWidget(MaterialApp(
+        locale: locale,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Scaffold(
+          body: Builder(
+            builder: (context) => TextButton(
+              onPressed: () => confirmAndLaunchAffiliateLink(context, link),
+              child: const Text('open'),
+            ),
+          ),
+        ),
+      ));
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+    }
+
+    for (final locale in const [Locale('ko'), Locale('ja')]) {
+      testWidgets('실제 URL·제휴 고지·취소/이동 버튼이 앱 언어(${locale.languageCode})로 나온다', (tester) async {
+        final l10n = lookupAppLocalizations(locale);
+        final link = service.shoppingLinksFor(query: '김밥', languageCode: 'ko').first;
+
+        await openSheet(tester, locale, link);
+
+        expect(find.text(l10n.shopLinkConfirmTitle), findsOneWidget);
+        expect(find.widgetWithText(SelectableText, link.url), findsOneWidget);
+        expect(find.text(l10n.shopAffiliateNotice), findsOneWidget);
+        expect(find.widgetWithText(OutlinedButton, l10n.cancelButton), findsOneWidget);
+        expect(find.widgetWithText(ElevatedButton, l10n.shopLinkGoButton), findsOneWidget);
+
+        // 취소하면 시트만 닫히고 아무 데도 이동하지 않는다.
+        await tester.tap(find.text(l10n.cancelButton));
+        await tester.pumpAndSettle();
+        expect(find.text(l10n.shopAffiliateNotice), findsNothing);
+      });
+    }
+
+    test('제휴 고지 문구가 14개 언어 모두 있다', () {
+      expect(AppLocalizations.supportedLocales, hasLength(14));
+      for (final locale in AppLocalizations.supportedLocales) {
+        expect(lookupAppLocalizations(locale).shopAffiliateNotice, isNotEmpty, reason: locale.toString());
+      }
+      expect(lookupAppLocalizations(const Locale('ko')).shopAffiliateNotice, '제휴 링크이며 수수료를 받을 수 있습니다');
+    });
   });
 }
