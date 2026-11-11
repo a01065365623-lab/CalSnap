@@ -287,6 +287,8 @@
 
   "crossPromoSectionTitle": "تطبيقات أخرى من K-Brain Games Lab",
   "crossPromoWediTagline": "دليلك اليومي للأنشطة حسب الطقس",
+  "crossPromoDrinkDiaryTagline": "سجّل مع من شربت ولماذا وكم، وتابع كمية استهلاكك",
+  "crossPromoCarDailyTagline": "مذكرات قيادة لتسجيل مع من ذهبت وإلى أين ولماذا",
   "crossPromoViewOnPlayButton": "عرض على Google Play",
 
   "recognitionErrorUnreadablePhoto": "تعذّرت قراءة هذه الصورة. حاول مرة أخرى أو اختر صورة أخرى.",

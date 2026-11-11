@@ -44,6 +44,8 @@ class CrossPromoApp {
 const String currentAppPackageName = 'com.kbraingames.calsnap';
 
 String _wediTagline(AppLocalizations l10n) => l10n.crossPromoWediTagline;
+String _drinkDiaryTagline(AppLocalizations l10n) => l10n.crossPromoDrinkDiaryTagline;
+String _carDailyTagline(AppLocalizations l10n) => l10n.crossPromoCarDailyTagline;
 
 const List<CrossPromoApp> crossPromoApps = [
   CrossPromoApp(
@@ -51,6 +53,22 @@ const List<CrossPromoApp> crossPromoApps = [
     name: 'Wedi',
     iconAsset: 'assets/promo/wedi.png',
     tagline: _wediTagline,
+    enabled: true,
+  ),
+  // 음주일기장. 소개 문구는 음주 기록·관리 중심으로 두고 음주를 권하는 표현은 쓰지 않는다.
+  CrossPromoApp(
+    packageName: 'com.kbraingames.drinkdiary',
+    name: 'DrinkDiary',
+    iconAsset: 'assets/promo/drinkdiary.png',
+    tagline: _drinkDiaryTagline,
+    enabled: true,
+  ),
+  // 카데일리
+  CrossPromoApp(
+    packageName: 'com.kbraingames.cardaily',
+    name: 'CarDaily',
+    iconAsset: 'assets/promo/cardaily.png',
+    tagline: _carDailyTagline,
     enabled: true,
   ),
 ];

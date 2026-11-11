@@ -287,6 +287,8 @@
 
   "crossPromoSectionTitle": "K-Brain Games Lab 的其他应用",
   "crossPromoWediTagline": "根据天气提供每日行动指南",
+  "crossPromoDrinkDiaryTagline": "记录和谁喝、为什么喝、喝了多少，帮你管理饮酒量",
+  "crossPromoCarDailyTagline": "记录和谁同行、去了哪里、为何出行的驾驶日记",
   "crossPromoViewOnPlayButton": "在 Google Play 上查看",
 
   "recognitionErrorUnreadablePhoto": "无法读取这张照片。请重试或选择其他照片。",
