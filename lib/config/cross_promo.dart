@@ -6,7 +6,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 /// 앱을 추가하려면:
 ///   1. 아이콘(192px PNG 권장)을 assets/promo/에 넣는다(pubspec.yaml에 폴더가 등록돼 있음).
 ///   2. 한 줄 소개 문구 키를 14개 언어 ARB(lib/l10n/app_*.arb)에 추가한다.
-///   3. 아래 [crossPromoApps]에 항목을 하나 추가한다.
+///   3. 아래 [crossPromoApps]에 항목을 하나 추가한다. 아직 출시 전이면 `enabled: false`로
+///      두면 목록에서 숨겨지고, 출시 후 `true`로 바꾸면 노출된다.
 class CrossPromoApp {
   /// Google Play 패키지명(applicationId).
   final String packageName;
@@ -20,11 +21,15 @@ class CrossPromoApp {
   /// 현재 언어의 한 줄 소개.
   final String Function(AppLocalizations l10n) tagline;
 
+  /// false면 설정 화면 목록에서 숨긴다(출시 전 앱).
+  final bool enabled;
+
   const CrossPromoApp({
     required this.packageName,
     required this.name,
     required this.iconAsset,
     required this.tagline,
+    required this.enabled,
   });
 
   /// Play 스토어 앱으로 바로 여는 링크.
@@ -46,9 +51,10 @@ const List<CrossPromoApp> crossPromoApps = [
     name: 'Wedi',
     iconAsset: 'assets/promo/wedi.png',
     tagline: _wediTagline,
+    enabled: true,
   ),
 ];
 
-/// 설정 화면에 실제로 보여줄 목록(현재 앱 제외).
+/// 설정 화면에 실제로 보여줄 목록(현재 앱·비활성 앱 제외).
 List<CrossPromoApp> get visibleCrossPromoApps =>
-    crossPromoApps.where((a) => a.packageName != currentAppPackageName).toList();
+    crossPromoApps.where((a) => a.enabled && a.packageName != currentAppPackageName).toList();
