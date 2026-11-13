@@ -51,6 +51,16 @@ class AppColors {
 
   static const Color waterBlue = Color(0xFF2E86DE);
   static const Color waterBlueBg = Color(0xFFDDEBFC);
+  // 물 빠른 추가 버튼 배경(흰 아이콘). waterBlue보다 한 단계 진해 흰색 대비 약 5.1:1.
+  static const Color waterBlueStrong = Color(0xFF1F6FBF);
+
+  // ── 하단 액션 버튼 ──────────────────────────────────────
+  // 강조색은 운동(틸)·찍기(코랄)만 쓰고, 통계 같은 보조 버튼은 이 중립 톤으로 낮춘다.
+  /// 강조색 버튼 위의 글자·아이콘.
+  static const Color onAccent = Color(0xFFFFFFFF);
+  static const Color neutralButtonBg = Color(0xFFF1EEEC);
+  static const Color neutralButtonFg = statsGray;
+  static const Color buttonShadow = Color(0x405A3A2E);
 
   // 목표 칼로리 초과 시 진행률 링의 주의색. 평소 링 색(foodCoral)보다 붉고 진해서
   // 초과 상태가 한눈에 구분된다(흰 배경 대비 4.5:1 이상).

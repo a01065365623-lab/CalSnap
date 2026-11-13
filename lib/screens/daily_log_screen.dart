@@ -12,6 +12,7 @@ import '../theme/app_colors.dart';
 import '../utils/bmr_calculator.dart';
 import '../utils/unit_converter.dart';
 import '../utils/weight_forecast.dart';
+import '../widgets/action_buttons.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../widgets/daily_log_empty_state.dart';
 import '../widgets/daily_summary_card.dart';
@@ -300,12 +301,14 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
           ),
         ],
       ),
+      // 홈 하단 버튼(운동/통계/찍기)과 같은 크기·모양·그림자의 정사각 버튼.
       floatingActionButton: _isToday
-          ? FloatingActionButton(
-              heroTag: 'daily_log_fab',
-              onPressed: _openWaterQuickAddOptions,
+          ? ActionSquareButton(
+              icon: Icons.water_drop,
               tooltip: l10n.dailyLogQuickAddWaterTooltip,
-              child: const Icon(Icons.water_drop),
+              background: AppColors.waterBlueStrong,
+              foreground: AppColors.onAccent,
+              onPressed: _openWaterQuickAddOptions,
             )
           : null,
     );

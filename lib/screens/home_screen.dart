@@ -11,6 +11,7 @@ import '../services/app_update_service.dart';
 import '../services/tts_service.dart';
 import '../services/user_profile_service.dart';
 import '../theme/app_colors.dart';
+import '../widgets/action_buttons.dart';
 import 'daily_log_screen.dart';
 import 'exercise_input_screen.dart';
 import 'quick_mode_screen.dart';
@@ -220,63 +221,18 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     ];
     return Scaffold(
       body: screens[_index],
-      // 운동/통계/찍기 3개를 다 정상 크기로 두니 하단 영역이 너무 커져서, 다른 탭(오늘의
-      // 로그 하단, 설정의 "테스트 데이터 삭제" 등) 요소를 가리고 터치까지 막았다.
-      // FloatingActionButtonThemeData로 크기·아이콘을 기존의 약 2/3 수준으로 줄였다가
-      // (Transform.scale 같은 시각적 축소가 아니라 실제 레이아웃 크기 자체를 줄이는
-      // 방식이라, 눌림 영역도 같이 줄어들어 뒤에 가려졌던 요소가 다시 눌린다),
-      // 그게 너무 작아서 그 축소된 크기 기준으로 가로만 약 1/3, 세로는 약 1/4만 다시
-      // 키운 비대칭 크기로 재조정했다(위치는 그대로 centerDocked 유지).
-      floatingActionButton: Theme(
-        data: Theme.of(context).copyWith(
-          floatingActionButtonTheme: Theme.of(context).floatingActionButtonTheme.copyWith(
-                iconSize: 16,
-                // 통계 FAB(원형): 2/3로 줄인 38x38 기준 가로 +1/3(≈51), 세로 +1/4(≈48).
-                sizeConstraints: const BoxConstraints.tightFor(width: 51, height: 48),
-                // extended FAB(운동/찍기): 2/3로 줄인 높이 32 기준 세로 +1/4 = 40.
-                extendedSizeConstraints: const BoxConstraints(minHeight: 40, maxHeight: 40),
-                extendedIconLabelSpacing: 8,
-                // extended FAB은 폭을 직접 지정하는 필드가 없어 좌우 padding으로 가로폭을
-                // 넓힌다(2/3로 줄였던 10 → 더 키움).
-                extendedPadding: const EdgeInsets.symmetric(horizontal: 14),
-                extendedTextStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-              ),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            FloatingActionButton.extended(
-              heroTag: 'exercise_fab',
-              backgroundColor: AppColors.exerciseTeal,
-              foregroundColor: Colors.white,
-              onPressed: () => _pushAndRefreshDailyLog(const ExerciseInputScreen()),
-              icon: const Icon(Icons.fitness_center),
-              label: Text(l10n.homeExerciseFabLabel),
-            ),
-            const SizedBox(width: 8),
-            // 하단 탭의 통계 화면과는 별개로, 운동/찍기 FAB 사이에 빠른 진입 경로를 하나
-            // 더 둔다. 3개짜리 extended FAB을 나란히 두면 라벨이 긴 언어(독일어 등)에서
-            // 가로로 넘칠 위험이 있어 이 버튼만 아이콘 전용(원형)으로 좁게 뒀다.
-            FloatingActionButton(
-              heroTag: 'stats_fab',
-              backgroundColor: AppColors.statsGray,
-              foregroundColor: Colors.white,
-              tooltip: l10n.statsAppBarTitle,
-              onPressed: () =>
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const StatsScreen())),
-              child: const Icon(Icons.bar_chart),
-            ),
-            const SizedBox(width: 8),
-            FloatingActionButton.extended(
-              heroTag: 'home_fab',
-              backgroundColor: AppColors.foodCoral,
-              foregroundColor: Colors.white,
-              onPressed: () => _pushAndRefreshDailyLog(const QuickModeScreen()),
-              icon: const Icon(Icons.camera_alt),
-              label: Text(l10n.homeCameraFabLabel),
-            ),
-          ],
-        ),
+      // 운동/통계/찍기 3개를 다 정상 크기로 두니 하단 영역이 너무 커져서 다른 탭 요소를
+      // 가리고 터치까지 막았던 이력이 있어, 높이를 44로 낮게 유지한다(예전 40~48 사이).
+      // 크기·그림자·간격은 ActionButtonMetrics 한 곳에서 맞추고, 강조색은 운동(틸)·
+      // 찍기(코랄)만 쓰며 통계는 중립 톤이다. 통계 버튼은 3개 라벨이 나란히 놓이면 긴
+      // 언어(독일어 등)에서 넘칠 수 있어 계속 아이콘 전용으로 둔다.
+      floatingActionButton: HomeActionButtons(
+        exerciseLabel: l10n.homeExerciseFabLabel,
+        statsTooltip: l10n.statsAppBarTitle,
+        cameraLabel: l10n.homeCameraFabLabel,
+        onExercise: () => _pushAndRefreshDailyLog(const ExerciseInputScreen()),
+        onStats: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const StatsScreen())),
+        onCamera: () => _pushAndRefreshDailyLog(const QuickModeScreen()),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       // Material 3의 BottomAppBar는 기본 높이가 80으로 고정돼 있고, 제스처 내비게이션

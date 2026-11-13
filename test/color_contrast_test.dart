@@ -35,10 +35,12 @@ void main() {
     ('섭취 숫자(진한 코랄) / 카드', AppColors.foodCoralStrong, AppColors.cardSurface),
     ('소모 숫자(진한 틸) / 카드', AppColors.exerciseTealStrong, AppColors.cardSurface),
     ('목표 초과(빨강) / 카드', AppColors.goalOverRed, AppColors.cardSurface),
-    ('흰 글자 / 진한 코랄 버튼', _white, AppColors.foodCoralStrong),
+    ('흰 글자 / 진한 코랄 버튼', AppColors.onAccent, AppColors.foodCoralStrong),
     ('진한 코랄 글자 / 바탕', AppColors.foodCoralStrong, AppColors.appBackground),
-    ('흰 글자 / 진한 틸 버튼', _white, AppColors.exerciseTealStrong),
+    ('흰 글자 / 진한 틸 버튼', AppColors.onAccent, AppColors.exerciseTealStrong),
     ('사진 한도 안내 / 회색 바탕', AppColors.statsGray, AppColors.statsGrayBg),
+    ('흰 아이콘 / 물 버튼', AppColors.onAccent, AppColors.waterBlueStrong),
+    ('통계 아이콘 / 중립 버튼', AppColors.neutralButtonFg, AppColors.neutralButtonBg),
   ];
   for (final (name, fg, bg) in textPairs) {
     test('글자 4.5:1 이상 — $name', () {
