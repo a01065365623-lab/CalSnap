@@ -306,5 +306,7 @@
   "weeklyForecastBasis": "Media neta {average} kcal en {days} días registrados · Objetivo {target} kcal",
   "weeklyForecastDisclaimer": "Es una estimación basada en 7700 kcal ≈ 1 kg. El cambio real puede variar.",
 
-  "dailyLogEmptyCameraButton": "Haz una foto para registrar"
+  "dailyLogEmptyCameraButton": "Haz una foto para registrar",
+
+  "weeklyForecastValueOverCap": "{change} o más por semana"
 }

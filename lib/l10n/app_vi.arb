@@ -306,5 +306,7 @@
   "weeklyForecastBasis": "TB calo ròng {average} kcal trong {days} ngày đã ghi · Mục tiêu {target} kcal",
   "weeklyForecastDisclaimer": "Đây là ước tính dựa trên 7.700 kcal ≈ 1 kg. Thay đổi thực tế có thể khác.",
 
-  "dailyLogEmptyCameraButton": "Chụp ảnh để ghi lại"
+  "dailyLogEmptyCameraButton": "Chụp ảnh để ghi lại",
+
+  "weeklyForecastValueOverCap": "{change} trở lên mỗi tuần"
 }

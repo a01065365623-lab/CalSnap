@@ -11,8 +11,16 @@ const int weightForecastWindowDays = 7;
 /// 이보다 기록한 날이 적으면 평균이 의미가 없어서 예상치를 보여주지 않는다.
 const int weightForecastMinRecordedDays = 3;
 
+/// 하루 섭취가 이보다 적은 날은 기록을 빼먹은 날로 보고 평균에서 뺀다(간식 하나만
+/// 적은 날이 그대로 들어가면 감량 예상이 크게 부풀려진다).
+const double weightForecastMinDailyIntake = 500;
+
+/// 주간 변화가 이 값(kg)을 넘으면 정확한 숫자 대신 "±1.0kg 이상"으로만 보여준다.
+/// 7일 남짓한 기록으로 그 이상을 단정해 보여주는 건 오해의 소지가 크다.
+const double weightForecastDisplayCapKg = 1.0;
+
 class WeeklyWeightForecast {
-  /// 기간 내 음식 섭취 기록이 있는 날 수.
+  /// 기간 내 섭취가 [weightForecastMinDailyIntake] 이상인 날 수.
   final int recordedDays;
 
   /// 기록한 날들의 일평균 순칼로리. 기록이 부족하면 null.
@@ -29,11 +37,14 @@ class WeeklyWeightForecast {
   });
 
   bool get hasEnoughData => weeklyChangeKg != null;
+
+  /// 표시 상한([weightForecastDisplayCapKg])을 넘어 "±1.0kg 이상"으로 보여줄지.
+  bool get exceedsDisplayCap => (weeklyChangeKg?.abs() ?? 0) > weightForecastDisplayCapKg;
 }
 
 /// [today] 전날까지 [weightForecastWindowDays]일의 일별 요약으로 주간 체중 변화를
-/// 추정한다. 섭취 기록이 없는 날(물만 마셨거나 기록을 다 지운 날 포함)은 평균에서
-/// 빼서, 기록을 빼먹은 날이 "0kcal 먹은 날"로 계산돼 감량이 부풀려지지 않게 한다.
+/// 추정한다. 섭취가 [weightForecastMinDailyIntake] 미만인 날(물만 마셨거나 기록을
+/// 일부만 한 날 포함)은 평균에서 빼서, 기록을 빼먹은 날 때문에 감량이 부풀려지지 않게 한다.
 WeeklyWeightForecast estimateWeeklyWeightChange({
   required Iterable<DailySummary> summaries,
   required double targetCalories,
@@ -44,7 +55,7 @@ WeeklyWeightForecast estimateWeeklyWeightChange({
 
   final netByDate = <String, double>{};
   for (final s in summaries) {
-    if (s.totalIntake <= 0) continue;
+    if (s.totalIntake < weightForecastMinDailyIntake) continue;
     if (s.date.compareTo(firstKey) < 0 || s.date.compareTo(todayKey) >= 0) continue;
     netByDate[s.date] = s.netCalories;
   }

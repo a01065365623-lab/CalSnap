@@ -306,5 +306,7 @@
   "weeklyForecastBasis": "Средн. чистые {average} ккал за {days} дн. с записями · Цель {target} ккал",
   "weeklyForecastDisclaimer": "Это оценка из расчёта 7700 ккал ≈ 1 кг. Реальные изменения могут отличаться.",
 
-  "dailyLogEmptyCameraButton": "Сфотографировать и записать"
+  "dailyLogEmptyCameraButton": "Сфотографировать и записать",
+
+  "weeklyForecastValueOverCap": "{change} или больше в неделю"
 }

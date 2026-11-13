@@ -306,5 +306,7 @@
   "weeklyForecastBasis": "記録した{days}日の平均正味カロリー {average}kcal・目標 {target}kcal",
   "weeklyForecastDisclaimer": "7,700kcal ≈ 1kgで計算した推定値です。実際の変化とは異なる場合があります。",
 
-  "dailyLogEmptyCameraButton": "写真を撮って記録"
+  "dailyLogEmptyCameraButton": "写真を撮って記録",
+
+  "weeklyForecastValueOverCap": "週に{change}以上の見込み"
 }

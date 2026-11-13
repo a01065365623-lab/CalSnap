@@ -306,5 +306,7 @@
   "weeklyForecastBasis": "Kayıtlı {days} günde ort. net {average} kcal · Hedef {target} kcal",
   "weeklyForecastDisclaimer": "Bu, 7.700 kcal ≈ 1 kg esasına dayalı bir tahmindir. Gerçek değişim farklı olabilir.",
 
-  "dailyLogEmptyCameraButton": "Fotoğraf çekip kaydet"
+  "dailyLogEmptyCameraButton": "Fotoğraf çekip kaydet",
+
+  "weeklyForecastValueOverCap": "Haftada {change} veya daha fazla"
 }

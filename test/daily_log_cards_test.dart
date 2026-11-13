@@ -144,6 +144,43 @@ void main() {
       expect(f.weeklyChangeKg! > 0, isTrue);
     });
 
+    test('섭취 500kcal 미만인 날은 평균에서 제외(500은 포함)', () {
+      final f = estimateWeeklyWeightChange(
+        today: today,
+        targetCalories: 2000,
+        summaries: [
+          summary(499, 0, date: '2026-11-09'), // 제외
+          summary(300, 0, date: '2026-11-10'), // 제외
+          summary(500, 0, date: '2026-11-11'), // 경계: 포함
+          summary(2000, 0, date: '2026-11-12'),
+          summary(2600, 0, date: '2026-11-13'),
+        ],
+      );
+      expect(f.recordedDays, 3);
+      expect(f.averageNetCalories, closeTo(1700, 1e-9));
+    });
+
+    test('500kcal 미만인 날을 빼면 3일이 안 되면 기록 부족', () {
+      final f = estimateWeeklyWeightChange(
+        today: today,
+        targetCalories: 2000,
+        summaries: [
+          summary(200, 0, date: '2026-11-11'),
+          summary(1800, 0, date: '2026-11-12'),
+          summary(1900, 0, date: '2026-11-13'),
+        ],
+      );
+      expect(f.hasEnoughData, isFalse);
+      expect(f.recordedDays, 2);
+    });
+
+    test('표시 상한: |변화| > 1.0kg일 때만', () {
+      expect(const WeeklyWeightForecast(recordedDays: 3, averageNetCalories: 0, weeklyChangeKg: -1.2).exceedsDisplayCap, isTrue);
+      expect(const WeeklyWeightForecast(recordedDays: 3, averageNetCalories: 0, weeklyChangeKg: 1.01).exceedsDisplayCap, isTrue);
+      expect(const WeeklyWeightForecast(recordedDays: 3, averageNetCalories: 0, weeklyChangeKg: -1.0).exceedsDisplayCap, isFalse);
+      expect(const WeeklyWeightForecast(recordedDays: 2).exceedsDisplayCap, isFalse);
+    });
+
     test('월 경계도 날짜로 계산', () {
       final f = estimateWeeklyWeightChange(
         today: DateTime(2026, 12, 2),
@@ -182,6 +219,46 @@ void main() {
       expect(find.text(ko.weeklyForecastDisclaimer), findsOneWidget);
     });
 
+    testWidgets('-1.0kg/주를 넘으면 "-1.0kg 이상"', (tester) async {
+      await pumpCard(
+        tester,
+        const WeeklyWeightForecastCard(
+          forecast: WeeklyWeightForecast(recordedDays: 4, averageNetCalories: 600, weeklyChangeKg: -1.27),
+          targetCalories: 2000,
+          unitSystem: UnitSystem.metric,
+        ),
+      );
+      expect(find.text('주 -1.0kg 이상 예상'), findsOneWidget);
+      expect(find.textContaining('1.3'), findsNothing, reason: '상한을 넘으면 실제 숫자는 보여주지 않는다');
+    });
+
+    testWidgets('+1.0kg/주를 넘으면 "+1.0kg 이상", imperial은 lb로', (tester) async {
+      const over = WeeklyWeightForecast(recordedDays: 4, averageNetCalories: 3400, weeklyChangeKg: 1.27);
+      await pumpCard(
+        tester,
+        const WeeklyWeightForecastCard(forecast: over, targetCalories: 2000, unitSystem: UnitSystem.metric),
+      );
+      expect(find.text('주 +1.0kg 이상 예상'), findsOneWidget);
+
+      await pumpCard(
+        tester,
+        const WeeklyWeightForecastCard(forecast: over, targetCalories: 2000, unitSystem: UnitSystem.imperial),
+      );
+      expect(find.text('주 +2.2lb 이상 예상'), findsOneWidget);
+    });
+
+    testWidgets('정확히 -1.0kg이면 상한 표시 없이 그대로', (tester) async {
+      await pumpCard(
+        tester,
+        const WeeklyWeightForecastCard(
+          forecast: WeeklyWeightForecast(recordedDays: 4, averageNetCalories: 900, weeklyChangeKg: -1.0),
+          targetCalories: 2000,
+          unitSystem: UnitSystem.metric,
+        ),
+      );
+      expect(find.text('주 약 -1.0kg 예상'), findsOneWidget);
+    });
+
     testWidgets('기록 부족: "기록이 더 필요해요"', (tester) async {
       await pumpCard(
         tester,
@@ -195,6 +272,14 @@ void main() {
     expectNoOverflowInAllLocales(
       '주간 예상 카드(예상치)',
       () => const WeeklyWeightForecastCard(forecast: enough, targetCalories: 2000, unitSystem: UnitSystem.imperial),
+    );
+    expectNoOverflowInAllLocales(
+      '주간 예상 카드(±1.0kg 이상)',
+      () => const WeeklyWeightForecastCard(
+        forecast: WeeklyWeightForecast(recordedDays: 4, averageNetCalories: 600, weeklyChangeKg: -1.27),
+        targetCalories: 2000,
+        unitSystem: UnitSystem.imperial,
+      ),
     );
     expectNoOverflowInAllLocales(
       '주간 예상 카드(기록 부족)',

@@ -81,7 +81,11 @@ class WeeklyWeightForecastCard extends StatelessWidget {
                     ),
                   ] else ...[
                     Text(
-                      l10n.weeklyForecastValue(formatWeeklyWeightChange(change, unitSystem)),
+                      forecast.exceedsDisplayCap
+                          ? l10n.weeklyForecastValueOverCap(
+                              formatWeeklyWeightChange(change.sign * weightForecastDisplayCapKg, unitSystem),
+                            )
+                          : l10n.weeklyForecastValue(formatWeeklyWeightChange(change, unitSystem)),
                       style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 2),

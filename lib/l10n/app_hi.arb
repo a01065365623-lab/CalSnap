@@ -306,5 +306,7 @@
   "weeklyForecastBasis": "{days} रिकॉर्ड किए दिनों का औसत शुद्ध {average} kcal · लक्ष्य {target} kcal",
   "weeklyForecastDisclaimer": "यह 7,700 kcal ≈ 1 kg के आधार पर अनुमान है। असली बदलाव अलग हो सकता है।",
 
-  "dailyLogEmptyCameraButton": "फ़ोटो लेकर दर्ज करें"
+  "dailyLogEmptyCameraButton": "फ़ोटो लेकर दर्ज करें",
+
+  "weeklyForecastValueOverCap": "हर हफ़्ते {change} या उससे ज़्यादा"
 }

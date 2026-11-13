@@ -307,5 +307,7 @@
   "weeklyForecastBasis": "Avg. net {average} kcal over {days} logged days · Goal {target} kcal",
   "weeklyForecastDisclaimer": "This is an estimate based on 7,700 kcal ≈ 1 kg. Actual changes may differ.",
 
-  "dailyLogEmptyCameraButton": "Snap a photo to log"
+  "dailyLogEmptyCameraButton": "Snap a photo to log",
+
+  "weeklyForecastValueOverCap": "{change} or more per week"
 }

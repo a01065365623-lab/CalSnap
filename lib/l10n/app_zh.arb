@@ -306,5 +306,7 @@
   "weeklyForecastBasis": "已记录{days}天平均净卡路里 {average}kcal · 目标 {target}kcal",
   "weeklyForecastDisclaimer": "这是按7,700kcal ≈ 1kg计算的估算值，实际变化可能不同。",
 
-  "dailyLogEmptyCameraButton": "拍照记录"
+  "dailyLogEmptyCameraButton": "拍照记录",
+
+  "weeklyForecastValueOverCap": "每周{change}以上"
 }

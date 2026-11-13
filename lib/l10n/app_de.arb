@@ -306,5 +306,7 @@
   "weeklyForecastBasis": "Ø netto {average} kcal an {days} erfassten Tagen · Ziel {target} kcal",
   "weeklyForecastDisclaimer": "Schätzwert auf Basis von 7.700 kcal ≈ 1 kg. Die tatsächliche Veränderung kann abweichen.",
 
-  "dailyLogEmptyCameraButton": "Foto aufnehmen und eintragen"
+  "dailyLogEmptyCameraButton": "Foto aufnehmen und eintragen",
+
+  "weeklyForecastValueOverCap": "{change} oder mehr pro Woche"
 }

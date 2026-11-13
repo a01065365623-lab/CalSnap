@@ -306,5 +306,7 @@
   "weeklyForecastBasis": "متوسط الصافي {average} سعرة خلال {days} أيام مسجلة · الهدف {target} سعرة",
   "weeklyForecastDisclaimer": "هذا تقدير مبني على أن 7700 سعرة ≈ 1 كغ. قد يختلف التغيّر الفعلي.",
 
-  "dailyLogEmptyCameraButton": "التقط صورة للتسجيل"
+  "dailyLogEmptyCameraButton": "التقط صورة للتسجيل",
+
+  "weeklyForecastValueOverCap": "{change} أو أكثر أسبوعيًا"
 }
