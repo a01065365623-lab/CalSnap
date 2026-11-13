@@ -39,6 +39,7 @@ void main() {
     ('진한 코랄 글자 / 바탕', AppColors.foodCoralStrong, AppColors.appBackground),
     ('흰 글자 / 진한 틸 버튼', AppColors.onAccent, AppColors.exerciseTealStrong),
     ('사진 한도 안내 / 회색 바탕', AppColors.statsGray, AppColors.statsGrayBg),
+    ('지방 라벨 / 카드', AppColors.statsGray, AppColors.cardSurface),
     ('흰 아이콘 / 물 버튼', AppColors.onAccent, AppColors.waterBlueStrong),
     ('통계 아이콘 / 중립 버튼', AppColors.neutralButtonFg, AppColors.neutralButtonBg),
   ];
@@ -51,6 +52,9 @@ void main() {
   final nonTextPairs = <(String, Color, Color)>[
     ('소모 아이콘(틸) / 카드', AppColors.exerciseTeal, AppColors.cardSurface),
     ('목표 링(코랄) / 카드', AppColors.foodCoral, AppColors.cardSurface),
+    ('탄수화물 막대 / 카드', AppColors.foodCoral, AppColors.cardSurface),
+    ('단백질 막대 / 카드', AppColors.exerciseTeal, AppColors.cardSurface),
+    ('지방 막대 / 카드', AppColors.statsGray, AppColors.cardSurface),
   ];
   for (final (name, fg, bg) in nonTextPairs) {
     test('비텍스트 3:1 이상 — $name', () {

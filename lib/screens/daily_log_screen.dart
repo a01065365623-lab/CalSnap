@@ -18,6 +18,7 @@ import '../widgets/daily_log_empty_state.dart';
 import '../widgets/daily_summary_card.dart';
 import '../widgets/food_detail_sheet.dart';
 import '../widgets/log_entry_tile.dart';
+import '../widgets/macro_progress_card.dart';
 import '../widgets/weekly_weight_forecast_card.dart';
 import 'meal_calendar_screen.dart';
 import 'quick_mode_screen.dart';
@@ -255,7 +256,7 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
                           targetCalories: _forecastTargetCalories!,
                           unitSystem: _unitSystem,
                         ),
-                      _NutrientsCard(entries: _entries),
+                      MacroProgressCard(entries: _entries, goalCalories: _goalCalories),
                     ],
                   ),
                 ),
@@ -408,59 +409,6 @@ class _WeightLogEntryCard extends StatelessWidget {
   }
 }
 
-/// 그날 음식 기록들의 탄수화물/단백질/지방 합계를 칩 3개로 보여준다. 각 항목의 값은 이미
-/// 실제 섭취량 기준으로 환산되어 저장돼 있으므로(calories와 동일한 방식) 그대로 더하면 된다.
-/// 운동/물 기록은 영양소와 무관하므로 집계에서 제외하고, 값이 없는(null) 과거 기록은 0으로 취급한다.
-/// 색상은 통계 화면의 매크로 비율 차트(stats_screen.dart)와 동일하게 맞췄다.
-class _NutrientsCard extends StatelessWidget {
-  final List<DailyLogEntry> entries;
-  const _NutrientsCard({required this.entries});
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    double carbs = 0, protein = 0, fat = 0;
-    for (final e in entries) {
-      if (e.type != LogType.food) continue;
-      carbs += e.carbsG ?? 0;
-      protein += e.proteinG ?? 0;
-      fat += e.fatG ?? 0;
-    }
-
-    return Card(
-      margin: const EdgeInsets.fromLTRB(12, 0, 12, 12),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-        child: Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          alignment: WrapAlignment.spaceEvenly,
-          children: [
-            _StatChip(
-              icon: Icons.grain,
-              label: '${l10n.macroCarbsLabel} ${carbs.toStringAsFixed(0)}g',
-              color: AppColors.foodCoral,
-              backgroundColor: AppColors.foodCoralBg,
-            ),
-            _StatChip(
-              icon: Icons.set_meal,
-              label: '${l10n.macroProteinLabel} ${protein.toStringAsFixed(0)}g',
-              color: AppColors.exerciseTeal,
-              backgroundColor: AppColors.exerciseTealBg,
-            ),
-            _StatChip(
-              icon: Icons.opacity,
-              label: '${l10n.macroFatLabel} ${fat.toStringAsFixed(0)}g',
-              color: AppColors.statsGray,
-              backgroundColor: AppColors.statsGrayBg,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 /// "체중 기록" 진입 카드 바로 위에, 설정에 이미 저장된 목표 칼로리/권장 수분
 /// 섭취량을 탄단지 칩(_NutrientsCard)과 동일한 스타일로 보여준다. 여기서는 저장된
 /// 값을 읽기만 하고 새로 계산하지 않는다 — 계산은 온보딩/프로필 수정 화면
@@ -506,7 +454,7 @@ class _GoalChipsCard extends StatelessWidget {
   }
 }
 
-/// 오늘의 로그 상단 칩(탄단지/목표 칼로리/권장 수분)에 공통으로 쓰는 필(pill) 스타일
+/// 오늘의 로그 목표 칩(목표 칼로리/권장 수분)에 공통으로 쓰는 필(pill) 스타일
 /// 위젯. 색상만 카테고리별로 다르고 모양·패딩·폰트 크기는 항상 동일하다.
 class _StatChip extends StatelessWidget {
   final IconData icon;
