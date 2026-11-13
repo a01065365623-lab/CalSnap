@@ -38,8 +38,8 @@ class DailyLogEmptyState extends StatelessWidget {
             child: FilledButton.icon(
               onPressed: onCamera,
               style: FilledButton.styleFrom(
-                backgroundColor: AppColors.foodCoral,
-                foregroundColor: Colors.white,
+                backgroundColor: AppColors.foodCoralStrong,
+                foregroundColor: AppColors.onAccent,
                 minimumSize: const Size.fromHeight(64),
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 textStyle: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
@@ -76,7 +76,7 @@ class _ShortcutButton extends StatelessWidget {
     return OutlinedButton.icon(
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
-        foregroundColor: AppColors.foodCoral,
+        foregroundColor: AppColors.foodCoralStrong,
         side: const BorderSide(color: AppColors.foodCoral),
         minimumSize: const Size.fromHeight(48),
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),

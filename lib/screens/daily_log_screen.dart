@@ -397,8 +397,8 @@ class _WeightLogEntryCard extends StatelessWidget {
       child: ListTile(
         leading: const CircleAvatar(
           backgroundColor: AppColors.weightTealBg,
-          foregroundColor: AppColors.weightTeal,
-          child: Icon(Icons.monitor_weight_outlined, color: AppColors.weightTeal),
+          foregroundColor: AppColors.weightTealStrong,
+          child: Icon(Icons.monitor_weight_outlined, color: AppColors.weightTealStrong),
         ),
         title: Text(l10n.weightLogAppBarTitle),
         subtitle: Text(l10n.weightLogCardSubtitle),
@@ -426,14 +426,14 @@ class _GoalChipsCard extends StatelessWidget {
         _StatChip(
           icon: Icons.local_fire_department,
           label: '${l10n.dailyLogGoalCaloriesChipLabel} ${goalCalories!.toStringAsFixed(0)}kcal',
-          color: AppColors.goalOrange,
+          color: AppColors.goalOrangeStrong,
           backgroundColor: AppColors.goalOrangeBg,
         ),
       if (waterGoalMl != null)
         _StatChip(
           icon: Icons.water_drop,
           label: '${l10n.dailyLogWaterGoalChipLabel} ${waterGoalMl!.toStringAsFixed(0)}ml',
-          color: AppColors.waterBlue,
+          color: AppColors.waterBlueText,
           backgroundColor: AppColors.waterBlueBg,
         ),
     ];

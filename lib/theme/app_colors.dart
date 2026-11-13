@@ -42,6 +42,9 @@ class AppColors {
 
   static const Color weightTeal = Color(0xFF6FBFA3);
   static const Color weightTealBg = Color(0xFFE8F6F0);
+  // weightTeal은 옅은 배경 위 아이콘으로 쓰기엔 대비가 낮아(약 2:1), 체중 카드 아이콘은
+  // 같은 계열의 진한 톤을 쓴다(weightTealBg 대비 약 3.8:1).
+  static const Color weightTealStrong = Color(0xFF2F8A6C);
 
   static const Color statsGray = Color(0xFF5F5E5A);
   static const Color statsGrayBg = Color(0xFFEBEAE7);
@@ -50,9 +53,16 @@ class AppColors {
   // exerciseTeal(단백질/운동/수분과 다른 계열)과 겹치지 않는 색으로 골랐다.
   static const Color goalOrange = Color(0xFFEF6C00);
   static const Color goalOrangeBg = Color(0xFFFDE7D2);
+  // 목표 칼로리 칩의 글자·아이콘(goalOrangeBg 대비 약 4.8:1).
+  static const Color goalOrangeStrong = Color(0xFFA84B00);
 
   static const Color waterBlue = Color(0xFF2E86DE);
   static const Color waterBlueBg = Color(0xFFDDEBFC);
+  // 권장 수분 칩의 글자·아이콘(waterBlueBg 대비 약 5.1:1).
+  static const Color waterBlueText = Color(0xFF1A63AB);
+  // 오늘의 로그 물 기록 아이콘(중립 블루그레이)과 그 배경.
+  static const Color waterTileFg = Color(0xFF546E7A);
+  static const Color waterTileBg = Color(0xFFECEFF1);
   // 물 빠른 추가 버튼 배경(흰 아이콘). waterBlue보다 한 단계 진해 흰색 대비 약 5.1:1.
   static const Color waterBlueStrong = Color(0xFF1F6FBF);
 

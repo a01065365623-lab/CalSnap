@@ -56,7 +56,7 @@ class WeeklyWeightForecastCard extends StatelessWidget {
           children: [
             CircleAvatar(
               backgroundColor: AppColors.weightTealBg,
-              child: Icon(icon, color: AppColors.weightTeal),
+              child: Icon(icon, color: AppColors.weightTealStrong),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -101,7 +101,7 @@ class WeeklyWeightForecastCard extends StatelessWidget {
                   const SizedBox(height: 6),
                   Text(
                     l10n.weeklyForecastDisclaimer,
-                    style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey),
+                    style: theme.textTheme.bodySmall?.copyWith(color: AppColors.textMuted),
                   ),
                 ],
               ),

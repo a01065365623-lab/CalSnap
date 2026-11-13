@@ -38,9 +38,9 @@ class LogEntryTile extends StatelessWidget {
       case LogType.food:
         return AppColors.foodCoral;
       case LogType.exercise:
-        return AppColors.exerciseTeal;
+        return AppColors.exerciseTealStrong;
       case LogType.water:
-        return Colors.blueGrey.shade400;
+        return AppColors.waterTileFg;
     }
   }
 
@@ -51,7 +51,7 @@ class LogEntryTile extends StatelessWidget {
       case LogType.exercise:
         return AppColors.exerciseTealBg;
       case LogType.water:
-        return Colors.blueGrey.shade50;
+        return AppColors.waterTileBg;
     }
   }
 
@@ -104,9 +104,9 @@ class LogEntryTile extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Theme.of(context).scaffoldBackgroundColor,
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 1.5),
+                    border: Border.all(color: AppColors.cardSurface, width: 1.5),
                   ),
-                  child: const Icon(Icons.edit, size: 10, color: Colors.grey),
+                  child: const Icon(Icons.edit, size: 10, color: AppColors.textMuted),
                 ),
               ),
             ),

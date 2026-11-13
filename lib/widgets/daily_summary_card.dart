@@ -91,7 +91,9 @@ class GoalProgressRing extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final percent = (ratio * 100).round();
+    // 링은 비텍스트(3:1)라 기본 코랄, 가운데 퍼센트 글자는 4.5:1을 넘는 진한 코랄.
     final color = isOver ? AppColors.goalOverRed : AppColors.foodCoral;
+    final textColor = isOver ? AppColors.goalOverRed : AppColors.foodCoralStrong;
     final trackColor = isOver ? AppColors.goalOverRedBg : AppColors.foodCoralBg;
 
     return Semantics(
@@ -121,7 +123,7 @@ class GoalProgressRing extends StatelessWidget {
                       fit: BoxFit.scaleDown,
                       child: Text(
                         '$percent%',
-                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: color),
+                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: textColor),
                       ),
                     ),
                   ),

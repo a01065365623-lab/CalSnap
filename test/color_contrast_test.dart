@@ -40,6 +40,9 @@ void main() {
     ('흰 글자 / 진한 틸 버튼', AppColors.onAccent, AppColors.exerciseTealStrong),
     ('사진 한도 안내 / 회색 바탕', AppColors.statsGray, AppColors.statsGrayBg),
     ('지방 라벨 / 카드', AppColors.statsGray, AppColors.cardSurface),
+    ('목표 칼로리 칩', AppColors.goalOrangeStrong, AppColors.goalOrangeBg),
+    ('권장 수분 칩', AppColors.waterBlueText, AppColors.waterBlueBg),
+    ('링 퍼센트(진한 코랄) / 카드', AppColors.foodCoralStrong, AppColors.cardSurface),
     ('흰 아이콘 / 물 버튼', AppColors.onAccent, AppColors.waterBlueStrong),
     ('통계 아이콘 / 중립 버튼', AppColors.neutralButtonFg, AppColors.neutralButtonBg),
   ];
@@ -55,6 +58,11 @@ void main() {
     ('탄수화물 막대 / 카드', AppColors.foodCoral, AppColors.cardSurface),
     ('단백질 막대 / 카드', AppColors.exerciseTeal, AppColors.cardSurface),
     ('지방 막대 / 카드', AppColors.statsGray, AppColors.cardSurface),
+    ('체중 아이콘 / 옅은 틸', AppColors.weightTealStrong, AppColors.weightTealBg),
+    ('음식 아이콘 / 옅은 코랄', AppColors.foodCoral, AppColors.foodCoralBg),
+    ('운동 아이콘 / 옅은 틸', AppColors.exerciseTealStrong, AppColors.exerciseTealBg),
+    ('물 아이콘 / 옅은 회청', AppColors.waterTileFg, AppColors.waterTileBg),
+    ('빈 화면 버튼 테두리 / 카드', AppColors.foodCoral, AppColors.appBackground),
   ];
   for (final (name, fg, bg) in nonTextPairs) {
     test('비텍스트 3:1 이상 — $name', () {
