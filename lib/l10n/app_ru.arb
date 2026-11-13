@@ -297,5 +297,12 @@
 
   "dailyLogGoalProgressLabel": "от цели",
   "dailyLogGoalOverLabel": "Выше цели",
-  "dailyLogGoalProgressSemantics": "{percent}% от цели по калориям"
+  "dailyLogGoalProgressSemantics": "{percent}% от цели по калориям",
+
+  "weeklyForecastTitle": "Прогноз веса на неделю",
+  "weeklyForecastValue": "Около {change} в неделю",
+  "weeklyForecastNeedMoreData": "Нужно больше записей",
+  "weeklyForecastNeedMoreDataHint": "Внесите записи хотя бы за {minDays} из последних {window} дней, чтобы увидеть прогноз (сейчас {days})",
+  "weeklyForecastBasis": "Средн. чистые {average} ккал за {days} дн. с записями · Цель {target} ккал",
+  "weeklyForecastDisclaimer": "Это оценка из расчёта 7700 ккал ≈ 1 кг. Реальные изменения могут отличаться."
 }

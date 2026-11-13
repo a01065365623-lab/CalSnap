@@ -297,5 +297,12 @@
 
   "dailyLogGoalProgressLabel": "vom Ziel",
   "dailyLogGoalOverLabel": "Über Ziel",
-  "dailyLogGoalProgressSemantics": "{percent} % des Kalorienziels"
+  "dailyLogGoalProgressSemantics": "{percent} % des Kalorienziels",
+
+  "weeklyForecastTitle": "Wöchentliche Gewichtsprognose",
+  "weeklyForecastValue": "Etwa {change} pro Woche",
+  "weeklyForecastNeedMoreData": "Mehr Einträge nötig",
+  "weeklyForecastNeedMoreDataHint": "Trage an mindestens {minDays} der letzten {window} Tage ein, um eine Prognose zu sehen (jetzt {days})",
+  "weeklyForecastBasis": "Ø netto {average} kcal an {days} erfassten Tagen · Ziel {target} kcal",
+  "weeklyForecastDisclaimer": "Schätzwert auf Basis von 7.700 kcal ≈ 1 kg. Die tatsächliche Veränderung kann abweichen."
 }

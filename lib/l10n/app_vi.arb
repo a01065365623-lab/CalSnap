@@ -297,5 +297,12 @@
 
   "dailyLogGoalProgressLabel": "so với mục tiêu",
   "dailyLogGoalOverLabel": "Vượt mục tiêu",
-  "dailyLogGoalProgressSemantics": "{percent}% mục tiêu calo"
+  "dailyLogGoalProgressSemantics": "{percent}% mục tiêu calo",
+
+  "weeklyForecastTitle": "Dự đoán thay đổi cân nặng mỗi tuần",
+  "weeklyForecastValue": "Khoảng {change} mỗi tuần",
+  "weeklyForecastNeedMoreData": "Cần thêm dữ liệu ghi chép",
+  "weeklyForecastNeedMoreDataHint": "Ghi chép ít nhất {minDays} trong {window} ngày gần nhất để xem dự đoán (hiện có {days})",
+  "weeklyForecastBasis": "TB calo ròng {average} kcal trong {days} ngày đã ghi · Mục tiêu {target} kcal",
+  "weeklyForecastDisclaimer": "Đây là ước tính dựa trên 7.700 kcal ≈ 1 kg. Thay đổi thực tế có thể khác."
 }

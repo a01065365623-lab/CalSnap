@@ -297,5 +297,12 @@
 
   "dailyLogGoalProgressLabel": "من الهدف",
   "dailyLogGoalOverLabel": "فوق الهدف",
-  "dailyLogGoalProgressSemantics": "{percent}% من هدف السعرات"
+  "dailyLogGoalProgressSemantics": "{percent}% من هدف السعرات",
+
+  "weeklyForecastTitle": "توقع تغيّر الوزن الأسبوعي",
+  "weeklyForecastValue": "نحو {change} أسبوعيًا",
+  "weeklyForecastNeedMoreData": "نحتاج إلى مزيد من السجلات",
+  "weeklyForecastNeedMoreDataHint": "سجّل {minDays} أيام على الأقل من آخر {window} أيام لرؤية التوقع (الآن {days})",
+  "weeklyForecastBasis": "متوسط الصافي {average} سعرة خلال {days} أيام مسجلة · الهدف {target} سعرة",
+  "weeklyForecastDisclaimer": "هذا تقدير مبني على أن 7700 سعرة ≈ 1 كغ. قد يختلف التغيّر الفعلي."
 }

@@ -425,5 +425,18 @@
   "dailyLogGoalOverLabel": "목표 초과",
   "@dailyLogGoalOverLabel": {"description": "순칼로리가 목표 칼로리를 넘었을 때 진행률 링 아래 라벨. 아주 짧게."},
   "dailyLogGoalProgressSemantics": "목표 칼로리의 {percent}%",
-  "@dailyLogGoalProgressSemantics": {"description": "진행률 링의 스크린리더 라벨", "placeholders": {"percent": {"type": "int"}}}
+  "@dailyLogGoalProgressSemantics": {"description": "진행률 링의 스크린리더 라벨", "placeholders": {"percent": {"type": "int"}}},
+
+  "weeklyForecastTitle": "주간 체중 변화 예상",
+  "@weeklyForecastTitle": {"description": "오늘의 로그의 주간 체중 변화 예상 카드 제목"},
+  "weeklyForecastValue": "주 약 {change} 예상",
+  "@weeklyForecastValue": {"description": "주간 체중 변화 예상치. change는 부호와 단위가 붙은 값(예: -0.5kg, +1.1lb)", "placeholders": {"change": {"type": "String", "example": "-0.5kg"}}},
+  "weeklyForecastNeedMoreData": "기록이 더 필요해요",
+  "@weeklyForecastNeedMoreData": {"description": "최근 기록이 3일 미만이라 예상치를 계산할 수 없을 때"},
+  "weeklyForecastNeedMoreDataHint": "최근 {window}일 중 {minDays}일 이상 기록하면 계산해 드려요 (지금 {days}일)",
+  "@weeklyForecastNeedMoreDataHint": {"description": "기록이 부족할 때 안내. window=기간(7), minDays=필요 일수(3), days=현재 기록한 날 수", "placeholders": {"window": {"type": "int"}, "minDays": {"type": "int"}, "days": {"type": "int"}}},
+  "weeklyForecastBasis": "기록한 {days}일 평균 순칼로리 {average}kcal · 목표 {target}kcal",
+  "@weeklyForecastBasis": {"description": "예상치 계산 근거. average=기록한 날 일평균 순칼로리, target=목표 칼로리, days=기록한 날 수", "placeholders": {"average": {"type": "int"}, "target": {"type": "int"}, "days": {"type": "int"}}},
+  "weeklyForecastDisclaimer": "7,700kcal ≈ 1kg으로 계산한 추정치예요. 실제 변화와 다를 수 있어요.",
+  "@weeklyForecastDisclaimer": {"description": "예상치가 참고용 추정치라는 안내(7700kcal ≈ 1kg 기준)"}
 }

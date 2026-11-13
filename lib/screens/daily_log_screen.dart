@@ -9,11 +9,14 @@ import '../services/meal_log_service.dart';
 import '../services/tts_service.dart';
 import '../services/user_profile_service.dart';
 import '../theme/app_colors.dart';
+import '../utils/bmr_calculator.dart';
 import '../utils/unit_converter.dart';
+import '../utils/weight_forecast.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../widgets/daily_summary_card.dart';
 import '../widgets/food_detail_sheet.dart';
 import '../widgets/log_entry_tile.dart';
+import '../widgets/weekly_weight_forecast_card.dart';
 import 'meal_calendar_screen.dart';
 import 'weight_log_screen.dart';
 
@@ -37,6 +40,10 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
   UnitSystem _unitSystem = UnitSystem.metric;
   double? _goalCalories;
   double? _waterGoalMl;
+  // 주간 체중 변화 예상의 기준 칼로리. 저장된 목표 칼로리가 우선이고, 없으면 프로필로
+  // 기초대사량 × 기본 활동계수를 계산한다. 둘 다 없으면 null(카드 숨김).
+  double? _forecastTargetCalories;
+  WeeklyWeightForecast? _weightForecast;
 
   bool get _isToday {
     final now = DateTime.now();
@@ -62,12 +69,39 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
     // 읽기만 한다(여기서 새로 계산하지 않음).
     final goalCalories = await UserProfileService.instance.getGoalCalories();
     final waterGoalMl = await UserProfileService.instance.getDailyWaterGoalMl();
+
+    double? forecastTarget = goalCalories;
+    if (forecastTarget == null) {
+      final profile = await UserProfileService.instance.getProfile();
+      if (profile != null) {
+        forecastTarget = calculateGoalCalories(
+          gender: profile.gender,
+          age: profile.age,
+          heightCm: profile.heightCm,
+          weightKg: profile.weightKg,
+        );
+      }
+    }
+    WeeklyWeightForecast? forecast;
+    if (forecastTarget != null && forecastTarget > 0) {
+      final now = DateTime.now();
+      final today = DateTime(now.year, now.month, now.day);
+      final recent = await _db.getSummaryRange(
+        today.subtract(const Duration(days: weightForecastWindowDays)),
+        today.subtract(const Duration(days: 1)),
+      );
+      forecast = estimateWeeklyWeightChange(summaries: recent, targetCalories: forecastTarget, today: today);
+    }
+
+    if (!mounted) return;
     setState(() {
       _entries = entries;
       _summary = summary;
       _unitSystem = unitSystem;
       _goalCalories = goalCalories;
       _waterGoalMl = waterGoalMl;
+      _forecastTargetCalories = forecastTarget;
+      _weightForecast = forecast;
     });
   }
 
@@ -197,6 +231,13 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
                           MaterialPageRoute(builder: (_) => const WeightLogScreen()),
                         ),
                       ),
+                      // 앞으로의 예상치라 오늘 화면에서만 보여준다.
+                      if (_isToday && _weightForecast != null && _forecastTargetCalories != null)
+                        WeeklyWeightForecastCard(
+                          forecast: _weightForecast!,
+                          targetCalories: _forecastTargetCalories!,
+                          unitSystem: _unitSystem,
+                        ),
                       _NutrientsCard(entries: _entries),
                     ],
                   ),

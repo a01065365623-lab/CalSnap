@@ -297,5 +297,12 @@
 
   "dailyLogGoalProgressLabel": "da meta",
   "dailyLogGoalOverLabel": "Acima da meta",
-  "dailyLogGoalProgressSemantics": "{percent}% da meta de calorias"
+  "dailyLogGoalProgressSemantics": "{percent}% da meta de calorias",
+
+  "weeklyForecastTitle": "Previsão semanal de peso",
+  "weeklyForecastValue": "Cerca de {change} por semana",
+  "weeklyForecastNeedMoreData": "Faltam registros",
+  "weeklyForecastNeedMoreDataHint": "Registre pelo menos {minDays} dos últimos {window} dias para ver a previsão (agora {days})",
+  "weeklyForecastBasis": "Média líquida {average} kcal em {days} dias registrados · Meta {target} kcal",
+  "weeklyForecastDisclaimer": "É uma estimativa com base em 7.700 kcal ≈ 1 kg. A mudança real pode ser diferente."
 }

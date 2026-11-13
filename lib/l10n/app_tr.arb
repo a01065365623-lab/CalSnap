@@ -297,5 +297,12 @@
 
   "dailyLogGoalProgressLabel": "hedefin",
   "dailyLogGoalOverLabel": "Hedef aşıldı",
-  "dailyLogGoalProgressSemantics": "Kalori hedefinin %{percent}'i"
+  "dailyLogGoalProgressSemantics": "Kalori hedefinin %{percent}'i",
+
+  "weeklyForecastTitle": "Haftalık kilo tahmini",
+  "weeklyForecastValue": "Haftada yaklaşık {change}",
+  "weeklyForecastNeedMoreData": "Daha fazla kayıt gerekli",
+  "weeklyForecastNeedMoreDataHint": "Tahmini görmek için son {window} günün en az {minDays} gününü kaydedin (şu an {days})",
+  "weeklyForecastBasis": "Kayıtlı {days} günde ort. net {average} kcal · Hedef {target} kcal",
+  "weeklyForecastDisclaimer": "Bu, 7.700 kcal ≈ 1 kg esasına dayalı bir tahmindir. Gerçek değişim farklı olabilir."
 }

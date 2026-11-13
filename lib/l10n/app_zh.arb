@@ -297,5 +297,12 @@
 
   "dailyLogGoalProgressLabel": "目标占比",
   "dailyLogGoalOverLabel": "超出目标",
-  "dailyLogGoalProgressSemantics": "卡路里目标的{percent}%"
+  "dailyLogGoalProgressSemantics": "卡路里目标的{percent}%",
+
+  "weeklyForecastTitle": "每周体重变化预估",
+  "weeklyForecastValue": "每周约{change}",
+  "weeklyForecastNeedMoreData": "需要更多记录",
+  "weeklyForecastNeedMoreDataHint": "最近{window}天中记录至少{minDays}天即可计算（目前{days}天）",
+  "weeklyForecastBasis": "已记录{days}天平均净卡路里 {average}kcal · 目标 {target}kcal",
+  "weeklyForecastDisclaimer": "这是按7,700kcal ≈ 1kg计算的估算值，实际变化可能不同。"
 }

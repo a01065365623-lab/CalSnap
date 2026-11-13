@@ -297,5 +297,12 @@
 
   "dailyLogGoalProgressLabel": "लक्ष्य का",
   "dailyLogGoalOverLabel": "लक्ष्य से ज़्यादा",
-  "dailyLogGoalProgressSemantics": "कैलोरी लक्ष्य का {percent}%"
+  "dailyLogGoalProgressSemantics": "कैलोरी लक्ष्य का {percent}%",
+
+  "weeklyForecastTitle": "साप्ताहिक वज़न बदलाव अनुमान",
+  "weeklyForecastValue": "हर हफ़्ते लगभग {change}",
+  "weeklyForecastNeedMoreData": "और रिकॉर्ड चाहिए",
+  "weeklyForecastNeedMoreDataHint": "अनुमान देखने के लिए पिछले {window} दिनों में से कम से कम {minDays} दिन रिकॉर्ड करें (अभी {days})",
+  "weeklyForecastBasis": "{days} रिकॉर्ड किए दिनों का औसत शुद्ध {average} kcal · लक्ष्य {target} kcal",
+  "weeklyForecastDisclaimer": "यह 7,700 kcal ≈ 1 kg के आधार पर अनुमान है। असली बदलाव अलग हो सकता है।"
 }
