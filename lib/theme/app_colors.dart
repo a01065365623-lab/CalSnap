@@ -20,6 +20,8 @@ class AppColors {
   static const Color cardSurface = Color(0xFFFFFFFF);
   static const Color cardBorder = Color(0xFFEEE6E2);
   static const Color cardShadow = Color(0x1F5A3A2E);
+  // 배너 광고 위아래 구분선. 광고가 카드(콘텐츠)처럼 보이지 않게 영역만 가른다.
+  static const Color adDivider = Color(0xFFE5DCD7);
 
   // ── 글자색 ─────────────────────────────────────────────
   // 흰 카드/바탕 위 보조 글자. Colors.grey(#9E9E9E)는 대비가 2.7:1이라 AA(4.5:1)를
