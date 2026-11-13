@@ -171,7 +171,6 @@
   "quickModeManualEntryStillAvailable": "You can still use manual entry.",
   "quickModePhotoQuotaRemaining": "Photo recognitions left today: {remaining}/{limit}",
   "manualEntryTextQuotaRemaining": "Manual estimates left today: {remaining}/{limit}",
-  "quickModeLaunchFreeNotice": "Free during launch celebration (paid plan coming later)",
   "quickModeConfidence": "Estimated confidence {value}%",
   "quickModePortionAdjust": "Portion adjust: {value}%",
   "quickModeEstimatedSummary": "Estimated {weight} · {calories}kcal",
@@ -309,5 +308,8 @@
 
   "dailyLogEmptyCameraButton": "Snap a photo to log",
 
-  "weeklyForecastValueOverCap": "{change} or more per week"
+  "weeklyForecastValueOverCap": "{change} or more per week",
+
+  "quickModePhotoQuotaNotice": "Photo recognition is free {limit} times a day because of AI costs. Manual entry stays free.",
+  "quickModePhotoQuotaNoticeDismiss": "Dismiss"
 }

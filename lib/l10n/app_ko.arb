@@ -249,7 +249,6 @@
   "@manualEntryTextQuotaRemaining": {
     "placeholders": { "remaining": { "type": "int" }, "limit": { "type": "int" } }
   },
-  "quickModeLaunchFreeNotice": "출시 기념 무료 이용 중 (이후 유료 전환 예정)",
   "quickModeConfidence": "추정 정확도 {value}%",
   "@quickModeConfidence": {
     "placeholders": { "value": { "type": "String" } }
@@ -444,5 +443,10 @@
   "@dailyLogEmptyCameraButton": {"description": "오늘 기록이 없을 때 보여주는 큰 카메라 버튼. 누르면 바로 카메라가 열린다."},
 
   "weeklyForecastValueOverCap": "주 {change} 이상 예상",
-  "@weeklyForecastValueOverCap": {"description": "주간 체중 변화 예상이 ±1.0kg을 넘을 때. change는 부호·단위가 붙은 상한값(-1.0kg, +2.2lb 등)", "placeholders": {"change": {"type": "String", "example": "-1.0kg"}}}
+  "@weeklyForecastValueOverCap": {"description": "주간 체중 변화 예상이 ±1.0kg을 넘을 때. change는 부호·단위가 붙은 상한값(-1.0kg, +2.2lb 등)", "placeholders": {"change": {"type": "String", "example": "-1.0kg"}}},
+
+  "quickModePhotoQuotaNotice": "사진 인식은 AI 비용 때문에 하루 {limit}회 무료예요. 직접 입력은 계속 무료예요.",
+  "@quickModePhotoQuotaNotice": {"description": "하루 두 번째 사진 인식 결과 아래에 하루 한 번 보이는 한 줄 안내. limit=서버가 내려준 하루 사진 인식 무료 횟수", "placeholders": {"limit": {"type": "int"}}},
+  "quickModePhotoQuotaNoticeDismiss": "안내 닫기",
+  "@quickModePhotoQuotaNoticeDismiss": {"description": "위 안내를 닫는 X 버튼의 툴팁/스크린리더 라벨"}
 }

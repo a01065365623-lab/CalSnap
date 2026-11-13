@@ -170,7 +170,6 @@
   "quickModeManualEntryStillAvailable": "Manuel girişi kullanmaya devam edebilirsiniz.",
   "quickModePhotoQuotaRemaining": "Bugün kalan fotoğraf tanıma: {remaining}/{limit}",
   "manualEntryTextQuotaRemaining": "Bugün kalan manuel tahmin: {remaining}/{limit}",
-  "quickModeLaunchFreeNotice": "Lansmana özel ücretsiz (ileride ücretli olacak)",
   "quickModeConfidence": "Tahmini doğruluk {value}%",
   "quickModePortionAdjust": "Porsiyon ayarı: {value}%",
   "quickModeEstimatedSummary": "Tahmini {weight} · {calories}kcal",
@@ -308,5 +307,8 @@
 
   "dailyLogEmptyCameraButton": "Fotoğraf çekip kaydet",
 
-  "weeklyForecastValueOverCap": "Haftada {change} veya daha fazla"
+  "weeklyForecastValueOverCap": "Haftada {change} veya daha fazla",
+
+  "quickModePhotoQuotaNotice": "Yapay zekâ maliyeti nedeniyle fotoğraf tanıma günde {limit} kez ücretsizdir. Elle giriş her zaman ücretsiz.",
+  "quickModePhotoQuotaNoticeDismiss": "Kapat"
 }

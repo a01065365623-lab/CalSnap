@@ -170,7 +170,6 @@
   "quickModeManualEntryStillAvailable": "Ручной ввод по-прежнему доступен.",
   "quickModePhotoQuotaRemaining": "Осталось распознаваний фото сегодня: {remaining}/{limit}",
   "manualEntryTextQuotaRemaining": "Осталось ручных оценок сегодня: {remaining}/{limit}",
-  "quickModeLaunchFreeNotice": "Бесплатно в честь запуска (позже станет платным)",
   "quickModeConfidence": "Примерная точность {value}%",
   "quickModePortionAdjust": "Коррекция порции: {value}%",
   "quickModeEstimatedSummary": "Примерно {weight} · {calories}ккал",
@@ -308,5 +307,8 @@
 
   "dailyLogEmptyCameraButton": "Сфотографировать и записать",
 
-  "weeklyForecastValueOverCap": "{change} или больше в неделю"
+  "weeklyForecastValueOverCap": "{change} или больше в неделю",
+
+  "quickModePhotoQuotaNotice": "Распознавание фото бесплатно {limit} раза в день из-за стоимости ИИ. Ручной ввод остаётся бесплатным.",
+  "quickModePhotoQuotaNoticeDismiss": "Закрыть"
 }

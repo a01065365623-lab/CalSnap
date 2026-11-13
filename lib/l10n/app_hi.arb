@@ -170,7 +170,6 @@
   "quickModeManualEntryStillAvailable": "आप मैन्युअल एंट्री अब भी इस्तेमाल कर सकते हैं।",
   "quickModePhotoQuotaRemaining": "आज बची फ़ोटो पहचान: {remaining}/{limit}",
   "manualEntryTextQuotaRemaining": "आज बचे मैन्युअल अनुमान: {remaining}/{limit}",
-  "quickModeLaunchFreeNotice": "लॉन्च के अवसर पर मुफ़्त (बाद में सशुल्क होगा)",
   "quickModeConfidence": "अनुमानित सटीकता {value}%",
   "quickModePortionAdjust": "मात्रा समायोजन: {value}%",
   "quickModeEstimatedSummary": "अनुमानित {weight} · {calories}kcal",
@@ -308,5 +307,8 @@
 
   "dailyLogEmptyCameraButton": "फ़ोटो लेकर दर्ज करें",
 
-  "weeklyForecastValueOverCap": "हर हफ़्ते {change} या उससे ज़्यादा"
+  "weeklyForecastValueOverCap": "हर हफ़्ते {change} या उससे ज़्यादा",
+
+  "quickModePhotoQuotaNotice": "AI की लागत के कारण फ़ोटो पहचान दिन में {limit} बार मुफ़्त है। मैन्युअल एंट्री हमेशा मुफ़्त है।",
+  "quickModePhotoQuotaNoticeDismiss": "बंद करें"
 }

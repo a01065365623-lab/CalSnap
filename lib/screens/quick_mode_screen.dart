@@ -12,11 +12,13 @@ import '../services/food_photo_service.dart';
 import '../services/food_recognition_service.dart';
 import '../services/gemini_food_recognition_service.dart';
 import '../services/meal_log_service.dart';
+import '../services/photo_quota_notice_service.dart';
 import '../services/tts_service.dart';
 import '../services/user_profile_service.dart';
 import '../theme/app_colors.dart';
 import '../utils/unit_converter.dart';
 import '../widgets/food_photo_thumbnail.dart';
+import '../widgets/photo_quota_notice.dart';
 import '../widgets/related_products_button.dart';
 import 'manual_food_entry_screen.dart';
 
@@ -55,6 +57,9 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
   // 소용없으므로 재시도 버튼 대신 아직 쓸 수 있는 "직접 입력"을 안내한다.
   bool _photoLimitReached = false;
   bool _saving = false;
+  // 오늘 두 번째 사진 인식 결과부터 결과 아래에 한 번 보여주는 "하루 N회 무료" 안내의
+  // N(서버 한도). null이면 안내를 숨긴다.
+  int? _photoQuotaNoticeLimit;
 
   // "최근 먹은 음식"(my_foods). 탭하면 Gemini 호출 없이 양만 조정해 바로 기록한다.
   List<MyFood> _myFoods = [];
@@ -165,6 +170,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
       _result = null;
       _errorMessage = null;
       _isManualEntry = false;
+      _photoQuotaNoticeLimit = null;
     });
     await _recognize(image);
   }
@@ -191,6 +197,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
       _foodNameController.text = result.foodName;
       _portionMultiplier = 1.0;
       _isManualEntry = true;
+      _photoQuotaNoticeLimit = null;
     });
   }
 
@@ -225,6 +232,11 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
         _foodNameController.text = result.foodName;
         _loading = false;
       });
+      final noticeLimit =
+          await PhotoQuotaNoticeService.instance.takeNoticeLimitForToday(_recognitionService.usage.value);
+      if (noticeLimit != null && mounted && identical(_image, image)) {
+        setState(() => _photoQuotaNoticeLimit = noticeLimit);
+      }
     } catch (e) {
       if (!mounted || !identical(_image, image)) return;
       final l10n = AppLocalizations.of(context)!;
@@ -261,6 +273,7 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
       _loading = false;
       _isManualEntry = false;
       _photoLimitReached = false;
+      _photoQuotaNoticeLimit = null;
     });
   }
 
@@ -387,12 +400,6 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
                 );
               },
             ),
-            const SizedBox(height: 4),
-            Text(
-              l10n.quickModeLaunchFreeNotice,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 11, color: AppColors.foodCoral),
-            ),
             const SizedBox(height: 24),
             if (_loading) const CircularProgressIndicator(),
             if (!_loading && _errorMessage != null) ...[
@@ -468,6 +475,16 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
                 ),
                 style: const TextStyle(fontSize: 13, color: Colors.grey),
               ),
+              if (_photoQuotaNoticeLimit != null) ...[
+                const SizedBox(height: 12),
+                PhotoQuotaNotice(
+                  dailyLimit: _photoQuotaNoticeLimit!,
+                  onDismiss: () {
+                    setState(() => _photoQuotaNoticeLimit = null);
+                    unawaited(PhotoQuotaNoticeService.instance.dismissForToday());
+                  },
+                ),
+              ],
               const SizedBox(height: 16),
               ElevatedButton(onPressed: _saving ? null : _save, child: Text(l10n.saveButton)),
               const SizedBox(height: 8),

@@ -170,7 +170,6 @@
   "quickModeManualEntryStillAvailable": "Bạn vẫn có thể dùng nhập thủ công.",
   "quickModePhotoQuotaRemaining": "Lượt nhận diện ảnh còn lại hôm nay: {remaining}/{limit}",
   "manualEntryTextQuotaRemaining": "Lượt ước tính thủ công còn lại hôm nay: {remaining}/{limit}",
-  "quickModeLaunchFreeNotice": "Miễn phí nhân dịp ra mắt (sau này sẽ thu phí)",
   "quickModeConfidence": "Độ chính xác ước tính {value}%",
   "quickModePortionAdjust": "Điều chỉnh khẩu phần: {value}%",
   "quickModeEstimatedSummary": "Ước tính {weight} · {calories}kcal",
@@ -308,5 +307,8 @@
 
   "dailyLogEmptyCameraButton": "Chụp ảnh để ghi lại",
 
-  "weeklyForecastValueOverCap": "{change} trở lên mỗi tuần"
+  "weeklyForecastValueOverCap": "{change} trở lên mỗi tuần",
+
+  "quickModePhotoQuotaNotice": "Nhận diện ảnh miễn phí {limit} lần mỗi ngày do chi phí AI. Nhập thủ công vẫn luôn miễn phí.",
+  "quickModePhotoQuotaNoticeDismiss": "Đóng"
 }

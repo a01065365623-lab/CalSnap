@@ -170,7 +170,6 @@
   "quickModeManualEntryStillAvailable": "Vous pouvez toujours utiliser la saisie manuelle.",
   "quickModePhotoQuotaRemaining": "Reconnaissances photo restantes aujourd'hui : {remaining}/{limit}",
   "manualEntryTextQuotaRemaining": "Estimations manuelles restantes aujourd'hui : {remaining}/{limit}",
-  "quickModeLaunchFreeNotice": "Gratuit pour le lancement (passage au payant prévu)",
   "quickModeConfidence": "Précision estimée {value}%",
   "quickModePortionAdjust": "Ajustement de la portion : {value}%",
   "quickModeEstimatedSummary": "Estimé {weight} · {calories}kcal",
@@ -308,5 +307,8 @@
 
   "dailyLogEmptyCameraButton": "Prendre une photo du repas",
 
-  "weeklyForecastValueOverCap": "{change} ou plus par semaine"
+  "weeklyForecastValueOverCap": "{change} ou plus par semaine",
+
+  "quickModePhotoQuotaNotice": "La reconnaissance photo est gratuite {limit} fois par jour en raison du coût de l'IA. La saisie manuelle reste gratuite.",
+  "quickModePhotoQuotaNoticeDismiss": "Fermer"
 }

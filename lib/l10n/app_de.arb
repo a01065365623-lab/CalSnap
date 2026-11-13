@@ -170,7 +170,6 @@
   "quickModeManualEntryStillAvailable": "Die manuelle Eingabe kannst du weiterhin nutzen.",
   "quickModePhotoQuotaRemaining": "Heute verbleibende Fotoerkennungen: {remaining}/{limit}",
   "manualEntryTextQuotaRemaining": "Heute verbleibende manuelle Schätzungen: {remaining}/{limit}",
-  "quickModeLaunchFreeNotice": "Zum Start kostenlos (später kostenpflichtig geplant)",
   "quickModeConfidence": "Geschätzte Genauigkeit {value}%",
   "quickModePortionAdjust": "Portionsanpassung: {value}%",
   "quickModeEstimatedSummary": "Geschätzt {weight} · {calories}kcal",
@@ -308,5 +307,8 @@
 
   "dailyLogEmptyCameraButton": "Foto aufnehmen und eintragen",
 
-  "weeklyForecastValueOverCap": "{change} oder mehr pro Woche"
+  "weeklyForecastValueOverCap": "{change} oder mehr pro Woche",
+
+  "quickModePhotoQuotaNotice": "Die Fotoerkennung ist wegen der KI-Kosten {limit}-mal täglich kostenlos. Manuelle Eingabe bleibt kostenlos.",
+  "quickModePhotoQuotaNoticeDismiss": "Schließen"
 }

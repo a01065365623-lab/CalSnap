@@ -170,7 +170,6 @@
   "quickModeManualEntryStillAvailable": "手入力は引き続きご利用いただけます。",
   "quickModePhotoQuotaRemaining": "本日の残り写真認識 {remaining}/{limit}",
   "manualEntryTextQuotaRemaining": "本日の残り手入力推定 {remaining}/{limit}",
-  "quickModeLaunchFreeNotice": "リリース記念で無料提供中（今後有料化予定）",
   "quickModeConfidence": "推定精度 {value}%",
   "quickModePortionAdjust": "量の補正: {value}%",
   "quickModeEstimatedSummary": "推定 {weight}・{calories}kcal",
@@ -308,5 +307,8 @@
 
   "dailyLogEmptyCameraButton": "写真を撮って記録",
 
-  "weeklyForecastValueOverCap": "週に{change}以上の見込み"
+  "weeklyForecastValueOverCap": "週に{change}以上の見込み",
+
+  "quickModePhotoQuotaNotice": "写真認識はAIのコストのため1日{limit}回まで無料です。手入力はずっと無料です。",
+  "quickModePhotoQuotaNoticeDismiss": "閉じる"
 }

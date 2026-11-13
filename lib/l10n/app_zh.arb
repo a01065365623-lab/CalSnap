@@ -170,7 +170,6 @@
   "quickModeManualEntryStillAvailable": "手动输入仍可继续使用。",
   "quickModePhotoQuotaRemaining": "今日剩余照片识别次数 {remaining}/{limit}",
   "manualEntryTextQuotaRemaining": "今日剩余手动估算次数 {remaining}/{limit}",
-  "quickModeLaunchFreeNotice": "上线纪念免费使用中（之后将转为付费）",
   "quickModeConfidence": "预估准确度 {value}%",
   "quickModePortionAdjust": "份量调整：{value}%",
   "quickModeEstimatedSummary": "预估 {weight} · {calories}kcal",
@@ -308,5 +307,8 @@
 
   "dailyLogEmptyCameraButton": "拍照记录",
 
-  "weeklyForecastValueOverCap": "每周{change}以上"
+  "weeklyForecastValueOverCap": "每周{change}以上",
+
+  "quickModePhotoQuotaNotice": "由于AI成本，照片识别每天可免费使用{limit}次。手动输入一直免费。",
+  "quickModePhotoQuotaNoticeDismiss": "关闭"
 }

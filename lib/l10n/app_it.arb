@@ -170,7 +170,6 @@
   "quickModeManualEntryStillAvailable": "Puoi ancora usare l'inserimento manuale.",
   "quickModePhotoQuotaRemaining": "Riconoscimenti foto rimasti oggi: {remaining}/{limit}",
   "manualEntryTextQuotaRemaining": "Stime manuali rimaste oggi: {remaining}/{limit}",
-  "quickModeLaunchFreeNotice": "Gratis per il lancio (in seguito diventerà a pagamento)",
   "quickModeConfidence": "Precisione stimata {value}%",
   "quickModePortionAdjust": "Regolazione porzione: {value}%",
   "quickModeEstimatedSummary": "Stimato {weight} · {calories}kcal",
@@ -308,5 +307,8 @@
 
   "dailyLogEmptyCameraButton": "Scatta una foto per registrare",
 
-  "weeklyForecastValueOverCap": "{change} o più a settimana"
+  "weeklyForecastValueOverCap": "{change} o più a settimana",
+
+  "quickModePhotoQuotaNotice": "Il riconoscimento foto è gratuito {limit} volte al giorno per i costi dell'IA. L'inserimento manuale resta gratuito.",
+  "quickModePhotoQuotaNoticeDismiss": "Chiudi"
 }
