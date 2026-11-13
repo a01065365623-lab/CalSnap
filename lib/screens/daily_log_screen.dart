@@ -179,21 +179,39 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
             padding: EdgeInsets.only(top: 8),
             child: BannerAdWidget(),
           ),
-          _SummaryCard(summary: _summary),
-          _GoalChipsCard(goalCalories: _goalCalories, waterGoalMl: _waterGoalMl),
-          _WeightLogEntryCard(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const WeightLogScreen()),
-            ),
-          ),
-          _NutrientsCard(entries: _entries),
+          // 상단 카드들도 목록과 함께 스크롤된다. 예전처럼 카드를 고정하고 목록만
+          // Expanded로 두면, 좁은 화면(320px)·큰 글꼴에서 카드만으로 높이를 다 써서
+          // 세로 overflow가 났다.
           Expanded(
-            child: _entries.isEmpty
-                ? Center(
-                    child: Text(_isToday ? l10n.dailyLogEmptyToday : l10n.dailyLogEmptyOtherDay),
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: [
+                      _SummaryCard(summary: _summary),
+                      _GoalChipsCard(goalCalories: _goalCalories, waterGoalMl: _waterGoalMl),
+                      _WeightLogEntryCard(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const WeightLogScreen()),
+                        ),
+                      ),
+                      _NutrientsCard(entries: _entries),
+                    ],
+                  ),
+                ),
+                if (_entries.isEmpty)
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                      child: Text(
+                        _isToday ? l10n.dailyLogEmptyToday : l10n.dailyLogEmptyOtherDay,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   )
-                : ListView.builder(
+                else
+                  SliverList.builder(
                     itemCount: _entries.length,
                     itemBuilder: (context, i) {
                       final e = _entries[i];
@@ -210,6 +228,11 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
                       );
                     },
                   ),
+                // 홈의 centerDocked FAB(운동/통계/찍기)과 이 화면의 물 FAB이 마지막
+                // 항목을 가리지 않도록 아래 여백을 둔다.
+                const SliverToBoxAdapter(child: SizedBox(height: 88)),
+              ],
+            ),
           ),
         ],
       ),
