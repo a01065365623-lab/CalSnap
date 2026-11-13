@@ -293,5 +293,9 @@
 
   "recognitionErrorUnreadablePhoto": "Bu fotoğraf okunamadı. Tekrar deneyin veya başka bir fotoğraf seçin.",
 
-  "shopAffiliateNotice": "Bu bir satış ortaklığı bağlantısıdır, komisyon alabiliriz"
+  "shopAffiliateNotice": "Bu bir satış ortaklığı bağlantısıdır, komisyon alabiliriz",
+
+  "dailyLogGoalProgressLabel": "hedefin",
+  "dailyLogGoalOverLabel": "Hedef aşıldı",
+  "dailyLogGoalProgressSemantics": "Kalori hedefinin %{percent}'i"
 }

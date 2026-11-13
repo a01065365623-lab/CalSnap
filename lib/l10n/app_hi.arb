@@ -293,5 +293,9 @@
 
   "recognitionErrorUnreadablePhoto": "यह फ़ोटो पढ़ी नहीं जा सकी। फिर से कोशिश करें या कोई दूसरी फ़ोटो चुनें।",
 
-  "shopAffiliateNotice": "यह एक एफ़िलिएट लिंक है, हमें कमीशन मिल सकता है"
+  "shopAffiliateNotice": "यह एक एफ़िलिएट लिंक है, हमें कमीशन मिल सकता है",
+
+  "dailyLogGoalProgressLabel": "लक्ष्य का",
+  "dailyLogGoalOverLabel": "लक्ष्य से ज़्यादा",
+  "dailyLogGoalProgressSemantics": "कैलोरी लक्ष्य का {percent}%"
 }

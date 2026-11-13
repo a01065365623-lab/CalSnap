@@ -11,6 +11,7 @@ import '../services/user_profile_service.dart';
 import '../theme/app_colors.dart';
 import '../utils/unit_converter.dart';
 import '../widgets/banner_ad_widget.dart';
+import '../widgets/daily_summary_card.dart';
 import '../widgets/food_detail_sheet.dart';
 import '../widgets/log_entry_tile.dart';
 import 'meal_calendar_screen.dart';
@@ -188,7 +189,7 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
                 SliverToBoxAdapter(
                   child: Column(
                     children: [
-                      _SummaryCard(summary: _summary),
+                      DailySummaryCard(summary: _summary, goalCalories: _goalCalories),
                       _GoalChipsCard(goalCalories: _goalCalories, waterGoalMl: _waterGoalMl),
                       _WeightLogEntryCard(
                         onTap: () => Navigator.push(
@@ -312,34 +313,6 @@ class _WaterQuickAddDialogState extends State<_WaterQuickAddDialog> {
           child: Text(l10n.dailyLogWaterAmountDialogAddButton),
         ),
       ],
-    );
-  }
-}
-
-class _SummaryCard extends StatelessWidget {
-  final DailySummary? summary;
-  const _SummaryCard({required this.summary});
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    final intake = summary?.totalIntake ?? 0;
-    final burned = summary?.totalBurned ?? 0;
-    final net = summary?.netCalories ?? 0;
-
-    return Card(
-      margin: const EdgeInsets.all(12),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _StatColumn(label: l10n.dailyLogIntakeLabel, value: intake),
-            _StatColumn(label: l10n.dailyLogBurnedLabel, value: burned),
-            _StatColumn(label: l10n.netCaloriesLabel, value: net, highlight: true),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -498,29 +471,6 @@ class _StatChip extends StatelessWidget {
           Text(label, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: color)),
         ],
       ),
-    );
-  }
-}
-
-class _StatColumn extends StatelessWidget {
-  final String label;
-  final double value;
-  final bool highlight;
-  const _StatColumn({required this.label, required this.value, this.highlight = false});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(label, style: const TextStyle(color: Colors.grey)),
-        Text(
-          value.toStringAsFixed(0),
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: highlight ? FontWeight.bold : FontWeight.normal,
-          ),
-        ),
-      ],
     );
   }
 }

@@ -293,5 +293,9 @@
 
   "recognitionErrorUnreadablePhoto": "写真を読み込めませんでした。もう一度試すか、別の写真を選んでください。",
 
-  "shopAffiliateNotice": "アフィリエイトリンクのため、手数料を受け取る場合があります"
+  "shopAffiliateNotice": "アフィリエイトリンクのため、手数料を受け取る場合があります",
+
+  "dailyLogGoalProgressLabel": "目標比",
+  "dailyLogGoalOverLabel": "目標超過",
+  "dailyLogGoalProgressSemantics": "目標カロリーの{percent}%"
 }

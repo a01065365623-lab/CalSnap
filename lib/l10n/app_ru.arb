@@ -293,5 +293,9 @@
 
   "recognitionErrorUnreadablePhoto": "Не удалось прочитать фото. Попробуйте ещё раз или выберите другое фото.",
 
-  "shopAffiliateNotice": "Это партнёрская ссылка, мы можем получить комиссию"
+  "shopAffiliateNotice": "Это партнёрская ссылка, мы можем получить комиссию",
+
+  "dailyLogGoalProgressLabel": "от цели",
+  "dailyLogGoalOverLabel": "Выше цели",
+  "dailyLogGoalProgressSemantics": "{percent}% от цели по калориям"
 }

@@ -29,4 +29,9 @@ class AppColors {
 
   static const Color waterBlue = Color(0xFF2E86DE);
   static const Color waterBlueBg = Color(0xFFDDEBFC);
+
+  // 목표 칼로리 초과 시 진행률 링의 주의색. 평소 링 색(foodCoral)보다 붉고 진해서
+  // 초과 상태가 한눈에 구분된다(흰 배경 대비 4.5:1 이상).
+  static const Color goalOverRed = Color(0xFFC62828);
+  static const Color goalOverRedBg = Color(0xFFFADCDC);
 }

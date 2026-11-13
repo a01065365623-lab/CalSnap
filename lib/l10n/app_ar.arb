@@ -293,5 +293,9 @@
 
   "recognitionErrorUnreadablePhoto": "تعذّرت قراءة هذه الصورة. حاول مرة أخرى أو اختر صورة أخرى.",
 
-  "shopAffiliateNotice": "هذا رابط تسويق بالعمولة وقد نحصل على عمولة"
+  "shopAffiliateNotice": "هذا رابط تسويق بالعمولة وقد نحصل على عمولة",
+
+  "dailyLogGoalProgressLabel": "من الهدف",
+  "dailyLogGoalOverLabel": "فوق الهدف",
+  "dailyLogGoalProgressSemantics": "{percent}% من هدف السعرات"
 }

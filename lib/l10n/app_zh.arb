@@ -293,5 +293,9 @@
 
   "recognitionErrorUnreadablePhoto": "无法读取这张照片。请重试或选择其他照片。",
 
-  "shopAffiliateNotice": "这是联盟推广链接，我们可能会获得佣金"
+  "shopAffiliateNotice": "这是联盟推广链接，我们可能会获得佣金",
+
+  "dailyLogGoalProgressLabel": "目标占比",
+  "dailyLogGoalOverLabel": "超出目标",
+  "dailyLogGoalProgressSemantics": "卡路里目标的{percent}%"
 }

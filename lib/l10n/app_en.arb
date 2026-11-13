@@ -294,5 +294,9 @@
 
   "recognitionErrorUnreadablePhoto": "Couldn't read this photo. Try again or choose a different photo.",
 
-  "shopAffiliateNotice": "This is an affiliate link, and we may earn a commission"
+  "shopAffiliateNotice": "This is an affiliate link, and we may earn a commission",
+
+  "dailyLogGoalProgressLabel": "of goal",
+  "dailyLogGoalOverLabel": "Over goal",
+  "dailyLogGoalProgressSemantics": "{percent}% of calorie goal"
 }

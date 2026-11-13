@@ -293,5 +293,9 @@
 
   "recognitionErrorUnreadablePhoto": "Não foi possível ler esta foto. Tente novamente ou escolha outra foto.",
 
-  "shopAffiliateNotice": "Este é um link de afiliado e podemos receber uma comissão"
+  "shopAffiliateNotice": "Este é um link de afiliado e podemos receber uma comissão",
+
+  "dailyLogGoalProgressLabel": "da meta",
+  "dailyLogGoalOverLabel": "Acima da meta",
+  "dailyLogGoalProgressSemantics": "{percent}% da meta de calorias"
 }

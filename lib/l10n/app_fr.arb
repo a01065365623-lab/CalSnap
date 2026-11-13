@@ -293,5 +293,9 @@
 
   "recognitionErrorUnreadablePhoto": "Impossible de lire cette photo. Réessayez ou choisissez une autre photo.",
 
-  "shopAffiliateNotice": "Ceci est un lien affilié, nous pouvons percevoir une commission"
+  "shopAffiliateNotice": "Ceci est un lien affilié, nous pouvons percevoir une commission",
+
+  "dailyLogGoalProgressLabel": "de l'objectif",
+  "dailyLogGoalOverLabel": "Dépassé",
+  "dailyLogGoalProgressSemantics": "{percent} % de l'objectif calorique"
 }

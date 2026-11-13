@@ -293,5 +293,9 @@
 
   "recognitionErrorUnreadablePhoto": "Không thể đọc ảnh này. Hãy thử lại hoặc chọn ảnh khác.",
 
-  "shopAffiliateNotice": "Đây là liên kết tiếp thị liên kết, chúng tôi có thể nhận hoa hồng"
+  "shopAffiliateNotice": "Đây là liên kết tiếp thị liên kết, chúng tôi có thể nhận hoa hồng",
+
+  "dailyLogGoalProgressLabel": "so với mục tiêu",
+  "dailyLogGoalOverLabel": "Vượt mục tiêu",
+  "dailyLogGoalProgressSemantics": "{percent}% mục tiêu calo"
 }
