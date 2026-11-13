@@ -10,6 +10,7 @@ import 'screens/onboarding_screen.dart';
 import 'services/ad_service.dart';
 import 'services/app_lock_service.dart';
 import 'services/user_profile_service.dart';
+import 'theme/app_colors.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,9 +58,25 @@ class CalSnapApp extends StatelessWidget {
         return const Locale('ko');
       },
       theme: ThemeData(
-        colorSchemeSeed: Colors.deepOrange,
+        colorSchemeSeed: AppColors.brandSeed,
         useMaterial3: true,
         fontFamily: 'Pretendard',
+        scaffoldBackgroundColor: AppColors.appBackground,
+        // 앱바도 바탕과 같은 색으로 두고, 스크롤 시 M3 기본 틴트(주황빛)가 덮이지 않게 한다.
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppColors.appBackground,
+          surfaceTintColor: Colors.transparent,
+        ),
+        cardTheme: CardThemeData(
+          color: AppColors.cardSurface,
+          surfaceTintColor: Colors.transparent,
+          shadowColor: AppColors.cardShadow,
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: const BorderSide(color: AppColors.cardBorder),
+          ),
+        ),
         // 스낵바가 body/bottomNavigationBar를 밀어 올리지 않고 그 위에 오버레이되게 한다.
         // fixed(기본값)였다면 스낵바가 뜰 때만 하단 배너 광고가 가려짐/드러남이 달라져
         // 평소 상태와 레이아웃이 달라 보이는 문제가 있었다.

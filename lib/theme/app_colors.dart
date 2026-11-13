@@ -10,6 +10,17 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
+  // ── 화면 바탕·카드 ──────────────────────────────────────
+  // 바탕은 흰색에 가까운 아주 옅은 웜톤, 카드는 순백 + 얇은 테두리 + 옅은 그림자로
+  // 바탕과 분리한다(카드끼리 같은 색으로 붙어 보이지 않게).
+  /// Material 테마 시드 컬러(기존 Colors.deepOrange와 같은 값).
+  static const Color brandSeed = Color(0xFFFF5722);
+
+  static const Color appBackground = Color(0xFFFFFBF9);
+  static const Color cardSurface = Color(0xFFFFFFFF);
+  static const Color cardBorder = Color(0xFFEEE6E2);
+  static const Color cardShadow = Color(0x1F5A3A2E);
+
   static const Color foodCoral = Color(0xFFD85A30);
   static const Color foodCoralBg = Color(0xFFFBE7E0);
 
