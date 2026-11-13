@@ -12,8 +12,9 @@ double? goalProgressRatio({required double netCalories, required double? goalCal
   return ratio < 0 ? 0 : ratio;
 }
 
-/// 오늘의 로그 상단 요약 카드. 섭취/소모/순칼로리 숫자 옆에 목표 대비 진행률 링을
-/// 보여준다. 목표 칼로리가 아직 없으면(온보딩 전 등) 링 없이 숫자만 보여준다.
+/// 오늘의 로그 상단 요약 카드. 순칼로리를 가장 크게, 그 아래에 섭취(코랄)·소모(틸)를
+/// 아이콘과 함께 보여주고, 왼쪽에 목표 대비 진행률 링을 둔다. 목표 칼로리가 아직
+/// 없으면(온보딩 전 등) 링 없이 숫자만 보여준다.
 class DailySummaryCard extends StatelessWidget {
   final DailySummary? summary;
   final double? goalCalories;
@@ -36,11 +37,41 @@ class DailySummaryCard extends StatelessWidget {
           children: [
             if (ratio != null) ...[
               GoalProgressRing(ratio: ratio),
-              const SizedBox(width: 12),
+              const SizedBox(width: 16),
             ],
-            Expanded(child: _StatColumn(label: l10n.dailyLogIntakeLabel, value: intake)),
-            Expanded(child: _StatColumn(label: l10n.dailyLogBurnedLabel, value: burned)),
-            Expanded(child: _StatColumn(label: l10n.netCaloriesLabel, value: net, highlight: true)),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _NetCalories(label: l10n.netCaloriesLabel, value: net),
+                  const SizedBox(height: 10),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: _SubStat(
+                          icon: Icons.restaurant,
+                          label: l10n.dailyLogIntakeLabel,
+                          value: intake,
+                          iconColor: AppColors.foodCoral,
+                          valueColor: AppColors.foodCoralStrong,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: _SubStat(
+                          icon: Icons.local_fire_department,
+                          label: l10n.dailyLogBurnedLabel,
+                          value: burned,
+                          iconColor: AppColors.exerciseTeal,
+                          valueColor: AppColors.exerciseTealStrong,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -105,7 +136,7 @@ class GoalProgressRing extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 11,
-                color: isOver ? AppColors.goalOverRed : Colors.grey,
+                color: isOver ? AppColors.goalOverRed : AppColors.textMuted,
                 fontWeight: isOver ? FontWeight.w600 : FontWeight.normal,
               ),
             ),
@@ -116,31 +147,95 @@ class GoalProgressRing extends StatelessWidget {
   }
 }
 
-class _StatColumn extends StatelessWidget {
+/// 요약 카드의 주인공 숫자: 순칼로리(가장 크게).
+class _NetCalories extends StatelessWidget {
   final String label;
   final double value;
-  final bool highlight;
-  const _StatColumn({required this.label, required this.value, this.highlight = false});
+  const _NetCalories({required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          textAlign: TextAlign.center,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(color: Colors.grey),
+        Row(
+          children: [
+            const Icon(Icons.balance, size: 16, color: AppColors.textMuted),
+            const SizedBox(width: 4),
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 13, color: AppColors.textMuted),
+              ),
+            ),
+          ],
         ),
         FittedBox(
           fit: BoxFit.scaleDown,
+          alignment: AlignmentDirectional.centerStart,
+          child: Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: value.toStringAsFixed(0),
+                  style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w800, height: 1.15),
+                ),
+                const TextSpan(
+                  text: ' kcal',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textMuted),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// 순칼로리 아래의 보조 숫자(섭취·소모). 아이콘과 숫자에 카테고리 색을 입힌다.
+class _SubStat extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final double value;
+  final Color iconColor;
+  final Color valueColor;
+
+  const _SubStat({
+    required this.icon,
+    required this.label,
+    required this.value,
+    required this.iconColor,
+    required this.valueColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(icon, size: 14, color: iconColor),
+            const SizedBox(width: 4),
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 12, color: AppColors.textMuted),
+              ),
+            ),
+          ],
+        ),
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: AlignmentDirectional.centerStart,
           child: Text(
             value.toStringAsFixed(0),
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: highlight ? FontWeight.bold : FontWeight.normal,
-            ),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: valueColor),
           ),
         ),
       ],

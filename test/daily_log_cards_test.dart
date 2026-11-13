@@ -70,10 +70,26 @@ void main() {
       expect(find.text(ko.dailyLogGoalProgressLabel), findsOneWidget);
       expect(find.text('1500'), findsOneWidget);
       expect(find.text('300'), findsOneWidget);
-      expect(find.text('1200'), findsOneWidget);
+      expect(find.text('1200 kcal'), findsOneWidget);
       final ring = tester.widget<CircularProgressIndicator>(find.byType(CircularProgressIndicator));
       expect(ring.value, closeTo(0.6, 1e-9));
       expect(ring.color, AppColors.foodCoral);
+    });
+
+    testWidgets('순칼로리가 가장 크고, 섭취는 코랄·소모는 틸 숫자 + 아이콘', (tester) async {
+      await pumpCard(tester, DailySummaryCard(summary: summary(1500, 300), goalCalories: 2000));
+
+      final intake = tester.widget<Text>(find.text('1500'));
+      final burned = tester.widget<Text>(find.text('300'));
+      expect(intake.style?.color, AppColors.foodCoralStrong);
+      expect(burned.style?.color, AppColors.exerciseTealStrong);
+
+      final netSize = tester.getSize(find.text('1200 kcal')).height;
+      expect(netSize, greaterThan(tester.getSize(find.text('1500')).height));
+
+      expect(find.byIcon(Icons.restaurant), findsOneWidget);
+      expect(find.byIcon(Icons.local_fire_department), findsOneWidget);
+      expect(find.byIcon(Icons.balance), findsOneWidget);
     });
 
     testWidgets('목표 초과: 링은 꽉 차고 주의색, 라벨은 "목표 초과"', (tester) async {
@@ -89,7 +105,8 @@ void main() {
     testWidgets('목표가 없으면 링 없이 숫자만', (tester) async {
       await pumpCard(tester, DailySummaryCard(summary: summary(500, 0), goalCalories: null));
       expect(find.byType(GoalProgressRing), findsNothing);
-      expect(find.text('500'), findsNWidgets(2)); // 섭취 = 순칼로리
+      expect(find.text('500'), findsOneWidget); // 섭취
+      expect(find.text('500 kcal'), findsOneWidget); // 순칼로리
     });
 
     expectNoOverflowInAllLocales(

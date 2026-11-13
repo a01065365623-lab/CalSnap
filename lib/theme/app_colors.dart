@@ -21,11 +21,22 @@ class AppColors {
   static const Color cardBorder = Color(0xFFEEE6E2);
   static const Color cardShadow = Color(0x1F5A3A2E);
 
+  // ── 글자색 ─────────────────────────────────────────────
+  // 흰 카드/바탕 위 보조 글자. Colors.grey(#9E9E9E)는 대비가 2.7:1이라 AA(4.5:1)를
+  // 못 넘어서, 라벨처럼 작은 글자에는 이 색을 쓴다(흰색 대비 약 5.5:1).
+  static const Color textMuted = Color(0xFF6B6966);
+
   static const Color foodCoral = Color(0xFFD85A30);
   static const Color foodCoralBg = Color(0xFFFBE7E0);
+  // foodCoral은 흰 바탕 대비 3.9:1이라 아이콘·링·막대에만 쓰고, 작은 글자와 흰 글자를
+  // 얹는 버튼 배경에는 같은 계열의 진한 코랄을 쓴다(흰색 대비 약 4.8:1).
+  static const Color foodCoralStrong = Color(0xFFC24E26);
 
   static const Color exerciseTeal = Color(0xFF1D9E75);
   static const Color exerciseTealBg = Color(0xFFDFF3EC);
+  // exerciseTeal은 흰 바탕 대비 3.4:1이라 아이콘·막대·큰 글자에만 쓰고, 작은 글자와
+  // 흰 글자를 얹는 버튼 배경에는 같은 계열의 진한 틸을 쓴다(흰색 대비 약 5.0:1).
+  static const Color exerciseTealStrong = Color(0xFF167E5E);
 
   static const Color weightTeal = Color(0xFF6FBFA3);
   static const Color weightTealBg = Color(0xFFE8F6F0);
