@@ -304,5 +304,7 @@
   "weeklyForecastNeedMoreData": "Cần thêm dữ liệu ghi chép",
   "weeklyForecastNeedMoreDataHint": "Ghi chép ít nhất {minDays} trong {window} ngày gần nhất để xem dự đoán (hiện có {days})",
   "weeklyForecastBasis": "TB calo ròng {average} kcal trong {days} ngày đã ghi · Mục tiêu {target} kcal",
-  "weeklyForecastDisclaimer": "Đây là ước tính dựa trên 7.700 kcal ≈ 1 kg. Thay đổi thực tế có thể khác."
+  "weeklyForecastDisclaimer": "Đây là ước tính dựa trên 7.700 kcal ≈ 1 kg. Thay đổi thực tế có thể khác.",
+
+  "dailyLogEmptyCameraButton": "Chụp ảnh để ghi lại"
 }

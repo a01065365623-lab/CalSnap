@@ -438,5 +438,8 @@
   "weeklyForecastBasis": "기록한 {days}일 평균 순칼로리 {average}kcal · 목표 {target}kcal",
   "@weeklyForecastBasis": {"description": "예상치 계산 근거. average=기록한 날 일평균 순칼로리, target=목표 칼로리, days=기록한 날 수", "placeholders": {"average": {"type": "int"}, "target": {"type": "int"}, "days": {"type": "int"}}},
   "weeklyForecastDisclaimer": "7,700kcal ≈ 1kg으로 계산한 추정치예요. 실제 변화와 다를 수 있어요.",
-  "@weeklyForecastDisclaimer": {"description": "예상치가 참고용 추정치라는 안내(7700kcal ≈ 1kg 기준)"}
+  "@weeklyForecastDisclaimer": {"description": "예상치가 참고용 추정치라는 안내(7700kcal ≈ 1kg 기준)"},
+
+  "dailyLogEmptyCameraButton": "사진 찍어 기록하기",
+  "@dailyLogEmptyCameraButton": {"description": "오늘 기록이 없을 때 보여주는 큰 카메라 버튼. 누르면 바로 카메라가 열린다."}
 }

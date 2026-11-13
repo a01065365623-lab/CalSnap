@@ -304,5 +304,7 @@
   "weeklyForecastNeedMoreData": "Faltan registros",
   "weeklyForecastNeedMoreDataHint": "Registra al menos {minDays} de los últimos {window} días para ver la previsión (ahora {days})",
   "weeklyForecastBasis": "Media neta {average} kcal en {days} días registrados · Objetivo {target} kcal",
-  "weeklyForecastDisclaimer": "Es una estimación basada en 7700 kcal ≈ 1 kg. El cambio real puede variar."
+  "weeklyForecastDisclaimer": "Es una estimación basada en 7700 kcal ≈ 1 kg. El cambio real puede variar.",
+
+  "dailyLogEmptyCameraButton": "Haz una foto para registrar"
 }

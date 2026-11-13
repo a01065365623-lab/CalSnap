@@ -13,11 +13,13 @@ import '../utils/bmr_calculator.dart';
 import '../utils/unit_converter.dart';
 import '../utils/weight_forecast.dart';
 import '../widgets/banner_ad_widget.dart';
+import '../widgets/daily_log_empty_state.dart';
 import '../widgets/daily_summary_card.dart';
 import '../widgets/food_detail_sheet.dart';
 import '../widgets/log_entry_tile.dart';
 import '../widgets/weekly_weight_forecast_card.dart';
 import 'meal_calendar_screen.dart';
+import 'quick_mode_screen.dart';
 import 'weight_log_screen.dart';
 
 class DailyLogScreen extends StatefulWidget {
@@ -44,6 +46,8 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
   // 기초대사량 × 기본 활동계수를 계산한다. 둘 다 없으면 null(카드 숨김).
   double? _forecastTargetCalories;
   WeeklyWeightForecast? _weightForecast;
+  // 저장된 "최근 먹은 음식"이 있을 때만 빈 화면에 그 바로가기를 보여준다.
+  bool _hasMyFoods = false;
 
   bool get _isToday {
     final now = DateTime.now();
@@ -93,6 +97,8 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
       forecast = estimateWeeklyWeightChange(summaries: recent, targetCalories: forecastTarget, today: today);
     }
 
+    final myFoods = await _db.getMyFoods(limit: 1);
+
     if (!mounted) return;
     setState(() {
       _entries = entries;
@@ -102,6 +108,7 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
       _waterGoalMl = waterGoalMl;
       _forecastTargetCalories = forecastTarget;
       _weightForecast = forecast;
+      _hasMyFoods = myFoods.isNotEmpty;
     });
   }
 
@@ -148,6 +155,15 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
     ));
     unawaited(TtsService.instance.speak(TtsCategory.waterLog));
     _load();
+  }
+
+  /// 빈 화면 바로가기. 빠른 측정 화면에서 저장하고 돌아오면 목록을 다시 읽는다.
+  Future<void> _openQuickMode(QuickModeStartAction startAction) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => QuickModeScreen(startAction: startAction)),
+    );
+    if (mounted) _load();
   }
 
   Future<void> _openMealCalendar() async {
@@ -242,14 +258,20 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
                     ],
                   ),
                 ),
-                if (_entries.isEmpty)
+                if (_entries.isEmpty && _isToday)
+                  SliverToBoxAdapter(
+                    child: DailyLogEmptyState(
+                      onCamera: () => _openQuickMode(QuickModeStartAction.camera),
+                      onManualEntry: () => _openQuickMode(QuickModeStartAction.manualEntry),
+                      // 빠른 측정 화면 맨 위에 "최근 먹은 음식" 목록이 바로 보인다.
+                      onRecentFoods: _hasMyFoods ? () => _openQuickMode(QuickModeStartAction.none) : null,
+                    ),
+                  )
+                else if (_entries.isEmpty)
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-                      child: Text(
-                        _isToday ? l10n.dailyLogEmptyToday : l10n.dailyLogEmptyOtherDay,
-                        textAlign: TextAlign.center,
-                      ),
+                      child: Text(l10n.dailyLogEmptyOtherDay, textAlign: TextAlign.center),
                     ),
                   )
                 else

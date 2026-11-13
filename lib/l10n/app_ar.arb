@@ -304,5 +304,7 @@
   "weeklyForecastNeedMoreData": "نحتاج إلى مزيد من السجلات",
   "weeklyForecastNeedMoreDataHint": "سجّل {minDays} أيام على الأقل من آخر {window} أيام لرؤية التوقع (الآن {days})",
   "weeklyForecastBasis": "متوسط الصافي {average} سعرة خلال {days} أيام مسجلة · الهدف {target} سعرة",
-  "weeklyForecastDisclaimer": "هذا تقدير مبني على أن 7700 سعرة ≈ 1 كغ. قد يختلف التغيّر الفعلي."
+  "weeklyForecastDisclaimer": "هذا تقدير مبني على أن 7700 سعرة ≈ 1 كغ. قد يختلف التغيّر الفعلي.",
+
+  "dailyLogEmptyCameraButton": "التقط صورة للتسجيل"
 }

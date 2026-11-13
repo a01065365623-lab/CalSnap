@@ -9,6 +9,7 @@ import 'package:calsnap/models/daily_log_entry.dart';
 import 'package:calsnap/theme/app_colors.dart';
 import 'package:calsnap/utils/unit_converter.dart';
 import 'package:calsnap/utils/weight_forecast.dart';
+import 'package:calsnap/widgets/daily_log_empty_state.dart';
 import 'package:calsnap/widgets/daily_summary_card.dart';
 import 'package:calsnap/widgets/weekly_weight_forecast_card.dart';
 import 'package:flutter/material.dart';
@@ -198,6 +199,45 @@ void main() {
     expectNoOverflowInAllLocales(
       '주간 예상 카드(기록 부족)',
       () => const WeeklyWeightForecastCard(forecast: notEnough, targetCalories: 2000, unitSystem: UnitSystem.metric),
+    );
+  });
+
+  group('DailyLogEmptyState', () {
+    final ko = lookupAppLocalizations(const Locale('ko'));
+
+    testWidgets('큰 카메라 버튼 + 직접 입력 + 최근 먹은 음식, 각각 콜백 호출', (tester) async {
+      final taps = <String>[];
+      await pumpCard(
+        tester,
+        DailyLogEmptyState(
+          onCamera: () => taps.add('camera'),
+          onManualEntry: () => taps.add('manual'),
+          onRecentFoods: () => taps.add('recent'),
+        ),
+      );
+      expect(find.text(ko.dailyLogEmptyToday), findsOneWidget);
+
+      await tester.tap(find.text(ko.dailyLogEmptyCameraButton));
+      await tester.tap(find.text(ko.quickModeManualEntryButton));
+      await tester.tap(find.text(ko.quickModeRecentFoodsTitle));
+      expect(taps, ['camera', 'manual', 'recent']);
+
+      final camera = tester.getSize(find.ancestor(
+        of: find.text(ko.dailyLogEmptyCameraButton),
+        matching: find.byWidgetPredicate((w) => w is ButtonStyleButton),
+      ));
+      expect(camera.height, greaterThanOrEqualTo(64), reason: '카메라 버튼은 크게');
+    });
+
+    testWidgets('저장된 음식이 없으면 "최근 먹은 음식" 숨김', (tester) async {
+      await pumpCard(tester, DailyLogEmptyState(onCamera: () {}, onManualEntry: () {}));
+      expect(find.text(ko.quickModeRecentFoodsTitle), findsNothing);
+      expect(find.text(ko.quickModeManualEntryButton), findsOneWidget);
+    });
+
+    expectNoOverflowInAllLocales(
+      '빈 화면 바로가기',
+      () => DailyLogEmptyState(onCamera: () {}, onManualEntry: () {}, onRecentFoods: () {}),
     );
   });
 }

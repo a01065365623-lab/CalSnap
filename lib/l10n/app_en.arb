@@ -305,5 +305,7 @@
   "weeklyForecastNeedMoreData": "More logs needed",
   "weeklyForecastNeedMoreDataHint": "Log at least {minDays} of the last {window} days to see a forecast (now {days})",
   "weeklyForecastBasis": "Avg. net {average} kcal over {days} logged days · Goal {target} kcal",
-  "weeklyForecastDisclaimer": "This is an estimate based on 7,700 kcal ≈ 1 kg. Actual changes may differ."
+  "weeklyForecastDisclaimer": "This is an estimate based on 7,700 kcal ≈ 1 kg. Actual changes may differ.",
+
+  "dailyLogEmptyCameraButton": "Snap a photo to log"
 }

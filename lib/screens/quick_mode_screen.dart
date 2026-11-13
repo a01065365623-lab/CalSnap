@@ -20,8 +20,14 @@ import '../widgets/food_photo_thumbnail.dart';
 import '../widgets/related_products_button.dart';
 import 'manual_food_entry_screen.dart';
 
+/// 빠른 측정 화면을 열자마자 바로 실행할 동작. 오늘의 로그 빈 화면의 바로가기
+/// 버튼(카메라/직접 입력)이 한 번 더 탭하지 않아도 되도록 쓴다.
+enum QuickModeStartAction { none, camera, manualEntry }
+
 class QuickModeScreen extends StatefulWidget {
-  const QuickModeScreen({super.key});
+  final QuickModeStartAction startAction;
+
+  const QuickModeScreen({super.key, this.startAction = QuickModeStartAction.none});
 
   @override
   State<QuickModeScreen> createState() => _QuickModeScreenState();
@@ -60,6 +66,20 @@ class _QuickModeScreenState extends State<QuickModeScreen> {
     _loadUnitSystem();
     _loadMyFoods();
     _recognitionService.refreshUsage();
+    if (widget.startAction != QuickModeStartAction.none) {
+      // 라우트 전환이 끝나기 전에 카메라/다음 화면을 띄우지 않도록 첫 프레임 뒤에 실행한다.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        switch (widget.startAction) {
+          case QuickModeStartAction.camera:
+            _pickImage(ImageSource.camera);
+          case QuickModeStartAction.manualEntry:
+            _openManualEntry();
+          case QuickModeStartAction.none:
+            break;
+        }
+      });
+    }
   }
 
   Future<void> _loadMyFoods() async {

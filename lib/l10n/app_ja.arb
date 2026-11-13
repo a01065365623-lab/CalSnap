@@ -304,5 +304,7 @@
   "weeklyForecastNeedMoreData": "記録がもう少し必要です",
   "weeklyForecastNeedMoreDataHint": "直近{window}日のうち{minDays}日以上記録すると計算します（現在{days}日）",
   "weeklyForecastBasis": "記録した{days}日の平均正味カロリー {average}kcal・目標 {target}kcal",
-  "weeklyForecastDisclaimer": "7,700kcal ≈ 1kgで計算した推定値です。実際の変化とは異なる場合があります。"
+  "weeklyForecastDisclaimer": "7,700kcal ≈ 1kgで計算した推定値です。実際の変化とは異なる場合があります。",
+
+  "dailyLogEmptyCameraButton": "写真を撮って記録"
 }

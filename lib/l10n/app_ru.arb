@@ -304,5 +304,7 @@
   "weeklyForecastNeedMoreData": "Нужно больше записей",
   "weeklyForecastNeedMoreDataHint": "Внесите записи хотя бы за {minDays} из последних {window} дней, чтобы увидеть прогноз (сейчас {days})",
   "weeklyForecastBasis": "Средн. чистые {average} ккал за {days} дн. с записями · Цель {target} ккал",
-  "weeklyForecastDisclaimer": "Это оценка из расчёта 7700 ккал ≈ 1 кг. Реальные изменения могут отличаться."
+  "weeklyForecastDisclaimer": "Это оценка из расчёта 7700 ккал ≈ 1 кг. Реальные изменения могут отличаться.",
+
+  "dailyLogEmptyCameraButton": "Сфотографировать и записать"
 }
