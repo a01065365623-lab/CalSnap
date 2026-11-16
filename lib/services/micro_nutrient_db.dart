@@ -223,11 +223,15 @@ class MicroNutrientSummary {
   /// approx 표시된 음식이거나 이름 일부만 맞춘 경우).
   final int approxCount;
 
+  /// 음식명이 매칭되지 않은 기록(먹은 양이 없어서 빠진 기록은 제외). 개발 확인용 집계에 쓴다.
+  final List<DailyLogEntry> nameMissEntries;
+
   const MicroNutrientSummary({
     required this.totals,
     required this.foodEntryCount,
     required this.unmatchedCount,
     this.approxCount = 0,
+    this.nameMissEntries = const [],
   });
 
   int get matchedCount => foodEntryCount - unmatchedCount;
@@ -241,11 +245,13 @@ MicroNutrientSummary summarizeMicroNutrients(Iterable<DailyLogEntry> entries, Mi
   var foodCount = 0;
   var unmatched = 0;
   var approx = 0;
+  final nameMisses = <DailyLogEntry>[];
   for (final e in entries) {
     if (e.type != LogType.food) continue;
     foodCount++;
     final grams = e.amount;
     final match = db.lookup(e.name);
+    if (match == null) nameMisses.add(e);
     if (match == null || grams == null || grams <= 0 || !grams.isFinite) {
       unmatched++;
       continue;
@@ -263,5 +269,6 @@ MicroNutrientSummary summarizeMicroNutrients(Iterable<DailyLogEntry> entries, Mi
     foodEntryCount: foodCount,
     unmatchedCount: unmatched,
     approxCount: approx,
+    nameMissEntries: nameMisses,
   );
 }

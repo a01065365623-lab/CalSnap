@@ -7,6 +7,7 @@ import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
 import '../services/meal_log_service.dart';
 import '../services/micro_nutrient_db.dart';
+import '../services/micro_nutrient_miss_log.dart';
 import '../services/tts_service.dart';
 import '../services/user_profile_service.dart';
 import '../theme/app_colors.dart';
@@ -118,6 +119,8 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
       _hasMyFoods = myFoods.isNotEmpty;
       _microDb = microDb;
     });
+    // 매칭 안 된 음식명을 기기 메모리에서만 센다(서버 전송 없음, 디버그 빌드에서만 로그).
+    MicroNutrientMissLog.instance.record(summarizeMicroNutrients(entries, microDb));
   }
 
   Future<void> _pickDate() async {
