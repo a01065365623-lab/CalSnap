@@ -310,5 +310,19 @@
   "weeklyForecastValueOverCap": "Haftada {change} veya daha fazla",
 
   "quickModePhotoQuotaNotice": "Yapay zekâ maliyeti nedeniyle fotoğraf tanıma günde {limit} kez ücretsizdir. Elle giriş her zaman ücretsiz.",
-  "quickModePhotoQuotaNoticeDismiss": "Kapat"
+  "quickModePhotoQuotaNoticeDismiss": "Kapat",
+
+  "microNutrientCardTitle": "Vitaminler ve mineraller",
+  "microNutrientVitaminD": "D vitamini",
+  "microNutrientVitaminB12": "B12 vitamini",
+  "microNutrientVitaminA": "A vitamini",
+  "microNutrientVitaminC": "C vitamini",
+  "microNutrientIron": "Demir",
+  "microNutrientCalcium": "Kalsiyum",
+  "microNutrientZinc": "Çinko",
+  "microNutrientPotassium": "Potasyum",
+  "microNutrientNoData": "Veri yok",
+  "microNutrientUnmatchedMeals": "{count} öğünün besin verisi yok",
+  "microNutrientBasisNote": "Fotoğraf tanımaya değil, kaydedilen yemek adı ve miktarına göre hesaplanır.",
+  "microNutrientDisclaimer": "Yalnızca bilgi amaçlıdır; USDA besin bileşimi verilerine ve Kore MFDS günlük referans değerlerine dayanır. Tıbbi tavsiye değildir."
 }

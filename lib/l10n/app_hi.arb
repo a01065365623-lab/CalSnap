@@ -310,5 +310,19 @@
   "weeklyForecastValueOverCap": "हर हफ़्ते {change} या उससे ज़्यादा",
 
   "quickModePhotoQuotaNotice": "AI की लागत के कारण फ़ोटो पहचान दिन में {limit} बार मुफ़्त है। मैन्युअल एंट्री हमेशा मुफ़्त है।",
-  "quickModePhotoQuotaNoticeDismiss": "बंद करें"
+  "quickModePhotoQuotaNoticeDismiss": "बंद करें",
+
+  "microNutrientCardTitle": "विटामिन और खनिज",
+  "microNutrientVitaminD": "विटामिन D",
+  "microNutrientVitaminB12": "विटामिन B12",
+  "microNutrientVitaminA": "विटामिन A",
+  "microNutrientVitaminC": "विटामिन C",
+  "microNutrientIron": "आयरन",
+  "microNutrientCalcium": "कैल्शियम",
+  "microNutrientZinc": "ज़िंक",
+  "microNutrientPotassium": "पोटैशियम",
+  "microNutrientNoData": "जानकारी नहीं",
+  "microNutrientUnmatchedMeals": "{count, plural, =1{1 भोजन की पोषण जानकारी नहीं है} other{{count} भोजन की पोषण जानकारी नहीं है}}",
+  "microNutrientBasisNote": "यह दर्ज किए गए भोजन के नाम और मात्रा से गणना है, फ़ोटो पहचान से नहीं।",
+  "microNutrientDisclaimer": "केवल संदर्भ के लिए, USDA खाद्य संरचना डेटा और कोरिया के MFDS दैनिक मानों पर आधारित। यह चिकित्सा सलाह नहीं है।"
 }

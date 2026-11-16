@@ -310,5 +310,19 @@
   "weeklyForecastValueOverCap": "每周{change}以上",
 
   "quickModePhotoQuotaNotice": "由于AI成本，照片识别每天可免费使用{limit}次。手动输入一直免费。",
-  "quickModePhotoQuotaNoticeDismiss": "关闭"
+  "quickModePhotoQuotaNoticeDismiss": "关闭",
+
+  "microNutrientCardTitle": "维生素·矿物质",
+  "microNutrientVitaminD": "维生素D",
+  "microNutrientVitaminB12": "维生素B12",
+  "microNutrientVitaminA": "维生素A",
+  "microNutrientVitaminC": "维生素C",
+  "microNutrientIron": "铁",
+  "microNutrientCalcium": "钙",
+  "microNutrientZinc": "锌",
+  "microNutrientPotassium": "钾",
+  "microNutrientNoData": "暂无信息",
+  "microNutrientUnmatchedMeals": "{count}餐没有营养信息",
+  "microNutrientBasisNote": "根据记录的食物名称和分量计算，而非照片识别结果。",
+  "microNutrientDisclaimer": "仅供参考，基于USDA食物成分数据和韩国食药处(MFDS)营养素参考值，不构成医疗建议。"
 }

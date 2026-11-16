@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../db/database_helper.dart';
 import '../models/daily_log_entry.dart';
 import '../services/meal_log_service.dart';
+import '../services/micro_nutrient_db.dart';
 import '../services/tts_service.dart';
 import '../services/user_profile_service.dart';
 import '../theme/app_colors.dart';
@@ -19,6 +20,7 @@ import '../widgets/daily_summary_card.dart';
 import '../widgets/food_detail_sheet.dart';
 import '../widgets/log_entry_tile.dart';
 import '../widgets/macro_progress_card.dart';
+import '../widgets/micro_nutrient_card.dart';
 import '../widgets/weekly_weight_forecast_card.dart';
 import 'meal_calendar_screen.dart';
 import 'quick_mode_screen.dart';
@@ -50,6 +52,8 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
   WeeklyWeightForecast? _weightForecast;
   // 저장된 "최근 먹은 음식"이 있을 때만 빈 화면에 그 바로가기를 보여준다.
   bool _hasMyFoods = false;
+  // 비타민·미네랄 계산용 로컬 데이터(앱 번들). 읽기 전이거나 실패하면 빈 DB → "정보 없음".
+  MicroNutrientDb _microDb = MicroNutrientDb.empty;
 
   bool get _isToday {
     final now = DateTime.now();
@@ -100,6 +104,7 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
     }
 
     final myFoods = await _db.getMyFoods(limit: 1);
+    final microDb = await MicroNutrientDb.load();
 
     if (!mounted) return;
     setState(() {
@@ -111,6 +116,7 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
       _forecastTargetCalories = forecastTarget;
       _weightForecast = forecast;
       _hasMyFoods = myFoods.isNotEmpty;
+      _microDb = microDb;
     });
   }
 
@@ -257,6 +263,7 @@ class _DailyLogScreenState extends State<DailyLogScreen> {
                           unitSystem: _unitSystem,
                         ),
                       MacroProgressCard(entries: _entries, goalCalories: _goalCalories),
+                      MicroNutrientCard(summary: summarizeMicroNutrients(_entries, _microDb)),
                     ],
                   ),
                 ),

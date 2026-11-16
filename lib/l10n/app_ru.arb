@@ -310,5 +310,19 @@
   "weeklyForecastValueOverCap": "{change} или больше в неделю",
 
   "quickModePhotoQuotaNotice": "Распознавание фото бесплатно {limit} раза в день из-за стоимости ИИ. Ручной ввод остаётся бесплатным.",
-  "quickModePhotoQuotaNoticeDismiss": "Закрыть"
+  "quickModePhotoQuotaNoticeDismiss": "Закрыть",
+
+  "microNutrientCardTitle": "Витамины и минералы",
+  "microNutrientVitaminD": "Витамин D",
+  "microNutrientVitaminB12": "Витамин B12",
+  "microNutrientVitaminA": "Витамин A",
+  "microNutrientVitaminC": "Витамин C",
+  "microNutrientIron": "Железо",
+  "microNutrientCalcium": "Кальций",
+  "microNutrientZinc": "Цинк",
+  "microNutrientPotassium": "Калий",
+  "microNutrientNoData": "Нет данных",
+  "microNutrientUnmatchedMeals": "{count, plural, one{{count} приём пищи без данных о питательности} few{{count} приёма пищи без данных о питательности} other{{count} приёмов пищи без данных о питательности}}",
+  "microNutrientBasisNote": "Расчёт по записанным названиям и количеству продуктов, а не по распознаванию фото.",
+  "microNutrientDisclaimer": "Только для справки: данные USDA о составе продуктов и суточные нормы корейского MFDS. Не является медицинской рекомендацией."
 }

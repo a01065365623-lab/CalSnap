@@ -310,5 +310,19 @@
   "weeklyForecastValueOverCap": "{change} ou mais por semana",
 
   "quickModePhotoQuotaNotice": "O reconhecimento de fotos é gratuito {limit} vezes por dia por causa do custo da IA. A entrada manual continua gratuita.",
-  "quickModePhotoQuotaNoticeDismiss": "Fechar"
+  "quickModePhotoQuotaNoticeDismiss": "Fechar",
+
+  "microNutrientCardTitle": "Vitaminas e minerais",
+  "microNutrientVitaminD": "Vitamina D",
+  "microNutrientVitaminB12": "Vitamina B12",
+  "microNutrientVitaminA": "Vitamina A",
+  "microNutrientVitaminC": "Vitamina C",
+  "microNutrientIron": "Ferro",
+  "microNutrientCalcium": "Cálcio",
+  "microNutrientZinc": "Zinco",
+  "microNutrientPotassium": "Potássio",
+  "microNutrientNoData": "Sem dados",
+  "microNutrientUnmatchedMeals": "{count, plural, =1{1 refeição sem dados nutricionais} other{{count} refeições sem dados nutricionais}}",
+  "microNutrientBasisNote": "Calculado a partir dos nomes e quantidades registrados, não do reconhecimento de fotos.",
+  "microNutrientDisclaimer": "Apenas para referência, com base nos dados de composição do USDA e nos valores diários da MFDS da Coreia. Não é aconselhamento médico."
 }

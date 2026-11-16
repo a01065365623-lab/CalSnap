@@ -310,5 +310,19 @@
   "weeklyForecastValueOverCap": "{change} trở lên mỗi tuần",
 
   "quickModePhotoQuotaNotice": "Nhận diện ảnh miễn phí {limit} lần mỗi ngày do chi phí AI. Nhập thủ công vẫn luôn miễn phí.",
-  "quickModePhotoQuotaNoticeDismiss": "Đóng"
+  "quickModePhotoQuotaNoticeDismiss": "Đóng",
+
+  "microNutrientCardTitle": "Vitamin & khoáng chất",
+  "microNutrientVitaminD": "Vitamin D",
+  "microNutrientVitaminB12": "Vitamin B12",
+  "microNutrientVitaminA": "Vitamin A",
+  "microNutrientVitaminC": "Vitamin C",
+  "microNutrientIron": "Sắt",
+  "microNutrientCalcium": "Canxi",
+  "microNutrientZinc": "Kẽm",
+  "microNutrientPotassium": "Kali",
+  "microNutrientNoData": "Không có dữ liệu",
+  "microNutrientUnmatchedMeals": "{count} bữa không có thông tin dinh dưỡng",
+  "microNutrientBasisNote": "Tính theo tên và lượng món ăn đã ghi, không phải theo nhận diện ảnh.",
+  "microNutrientDisclaimer": "Chỉ để tham khảo, dựa trên dữ liệu thành phần thực phẩm của USDA và giá trị tham chiếu hằng ngày của MFDS Hàn Quốc. Không phải lời khuyên y tế."
 }

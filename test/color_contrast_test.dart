@@ -63,6 +63,9 @@ void main() {
     ('운동 아이콘 / 옅은 틸', AppColors.exerciseTealStrong, AppColors.exerciseTealBg),
     ('물 아이콘 / 옅은 회청', AppColors.waterTileFg, AppColors.waterTileBg),
     ('빈 화면 버튼 테두리 / 카드', AppColors.foodCoral, AppColors.appBackground),
+    ('비타민 막대 / 카드', AppColors.goalOrange, AppColors.cardSurface),
+    ('미네랄 막대 / 카드', AppColors.waterBlue, AppColors.cardSurface),
+    ('비타민·미네랄 카드 아이콘 / 카드', AppColors.weightTealStrong, AppColors.cardSurface),
   ];
   for (final (name, fg, bg) in nonTextPairs) {
     test('비텍스트 3:1 이상 — $name', () {

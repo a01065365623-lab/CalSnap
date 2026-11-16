@@ -310,5 +310,19 @@
   "weeklyForecastValueOverCap": "週に{change}以上の見込み",
 
   "quickModePhotoQuotaNotice": "写真認識はAIのコストのため1日{limit}回まで無料です。手入力はずっと無料です。",
-  "quickModePhotoQuotaNoticeDismiss": "閉じる"
+  "quickModePhotoQuotaNoticeDismiss": "閉じる",
+
+  "microNutrientCardTitle": "ビタミン・ミネラル",
+  "microNutrientVitaminD": "ビタミンD",
+  "microNutrientVitaminB12": "ビタミンB12",
+  "microNutrientVitaminA": "ビタミンA",
+  "microNutrientVitaminC": "ビタミンC",
+  "microNutrientIron": "鉄",
+  "microNutrientCalcium": "カルシウム",
+  "microNutrientZinc": "亜鉛",
+  "microNutrientPotassium": "カリウム",
+  "microNutrientNoData": "情報なし",
+  "microNutrientUnmatchedMeals": "{count}食は栄養情報がありません",
+  "microNutrientBasisNote": "写真認識ではなく、記録した食品名と量から計算しています。",
+  "microNutrientDisclaimer": "USDAの食品成分データと韓国食薬処(MFDS)の栄養成分基準値に基づく参考値です。医学的な助言ではありません。"
 }

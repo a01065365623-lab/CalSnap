@@ -310,5 +310,19 @@
   "weeklyForecastValueOverCap": "{change} أو أكثر أسبوعيًا",
 
   "quickModePhotoQuotaNotice": "التعرّف على الصور مجاني {limit} مرات يوميًا بسبب تكلفة الذكاء الاصطناعي. الإدخال اليدوي يبقى مجانيًا.",
-  "quickModePhotoQuotaNoticeDismiss": "إغلاق"
+  "quickModePhotoQuotaNoticeDismiss": "إغلاق",
+
+  "microNutrientCardTitle": "الفيتامينات والمعادن",
+  "microNutrientVitaminD": "فيتامين D",
+  "microNutrientVitaminB12": "فيتامين B12",
+  "microNutrientVitaminA": "فيتامين A",
+  "microNutrientVitaminC": "فيتامين C",
+  "microNutrientIron": "الحديد",
+  "microNutrientCalcium": "الكالسيوم",
+  "microNutrientZinc": "الزنك",
+  "microNutrientPotassium": "البوتاسيوم",
+  "microNutrientNoData": "لا توجد بيانات",
+  "microNutrientUnmatchedMeals": "{count, plural, =1{وجبة واحدة بلا بيانات غذائية} other{{count} وجبات بلا بيانات غذائية}}",
+  "microNutrientBasisNote": "يُحسب من أسماء الأطعمة المسجلة وكمياتها، وليس من التعرّف على الصور.",
+  "microNutrientDisclaimer": "للاسترشاد فقط، استنادًا إلى بيانات تركيب الأغذية من USDA والقيم اليومية لهيئة MFDS الكورية. ليست نصيحة طبية."
 }
