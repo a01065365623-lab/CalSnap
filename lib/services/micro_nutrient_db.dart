@@ -73,8 +73,11 @@ class MicroNutrientDb {
 
   int get size => _index.values.toSet().length;
 
-  factory MicroNutrientDb.fromJson(Object? json) {
+  /// [json]은 micro_nutrients.json, [composites]는 composites.json(복합 요리 사전, 선택).
+  /// 같은 이름이면 USDA 단일 음식이 복합 요리보다 우선한다.
+  factory MicroNutrientDb.fromJson(Object? json, {Object? composites}) {
     final index = <String, MicroNutrientFood>{};
+    final byKo = <String, MicroNutrientFood>{};
     final foods = json is Map ? json['foods'] : null;
     if (foods is! List) return MicroNutrientDb._(index);
     for (final raw in foods) {
@@ -92,13 +95,58 @@ class MicroNutrientDb {
         },
         approx: raw['approx'] == true,
       );
-      final aliases = raw['aliases'] is List ? (raw['aliases'] as List).whereType<String>() : const <String>[];
-      for (final name in [ko, en, ...aliases]) {
-        final key = normalizeFoodName(name);
-        if (key.isNotEmpty) index.putIfAbsent(key, () => food);
+      byKo.putIfAbsent(ko, () => food);
+      _addNames(index, food, raw['aliases']);
+    }
+    final dishes = composites is Map ? composites['composites'] : null;
+    if (dishes is List) {
+      for (final raw in dishes) {
+        final dish = _compositeFrom(raw, byKo);
+        if (dish != null) _addNames(index, dish, (raw as Map)['aliases']);
       }
     }
     return MicroNutrientDb._(index);
+  }
+
+  static void _addNames(Map<String, MicroNutrientFood> index, MicroNutrientFood food, Object? aliases) {
+    final extra = aliases is List ? aliases.whereType<String>() : const <String>[];
+    for (final name in [food.nameKo, food.nameEn, ...extra]) {
+      final key = normalizeFoodName(name);
+      if (key.isNotEmpty) index.putIfAbsent(key, () => food);
+    }
+  }
+
+  /// 복합 요리 한 건을 재료(g) 가중 평균으로 100g당 값으로 바꾼다. 재료가 DB에 없거나 g이
+  /// 이상하면 그 요리는 건너뛴다. 재료 중 하나라도 값이 없는(null) 영양소는 null로 둔다
+  /// (모르는 값을 0으로 쳐서 낮게 보이지 않게).
+  static MicroNutrientFood? _compositeFrom(Object? raw, Map<String, MicroNutrientFood> byKo) {
+    if (raw is! Map) return null;
+    final ko = raw['ko'];
+    final en = raw['en'];
+    final ingredients = raw['ingredients'];
+    if (ko is! String || en is! String || ingredients is! List || ingredients.isEmpty) return null;
+    final parts = <(MicroNutrientFood, double)>[];
+    for (final item in ingredients) {
+      final food = item is Map ? byKo[item['food']] : null;
+      final grams = item is Map && item['g'] is num ? (item['g'] as num).toDouble() : null;
+      if (food == null || grams == null || grams <= 0) {
+        debugPrint('composites.json: "$ko"의 재료 $item 를 찾을 수 없어 건너뜀');
+        return null;
+      }
+      parts.add((food, grams));
+    }
+    final totalGrams = parts.fold<double>(0, (sum, p) => sum + p.$2);
+    return MicroNutrientFood(
+      nameKo: ko,
+      nameEn: en,
+      approx: true,
+      per100g: {
+        for (final n in MicroNutrient.values)
+          n: parts.any((p) => p.$1.per100g[n] == null)
+              ? null
+              : parts.fold<double>(0, (sum, p) => sum + p.$1.per100g[n]! * p.$2) / totalGrams,
+      },
+    );
   }
 
   /// 기록된 음식명으로 찾는다. 못 찾으면 null(예외 없음).
@@ -140,8 +188,15 @@ class MicroNutrientDb {
   static Future<MicroNutrientDb> load({AssetBundle? bundle}) {
     return _loading ??= () async {
       try {
-        final raw = await (bundle ?? rootBundle).loadString('assets/nutrition/micro_nutrients.json');
-        return MicroNutrientDb.fromJson(jsonDecode(raw));
+        final assets = bundle ?? rootBundle;
+        final raw = await assets.loadString('assets/nutrition/micro_nutrients.json');
+        Object? composites;
+        try {
+          composites = jsonDecode(await assets.loadString('assets/nutrition/composites.json'));
+        } catch (e) {
+          debugPrint('composites.json load failed: $e'); // 복합 요리 없이 단일 음식만 쓴다.
+        }
+        return MicroNutrientDb.fromJson(jsonDecode(raw), composites: composites);
       } catch (e) {
         debugPrint('micro_nutrients.json load failed: $e');
         return empty;
