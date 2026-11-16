@@ -70,9 +70,8 @@ void main() {
       expect(sampleDb.match('Chicken breast (grilled)')?.nameKo, '닭가슴살');
     });
 
-    test('부분 일치는 하지 않는다', () {
-      expect(sampleDb.match('닭가슴살 샐러드'), isNull);
-      expect(sampleDb.match('계란'), isNull);
+    test('DB 이름보다 짧은 이름은 부분 일치 대상이 아니다', () {
+      expect(sampleDb.match('계란'), isNull, reason: '"삶은 계란"의 일부일 뿐');
     });
 
     test('다른 언어·빈 문자열·이상한 입력은 예외 없이 null', () {

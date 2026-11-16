@@ -35,14 +35,39 @@ String normalizeFoodNameWithoutBrackets(String name) {
   return normalizeFoodName(name.replaceAll(RegExp(r'[(\[{（［【][^)\]}）］】]*[)\]}）］】]'), ''));
 }
 
+/// 부분 일치에 쓰는 DB 음식명의 최소 길이(정규화 후 글자 수). 1글자(밥·파·무·배·김 등)는
+/// 다른 이름 속에 너무 쉽게 들어 있어 부분 일치에서는 쓰지 않는다(정확히 같을 때만 매칭).
+const int microNutrientPartialMinLength = 2;
+
+/// 국물 요리로 끝나는 이름은 부분 일치하지 않는다. "감자탕"→감자, "김치찌개"→김치처럼
+/// 재료 하나의 100g당 값을 국물까지 포함한 무게에 곱하면 크게 부풀려지기 때문이다.
+const List<String> _brothDishSuffixes = ['찌개', '전골', '국밥', '탕', '국', '수프', '스프', 'soup', 'stew', 'broth'];
+
+/// [MicroNutrientDb.lookup] 결과. [partial]이면 이름 일부만 맞춘 것이라 비슷한 음식 값으로 본다.
+class MicroNutrientMatch {
+  final MicroNutrientFood food;
+  final bool partial;
+
+  const MicroNutrientMatch(this.food, {this.partial = false});
+
+  /// 합산 시 "비슷한 음식 값" 안내 대상인지.
+  bool get approx => partial || food.approx;
+}
+
 /// assets/nutrition/micro_nutrients.json을 읽어 음식명(한/영/별칭) → 영양소 값 색인을 만든다.
-/// 음식명은 정규화한 문자열이 정확히 같을 때만 매칭한다(부분 일치는 엉뚱한 음식에 붙을
-/// 위험이 커서 하지 않는다). 데이터 파일이 없거나 깨져 있어도 예외를 던지지 않고 빈 DB가
-/// 되어, 화면에는 "정보 없음"만 보인다.
+/// 매칭 순서: ① 정규화한 이름이 정확히 같음 → ② 괄호 내용을 뺀 이름이 같음 → ③ 부분 일치
+/// (이름 안에 들어 있는 DB 음식명 중 가장 긴 것, 길이가 같으면 앞에 나온 것). ③은 approx로
+/// 취급한다. 데이터 파일이 없거나 깨져 있어도 예외를 던지지 않고 빈 DB가 되어, 화면에는
+/// "정보 없음"만 보인다.
 class MicroNutrientDb {
   final Map<String, MicroNutrientFood> _index;
 
-  MicroNutrientDb._(this._index);
+  /// 부분 일치 후보 키(길이 내림차순).
+  final List<String> _partialKeys;
+
+  MicroNutrientDb._(this._index)
+      : _partialKeys = _index.keys.where((k) => k.length >= microNutrientPartialMinLength).toList()
+          ..sort((a, b) => b.length.compareTo(a.length));
 
   static final MicroNutrientDb empty = MicroNutrientDb._(const {});
 
@@ -77,11 +102,36 @@ class MicroNutrientDb {
   }
 
   /// 기록된 음식명으로 찾는다. 못 찾으면 null(예외 없음).
-  MicroNutrientFood? match(String foodName) {
-    final exact = _index[normalizeFoodName(foodName)];
-    if (exact != null) return exact;
-    final key = normalizeFoodNameWithoutBrackets(foodName);
-    return key.isEmpty ? null : _index[key];
+  MicroNutrientFood? match(String foodName) => lookup(foodName)?.food;
+
+  /// [match]와 같지만 부분 일치 여부까지 알려준다.
+  MicroNutrientMatch? lookup(String foodName) {
+    final normalized = normalizeFoodName(foodName);
+    final exact = _index[normalized];
+    if (exact != null) return MicroNutrientMatch(exact);
+    final withoutBrackets = normalizeFoodNameWithoutBrackets(foodName);
+    if (withoutBrackets.isEmpty) return null;
+    final bracketless = _index[withoutBrackets];
+    if (bracketless != null) return MicroNutrientMatch(bracketless);
+    final partial = _longestContainedKey(withoutBrackets);
+    return partial == null ? null : MicroNutrientMatch(_index[partial]!, partial: true);
+  }
+
+  String? _longestContainedKey(String name) {
+    if (_brothDishSuffixes.any(name.endsWith)) return null;
+    String? best;
+    var bestPos = 0;
+    for (final key in _partialKeys) {
+      if (best != null && key.length < best.length) break;
+      if (key.length >= name.length) continue; // 같은 길이면 이미 정확 일치에서 걸렀다.
+      final pos = name.indexOf(key);
+      if (pos < 0) continue;
+      if (best == null || pos < bestPos) {
+        best = key;
+        bestPos = pos;
+      }
+    }
+    return best;
   }
 
   static Future<MicroNutrientDb>? _loading;
@@ -114,7 +164,8 @@ class MicroNutrientSummary {
   /// 영양 정보를 못 붙인 음식 기록 수(음식명이 매칭되지 않았거나, 먹은 양(g)이 없는 기록).
   final int unmatchedCount;
 
-  /// 합산에 들어간 기록 중 비슷한 음식 값([MicroNutrientFood.approx])으로 계산한 수.
+  /// 합산에 들어간 기록 중 비슷한 음식 값으로 계산한 수([MicroNutrientMatch.approx]:
+  /// approx 표시된 음식이거나 이름 일부만 맞춘 경우).
   final int approxCount;
 
   const MicroNutrientSummary({
@@ -139,12 +190,13 @@ MicroNutrientSummary summarizeMicroNutrients(Iterable<DailyLogEntry> entries, Mi
     if (e.type != LogType.food) continue;
     foodCount++;
     final grams = e.amount;
-    final food = db.match(e.name);
-    if (food == null || grams == null || grams <= 0 || !grams.isFinite) {
+    final match = db.lookup(e.name);
+    if (match == null || grams == null || grams <= 0 || !grams.isFinite) {
       unmatched++;
       continue;
     }
-    if (food.approx) approx++;
+    final food = match.food;
+    if (match.approx) approx++;
     for (final n in MicroNutrient.values) {
       final per100 = food.per100g[n];
       if (per100 == null) continue;
