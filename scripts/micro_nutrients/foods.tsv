@@ -1,0 +1,328 @@
+# CalSnap 비타민·미네랄 음식 대응표. 각 행은 USDA FoodData Central의 실제 항목(fdc_id + description)과 1:1로 대응한다.
+# 값은 여기 적지 않는다 — build_micro_nutrients.py가 USDA 원본 CSV에서 읽어 assets/nutrition/micro_nutrients.json을 만든다.
+# columns: name_ko	name_en	aliases(;)	dataset	fdc_id	usda_description
+쌀밥	cooked white rice	흰쌀밥;백미밥;공기밥;밥;rice;white rice;steamed rice	fndds	2708408	Rice, white, cooked, no added fat
+현미밥	cooked brown rice	현미;brown rice	fndds	2708414	Rice, brown, cooked, no added fat
+찹쌀밥	cooked glutinous rice	찹쌀;sticky rice;glutinous rice	sr_legacy	169711	Rice, white, glutinous, unenriched, cooked
+보리밥	cooked barley	보리;barley	sr_legacy	170285	Barley, pearled, cooked
+죽	rice porridge	흰죽;쌀죽;congee;rice porridge	fndds	2708418	Congee
+오트밀	oatmeal	귀리죽;oatmeal	fndds	2708381	Oatmeal, regular or quick, made with water, no added fat
+볶음밥	fried rice	fried rice	fndds	2708952	Rice, fried, NFS
+비빔밥	bibimbap	bibimbap;bibim bap	fndds	2708950	Bibimbap, Korean
+떡볶이	tteokbokki	떡뽁이;tteokbokki;dukboki;topokki	fndds	2708957	Dukboki or Tteokbokki, Korean
+라면	ramen	라멘;인스턴트라면;ramen;ramyeon;instant noodles	fndds	2709152	Soup, ramen noodles, water added
+에그누들	egg noodles	egg noodles	fndds	2708352	Noodles, cooked
+메밀국수	soba noodles	메밀면;소바;soba	sr_legacy	168907	Noodles, japanese, soba, cooked
+당면	glass noodles	glass noodles;cellophane noodles	fndds	2708355	Long rice noodles, made from mung beans, cooked
+스파게티	spaghetti	파스타;spaghetti;pasta	fndds	2708357	Pasta, cooked
+식빵	white bread	흰식빵;빵;white bread;bread;toast	fndds	2707598	Bread, white
+통밀빵	whole wheat bread	whole wheat bread	fndds	2707709	Bread, whole wheat
+베이글	bagel	bagel	fndds	2707684	Bagel
+크루아상	croissant	크로와상;croissant	fndds	2707678	Croissant
+모닝빵	dinner roll	롤빵;dinner roll	fndds	2707654	Roll, white, soft
+감자	boiled potato	삶은감자;찐감자;potato;boiled potato	fndds	2709388	Potato, boiled, from fresh, peel not eaten, no added fat
+고구마	sweet potato	군고구마;찐고구마;sweet potato	fndds	2709699	Sweet potato, baked, no added fat
+옥수수	corn	찐옥수수;corn;sweet corn	fndds	2709910	Corn, fresh, cooked, no added fat
+콘플레이크	corn flakes	시리얼;cereal;corn flakes	fndds	2708453	Cereal, corn flakes, plain
+그래놀라	granola	granola	fndds	2708461	Cereal, granola
+계란	egg	달걀;생계란;egg;raw egg	fndds	2707152	Egg, whole, raw
+삶은 계란	hard-boiled egg	삶은달걀;구운계란;boiled egg;hard boiled egg	fndds	2707154	Egg, whole, boiled or poached
+계란후라이	fried egg	달걀프라이;계란프라이;fried egg	fndds	2707156	Egg, whole, fried no added fat
+스크램블에그	scrambled eggs	스크램블;scrambled egg;scrambled eggs	fndds	2707205	Egg omelet or scrambled egg, no added fat
+오믈렛	omelet	omelet;omelette	fndds	2707200	Egg omelet or scrambled egg, made with oil
+메추리알	quail egg	quail egg	sr_legacy	172191	Egg, quail, whole, fresh, raw
+우유	milk	흰우유;whole milk;milk	fndds	2705385	Milk, whole
+저지방우유	low-fat milk	low fat milk;1% milk	fndds	2705387	Milk, low fat (1%)
+무지방우유	skim milk	탈지우유;skim milk;fat free milk	fndds	2705388	Milk, fat free (skim)
+초코우유	chocolate milk	chocolate milk	fndds	2705466	Chocolate milk, NFS
+두유	soy milk	soymilk;soy milk	fndds	2705405	Soy milk, unsweetened
+요거트	plain yogurt	요구르트;플레인요거트;yogurt;yoghurt	fndds	2705418	Yogurt, whole milk, plain
+그릭요거트	greek yogurt	greek yogurt	fndds	2705422	Yogurt, Greek, whole milk, plain
+치즈	cheddar cheese	체다치즈;cheese;cheddar	fndds	2705709	Cheese, Cheddar
+슬라이스치즈	american cheese	슬라이스 치즈;sliced cheese;american cheese	fndds	2705764	Cheese, American
+모짜렐라치즈	mozzarella	모짜렐라;mozzarella	fndds	2705722	Cheese, Mozzarella, NFS
+크림치즈	cream cheese	cream cheese	fndds	2705760	Cream cheese, regular, plain
+버터	butter	butter	fndds	2710155	Butter, stick
+아이스크림	ice cream	ice cream	fndds	2705630	Ice cream, vanilla
+생크림	whipping cream	휘핑크림;heavy cream;whipping cream	fndds	2705597	Cream, heavy
+닭가슴살	chicken breast	닭가슴;chicken breast	fndds	2705956	Chicken breast, baked, broiled, or roasted, skin not eaten, from raw
+닭다리	chicken drumstick	chicken drumstick;chicken leg	fndds	2706002	Chicken drumstick, baked, broiled, or roasted, skin eaten, from raw
+닭날개	chicken wing	chicken wings;chicken wing	fndds	2706057	Chicken wing, baked, broiled, or roasted, from raw
+치킨	fried chicken	후라이드치킨;프라이드치킨;fried chicken	fndds	2705973	Chicken breast, fried, coated, skin / coating eaten, from raw
+소고기	beef steak	쇠고기;스테이크;등심;beef;steak	fndds	2705824	Beef, steak, NFS
+다진 소고기	ground beef	다진고기;ground beef	fndds	2705854	Beef, ground
+갈비	beef short ribs	소갈비;short ribs	fndds	2705845	Beef, shortribs
+돼지고기	pork	pork	fndds	2705862	Pork, NFS
+삼겹살	pork belly	pork belly	sr_legacy	167812	Pork, fresh, belly, raw
+돈까스	pork cutlet	돈가스;tonkatsu;pork cutlet	fndds	2705870	Pork, chop, coated, lean and fat eaten
+햄	ham	ham	fndds	2706206	Ham, prepackaged or deli, luncheon meat
+베이컨	bacon	bacon	fndds	2705887	Pork bacon, NS as to fresh, smoked or cured, cooked
+소시지	sausage	비엔나;sausage	fndds	2706191	Pork sausage
+스팸	luncheon meat	런천미트;spam;luncheon meat	fndds	2706205	Luncheon meat, NFS
+오리고기	duck	오리;duck	fndds	2706139	Duck, roasted, skin eaten
+양고기	lamb	lamb	fndds	2705905	Lamb, NS as to cut
+고등어	mackerel	고등어구이;mackerel	fndds	2706264	Fish, mackerel, baked or broiled
+연어	salmon	연어구이;salmon	fndds	2706286	Fish, salmon, baked or broiled
+연어회	raw salmon	salmon sashimi	fndds	2706284	Fish, salmon, raw
+참치캔	canned tuna	참치;tuna;canned tuna	fndds	2706311	Fish, tuna, canned
+멸치	anchovy	anchovy;anchovies	fndds	2706232	Fish, anchovy
+오징어	squid	squid	fndds	2706333	Calamari, cooked
+문어	octopus	octopus	fndds	2706331	Octopus
+새우	shrimp	shrimp;prawn	fndds	2706363	Shrimp, steamed or boiled
+게	crab	대게;꽃게;crab	fndds	2706344	Crab
+조개	clams	clam;clams	fndds	2706342	Clams, steamed or boiled
+굴	oysters	oyster;oysters	fndds	2706353	Oysters, steamed
+홍합	mussels	mussel;mussels	fndds	2706350	Mussels
+명태	pollock	동태;pollock	sr_legacy	173726	Fish, pollock, Alaska, cooked
+대구	cod	cod	fndds	2706241	Fish, cod, baked or broiled
+장어	eel	eel	fndds	2706247	Fish, eel
+전복	abalone	abalone	fndds	2706337	Abalone
+가리비	scallops	scallop;scallops	fndds	2706358	Scallops, steamed or boiled
+김	laver seaweed	구운김;조미김;laver;nori;seaweed	fndds	2709988	Seaweed, dried
+미역	wakame	미역줄기;wakame	sr_legacy	170496	Seaweed, wakame, raw
+다시마	kelp	kelp	sr_legacy	168457	Seaweed, kelp, raw
+미역국	seaweed soup	seaweed soup	fndds	2710110	Soup, seaweed
+두부	tofu	tofu	fndds	2707435	Soybean curd
+순두부	soft tofu	soft tofu	sr_legacy	172449	Tofu, soft, prepared with calcium sulfate and magnesium chloride (nigari)
+유부	fried tofu	fried tofu	sr_legacy	172451	Tofu, fried
+콩	soybeans	대두;soybeans	fndds	2707388	Soybeans, cooked
+검은콩	black beans	서리태;black beans	fndds	2707363	Black beans, from canned, no added fat
+팥	adzuki beans	adzuki beans;red beans	sr_legacy	173728	Beans, adzuki, mature seeds, cooked, boiled, without salt
+녹두	mung beans	mung beans	fndds	2707389	Mung beans, cooked
+숙주나물	mung bean sprouts	숙주;bean sprouts;mung bean sprouts	fndds	2709871	Bean sprouts, cooked
+콩나물	soybean sprouts	soybean sprouts	sr_legacy	168460	Soybeans, mature seeds, sprouted, cooked, steamed
+낫토	natto	natto	sr_legacy	172443	Natto
+땅콩	peanuts	peanuts;peanut	fndds	2707515	Peanuts, roasted, salted
+땅콩버터	peanut butter	peanut butter	fndds	2707537	Peanut butter
+아몬드	almonds	almond;almonds	fndds	2707489	Almonds, unsalted
+호두	walnuts	walnut;walnuts	fndds	2707531	Walnuts, excluding honey roasted
+캐슈넛	cashews	cashew;cashews	fndds	2707497	Cashews, unsalted
+피스타치오	pistachios	pistachio;pistachios	fndds	2707530	Pistachio nuts, unsalted
+잣	pine nuts	pine nuts	sr_legacy	170591	Nuts, pine nuts, dried
+밤	chestnuts	군밤;chestnut;chestnuts	fndds	2707499	Chestnuts
+참깨	sesame seeds	깨;sesame seeds	fndds	2707586	Sesame seeds
+시금치	cooked spinach	시금치나물;spinach	fndds	2709615	Spinach, fresh, cooked, no added fat
+생시금치	raw spinach	raw spinach	fndds	2709614	Spinach, raw
+배추	napa cabbage	알배추;napa cabbage;chinese cabbage	sr_legacy	169979	Cabbage, chinese (pe-tsai), raw
+양배추	cabbage	cabbage	fndds	2709773	Cabbage, green, raw
+브로콜리	broccoli	broccoli	fndds	2709645	Broccoli, fresh, cooked, no added fat
+당근	carrot	carrot;carrots	fndds	2709660	Carrots, raw
+양파	onion	onion;onions	fndds	2709795	Onions, raw
+대파	green onion	파;쪽파;green onion;scallion	fndds	2709794	Onions, green, raw
+마늘	garlic	garlic	fndds	2709786	Garlic, raw
+생강	ginger	ginger	sr_legacy	169231	Ginger root, raw
+오이	cucumber	cucumber	fndds	2709784	Cucumber, raw
+애호박	zucchini	호박;zucchini;courgette	fndds	2709808	Summer squash, green, raw
+단호박	kabocha squash	kabocha;pumpkin	fndds	2709692	Pumpkin, cooked
+가지	eggplant	eggplant;aubergine	fndds	2709929	Eggplant, cooked, no added fat
+고추	chili pepper	풋고추;청양고추;hot pepper;chili pepper	fndds	2709798	Peppers, hot, raw
+파프리카	bell pepper	피망;빨간파프리카;bell pepper;paprika	fndds	2709801	Peppers, sweet, red, raw
+토마토	tomato	tomato	fndds	2709719	Tomatoes, raw
+상추	lettuce	lettuce	fndds	2709789	Lettuce, raw
+무	radish	무우;radish;daikon	sr_legacy	168451	Radishes, oriental, raw
+연근	lotus root	lotus root	fndds	2709936	Lotus root, cooked
+우엉	burdock root	burdock	fndds	2709886	Burdock, cooked
+버섯	mushrooms	양송이;mushroom;mushrooms	fndds	2709793	Mushrooms, raw
+표고버섯	shiitake	표고;shiitake	sr_legacy	168437	Mushrooms, shiitake, cooked, without salt
+팽이버섯	enoki mushrooms	팽이;enoki	sr_legacy	169382	Mushrooms, enoki, raw
+느타리버섯	oyster mushrooms	느타리;oyster mushroom	sr_legacy	168580	Mushrooms, oyster, raw
+아스파라거스	asparagus	asparagus	fndds	2709834	Asparagus, fresh, cooked, no added fat
+셀러리	celery	샐러리;celery	fndds	2709778	Celery, raw
+케일	kale	kale	fndds	2709599	Kale, raw
+청경채	bok choy	bok choy;pak choi	sr_legacy	170391	Cabbage, chinese (pak-choi), cooked, boiled, drained, without salt
+콜리플라워	cauliflower	cauliflower	fndds	2709777	Cauliflower, raw
+비트	beets	beet;beets;beetroot	fndds	2709872	Beets, fresh, cooked, no added fat
+김치	kimchi	배추김치;kimchi	fndds	2710077	Kimchi
+단무지	pickled radish	pickled radish;danmuji	fndds	2710099	Radishes, pickled
+사과	apple	apple	fndds	2709215	Apple, raw
+배	asian pear	nashi;asian pear;korean pear	fndds	2709255	Pear, Asian, raw
+바나나	banana	banana	fndds	2709224	Banana, raw
+귤	tangerine	감귤;밀감;tangerine;mandarin	fndds	2709175	Tangerine, raw
+오렌지	orange	orange	fndds	2709171	Orange, raw
+포도	grapes	grape;grapes	fndds	2709237	Grapes, raw
+딸기	strawberries	strawberry;strawberries	fndds	2709283	Strawberries, raw
+수박	watermelon	watermelon	fndds	2709270	Watermelon, raw
+멜론	cantaloupe	cantaloupe;melon	fndds	2709226	Cantaloupe, raw
+복숭아	peach	peach	fndds	2709249	Peach, raw
+자두	plum	plum	fndds	2709265	Plum, raw
+키위	kiwi	kiwi;kiwifruit	fndds	2709239	Kiwi fruit, raw
+블루베리	blueberries	blueberry;blueberries	fndds	2709275	Blueberries, raw
+감	persimmon	단감;홍시;persimmon	fndds	2709259	Persimmon, raw
+곶감	dried persimmon	dried persimmon	fndds	2709209	Persimmon, dried
+대추	jujube	jujube	sr_legacy	168151	Jujube, raw
+망고	mango	mango	fndds	2709242	Mango, raw
+파인애플	pineapple	pineapple	fndds	2709260	Pineapple, raw
+체리	cherries	cherry;cherries	fndds	2709231	Cherries, raw
+레몬	lemon	lemon	fndds	2709168	Lemon, raw
+자몽	grapefruit	grapefruit	fndds	2709165	Grapefruit, raw
+석류	pomegranate	pomegranate	fndds	2709267	Pomegranate, raw
+아보카도	avocado	avocado	fndds	2709223	Avocado, raw
+무화과	figs	fig;figs	fndds	2709235	Fig, raw
+건포도	raisins	raisin;raisins	fndds	2709212	Raisins
+오렌지주스	orange juice	orange juice	fndds	2709186	Orange juice, 100%, NFS
+사과주스	apple juice	apple juice	fndds	2709320	Apple juice, 100%
+커피	coffee	아메리카노;블랙커피;coffee;americano	fndds	2710375	Coffee, brewed
+카페라떼	latte	라떼;latte;cafe latte	fndds	2710386	Coffee, Latte
+녹차	green tea	green tea	fndds	2710490	Tea, hot, leaf, green
+콜라	cola	coke;cola	fndds	2710541	Soft drink, cola
+맥주	beer	beer	fndds	2710616	Beer
+와인	wine	레드와인;wine;red wine	fndds	2710688	Wine, red
+피자	pizza	cheese pizza;pizza	fndds	2708616	Pizza, cheese, from restaurant or fast food, medium crust
+햄버거	hamburger	버거;burger;hamburger	fndds	2706920	Hamburger, NFS
+감자튀김	french fries	후렌치후라이;french fries;fries	fndds	2709456	Potato, french fries, NFS
+핫도그	hot dog	hot dog	fndds	2706166	Hot dog, NFS
+도넛	doughnut	도너츠;donut;doughnut	fndds	2708062	Doughnut, NFS
+초콜릿	milk chocolate	밀크초콜릿;chocolate	fndds	2710328	Chocolate candy
+다크초콜릿	dark chocolate	dark chocolate	fndds	2710336	Dark chocolate candy
+쿠키	cookie	cookie	fndds	2707909	Cookie, chocolate chip
+팝콘	popcorn	popcorn	fndds	2708216	Popcorn, NFS
+감자칩	potato chips	포테이토칩;potato chips;chips	fndds	2709422	Potato chips, plain
+와플	waffle	waffle	fndds	2708325	Waffle, plain
+팬케이크	pancake	핫케이크;pancake	fndds	2708304	Pancakes, plain
+꿀	honey	honey	fndds	2710281	Honey
+딸기잼	jam	잼;jam;strawberry jam	fndds	2710301	Jam
+초밥	sushi	스시;sushi	fndds	2708959	Sushi, NFS
+간장	soy sauce	soy sauce	fndds	2707442	Soy sauce
+참기름	sesame oil	sesame oil	fndds	2710190	Sesame oil
+올리브유	olive oil	olive oil	fndds	2710186	Olive oil
+마요네즈	mayonnaise	mayo;mayonnaise	fndds	2710204	Mayonnaise, regular
+케첩	ketchup	케찹;ketchup	fndds	2709733	Ketchup
+퀴노아	quinoa	quinoa	fndds	2708400	Quinoa, no added fat
+쌀국수	rice noodles	rice noodles;pho noodles	fndds	2708356	Rice noodles, cooked
+소면	somen noodles	국수;면;잔치국수;somen;noodles	sr_legacy	168909	Noodles, japanese, somen, cooked
+호밀빵	rye bread	rye bread	fndds	2707755	Bread, rye
+잡곡빵	multigrain bread	multigrain bread	fndds	2707777	Bread, multigrain
+머핀	muffin	muffin	fndds	2707829	Muffin, NFS
+크래커	crackers	crackers;saltine	fndds	2708167	Crackers, saltine
+프레첼	pretzels	pretzel;pretzels	fndds	2708247	Pretzels, NFS
+또띠아	flour tortilla	토르티야;tortilla	fndds	2707824	Tortilla, flour
+난	naan	naan	fndds	2707613	Bread, naan
+피타빵	pita bread	pita	fndds	2707616	Bread, pita
+비스킷	biscuit	biscuit	fndds	2707801	Biscuit, NFS
+치킨커리	chicken curry	chicken curry	fndds	2706437	Chicken curry
+미트볼	meatballs	meatball;meatballs	fndds	2706467	Meatballs, NS as to type of meat, with sauce
+라자냐	lasagna	lasagne;lasagna	fndds	2708750	Lasagna with meat
+맥앤치즈	macaroni and cheese	마카로니치즈;mac and cheese;macaroni and cheese	fndds	2708811	Macaroni or noodles with cheese
+타코	taco	taco;tacos	fndds	2708514	Taco, NFS
+부리또	burrito	브리또;burrito	fndds	2708534	Burrito, NFS
+치킨너겟	chicken nuggets	너겟;chicken nuggets	fndds	2706092	Chicken nuggets, NFS
+치킨누들수프	chicken noodle soup	치킨수프;chicken soup;chicken noodle soup	fndds	2709149	Soup, chicken noodle
+토마토수프	tomato soup	tomato soup	fndds	2709757	Soup, tomato
+클램차우더	clam chowder	clam chowder	fndds	2707139	Soup, New England clam chowder
+감자샐러드	potato salad	potato salad	fndds	2709532	Potato salad with egg, made with mayonnaise
+코울슬로	coleslaw	coleslaw	fndds	2709815	Coleslaw
+시저샐러드	caesar salad	caesar salad	fndds	2709591	Caesar salad, with romaine, no dressing
+참치샐러드	tuna salad	tuna salad	fndds	2706828	Tuna salad, made with mayonnaise
+에그샐러드	egg salad	egg salad	fndds	2707182	Egg salad, made with mayonnaise
+칠리	chili con carne	chili con carne;chili	fndds	2706375	Chili with meat and beans
+팟타이	pad thai	pad thai	fndds	2708804	Pad Thai, NFS
+탕수육	sweet and sour pork	sweet and sour pork	fndds	2706401	Sweet and sour pork
+볶음면	chow mein	chow mein;lo mein	fndds	2708798	Lo mein, NFS
+데리야끼치킨	chicken teriyaki	teriyaki chicken;chicken teriyaki	fndds	2706433	Chicken or turkey with teriyaki
+캘리포니아롤	california roll	california roll	fndds	2708961	Sushi roll, California
+군만두	fried dumpling	potsticker;fried dumpling;gyoza	fndds	2708705	Wonton, dumpling or pot sticker, fried
+찐만두	steamed dumpling	물만두;steamed dumpling;dumpling;dumplings;wonton	fndds	2708708	Wonton, dumpling or pot sticker, steamed
+춘권	egg roll	spring roll;egg roll	fndds	2708702	Egg roll, with beef and/or pork
+햄샌드위치	ham sandwich	ham sandwich	fndds	2706964	Ham sandwich on white
+닭안심	chicken tenders	chicken tenders	fndds	2706098	Chicken tenders or strips, NFS
+닭간	chicken liver	chicken liver	fndds	2706154	Liver, chicken
+소간	beef liver	liver;beef liver	fndds	2706153	Liver, beef
+육포	beef jerky	jerky;beef jerky	fndds	2705860	Beef jerky
+칠면조	turkey	turkey	fndds	2706104	Turkey, NFS
+차돌박이	beef brisket	brisket;beef brisket	fndds	2705851	Beef, brisket
+안심	beef tenderloin	tenderloin;filet mignon	fndds	2705841	Beef, steak, tenderloin
+립아이	ribeye steak	ribeye	fndds	2705829	Beef, steak, ribeye, lean and fat eaten
+돼지갈비	pork ribs	pork ribs	fndds	2705894	Pork, ribs
+족발	pig's feet	pig feet;pigs feet	fndds	2705898	Pork, pig's feet
+소 양	beef tripe	양;천엽;tripe	fndds	2706162	Tripe
+방어	yellowtail	yellowtail	sr_legacy	174248	Fish, yellowtail, mixed species, cooked, dry heat
+농어	sea bass	sea bass	sr_legacy	173694	Fish, sea bass, mixed species, cooked, dry heat
+조기	croaker	yellow croaker;croaker	fndds	2706246	Fish, croaker
+광어	flounder	넙치;flounder;halibut	fndds	2706249	Fish, flounder, baked or broiled
+참치회	raw tuna	tuna sashimi	fndds	2706308	Fish, tuna, raw
+정어리	sardines	sardine;sardines	fndds	2706293	Fish, sardines, canned
+청어	herring	herring	fndds	2706261	Fish, herring
+송어	trout	trout	fndds	2706303	Fish, trout, baked or broiled
+메기	catfish	catfish	fndds	2706235	Fish, catfish, baked or broiled
+틸라피아	tilapia	tilapia	fndds	2706319	Fish, tilapia, baked or broiled
+랍스터	lobster	바닷가재;lobster	fndds	2706349	Lobster
+게맛살	imitation crab	크래미;imitation crab;surimi	fndds	2706568	Imitation crab meat
+새우튀김	fried shrimp	shrimp tempura;fried shrimp	fndds	2706364	Shrimp, fried
+오징어튀김	fried calamari	fried squid;fried calamari	fndds	2706334	Calamari, fried
+근대	swiss chard	chard;swiss chard	fndds	2709575	Chard, cooked
+구운감자	baked potato	baked potato	fndds	2709524	Potato, baked, peel eaten
+으깬감자	mashed potatoes	매쉬드포테이토;mashed potatoes	fndds	2709496	Potato, mashed, from fresh, made with milk
+강낭콩	kidney beans	kidney beans	fndds	2707383	Kidney beans, from canned, no added fat
+병아리콩	chickpeas	chickpeas;garbanzo	fndds	2707418	Chickpeas, from canned, no added fat
+렌틸콩	lentils	렌즈콩;lentils	fndds	2707425	Lentils, from dried, no added fat
+풋콩	edamame	에다마메;edamame	fndds	2707436	Edamame, cooked
+껍질콩	green beans	green beans	fndds	2709852	Green beans, fresh, cooked, no added fat
+오크라	okra	okra	fndds	2709944	Okra, fresh, cooked, no added fat
+순무	turnip	turnip	fndds	2710002	Turnip, cooked
+래디시	red radish	radishes	fndds	2709803	Radish
+방울양배추	brussels sprouts	brussels sprouts	fndds	2709881	Brussels sprouts, fresh, cooked, no added fat
+익힌 배추	cooked napa cabbage	cooked napa cabbage	sr_legacy	169980	Cabbage, chinese (pe-tsai), cooked, boiled, drained, without salt
+익힌 양배추	cooked cabbage	cooked cabbage	fndds	2709889	Cabbage, green, cooked, no added fat
+익힌 당근	cooked carrots	cooked carrots	fndds	2709664	Carrots, fresh, cooked, no added fat
+볶은 양파	cooked onion	cooked onion	fndds	2709950	Onions, cooked, no added fat
+생브로콜리	raw broccoli	raw broccoli	fndds	2709643	Broccoli, raw
+피클	pickles	오이피클;pickles;pickle	fndds	2710078	Pickles, dill
+올리브	olives	olive;olives	fndds	2710090	Olives, black
+살구	apricot	apricot	fndds	2709221	Apricot, raw
+라임	lime	lime	fndds	2709170	Lime, raw
+코코넛	coconut	coconut	fndds	2707500	Coconut, fresh
+리치	lychee	litchi;lychee	fndds	2709240	Lychee
+용과	dragon fruit	dragonfruit;dragon fruit;pitaya	fndds	2709234	Dragon fruit
+파파야	papaya	papaya	fndds	2709246	Papaya, raw
+구아바	guava	guava	fndds	2709238	Guava, raw
+라즈베리	raspberries	raspberry;raspberries	fndds	2709281	Raspberries, raw
+블랙베리	blackberries	blackberry;blackberries	fndds	2709273	Blackberries, raw
+크랜베리	dried cranberries	cranberry;cranberries	fndds	2709202	Cranberries, dried
+청포도	green grapes	green grapes	sr_legacy	174683	Grapes, red or green (European type, such as Thompson seedless), raw
+과일칵테일	fruit cocktail	fruit cocktail	fndds	2709290	Fruit cocktail, canned, in syrup
+사과소스	applesauce	applesauce	fndds	2709216	Applesauce, regular
+프룬	prunes	dried plum;prunes	fndds	2709211	Prune, dried
+말린 망고	dried mango	dried mango	fndds	2709205	Mango, dried
+과일요거트	fruit yogurt	요플레;fruit yogurt	fndds	2705426	Yogurt, whole milk, fruit
+저지방우유(2%)	reduced fat milk	2% milk;reduced fat milk	fndds	2705386	Milk, reduced fat (2%)
+딸기우유	strawberry milk	strawberry milk	fndds	2705495	Strawberry milk, NFS
+파마산치즈	parmesan	parmesan	fndds	2705730	Cheese, Parmesan, hard
+코티지치즈	cottage cheese	cottage cheese	fndds	2705747	Cheese, cottage, NFS
+리코타치즈	ricotta	ricotta	fndds	2705750	Cheese, Ricotta
+연유	condensed milk	condensed milk	fndds	2705402	Milk, condensed, sweetened
+초코아이스크림	chocolate ice cream	chocolate ice cream	fndds	2705632	Ice cream, chocolate
+프로즌요거트	frozen yogurt	frozen yogurt	fndds	2705451	Frozen yogurt, NFS
+푸딩	pudding	pudding	fndds	2705692	Pudding, flavors other than chocolate, ready-to-eat
+홍차	black tea	black tea	fndds	2710488	Tea, hot, leaf, black
+우롱차	oolong tea	oolong tea	fndds	2710492	Tea, hot, leaf, oolong
+밀크티	bubble tea	버블티;bubble tea;milk tea	fndds	2710508	Tea, bubble
+아이스티	iced tea	iced tea	fndds	2710527	Tea, iced, bottled, black
+스포츠음료	sports drink	게토레이;sports drink	fndds	2710771	Sports drink, NFS
+에너지드링크	energy drink	energy drink	fndds	2710756	Energy Drink
+코코아	hot chocolate	핫초코;hot chocolate;cocoa	fndds	2705473	Hot chocolate / cocoa, made with whole or reduced fat (2%) milk
+토마토주스	tomato juice	tomato juice	fndds	2709728	Tomato juice, 100%
+포도주스	grape juice	grape juice	fndds	2709325	Grape juice, 100%
+자몽주스	grapefruit juice	grapefruit juice	fndds	2709177	Grapefruit juice, 100%, NS as to form
+레모네이드	lemonade	lemonade	fndds	2710570	Lemonade, fruit juice drink
+화이트와인	white wine	white wine	fndds	2710689	Wine, white
+그래놀라바	granola bar	granola bar;cereal bar	fndds	2708101	Cereal or Granola bar, NFS
+단백질바	protein bar	protein bar	fndds	2708127	Nutrition bar or meal replacement bar, NFS
+치즈케이크	cheesecake	cheesecake	fndds	2707861	Cheesecake, plain
+애플파이	apple pie	apple pie	fndds	2707995	Pie, apple
+컵케이크	cupcake	cupcake	fndds	2707866	Cake or cupcake, chocolate with chocolate icing, bakery
+나초	tortilla chips	tortilla chips;nachos	fndds	2708202	Tortilla chips, plain
+설탕	sugar	sugar	fndds	2710258	Sugar, white, granulated or lump
+식초	vinegar	vinegar	fndds	2709351	Vinegar
+머스타드	mustard	mustard	fndds	2710085	Mustard
+바베큐소스	barbecue sauce	bbq sauce;barbecue sauce	fndds	2709750	Barbecue sauce
+굴소스	oyster sauce	oyster sauce	sr_legacy	174529	Sauce, oyster, ready-to-serve
+데리야끼소스	teriyaki sauce	teriyaki sauce	fndds	2707445	Teriyaki sauce
+핫소스	hot sauce	hot sauce	fndds	2710093	Hot pepper sauce
+살사	salsa	salsa	fndds	2709738	Salsa, red
+마가린	margarine	margarine	fndds	2710159	Margarine, stick
+식용유	vegetable oil	카놀라유;cooking oil;vegetable oil;canola oil	fndds	2710188	Canola oil
+오리알	duck egg	duck egg	fndds	2707176	Duck egg, cooked
+쌀	uncooked rice	white rice uncooked	sr_legacy	168877	Rice, white, long-grain, regular, raw, enriched
+현미(생)	raw brown rice	brown rice uncooked	sr_legacy	169703	Rice, brown, long-grain, raw (Includes foods for USDA's Food Distribution Program)
+감자(생)	raw potato	raw potato	sr_legacy	170026	Potatoes, flesh and skin, raw
+양송이버섯(익힌)	cooked mushrooms	cooked mushrooms	fndds	2709937	Mushrooms, fresh, cooked, no added fat

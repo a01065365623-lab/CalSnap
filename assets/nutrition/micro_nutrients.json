@@ -1,0 +1,6784 @@
+{
+ "version": 1,
+ "note": "100g당 값. USDA FoodData Central 원본 값 그대로이며, 원본에 없는 값은 null이다.",
+ "sources": {
+  "fndds": {
+   "name": "USDA FoodData Central — FNDDS (Survey Foods), release 2024-10-31",
+   "url": "https://fdc.nal.usda.gov/download-datasets"
+  },
+  "sr_legacy": {
+   "name": "USDA FoodData Central — SR Legacy, release 2018-04",
+   "url": "https://fdc.nal.usda.gov/download-datasets"
+  }
+ },
+ "units": {
+  "vitaminD_ug": "ug",
+  "vitaminB12_ug": "ug",
+  "vitaminA_ugRAE": "ugRAE",
+  "vitaminC_mg": "mg",
+  "iron_mg": "mg",
+  "calcium_mg": "mg",
+  "zinc_mg": "mg",
+  "potassium_mg": "mg"
+ },
+ "foods": [
+  {
+   "ko": "쌀밥",
+   "en": "cooked white rice",
+   "aliases": [
+    "흰쌀밥",
+    "백미밥",
+    "공기밥",
+    "밥",
+    "rice",
+    "white rice",
+    "steamed rice"
+   ],
+   "source": "fndds",
+   "fdcId": 2708408,
+   "usdaDescription": "Rice, white, cooked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.19,
+    "calcium_mg": 10.0,
+    "zinc_mg": 0.49,
+    "potassium_mg": 35.0
+   }
+  },
+  {
+   "ko": "현미밥",
+   "en": "cooked brown rice",
+   "aliases": [
+    "현미",
+    "brown rice"
+   ],
+   "source": "fndds",
+   "fdcId": 2708414,
+   "usdaDescription": "Rice, brown, cooked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.4,
+    "calcium_mg": 5.0,
+    "zinc_mg": 0.63,
+    "potassium_mg": 80.0
+   }
+  },
+  {
+   "ko": "찹쌀밥",
+   "en": "cooked glutinous rice",
+   "aliases": [
+    "찹쌀",
+    "sticky rice",
+    "glutinous rice"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 169711,
+   "usdaDescription": "Rice, white, glutinous, unenriched, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.14,
+    "calcium_mg": 2.0,
+    "zinc_mg": 0.41,
+    "potassium_mg": 10.0
+   }
+  },
+  {
+   "ko": "보리밥",
+   "en": "cooked barley",
+   "aliases": [
+    "보리",
+    "barley"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 170285,
+   "usdaDescription": "Barley, pearled, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.33,
+    "calcium_mg": 11.0,
+    "zinc_mg": 0.82,
+    "potassium_mg": 93.0
+   }
+  },
+  {
+   "ko": "죽",
+   "en": "rice porridge",
+   "aliases": [
+    "흰죽",
+    "쌀죽",
+    "congee",
+    "rice porridge"
+   ],
+   "source": "fndds",
+   "fdcId": 2708418,
+   "usdaDescription": "Congee",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.36,
+    "calcium_mg": 5.0,
+    "zinc_mg": 0.15,
+    "potassium_mg": 10.0
+   }
+  },
+  {
+   "ko": "오트밀",
+   "en": "oatmeal",
+   "aliases": [
+    "귀리죽",
+    "oatmeal"
+   ],
+   "source": "fndds",
+   "fdcId": 2708381,
+   "usdaDescription": "Oatmeal, regular or quick, made with water, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.68,
+    "calcium_mg": 12.0,
+    "zinc_mg": 0.62,
+    "potassium_mg": 58.0
+   }
+  },
+  {
+   "ko": "볶음밥",
+   "en": "fried rice",
+   "aliases": [
+    "fried rice"
+   ],
+   "source": "fndds",
+   "fdcId": 2708952,
+   "usdaDescription": "Rice, fried, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 22.0,
+    "vitaminC_mg": 3.8,
+    "iron_mg": 0.46,
+    "calcium_mg": 11.0,
+    "zinc_mg": 0.69,
+    "potassium_mg": 69.0
+   }
+  },
+  {
+   "ko": "비빔밥",
+   "en": "bibimbap",
+   "aliases": [
+    "bibimbap",
+    "bibim bap"
+   ],
+   "source": "fndds",
+   "fdcId": 2708950,
+   "usdaDescription": "Bibimbap, Korean",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.26,
+    "vitaminA_ugRAE": 113.0,
+    "vitaminC_mg": 10.5,
+    "iron_mg": 0.93,
+    "calcium_mg": 25.0,
+    "zinc_mg": 0.92,
+    "potassium_mg": 244.0
+   }
+  },
+  {
+   "ko": "떡볶이",
+   "en": "tteokbokki",
+   "aliases": [
+    "떡뽁이",
+    "tteokbokki",
+    "dukboki",
+    "topokki"
+   ],
+   "source": "fndds",
+   "fdcId": 2708957,
+   "usdaDescription": "Dukboki or Tteokbokki, Korean",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.22,
+    "vitaminA_ugRAE": 25.0,
+    "vitaminC_mg": 4.7,
+    "iron_mg": 0.39,
+    "calcium_mg": 19.0,
+    "zinc_mg": 0.37,
+    "potassium_mg": 104.0
+   }
+  },
+  {
+   "ko": "라면",
+   "en": "ramen",
+   "aliases": [
+    "라멘",
+    "인스턴트라면",
+    "ramen",
+    "ramyeon",
+    "instant noodles"
+   ],
+   "source": "fndds",
+   "fdcId": 2709152,
+   "usdaDescription": "Soup, ramen noodles, water added",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.04,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.62,
+    "calcium_mg": 6.0,
+    "zinc_mg": 0.1,
+    "potassium_mg": 27.0
+   }
+  },
+  {
+   "ko": "에그누들",
+   "en": "egg noodles",
+   "aliases": [
+    "egg noodles"
+   ],
+   "source": "fndds",
+   "fdcId": 2708352,
+   "usdaDescription": "Noodles, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 0.09,
+    "vitaminA_ugRAE": 6.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.46,
+    "calcium_mg": 12.0,
+    "zinc_mg": 0.65,
+    "potassium_mg": 38.0
+   }
+  },
+  {
+   "ko": "메밀국수",
+   "en": "soba noodles",
+   "aliases": [
+    "메밀면",
+    "소바",
+    "soba"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 168907,
+   "usdaDescription": "Noodles, japanese, soba, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.48,
+    "calcium_mg": 4.0,
+    "zinc_mg": 0.12,
+    "potassium_mg": 35.0
+   }
+  },
+  {
+   "ko": "당면",
+   "en": "glass noodles",
+   "aliases": [
+    "glass noodles",
+    "cellophane noodles"
+   ],
+   "source": "fndds",
+   "fdcId": 2708355,
+   "usdaDescription": "Long rice noodles, made from mung beans, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.44,
+    "calcium_mg": 7.0,
+    "zinc_mg": 0.09,
+    "potassium_mg": 2.0
+   }
+  },
+  {
+   "ko": "스파게티",
+   "en": "spaghetti",
+   "aliases": [
+    "파스타",
+    "spaghetti",
+    "pasta"
+   ],
+   "source": "fndds",
+   "fdcId": 2708357,
+   "usdaDescription": "Pasta, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.27,
+    "calcium_mg": 7.0,
+    "zinc_mg": 0.51,
+    "potassium_mg": 44.0
+   }
+  },
+  {
+   "ko": "식빵",
+   "en": "white bread",
+   "aliases": [
+    "흰식빵",
+    "빵",
+    "white bread",
+    "bread",
+    "toast"
+   ],
+   "source": "fndds",
+   "fdcId": 2707598,
+   "usdaDescription": "Bread, white",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 3.36,
+    "calcium_mg": 211.0,
+    "zinc_mg": 0.88,
+    "potassium_mg": 117.0
+   }
+  },
+  {
+   "ko": "통밀빵",
+   "en": "whole wheat bread",
+   "aliases": [
+    "whole wheat bread"
+   ],
+   "source": "fndds",
+   "fdcId": 2707709,
+   "usdaDescription": "Bread, whole wheat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 2.56,
+    "calcium_mg": 163.0,
+    "zinc_mg": 1.76,
+    "potassium_mg": 250.0
+   }
+  },
+  {
+   "ko": "베이글",
+   "en": "bagel",
+   "aliases": [
+    "bagel"
+   ],
+   "source": "fndds",
+   "fdcId": 2707684,
+   "usdaDescription": "Bagel",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 3.57,
+    "calcium_mg": 70.0,
+    "zinc_mg": 0.83,
+    "potassium_mg": 107.0
+   }
+  },
+  {
+   "ko": "크루아상",
+   "en": "croissant",
+   "aliases": [
+    "크로와상",
+    "croissant"
+   ],
+   "source": "fndds",
+   "fdcId": 2707678,
+   "usdaDescription": "Croissant",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.16,
+    "vitaminA_ugRAE": 206.0,
+    "vitaminC_mg": 0.2,
+    "iron_mg": 2.03,
+    "calcium_mg": 37.0,
+    "zinc_mg": 0.75,
+    "potassium_mg": 118.0
+   }
+  },
+  {
+   "ko": "모닝빵",
+   "en": "dinner roll",
+   "aliases": [
+    "롤빵",
+    "dinner roll"
+   ],
+   "source": "fndds",
+   "fdcId": 2707654,
+   "usdaDescription": "Roll, white, soft",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.2,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 1.3,
+    "iron_mg": 3.43,
+    "calcium_mg": 144.0,
+    "zinc_mg": 0.73,
+    "potassium_mg": 122.0
+   }
+  },
+  {
+   "ko": "감자",
+   "en": "boiled potato",
+   "aliases": [
+    "삶은감자",
+    "찐감자",
+    "potato",
+    "boiled potato"
+   ],
+   "source": "fndds",
+   "fdcId": 2709388,
+   "usdaDescription": "Potato, boiled, from fresh, peel not eaten, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 12.7,
+    "iron_mg": 0.35,
+    "calcium_mg": 5.0,
+    "zinc_mg": 0.29,
+    "potassium_mg": 389.0
+   }
+  },
+  {
+   "ko": "고구마",
+   "en": "sweet potato",
+   "aliases": [
+    "군고구마",
+    "찐고구마",
+    "sweet potato"
+   ],
+   "source": "fndds",
+   "fdcId": 2709699,
+   "usdaDescription": "Sweet potato, baked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 699.0,
+    "vitaminC_mg": 13.1,
+    "iron_mg": 0.42,
+    "calcium_mg": 23.0,
+    "zinc_mg": 0.35,
+    "potassium_mg": 504.0
+   }
+  },
+  {
+   "ko": "옥수수",
+   "en": "corn",
+   "aliases": [
+    "찐옥수수",
+    "corn",
+    "sweet corn"
+   ],
+   "source": "fndds",
+   "fdcId": 2709910,
+   "usdaDescription": "Corn, fresh, cooked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 9.0,
+    "vitaminC_mg": 5.8,
+    "iron_mg": 0.52,
+    "calcium_mg": 2.0,
+    "zinc_mg": 0.46,
+    "potassium_mg": 269.0
+   }
+  },
+  {
+   "ko": "콘플레이크",
+   "en": "corn flakes",
+   "aliases": [
+    "시리얼",
+    "cereal",
+    "corn flakes"
+   ],
+   "source": "fndds",
+   "fdcId": 2708453,
+   "usdaDescription": "Cereal, corn flakes, plain",
+   "per100g": {
+    "vitaminD_ug": 5.0,
+    "vitaminB12_ug": 1.8,
+    "vitaminA_ugRAE": 10.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 28.01,
+    "calcium_mg": 4.0,
+    "zinc_mg": 0.6,
+    "potassium_mg": 128.0
+   }
+  },
+  {
+   "ko": "그래놀라",
+   "en": "granola",
+   "aliases": [
+    "granola"
+   ],
+   "source": "fndds",
+   "fdcId": 2708461,
+   "usdaDescription": "Cereal, granola",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.1,
+    "iron_mg": 3.07,
+    "calcium_mg": 51.0,
+    "zinc_mg": 2.57,
+    "potassium_mg": 310.0
+   }
+  },
+  {
+   "ko": "계란",
+   "en": "egg",
+   "aliases": [
+    "달걀",
+    "생계란",
+    "egg",
+    "raw egg"
+   ],
+   "source": "fndds",
+   "fdcId": 2707152,
+   "usdaDescription": "Egg, whole, raw",
+   "per100g": {
+    "vitaminD_ug": 2.5,
+    "vitaminB12_ug": 1.02,
+    "vitaminA_ugRAE": 180.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.67,
+    "calcium_mg": 48.0,
+    "zinc_mg": 1.24,
+    "potassium_mg": 132.0
+   }
+  },
+  {
+   "ko": "삶은 계란",
+   "en": "hard-boiled egg",
+   "aliases": [
+    "삶은달걀",
+    "구운계란",
+    "boiled egg",
+    "hard boiled egg"
+   ],
+   "source": "fndds",
+   "fdcId": 2707154,
+   "usdaDescription": "Egg, whole, boiled or poached",
+   "per100g": {
+    "vitaminD_ug": 2.5,
+    "vitaminB12_ug": 0.82,
+    "vitaminA_ugRAE": 180.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.67,
+    "calcium_mg": 48.0,
+    "zinc_mg": 1.24,
+    "potassium_mg": 132.0
+   }
+  },
+  {
+   "ko": "계란후라이",
+   "en": "fried egg",
+   "aliases": [
+    "달걀프라이",
+    "계란프라이",
+    "fried egg"
+   ],
+   "source": "fndds",
+   "fdcId": 2707156,
+   "usdaDescription": "Egg, whole, fried no added fat",
+   "per100g": {
+    "vitaminD_ug": 2.5,
+    "vitaminB12_ug": 0.81,
+    "vitaminA_ugRAE": 179.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.66,
+    "calcium_mg": 48.0,
+    "zinc_mg": 1.24,
+    "potassium_mg": 132.0
+   }
+  },
+  {
+   "ko": "스크램블에그",
+   "en": "scrambled eggs",
+   "aliases": [
+    "스크램블",
+    "scrambled egg",
+    "scrambled eggs"
+   ],
+   "source": "fndds",
+   "fdcId": 2707205,
+   "usdaDescription": "Egg omelet or scrambled egg, no added fat",
+   "per100g": {
+    "vitaminD_ug": 2.5,
+    "vitaminB12_ug": 0.81,
+    "vitaminA_ugRAE": 179.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.66,
+    "calcium_mg": 48.0,
+    "zinc_mg": 1.24,
+    "potassium_mg": 132.0
+   }
+  },
+  {
+   "ko": "오믈렛",
+   "en": "omelet",
+   "aliases": [
+    "omelet",
+    "omelette"
+   ],
+   "source": "fndds",
+   "fdcId": 2707200,
+   "usdaDescription": "Egg omelet or scrambled egg, made with oil",
+   "per100g": {
+    "vitaminD_ug": 2.3,
+    "vitaminB12_ug": 0.76,
+    "vitaminA_ugRAE": 168.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.57,
+    "calcium_mg": 45.0,
+    "zinc_mg": 1.16,
+    "potassium_mg": 123.0
+   }
+  },
+  {
+   "ko": "메추리알",
+   "en": "quail egg",
+   "aliases": [
+    "quail egg"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 172191,
+   "usdaDescription": "Egg, quail, whole, fresh, raw",
+   "per100g": {
+    "vitaminD_ug": 1.4,
+    "vitaminB12_ug": 1.58,
+    "vitaminA_ugRAE": 156.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 3.65,
+    "calcium_mg": 64.0,
+    "zinc_mg": 1.47,
+    "potassium_mg": 132.0
+   }
+  },
+  {
+   "ko": "우유",
+   "en": "milk",
+   "aliases": [
+    "흰우유",
+    "whole milk",
+    "milk"
+   ],
+   "source": "fndds",
+   "fdcId": 2705385,
+   "usdaDescription": "Milk, whole",
+   "per100g": {
+    "vitaminD_ug": 1.1,
+    "vitaminB12_ug": 0.54,
+    "vitaminA_ugRAE": 32.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.0,
+    "calcium_mg": 123.0,
+    "zinc_mg": 0.42,
+    "potassium_mg": 150.0
+   }
+  },
+  {
+   "ko": "저지방우유",
+   "en": "low-fat milk",
+   "aliases": [
+    "low fat milk",
+    "1% milk"
+   ],
+   "source": "fndds",
+   "fdcId": 2705387,
+   "usdaDescription": "Milk, low fat (1%)",
+   "per100g": {
+    "vitaminD_ug": 1.1,
+    "vitaminB12_ug": 0.61,
+    "vitaminA_ugRAE": 58.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.0,
+    "calcium_mg": 126.0,
+    "zinc_mg": 0.43,
+    "potassium_mg": 159.0
+   }
+  },
+  {
+   "ko": "무지방우유",
+   "en": "skim milk",
+   "aliases": [
+    "탈지우유",
+    "skim milk",
+    "fat free milk"
+   ],
+   "source": "fndds",
+   "fdcId": 2705388,
+   "usdaDescription": "Milk, fat free (skim)",
+   "per100g": {
+    "vitaminD_ug": 1.1,
+    "vitaminB12_ug": 0.58,
+    "vitaminA_ugRAE": 64.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.0,
+    "calcium_mg": 132.0,
+    "zinc_mg": 0.45,
+    "potassium_mg": 167.0
+   }
+  },
+  {
+   "ko": "초코우유",
+   "en": "chocolate milk",
+   "aliases": [
+    "chocolate milk"
+   ],
+   "source": "fndds",
+   "fdcId": 2705466,
+   "usdaDescription": "Chocolate milk, NFS",
+   "per100g": {
+    "vitaminD_ug": 1.1,
+    "vitaminB12_ug": 0.25,
+    "vitaminA_ugRAE": 55.0,
+    "vitaminC_mg": 0.6,
+    "iron_mg": 0.24,
+    "calcium_mg": 128.0,
+    "zinc_mg": 0.42,
+    "potassium_mg": 174.0
+   }
+  },
+  {
+   "ko": "두유",
+   "en": "soy milk",
+   "aliases": [
+    "soymilk",
+    "soy milk"
+   ],
+   "source": "fndds",
+   "fdcId": 2705405,
+   "usdaDescription": "Soy milk, unsweetened",
+   "per100g": {
+    "vitaminD_ug": 0.7,
+    "vitaminB12_ug": 0.39,
+    "vitaminA_ugRAE": 58.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.54,
+    "calcium_mg": 101.0,
+    "zinc_mg": 0.31,
+    "potassium_mg": 158.0
+   }
+  },
+  {
+   "ko": "요거트",
+   "en": "plain yogurt",
+   "aliases": [
+    "요구르트",
+    "플레인요거트",
+    "yogurt",
+    "yoghurt"
+   ],
+   "source": "fndds",
+   "fdcId": 2705418,
+   "usdaDescription": "Yogurt, whole milk, plain",
+   "per100g": {
+    "vitaminD_ug": 1.2,
+    "vitaminB12_ug": 0.37,
+    "vitaminA_ugRAE": 48.0,
+    "vitaminC_mg": 0.5,
+    "iron_mg": 0.0,
+    "calcium_mg": 127.0,
+    "zinc_mg": 0.43,
+    "potassium_mg": 164.0
+   }
+  },
+  {
+   "ko": "그릭요거트",
+   "en": "greek yogurt",
+   "aliases": [
+    "greek yogurt"
+   ],
+   "source": "fndds",
+   "fdcId": 2705422,
+   "usdaDescription": "Yogurt, Greek, whole milk, plain",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.75,
+    "vitaminA_ugRAE": 38.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.0,
+    "calcium_mg": 111.0,
+    "zinc_mg": 0.47,
+    "potassium_mg": 147.0
+   }
+  },
+  {
+   "ko": "치즈",
+   "en": "cheddar cheese",
+   "aliases": [
+    "체다치즈",
+    "cheese",
+    "cheddar"
+   ],
+   "source": "fndds",
+   "fdcId": 2705709,
+   "usdaDescription": "Cheese, Cheddar",
+   "per100g": {
+    "vitaminD_ug": 0.6,
+    "vitaminB12_ug": 1.06,
+    "vitaminA_ugRAE": 316.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.16,
+    "calcium_mg": 707.0,
+    "zinc_mg": 3.67,
+    "potassium_mg": 77.0
+   }
+  },
+  {
+   "ko": "슬라이스치즈",
+   "en": "american cheese",
+   "aliases": [
+    "슬라이스 치즈",
+    "sliced cheese",
+    "american cheese"
+   ],
+   "source": "fndds",
+   "fdcId": 2705764,
+   "usdaDescription": "Cheese, American",
+   "per100g": {
+    "vitaminD_ug": 6.5,
+    "vitaminB12_ug": 1.48,
+    "vitaminA_ugRAE": 262.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.74,
+    "calcium_mg": 1062.0,
+    "zinc_mg": 2.37,
+    "potassium_mg": 207.0
+   }
+  },
+  {
+   "ko": "모짜렐라치즈",
+   "en": "mozzarella",
+   "aliases": [
+    "모짜렐라",
+    "mozzarella"
+   ],
+   "source": "fndds",
+   "fdcId": 2705722,
+   "usdaDescription": "Cheese, Mozzarella, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.4,
+    "vitaminB12_ug": 1.65,
+    "vitaminA_ugRAE": 203.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.2,
+    "calcium_mg": 693.0,
+    "zinc_mg": 3.62,
+    "potassium_mg": 116.0
+   }
+  },
+  {
+   "ko": "크림치즈",
+   "en": "cream cheese",
+   "aliases": [
+    "cream cheese"
+   ],
+   "source": "fndds",
+   "fdcId": 2705760,
+   "usdaDescription": "Cream cheese, regular, plain",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 274.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.0,
+    "calcium_mg": 97.0,
+    "zinc_mg": 0.59,
+    "potassium_mg": 125.0
+   }
+  },
+  {
+   "ko": "버터",
+   "en": "butter",
+   "aliases": [
+    "butter"
+   ],
+   "source": "fndds",
+   "fdcId": 2710155,
+   "usdaDescription": "Butter, stick",
+   "per100g": {
+    "vitaminD_ug": 0.4,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 758.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.06,
+    "calcium_mg": 21.0,
+    "zinc_mg": 0.07,
+    "potassium_mg": 23.0
+   }
+  },
+  {
+   "ko": "아이스크림",
+   "en": "ice cream",
+   "aliases": [
+    "ice cream"
+   ],
+   "source": "fndds",
+   "fdcId": 2705630,
+   "usdaDescription": "Ice cream, vanilla",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 0.39,
+    "vitaminA_ugRAE": 118.0,
+    "vitaminC_mg": 0.6,
+    "iron_mg": 0.09,
+    "calcium_mg": 128.0,
+    "zinc_mg": 0.69,
+    "potassium_mg": 199.0
+   }
+  },
+  {
+   "ko": "생크림",
+   "en": "whipping cream",
+   "aliases": [
+    "휘핑크림",
+    "heavy cream",
+    "whipping cream"
+   ],
+   "source": "fndds",
+   "fdcId": 2705597,
+   "usdaDescription": "Cream, heavy",
+   "per100g": {
+    "vitaminD_ug": 1.6,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 327.0,
+    "vitaminC_mg": 0.6,
+    "iron_mg": 0.0,
+    "calcium_mg": 61.0,
+    "zinc_mg": 0.22,
+    "potassium_mg": 97.0
+   }
+  },
+  {
+   "ko": "닭가슴살",
+   "en": "chicken breast",
+   "aliases": [
+    "닭가슴",
+    "chicken breast"
+   ],
+   "source": "fndds",
+   "fdcId": 2705956,
+   "usdaDescription": "Chicken breast, baked, broiled, or roasted, skin not eaten, from raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.18,
+    "vitaminA_ugRAE": 9.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.45,
+    "calcium_mg": 7.0,
+    "zinc_mg": 0.91,
+    "potassium_mg": 359.0
+   }
+  },
+  {
+   "ko": "닭다리",
+   "en": "chicken drumstick",
+   "aliases": [
+    "chicken drumstick",
+    "chicken leg"
+   ],
+   "source": "fndds",
+   "fdcId": 2706002,
+   "usdaDescription": "Chicken drumstick, baked, broiled, or roasted, skin eaten, from raw",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 0.39,
+    "vitaminA_ugRAE": 12.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.1,
+    "calcium_mg": 11.0,
+    "zinc_mg": 2.35,
+    "potassium_mg": 246.0
+   }
+  },
+  {
+   "ko": "닭날개",
+   "en": "chicken wing",
+   "aliases": [
+    "chicken wings",
+    "chicken wing"
+   ],
+   "source": "fndds",
+   "fdcId": 2706057,
+   "usdaDescription": "Chicken wing, baked, broiled, or roasted, from raw",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 0.35,
+    "vitaminA_ugRAE": 12.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.83,
+    "calcium_mg": 18.0,
+    "zinc_mg": 1.63,
+    "potassium_mg": 210.0
+   }
+  },
+  {
+   "ko": "치킨",
+   "en": "fried chicken",
+   "aliases": [
+    "후라이드치킨",
+    "프라이드치킨",
+    "fried chicken"
+   ],
+   "source": "fndds",
+   "fdcId": 2705973,
+   "usdaDescription": "Chicken breast, fried, coated, skin / coating eaten, from raw",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 0.15,
+    "vitaminA_ugRAE": 15.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.88,
+    "calcium_mg": 13.0,
+    "zinc_mg": 0.77,
+    "potassium_mg": 245.0
+   }
+  },
+  {
+   "ko": "소고기",
+   "en": "beef steak",
+   "aliases": [
+    "쇠고기",
+    "스테이크",
+    "등심",
+    "beef",
+    "steak"
+   ],
+   "source": "fndds",
+   "fdcId": 2705824,
+   "usdaDescription": "Beef, steak, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 2.04,
+    "vitaminA_ugRAE": 5.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 2.64,
+    "calcium_mg": 16.0,
+    "zinc_mg": 5.08,
+    "potassium_mg": 321.0
+   }
+  },
+  {
+   "ko": "다진 소고기",
+   "en": "ground beef",
+   "aliases": [
+    "다진고기",
+    "ground beef"
+   ],
+   "source": "fndds",
+   "fdcId": 2705854,
+   "usdaDescription": "Beef, ground",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 2.7,
+    "vitaminA_ugRAE": 3.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 2.47,
+    "calcium_mg": 24.0,
+    "zinc_mg": 6.2,
+    "potassium_mg": 302.0
+   }
+  },
+  {
+   "ko": "갈비",
+   "en": "beef short ribs",
+   "aliases": [
+    "소갈비",
+    "short ribs"
+   ],
+   "source": "fndds",
+   "fdcId": 2705845,
+   "usdaDescription": "Beef, shortribs",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 1.06,
+    "vitaminA_ugRAE": 3.0,
+    "vitaminC_mg": 0.2,
+    "iron_mg": 1.34,
+    "calcium_mg": 23.0,
+    "zinc_mg": 3.29,
+    "potassium_mg": 293.0
+   }
+  },
+  {
+   "ko": "돼지고기",
+   "en": "pork",
+   "aliases": [
+    "pork"
+   ],
+   "source": "fndds",
+   "fdcId": 2705862,
+   "usdaDescription": "Pork, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.7,
+    "vitaminB12_ug": 0.65,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.79,
+    "calcium_mg": 10.0,
+    "zinc_mg": 2.44,
+    "potassium_mg": 402.0
+   }
+  },
+  {
+   "ko": "삼겹살",
+   "en": "pork belly",
+   "aliases": [
+    "pork belly"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 167812,
+   "usdaDescription": "Pork, fresh, belly, raw",
+   "per100g": {
+    "vitaminD_ug": null,
+    "vitaminB12_ug": 0.84,
+    "vitaminA_ugRAE": 3.0,
+    "vitaminC_mg": 0.3,
+    "iron_mg": 0.52,
+    "calcium_mg": 5.0,
+    "zinc_mg": 1.02,
+    "potassium_mg": 185.0
+   }
+  },
+  {
+   "ko": "돈까스",
+   "en": "pork cutlet",
+   "aliases": [
+    "돈가스",
+    "tonkatsu",
+    "pork cutlet"
+   ],
+   "source": "fndds",
+   "fdcId": 2705870,
+   "usdaDescription": "Pork, chop, coated, lean and fat eaten",
+   "per100g": {
+    "vitaminD_ug": 0.5,
+    "vitaminB12_ug": 0.59,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.02,
+    "calcium_mg": 26.0,
+    "zinc_mg": 1.87,
+    "potassium_mg": 390.0
+   }
+  },
+  {
+   "ko": "햄",
+   "en": "ham",
+   "aliases": [
+    "ham"
+   ],
+   "source": "fndds",
+   "fdcId": 2706206,
+   "usdaDescription": "Ham, prepackaged or deli, luncheon meat",
+   "per100g": {
+    "vitaminD_ug": 0.6,
+    "vitaminB12_ug": 0.36,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.58,
+    "calcium_mg": 5.0,
+    "zinc_mg": 1.52,
+    "potassium_mg": 425.0
+   }
+  },
+  {
+   "ko": "베이컨",
+   "en": "bacon",
+   "aliases": [
+    "bacon"
+   ],
+   "source": "fndds",
+   "fdcId": 2705887,
+   "usdaDescription": "Pork bacon, NS as to fresh, smoked or cured, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.4,
+    "vitaminB12_ug": 1.09,
+    "vitaminA_ugRAE": 11.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.12,
+    "calcium_mg": 12.0,
+    "zinc_mg": 3.31,
+    "potassium_mg": 528.0
+   }
+  },
+  {
+   "ko": "소시지",
+   "en": "sausage",
+   "aliases": [
+    "비엔나",
+    "sausage"
+   ],
+   "source": "fndds",
+   "fdcId": 2706191,
+   "usdaDescription": "Pork sausage",
+   "per100g": {
+    "vitaminD_ug": 1.4,
+    "vitaminB12_ug": 0.98,
+    "vitaminA_ugRAE": 28.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.2,
+    "calcium_mg": 9.0,
+    "zinc_mg": 2.45,
+    "potassium_mg": 342.0
+   }
+  },
+  {
+   "ko": "스팸",
+   "en": "luncheon meat",
+   "aliases": [
+    "런천미트",
+    "spam",
+    "luncheon meat"
+   ],
+   "source": "fndds",
+   "fdcId": 2706205,
+   "usdaDescription": "Luncheon meat, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.6,
+    "vitaminB12_ug": 0.36,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.58,
+    "calcium_mg": 5.0,
+    "zinc_mg": 1.52,
+    "potassium_mg": 425.0
+   }
+  },
+  {
+   "ko": "오리고기",
+   "en": "duck",
+   "aliases": [
+    "오리",
+    "duck"
+   ],
+   "source": "fndds",
+   "fdcId": 2706139,
+   "usdaDescription": "Duck, roasted, skin eaten",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 0.3,
+    "vitaminA_ugRAE": 63.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 2.69,
+    "calcium_mg": 11.0,
+    "zinc_mg": 1.85,
+    "potassium_mg": 203.0
+   }
+  },
+  {
+   "ko": "양고기",
+   "en": "lamb",
+   "aliases": [
+    "lamb"
+   ],
+   "source": "fndds",
+   "fdcId": 2705905,
+   "usdaDescription": "Lamb, NS as to cut",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 2.53,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.86,
+    "calcium_mg": 17.0,
+    "zinc_mg": 4.42,
+    "potassium_mg": 308.0
+   }
+  },
+  {
+   "ko": "고등어",
+   "en": "mackerel",
+   "aliases": [
+    "고등어구이",
+    "mackerel"
+   ],
+   "source": "fndds",
+   "fdcId": 2706264,
+   "usdaDescription": "Fish, mackerel, baked or broiled",
+   "per100g": {
+    "vitaminD_ug": 11.3,
+    "vitaminB12_ug": 4.92,
+    "vitaminA_ugRAE": 40.0,
+    "vitaminC_mg": 2.0,
+    "iron_mg": 1.45,
+    "calcium_mg": 29.0,
+    "zinc_mg": 0.83,
+    "potassium_mg": 505.0
+   }
+  },
+  {
+   "ko": "연어",
+   "en": "salmon",
+   "aliases": [
+    "연어구이",
+    "salmon"
+   ],
+   "source": "fndds",
+   "fdcId": 2706286,
+   "usdaDescription": "Fish, salmon, baked or broiled",
+   "per100g": {
+    "vitaminD_ug": 13.7,
+    "vitaminB12_ug": 3.87,
+    "vitaminA_ugRAE": 75.0,
+    "vitaminC_mg": 2.9,
+    "iron_mg": 0.44,
+    "calcium_mg": 11.0,
+    "zinc_mg": 0.46,
+    "potassium_mg": 452.0
+   }
+  },
+  {
+   "ko": "연어회",
+   "en": "raw salmon",
+   "aliases": [
+    "salmon sashimi"
+   ],
+   "source": "fndds",
+   "fdcId": 2706284,
+   "usdaDescription": "Fish, salmon, raw",
+   "per100g": {
+    "vitaminD_ug": 11.0,
+    "vitaminB12_ug": 3.46,
+    "vitaminA_ugRAE": 52.0,
+    "vitaminC_mg": 2.9,
+    "iron_mg": 0.35,
+    "calcium_mg": 8.0,
+    "zinc_mg": 0.37,
+    "potassium_mg": 364.0
+   }
+  },
+  {
+   "ko": "참치캔",
+   "en": "canned tuna",
+   "aliases": [
+    "참치",
+    "tuna",
+    "canned tuna"
+   ],
+   "source": "fndds",
+   "fdcId": 2706311,
+   "usdaDescription": "Fish, tuna, canned",
+   "per100g": {
+    "vitaminD_ug": 1.2,
+    "vitaminB12_ug": 2.57,
+    "vitaminA_ugRAE": 17.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.67,
+    "calcium_mg": 18.0,
+    "zinc_mg": 0.66,
+    "potassium_mg": 176.0
+   }
+  },
+  {
+   "ko": "멸치",
+   "en": "anchovy",
+   "aliases": [
+    "anchovy",
+    "anchovies"
+   ],
+   "source": "fndds",
+   "fdcId": 2706232,
+   "usdaDescription": "Fish, anchovy",
+   "per100g": {
+    "vitaminD_ug": 1.7,
+    "vitaminB12_ug": 0.88,
+    "vitaminA_ugRAE": 12.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 4.63,
+    "calcium_mg": 232.0,
+    "zinc_mg": 2.44,
+    "potassium_mg": 544.0
+   }
+  },
+  {
+   "ko": "오징어",
+   "en": "squid",
+   "aliases": [
+    "squid"
+   ],
+   "source": "fndds",
+   "fdcId": 2706333,
+   "usdaDescription": "Calamari, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 1.37,
+    "vitaminA_ugRAE": 32.0,
+    "vitaminC_mg": 4.7,
+    "iron_mg": 0.85,
+    "calcium_mg": 40.0,
+    "zinc_mg": 1.9,
+    "potassium_mg": 306.0
+   }
+  },
+  {
+   "ko": "문어",
+   "en": "octopus",
+   "aliases": [
+    "octopus"
+   ],
+   "source": "fndds",
+   "fdcId": 2706331,
+   "usdaDescription": "Octopus",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 12.95,
+    "vitaminA_ugRAE": 35.0,
+    "vitaminC_mg": 3.0,
+    "iron_mg": 4.92,
+    "calcium_mg": 55.0,
+    "zinc_mg": 1.43,
+    "potassium_mg": 290.0
+   }
+  },
+  {
+   "ko": "새우",
+   "en": "shrimp",
+   "aliases": [
+    "shrimp",
+    "prawn"
+   ],
+   "source": "fndds",
+   "fdcId": 2706363,
+   "usdaDescription": "Shrimp, steamed or boiled",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 1.19,
+    "vitaminA_ugRAE": 65.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.26,
+    "calcium_mg": 68.0,
+    "zinc_mg": 1.23,
+    "potassium_mg": 143.0
+   }
+  },
+  {
+   "ko": "게",
+   "en": "crab",
+   "aliases": [
+    "대게",
+    "꽃게",
+    "crab"
+   ],
+   "source": "fndds",
+   "fdcId": 2706344,
+   "usdaDescription": "Crab",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 3.33,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 3.3,
+    "iron_mg": 0.5,
+    "calcium_mg": 91.0,
+    "zinc_mg": 3.81,
+    "potassium_mg": 259.0
+   }
+  },
+  {
+   "ko": "조개",
+   "en": "clams",
+   "aliases": [
+    "clam",
+    "clams"
+   ],
+   "source": "fndds",
+   "fdcId": 2706342,
+   "usdaDescription": "Clams, steamed or boiled",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 12.14,
+    "vitaminA_ugRAE": 108.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 2.05,
+    "calcium_mg": 49.0,
+    "zinc_mg": 0.65,
+    "potassium_mg": 58.0
+   }
+  },
+  {
+   "ko": "굴",
+   "en": "oysters",
+   "aliases": [
+    "oyster",
+    "oysters"
+   ],
+   "source": "fndds",
+   "fdcId": 2706353,
+   "usdaDescription": "Oysters, steamed",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 9.41,
+    "vitaminA_ugRAE": 16.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 5.84,
+    "calcium_mg": 75.0,
+    "zinc_mg": 49.75,
+    "potassium_mg": 197.0
+   }
+  },
+  {
+   "ko": "홍합",
+   "en": "mussels",
+   "aliases": [
+    "mussel",
+    "mussels"
+   ],
+   "source": "fndds",
+   "fdcId": 2706350,
+   "usdaDescription": "Mussels",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 12.91,
+    "vitaminA_ugRAE": 58.0,
+    "vitaminC_mg": 8.1,
+    "iron_mg": 5.0,
+    "calcium_mg": 33.0,
+    "zinc_mg": 2.02,
+    "potassium_mg": 405.0
+   }
+  },
+  {
+   "ko": "명태",
+   "en": "pollock",
+   "aliases": [
+    "동태",
+    "pollock"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 173726,
+   "usdaDescription": "Fish, pollock, Alaska, cooked",
+   "per100g": {
+    "vitaminD_ug": null,
+    "vitaminB12_ug": null,
+    "vitaminA_ugRAE": null,
+    "vitaminC_mg": null,
+    "iron_mg": 0.29,
+    "calcium_mg": 13.0,
+    "zinc_mg": 0.44,
+    "potassium_mg": 364.0
+   }
+  },
+  {
+   "ko": "대구",
+   "en": "cod",
+   "aliases": [
+    "cod"
+   ],
+   "source": "fndds",
+   "fdcId": 2706241,
+   "usdaDescription": "Fish, cod, baked or broiled",
+   "per100g": {
+    "vitaminD_ug": 0.7,
+    "vitaminB12_ug": 2.21,
+    "vitaminA_ugRAE": 22.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.2,
+    "calcium_mg": 11.0,
+    "zinc_mg": 0.39,
+    "potassium_mg": 292.0
+   }
+  },
+  {
+   "ko": "장어",
+   "en": "eel",
+   "aliases": [
+    "eel"
+   ],
+   "source": "fndds",
+   "fdcId": 2706247,
+   "usdaDescription": "Fish, eel",
+   "per100g": {
+    "vitaminD_ug": 24.5,
+    "vitaminB12_ug": 2.85,
+    "vitaminA_ugRAE": 951.0,
+    "vitaminC_mg": 1.5,
+    "iron_mg": 1.11,
+    "calcium_mg": 31.0,
+    "zinc_mg": 1.8,
+    "potassium_mg": 302.0
+   }
+  },
+  {
+   "ko": "전복",
+   "en": "abalone",
+   "aliases": [
+    "abalone"
+   ],
+   "source": "fndds",
+   "fdcId": 2706337,
+   "usdaDescription": "Abalone",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.77,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 2.0,
+    "iron_mg": 3.97,
+    "calcium_mg": 39.0,
+    "zinc_mg": 1.02,
+    "potassium_mg": 310.0
+   }
+  },
+  {
+   "ko": "가리비",
+   "en": "scallops",
+   "aliases": [
+    "scallop",
+    "scallops"
+   ],
+   "source": "fndds",
+   "fdcId": 2706358,
+   "usdaDescription": "Scallops, steamed or boiled",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 1.51,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.48,
+    "calcium_mg": 8.0,
+    "zinc_mg": 1.15,
+    "potassium_mg": 259.0
+   }
+  },
+  {
+   "ko": "김",
+   "en": "laver seaweed",
+   "aliases": [
+    "구운김",
+    "조미김",
+    "laver",
+    "nori",
+    "seaweed"
+   ],
+   "source": "fndds",
+   "fdcId": 2709988,
+   "usdaDescription": "Seaweed, dried",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 14.0,
+    "vitaminC_mg": 5.0,
+    "iron_mg": 24.95,
+    "calcium_mg": 372.0,
+    "zinc_mg": 3.9,
+    "potassium_mg": 1244.0
+   }
+  },
+  {
+   "ko": "미역",
+   "en": "wakame",
+   "aliases": [
+    "미역줄기",
+    "wakame"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 170496,
+   "usdaDescription": "Seaweed, wakame, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 18.0,
+    "vitaminC_mg": 3.0,
+    "iron_mg": 2.18,
+    "calcium_mg": 150.0,
+    "zinc_mg": 0.38,
+    "potassium_mg": 50.0
+   }
+  },
+  {
+   "ko": "다시마",
+   "en": "kelp",
+   "aliases": [
+    "kelp"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 168457,
+   "usdaDescription": "Seaweed, kelp, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 6.0,
+    "vitaminC_mg": 3.0,
+    "iron_mg": 2.85,
+    "calcium_mg": 168.0,
+    "zinc_mg": 1.23,
+    "potassium_mg": 89.0
+   }
+  },
+  {
+   "ko": "미역국",
+   "en": "seaweed soup",
+   "aliases": [
+    "seaweed soup"
+   ],
+   "source": "fndds",
+   "fdcId": 2710110,
+   "usdaDescription": "Soup, seaweed",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.29,
+    "vitaminA_ugRAE": 10.0,
+    "vitaminC_mg": 1.9,
+    "iron_mg": 0.58,
+    "calcium_mg": 20.0,
+    "zinc_mg": 0.75,
+    "potassium_mg": 83.0
+   }
+  },
+  {
+   "ko": "두부",
+   "en": "tofu",
+   "aliases": [
+    "tofu"
+   ],
+   "source": "fndds",
+   "fdcId": 2707435,
+   "usdaDescription": "Soybean curd",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.2,
+    "iron_mg": 1.11,
+    "calcium_mg": 111.0,
+    "zinc_mg": 0.64,
+    "potassium_mg": 120.0
+   }
+  },
+  {
+   "ko": "순두부",
+   "en": "soft tofu",
+   "aliases": [
+    "soft tofu"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 172449,
+   "usdaDescription": "Tofu, soft, prepared with calcium sulfate and magnesium chloride (nigari)",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.2,
+    "iron_mg": 1.11,
+    "calcium_mg": 111.0,
+    "zinc_mg": 0.64,
+    "potassium_mg": 120.0
+   }
+  },
+  {
+   "ko": "유부",
+   "en": "fried tofu",
+   "aliases": [
+    "fried tofu"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 172451,
+   "usdaDescription": "Tofu, fried",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 4.87,
+    "calcium_mg": 372.0,
+    "zinc_mg": 1.99,
+    "potassium_mg": 146.0
+   }
+  },
+  {
+   "ko": "콩",
+   "en": "soybeans",
+   "aliases": [
+    "대두",
+    "soybeans"
+   ],
+   "source": "fndds",
+   "fdcId": 2707388,
+   "usdaDescription": "Soybeans, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 1.5,
+    "iron_mg": 4.79,
+    "calcium_mg": 95.0,
+    "zinc_mg": 1.07,
+    "potassium_mg": 479.0
+   }
+  },
+  {
+   "ko": "검은콩",
+   "en": "black beans",
+   "aliases": [
+    "서리태",
+    "black beans"
+   ],
+   "source": "fndds",
+   "fdcId": 2707363,
+   "usdaDescription": "Black beans, from canned, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 3.8,
+    "iron_mg": 2.79,
+    "calcium_mg": 51.0,
+    "zinc_mg": 0.79,
+    "potassium_mg": 453.0
+   }
+  },
+  {
+   "ko": "팥",
+   "en": "adzuki beans",
+   "aliases": [
+    "adzuki beans",
+    "red beans"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 173728,
+   "usdaDescription": "Beans, adzuki, mature seeds, cooked, boiled, without salt",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 2.0,
+    "calcium_mg": 28.0,
+    "zinc_mg": 1.77,
+    "potassium_mg": 532.0
+   }
+  },
+  {
+   "ko": "녹두",
+   "en": "mung beans",
+   "aliases": [
+    "mung beans"
+   ],
+   "source": "fndds",
+   "fdcId": 2707389,
+   "usdaDescription": "Mung beans, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 0.9,
+    "iron_mg": 1.31,
+    "calcium_mg": 25.0,
+    "zinc_mg": 0.78,
+    "potassium_mg": 247.0
+   }
+  },
+  {
+   "ko": "숙주나물",
+   "en": "mung bean sprouts",
+   "aliases": [
+    "숙주",
+    "bean sprouts",
+    "mung bean sprouts"
+   ],
+   "source": "fndds",
+   "fdcId": 2709871,
+   "usdaDescription": "Bean sprouts, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 12.0,
+    "vitaminC_mg": 6.3,
+    "iron_mg": 2.8,
+    "calcium_mg": 56.0,
+    "zinc_mg": 0.78,
+    "potassium_mg": 299.0
+   }
+  },
+  {
+   "ko": "콩나물",
+   "en": "soybean sprouts",
+   "aliases": [
+    "soybean sprouts"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 168460,
+   "usdaDescription": "Soybeans, mature seeds, sprouted, cooked, steamed",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 8.3,
+    "iron_mg": 1.31,
+    "calcium_mg": 59.0,
+    "zinc_mg": 1.04,
+    "potassium_mg": 355.0
+   }
+  },
+  {
+   "ko": "낫토",
+   "en": "natto",
+   "aliases": [
+    "natto"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 172443,
+   "usdaDescription": "Natto",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 13.0,
+    "iron_mg": 8.6,
+    "calcium_mg": 217.0,
+    "zinc_mg": 3.03,
+    "potassium_mg": 729.0
+   }
+  },
+  {
+   "ko": "땅콩",
+   "en": "peanuts",
+   "aliases": [
+    "peanuts",
+    "peanut"
+   ],
+   "source": "fndds",
+   "fdcId": 2707515,
+   "usdaDescription": "Peanuts, roasted, salted",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.8,
+    "iron_mg": 1.52,
+    "calcium_mg": 61.0,
+    "zinc_mg": 3.28,
+    "potassium_mg": 726.0
+   }
+  },
+  {
+   "ko": "땅콩버터",
+   "en": "peanut butter",
+   "aliases": [
+    "peanut butter"
+   ],
+   "source": "fndds",
+   "fdcId": 2707537,
+   "usdaDescription": "Peanut butter",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.74,
+    "calcium_mg": 49.0,
+    "zinc_mg": 2.51,
+    "potassium_mg": 558.0
+   }
+  },
+  {
+   "ko": "아몬드",
+   "en": "almonds",
+   "aliases": [
+    "almond",
+    "almonds"
+   ],
+   "source": "fndds",
+   "fdcId": 2707489,
+   "usdaDescription": "Almonds, unsalted",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 3.62,
+    "calcium_mg": 260.0,
+    "zinc_mg": 3.21,
+    "potassium_mg": 692.0
+   }
+  },
+  {
+   "ko": "호두",
+   "en": "walnuts",
+   "aliases": [
+    "walnut",
+    "walnuts"
+   ],
+   "source": "fndds",
+   "fdcId": 2707531,
+   "usdaDescription": "Walnuts, excluding honey roasted",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 1.3,
+    "iron_mg": 2.24,
+    "calcium_mg": 88.0,
+    "zinc_mg": 2.76,
+    "potassium_mg": 424.0
+   }
+  },
+  {
+   "ko": "캐슈넛",
+   "en": "cashews",
+   "aliases": [
+    "cashew",
+    "cashews"
+   ],
+   "source": "fndds",
+   "fdcId": 2707497,
+   "usdaDescription": "Cashews, unsalted",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 5.82,
+    "calcium_mg": 44.0,
+    "zinc_mg": 5.43,
+    "potassium_mg": 548.0
+   }
+  },
+  {
+   "ko": "피스타치오",
+   "en": "pistachios",
+   "aliases": [
+    "pistachio",
+    "pistachios"
+   ],
+   "source": "fndds",
+   "fdcId": 2707530,
+   "usdaDescription": "Pistachio nuts, unsalted",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 13.0,
+    "vitaminC_mg": 2.9,
+    "iron_mg": 3.91,
+    "calcium_mg": 104.0,
+    "zinc_mg": 2.27,
+    "potassium_mg": 977.0
+   }
+  },
+  {
+   "ko": "잣",
+   "en": "pine nuts",
+   "aliases": [
+    "pine nuts"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 170591,
+   "usdaDescription": "Nuts, pine nuts, dried",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 0.8,
+    "iron_mg": 5.53,
+    "calcium_mg": 16.0,
+    "zinc_mg": 6.45,
+    "potassium_mg": 597.0
+   }
+  },
+  {
+   "ko": "밤",
+   "en": "chestnuts",
+   "aliases": [
+    "군밤",
+    "chestnut",
+    "chestnuts"
+   ],
+   "source": "fndds",
+   "fdcId": 2707499,
+   "usdaDescription": "Chestnuts",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 26.0,
+    "iron_mg": 0.91,
+    "calcium_mg": 29.0,
+    "zinc_mg": 0.57,
+    "potassium_mg": 592.0
+   }
+  },
+  {
+   "ko": "참깨",
+   "en": "sesame seeds",
+   "aliases": [
+    "깨",
+    "sesame seeds"
+   ],
+   "source": "fndds",
+   "fdcId": 2707586,
+   "usdaDescription": "Sesame seeds",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 3.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 6.36,
+    "calcium_mg": 60.0,
+    "zinc_mg": 6.73,
+    "potassium_mg": 370.0
+   }
+  },
+  {
+   "ko": "시금치",
+   "en": "cooked spinach",
+   "aliases": [
+    "시금치나물",
+    "spinach"
+   ],
+   "source": "fndds",
+   "fdcId": 2709615,
+   "usdaDescription": "Spinach, fresh, cooked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 341.0,
+    "vitaminC_mg": 24.9,
+    "iron_mg": 1.23,
+    "calcium_mg": 79.0,
+    "zinc_mg": 0.49,
+    "potassium_mg": 540.0
+   }
+  },
+  {
+   "ko": "생시금치",
+   "en": "raw spinach",
+   "aliases": [
+    "raw spinach"
+   ],
+   "source": "fndds",
+   "fdcId": 2709614,
+   "usdaDescription": "Spinach, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 283.0,
+    "vitaminC_mg": 26.5,
+    "iron_mg": 1.26,
+    "calcium_mg": 68.0,
+    "zinc_mg": 0.45,
+    "potassium_mg": 582.0
+   }
+  },
+  {
+   "ko": "배추",
+   "en": "napa cabbage",
+   "aliases": [
+    "알배추",
+    "napa cabbage",
+    "chinese cabbage"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 169979,
+   "usdaDescription": "Cabbage, chinese (pe-tsai), raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 16.0,
+    "vitaminC_mg": 27.0,
+    "iron_mg": 0.31,
+    "calcium_mg": 77.0,
+    "zinc_mg": 0.23,
+    "potassium_mg": 238.0
+   }
+  },
+  {
+   "ko": "양배추",
+   "en": "cabbage",
+   "aliases": [
+    "cabbage"
+   ],
+   "source": "fndds",
+   "fdcId": 2709773,
+   "usdaDescription": "Cabbage, green, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 5.0,
+    "vitaminC_mg": 40.3,
+    "iron_mg": 0.07,
+    "calcium_mg": 42.0,
+    "zinc_mg": 0.21,
+    "potassium_mg": 207.0
+   }
+  },
+  {
+   "ko": "브로콜리",
+   "en": "broccoli",
+   "aliases": [
+    "broccoli"
+   ],
+   "source": "fndds",
+   "fdcId": 2709645,
+   "usdaDescription": "Broccoli, fresh, cooked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 8.0,
+    "vitaminC_mg": 80.6,
+    "iron_mg": 0.72,
+    "calcium_mg": 48.0,
+    "zinc_mg": 0.44,
+    "potassium_mg": 315.0
+   }
+  },
+  {
+   "ko": "당근",
+   "en": "carrot",
+   "aliases": [
+    "carrot",
+    "carrots"
+   ],
+   "source": "fndds",
+   "fdcId": 2709660,
+   "usdaDescription": "Carrots, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 762.0,
+    "vitaminC_mg": 4.2,
+    "iron_mg": 0.12,
+    "calcium_mg": 36.0,
+    "zinc_mg": 0.2,
+    "potassium_mg": 258.0
+   }
+  },
+  {
+   "ko": "양파",
+   "en": "onion",
+   "aliases": [
+    "onion",
+    "onions"
+   ],
+   "source": "fndds",
+   "fdcId": 2709795,
+   "usdaDescription": "Onions, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 8.2,
+    "iron_mg": 0.24,
+    "calcium_mg": 17.0,
+    "zinc_mg": 0.17,
+    "potassium_mg": 171.0
+   }
+  },
+  {
+   "ko": "대파",
+   "en": "green onion",
+   "aliases": [
+    "파",
+    "쪽파",
+    "green onion",
+    "scallion"
+   ],
+   "source": "fndds",
+   "fdcId": 2709794,
+   "usdaDescription": "Onions, green, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 50.0,
+    "vitaminC_mg": 18.8,
+    "iron_mg": 1.48,
+    "calcium_mg": 72.0,
+    "zinc_mg": 0.39,
+    "potassium_mg": 276.0
+   }
+  },
+  {
+   "ko": "마늘",
+   "en": "garlic",
+   "aliases": [
+    "garlic"
+   ],
+   "source": "fndds",
+   "fdcId": 2709786,
+   "usdaDescription": "Garlic, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 10.0,
+    "iron_mg": 1.7,
+    "calcium_mg": 181.0,
+    "zinc_mg": 1.16,
+    "potassium_mg": 401.0
+   }
+  },
+  {
+   "ko": "생강",
+   "en": "ginger",
+   "aliases": [
+    "ginger"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 169231,
+   "usdaDescription": "Ginger root, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 5.0,
+    "iron_mg": 0.6,
+    "calcium_mg": 16.0,
+    "zinc_mg": 0.34,
+    "potassium_mg": 415.0
+   }
+  },
+  {
+   "ko": "오이",
+   "en": "cucumber",
+   "aliases": [
+    "cucumber"
+   ],
+   "source": "fndds",
+   "fdcId": 2709784,
+   "usdaDescription": "Cucumber, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 5.0,
+    "vitaminC_mg": 2.8,
+    "iron_mg": 0.0,
+    "calcium_mg": 16.0,
+    "zinc_mg": 0.2,
+    "potassium_mg": 170.0
+   }
+  },
+  {
+   "ko": "애호박",
+   "en": "zucchini",
+   "aliases": [
+    "호박",
+    "zucchini",
+    "courgette"
+   ],
+   "source": "fndds",
+   "fdcId": 2709808,
+   "usdaDescription": "Summer squash, green, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 10.0,
+    "vitaminC_mg": 17.9,
+    "iron_mg": 0.37,
+    "calcium_mg": 16.0,
+    "zinc_mg": 0.32,
+    "potassium_mg": 261.0
+   }
+  },
+  {
+   "ko": "단호박",
+   "en": "kabocha squash",
+   "aliases": [
+    "kabocha",
+    "pumpkin"
+   ],
+   "source": "fndds",
+   "fdcId": 2709692,
+   "usdaDescription": "Pumpkin, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 433.0,
+    "vitaminC_mg": 8.0,
+    "iron_mg": 0.84,
+    "calcium_mg": 22.0,
+    "zinc_mg": 0.33,
+    "potassium_mg": 354.0
+   }
+  },
+  {
+   "ko": "가지",
+   "en": "eggplant",
+   "aliases": [
+    "eggplant",
+    "aubergine"
+   ],
+   "source": "fndds",
+   "fdcId": 2709929,
+   "usdaDescription": "Eggplant, cooked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 2.0,
+    "iron_mg": 0.25,
+    "calcium_mg": 10.0,
+    "zinc_mg": 0.17,
+    "potassium_mg": 246.0
+   }
+  },
+  {
+   "ko": "고추",
+   "en": "chili pepper",
+   "aliases": [
+    "풋고추",
+    "청양고추",
+    "hot pepper",
+    "chili pepper"
+   ],
+   "source": "fndds",
+   "fdcId": 2709798,
+   "usdaDescription": "Peppers, hot, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 51.0,
+    "vitaminC_mg": 131.2,
+    "iron_mg": 0.64,
+    "calcium_mg": 13.0,
+    "zinc_mg": 0.2,
+    "potassium_mg": 285.0
+   }
+  },
+  {
+   "ko": "파프리카",
+   "en": "bell pepper",
+   "aliases": [
+    "피망",
+    "빨간파프리카",
+    "bell pepper",
+    "paprika"
+   ],
+   "source": "fndds",
+   "fdcId": 2709801,
+   "usdaDescription": "Peppers, sweet, red, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 157.0,
+    "vitaminC_mg": 141.7,
+    "iron_mg": 0.35,
+    "calcium_mg": 6.0,
+    "zinc_mg": 0.2,
+    "potassium_mg": 213.0
+   }
+  },
+  {
+   "ko": "토마토",
+   "en": "tomato",
+   "aliases": [
+    "tomato"
+   ],
+   "source": "fndds",
+   "fdcId": 2709719,
+   "usdaDescription": "Tomatoes, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 32.0,
+    "vitaminC_mg": 16.3,
+    "iron_mg": 0.22,
+    "calcium_mg": 10.0,
+    "zinc_mg": 0.15,
+    "potassium_mg": 226.0
+   }
+  },
+  {
+   "ko": "상추",
+   "en": "lettuce",
+   "aliases": [
+    "lettuce"
+   ],
+   "source": "fndds",
+   "fdcId": 2709789,
+   "usdaDescription": "Lettuce, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 302.0,
+    "vitaminC_mg": 8.0,
+    "iron_mg": 0.26,
+    "calcium_mg": 31.0,
+    "zinc_mg": 0.26,
+    "potassium_mg": 249.0
+   }
+  },
+  {
+   "ko": "무",
+   "en": "radish",
+   "aliases": [
+    "무우",
+    "radish",
+    "daikon"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 168451,
+   "usdaDescription": "Radishes, oriental, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 22.0,
+    "iron_mg": 0.4,
+    "calcium_mg": 27.0,
+    "zinc_mg": 0.15,
+    "potassium_mg": 227.0
+   }
+  },
+  {
+   "ko": "연근",
+   "en": "lotus root",
+   "aliases": [
+    "lotus root"
+   ],
+   "source": "fndds",
+   "fdcId": 2709936,
+   "usdaDescription": "Lotus root, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 11.0,
+    "vitaminC_mg": 26.5,
+    "iron_mg": 0.87,
+    "calcium_mg": 26.0,
+    "zinc_mg": 0.32,
+    "potassium_mg": 352.0
+   }
+  },
+  {
+   "ko": "우엉",
+   "en": "burdock root",
+   "aliases": [
+    "burdock"
+   ],
+   "source": "fndds",
+   "fdcId": 2709886,
+   "usdaDescription": "Burdock, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 12.0,
+    "vitaminC_mg": 2.7,
+    "iron_mg": 0.84,
+    "calcium_mg": 43.0,
+    "zinc_mg": 0.34,
+    "potassium_mg": 321.0
+   }
+  },
+  {
+   "ko": "버섯",
+   "en": "mushrooms",
+   "aliases": [
+    "양송이",
+    "mushroom",
+    "mushrooms"
+   ],
+   "source": "fndds",
+   "fdcId": 2709793,
+   "usdaDescription": "Mushrooms, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.04,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 2.1,
+    "iron_mg": 0.23,
+    "calcium_mg": 5.0,
+    "zinc_mg": 0.5,
+    "potassium_mg": 371.0
+   }
+  },
+  {
+   "ko": "표고버섯",
+   "en": "shiitake",
+   "aliases": [
+    "표고",
+    "shiitake"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 168437,
+   "usdaDescription": "Mushrooms, shiitake, cooked, without salt",
+   "per100g": {
+    "vitaminD_ug": 0.7,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.3,
+    "iron_mg": 0.44,
+    "calcium_mg": 3.0,
+    "zinc_mg": 1.33,
+    "potassium_mg": 117.0
+   }
+  },
+  {
+   "ko": "팽이버섯",
+   "en": "enoki mushrooms",
+   "aliases": [
+    "팽이",
+    "enoki"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 169382,
+   "usdaDescription": "Mushrooms, enoki, raw",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": null,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.15,
+    "calcium_mg": 0.0,
+    "zinc_mg": 0.65,
+    "potassium_mg": 359.0
+   }
+  },
+  {
+   "ko": "느타리버섯",
+   "en": "oyster mushrooms",
+   "aliases": [
+    "느타리",
+    "oyster mushroom"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 168580,
+   "usdaDescription": "Mushrooms, oyster, raw",
+   "per100g": {
+    "vitaminD_ug": 0.7,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.33,
+    "calcium_mg": 3.0,
+    "zinc_mg": 0.77,
+    "potassium_mg": 420.0
+   }
+  },
+  {
+   "ko": "아스파라거스",
+   "en": "asparagus",
+   "aliases": [
+    "asparagus"
+   ],
+   "source": "fndds",
+   "fdcId": 2709834,
+   "usdaDescription": "Asparagus, fresh, cooked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 39.0,
+    "vitaminC_mg": 5.1,
+    "iron_mg": 2.29,
+    "calcium_mg": 26.0,
+    "zinc_mg": 0.58,
+    "potassium_mg": 217.0
+   }
+  },
+  {
+   "ko": "셀러리",
+   "en": "celery",
+   "aliases": [
+    "샐러리",
+    "celery"
+   ],
+   "source": "fndds",
+   "fdcId": 2709778,
+   "usdaDescription": "Celery, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 22.0,
+    "vitaminC_mg": 3.1,
+    "iron_mg": 0.0,
+    "calcium_mg": 46.0,
+    "zinc_mg": 0.09,
+    "potassium_mg": 265.0
+   }
+  },
+  {
+   "ko": "케일",
+   "en": "kale",
+   "aliases": [
+    "kale"
+   ],
+   "source": "fndds",
+   "fdcId": 2709599,
+   "usdaDescription": "Kale, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 241.0,
+    "vitaminC_mg": 93.4,
+    "iron_mg": 1.6,
+    "calcium_mg": 254.0,
+    "zinc_mg": 0.39,
+    "potassium_mg": 348.0
+   }
+  },
+  {
+   "ko": "청경채",
+   "en": "bok choy",
+   "aliases": [
+    "bok choy",
+    "pak choi"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 170391,
+   "usdaDescription": "Cabbage, chinese (pak-choi), cooked, boiled, drained, without salt",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 212.0,
+    "vitaminC_mg": 26.0,
+    "iron_mg": 1.04,
+    "calcium_mg": 93.0,
+    "zinc_mg": 0.17,
+    "potassium_mg": 371.0
+   }
+  },
+  {
+   "ko": "콜리플라워",
+   "en": "cauliflower",
+   "aliases": [
+    "cauliflower"
+   ],
+   "source": "fndds",
+   "fdcId": 2709777,
+   "usdaDescription": "Cauliflower, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 48.2,
+    "iron_mg": 0.42,
+    "calcium_mg": 22.0,
+    "zinc_mg": 0.27,
+    "potassium_mg": 299.0
+   }
+  },
+  {
+   "ko": "비트",
+   "en": "beets",
+   "aliases": [
+    "beet",
+    "beets",
+    "beetroot"
+   ],
+   "source": "fndds",
+   "fdcId": 2709872,
+   "usdaDescription": "Beets, fresh, cooked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 4.3,
+    "iron_mg": 0.83,
+    "calcium_mg": 17.0,
+    "zinc_mg": 0.36,
+    "potassium_mg": 338.0
+   }
+  },
+  {
+   "ko": "김치",
+   "en": "kimchi",
+   "aliases": [
+    "배추김치",
+    "kimchi"
+   ],
+   "source": "fndds",
+   "fdcId": 2710077,
+   "usdaDescription": "Kimchi",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 5.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 2.5,
+    "calcium_mg": 33.0,
+    "zinc_mg": 0.22,
+    "potassium_mg": 151.0
+   }
+  },
+  {
+   "ko": "단무지",
+   "en": "pickled radish",
+   "aliases": [
+    "pickled radish",
+    "danmuji"
+   ],
+   "source": "fndds",
+   "fdcId": 2710099,
+   "usdaDescription": "Radishes, pickled",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 10.4,
+    "iron_mg": 0.29,
+    "calcium_mg": 22.0,
+    "zinc_mg": 0.23,
+    "potassium_mg": 194.0
+   }
+  },
+  {
+   "ko": "사과",
+   "en": "apple",
+   "aliases": [
+    "apple"
+   ],
+   "source": "fndds",
+   "fdcId": 2709215,
+   "usdaDescription": "Apple, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 3.0,
+    "vitaminC_mg": 4.6,
+    "iron_mg": 0.03,
+    "calcium_mg": 5.0,
+    "zinc_mg": 0.02,
+    "potassium_mg": 104.0
+   }
+  },
+  {
+   "ko": "배",
+   "en": "asian pear",
+   "aliases": [
+    "nashi",
+    "asian pear",
+    "korean pear"
+   ],
+   "source": "fndds",
+   "fdcId": 2709255,
+   "usdaDescription": "Pear, Asian, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 3.8,
+    "iron_mg": 0.0,
+    "calcium_mg": 4.0,
+    "zinc_mg": 0.02,
+    "potassium_mg": 121.0
+   }
+  },
+  {
+   "ko": "바나나",
+   "en": "banana",
+   "aliases": [
+    "banana"
+   ],
+   "source": "fndds",
+   "fdcId": 2709224,
+   "usdaDescription": "Banana, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 12.0,
+    "iron_mg": 0.0,
+    "calcium_mg": 5.0,
+    "zinc_mg": 0.16,
+    "potassium_mg": 326.0
+   }
+  },
+  {
+   "ko": "귤",
+   "en": "tangerine",
+   "aliases": [
+    "감귤",
+    "밀감",
+    "tangerine",
+    "mandarin"
+   ],
+   "source": "fndds",
+   "fdcId": 2709175,
+   "usdaDescription": "Tangerine, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 34.0,
+    "vitaminC_mg": 26.7,
+    "iron_mg": 0.15,
+    "calcium_mg": 37.0,
+    "zinc_mg": 0.07,
+    "potassium_mg": 166.0
+   }
+  },
+  {
+   "ko": "오렌지",
+   "en": "orange",
+   "aliases": [
+    "orange"
+   ],
+   "source": "fndds",
+   "fdcId": 2709171,
+   "usdaDescription": "Orange, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 11.0,
+    "vitaminC_mg": 56.2,
+    "iron_mg": 0.22,
+    "calcium_mg": 42.0,
+    "zinc_mg": 0.09,
+    "potassium_mg": 174.0
+   }
+  },
+  {
+   "ko": "포도",
+   "en": "grapes",
+   "aliases": [
+    "grape",
+    "grapes"
+   ],
+   "source": "fndds",
+   "fdcId": 2709237,
+   "usdaDescription": "Grapes, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 3.0,
+    "vitaminC_mg": 3.2,
+    "iron_mg": 0.18,
+    "calcium_mg": 10.0,
+    "zinc_mg": 0.04,
+    "potassium_mg": 224.0
+   }
+  },
+  {
+   "ko": "딸기",
+   "en": "strawberries",
+   "aliases": [
+    "strawberry",
+    "strawberries"
+   ],
+   "source": "fndds",
+   "fdcId": 2709283,
+   "usdaDescription": "Strawberries, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 59.6,
+    "iron_mg": 0.26,
+    "calcium_mg": 17.0,
+    "zinc_mg": 0.11,
+    "potassium_mg": 161.0
+   }
+  },
+  {
+   "ko": "수박",
+   "en": "watermelon",
+   "aliases": [
+    "watermelon"
+   ],
+   "source": "fndds",
+   "fdcId": 2709270,
+   "usdaDescription": "Watermelon, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 28.0,
+    "vitaminC_mg": 8.1,
+    "iron_mg": 0.24,
+    "calcium_mg": 7.0,
+    "zinc_mg": 0.1,
+    "potassium_mg": 112.0
+   }
+  },
+  {
+   "ko": "멜론",
+   "en": "cantaloupe",
+   "aliases": [
+    "cantaloupe",
+    "melon"
+   ],
+   "source": "fndds",
+   "fdcId": 2709226,
+   "usdaDescription": "Cantaloupe, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 232.0,
+    "vitaminC_mg": 10.9,
+    "iron_mg": 0.38,
+    "calcium_mg": 9.0,
+    "zinc_mg": 0.44,
+    "potassium_mg": 157.0
+   }
+  },
+  {
+   "ko": "복숭아",
+   "en": "peach",
+   "aliases": [
+    "peach"
+   ],
+   "source": "fndds",
+   "fdcId": 2709249,
+   "usdaDescription": "Peach, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 24.0,
+    "vitaminC_mg": 4.1,
+    "iron_mg": 0.34,
+    "calcium_mg": 4.0,
+    "zinc_mg": 0.23,
+    "potassium_mg": 122.0
+   }
+  },
+  {
+   "ko": "자두",
+   "en": "plum",
+   "aliases": [
+    "plum"
+   ],
+   "source": "fndds",
+   "fdcId": 2709265,
+   "usdaDescription": "Plum, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 17.0,
+    "vitaminC_mg": 9.5,
+    "iron_mg": 0.17,
+    "calcium_mg": 6.0,
+    "zinc_mg": 0.1,
+    "potassium_mg": 157.0
+   }
+  },
+  {
+   "ko": "키위",
+   "en": "kiwi",
+   "aliases": [
+    "kiwi",
+    "kiwifruit"
+   ],
+   "source": "fndds",
+   "fdcId": 2709239,
+   "usdaDescription": "Kiwi fruit, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 4.0,
+    "vitaminC_mg": 74.7,
+    "iron_mg": 0.24,
+    "calcium_mg": 35.0,
+    "zinc_mg": 0.14,
+    "potassium_mg": 198.0
+   }
+  },
+  {
+   "ko": "블루베리",
+   "en": "blueberries",
+   "aliases": [
+    "blueberry",
+    "blueberries"
+   ],
+   "source": "fndds",
+   "fdcId": 2709275,
+   "usdaDescription": "Blueberries, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 3.0,
+    "vitaminC_mg": 8.1,
+    "iron_mg": 0.34,
+    "calcium_mg": 12.0,
+    "zinc_mg": 0.09,
+    "potassium_mg": 86.0
+   }
+  },
+  {
+   "ko": "감",
+   "en": "persimmon",
+   "aliases": [
+    "단감",
+    "홍시",
+    "persimmon"
+   ],
+   "source": "fndds",
+   "fdcId": 2709259,
+   "usdaDescription": "Persimmon, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 81.0,
+    "vitaminC_mg": 7.5,
+    "iron_mg": 0.15,
+    "calcium_mg": 8.0,
+    "zinc_mg": 0.11,
+    "potassium_mg": 161.0
+   }
+  },
+  {
+   "ko": "곶감",
+   "en": "dried persimmon",
+   "aliases": [
+    "dried persimmon"
+   ],
+   "source": "fndds",
+   "fdcId": 2709209,
+   "usdaDescription": "Persimmon, dried",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 108.0,
+    "vitaminC_mg": 4.0,
+    "iron_mg": 0.42,
+    "calcium_mg": 22.0,
+    "zinc_mg": 0.3,
+    "potassium_mg": 429.0
+   }
+  },
+  {
+   "ko": "대추",
+   "en": "jujube",
+   "aliases": [
+    "jujube"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 168151,
+   "usdaDescription": "Jujube, raw",
+   "per100g": {
+    "vitaminD_ug": null,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 69.0,
+    "iron_mg": 0.48,
+    "calcium_mg": 21.0,
+    "zinc_mg": 0.05,
+    "potassium_mg": 250.0
+   }
+  },
+  {
+   "ko": "망고",
+   "en": "mango",
+   "aliases": [
+    "mango"
+   ],
+   "source": "fndds",
+   "fdcId": 2709242,
+   "usdaDescription": "Mango, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 54.0,
+    "vitaminC_mg": 36.4,
+    "iron_mg": 0.16,
+    "calcium_mg": 11.0,
+    "zinc_mg": 0.09,
+    "potassium_mg": 168.0
+   }
+  },
+  {
+   "ko": "파인애플",
+   "en": "pineapple",
+   "aliases": [
+    "pineapple"
+   ],
+   "source": "fndds",
+   "fdcId": 2709260,
+   "usdaDescription": "Pineapple, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 3.0,
+    "vitaminC_mg": 58.6,
+    "iron_mg": 0.05,
+    "calcium_mg": 12.0,
+    "zinc_mg": 0.11,
+    "potassium_mg": 137.0
+   }
+  },
+  {
+   "ko": "체리",
+   "en": "cherries",
+   "aliases": [
+    "cherry",
+    "cherries"
+   ],
+   "source": "fndds",
+   "fdcId": 2709231,
+   "usdaDescription": "Cherries, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 3.0,
+    "vitaminC_mg": 10.4,
+    "iron_mg": 0.11,
+    "calcium_mg": 12.0,
+    "zinc_mg": 0.06,
+    "potassium_mg": 230.0
+   }
+  },
+  {
+   "ko": "레몬",
+   "en": "lemon",
+   "aliases": [
+    "lemon"
+   ],
+   "source": "fndds",
+   "fdcId": 2709168,
+   "usdaDescription": "Lemon, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 53.0,
+    "iron_mg": 0.6,
+    "calcium_mg": 26.0,
+    "zinc_mg": 0.06,
+    "potassium_mg": 138.0
+   }
+  },
+  {
+   "ko": "자몽",
+   "en": "grapefruit",
+   "aliases": [
+    "grapefruit"
+   ],
+   "source": "fndds",
+   "fdcId": 2709165,
+   "usdaDescription": "Grapefruit, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 58.0,
+    "vitaminC_mg": 31.2,
+    "iron_mg": 0.08,
+    "calcium_mg": 22.0,
+    "zinc_mg": 0.07,
+    "potassium_mg": 135.0
+   }
+  },
+  {
+   "ko": "석류",
+   "en": "pomegranate",
+   "aliases": [
+    "pomegranate"
+   ],
+   "source": "fndds",
+   "fdcId": 2709267,
+   "usdaDescription": "Pomegranate, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 10.2,
+    "iron_mg": 0.3,
+    "calcium_mg": 10.0,
+    "zinc_mg": 0.35,
+    "potassium_mg": 236.0
+   }
+  },
+  {
+   "ko": "아보카도",
+   "en": "avocado",
+   "aliases": [
+    "avocado"
+   ],
+   "source": "fndds",
+   "fdcId": 2709223,
+   "usdaDescription": "Avocado, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 7.0,
+    "vitaminC_mg": 10.0,
+    "iron_mg": 0.55,
+    "calcium_mg": 12.0,
+    "zinc_mg": 0.64,
+    "potassium_mg": 485.0
+   }
+  },
+  {
+   "ko": "무화과",
+   "en": "figs",
+   "aliases": [
+    "fig",
+    "figs"
+   ],
+   "source": "fndds",
+   "fdcId": 2709235,
+   "usdaDescription": "Fig, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 7.0,
+    "vitaminC_mg": 2.0,
+    "iron_mg": 0.37,
+    "calcium_mg": 35.0,
+    "zinc_mg": 0.15,
+    "potassium_mg": 232.0
+   }
+  },
+  {
+   "ko": "건포도",
+   "en": "raisins",
+   "aliases": [
+    "raisin",
+    "raisins"
+   ],
+   "source": "fndds",
+   "fdcId": 2709212,
+   "usdaDescription": "Raisins",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 2.3,
+    "iron_mg": 1.79,
+    "calcium_mg": 62.0,
+    "zinc_mg": 0.36,
+    "potassium_mg": 744.0
+   }
+  },
+  {
+   "ko": "오렌지주스",
+   "en": "orange juice",
+   "aliases": [
+    "orange juice"
+   ],
+   "source": "fndds",
+   "fdcId": 2709186,
+   "usdaDescription": "Orange juice, 100%, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.4,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 28.7,
+    "iron_mg": 0.06,
+    "calcium_mg": 56.0,
+    "zinc_mg": 0.03,
+    "potassium_mg": 181.0
+   }
+  },
+  {
+   "ko": "사과주스",
+   "en": "apple juice",
+   "aliases": [
+    "apple juice"
+   ],
+   "source": "fndds",
+   "fdcId": 2709320,
+   "usdaDescription": "Apple juice, 100%",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 38.6,
+    "iron_mg": 0.06,
+    "calcium_mg": 7.0,
+    "zinc_mg": 0.0,
+    "potassium_mg": 97.0
+   }
+  },
+  {
+   "ko": "커피",
+   "en": "coffee",
+   "aliases": [
+    "아메리카노",
+    "블랙커피",
+    "coffee",
+    "americano"
+   ],
+   "source": "fndds",
+   "fdcId": 2710375,
+   "usdaDescription": "Coffee, brewed",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.01,
+    "calcium_mg": 2.0,
+    "zinc_mg": 0.02,
+    "potassium_mg": 49.0
+   }
+  },
+  {
+   "ko": "카페라떼",
+   "en": "latte",
+   "aliases": [
+    "라떼",
+    "latte",
+    "cafe latte"
+   ],
+   "source": "fndds",
+   "fdcId": 2710386,
+   "usdaDescription": "Coffee, Latte",
+   "per100g": {
+    "vitaminD_ug": 0.9,
+    "vitaminB12_ug": 0.37,
+    "vitaminA_ugRAE": 69.0,
+    "vitaminC_mg": 0.2,
+    "iron_mg": 0.02,
+    "calcium_mg": 105.0,
+    "zinc_mg": 0.37,
+    "potassium_mg": 152.0
+   }
+  },
+  {
+   "ko": "녹차",
+   "en": "green tea",
+   "aliases": [
+    "green tea"
+   ],
+   "source": "fndds",
+   "fdcId": 2710490,
+   "usdaDescription": "Tea, hot, leaf, green",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.02,
+    "calcium_mg": 0.0,
+    "zinc_mg": 0.01,
+    "potassium_mg": 8.0
+   }
+  },
+  {
+   "ko": "콜라",
+   "en": "cola",
+   "aliases": [
+    "coke",
+    "cola"
+   ],
+   "source": "fndds",
+   "fdcId": 2710541,
+   "usdaDescription": "Soft drink, cola",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.02,
+    "calcium_mg": 1.0,
+    "zinc_mg": 0.09,
+    "potassium_mg": 5.0
+   }
+  },
+  {
+   "ko": "맥주",
+   "en": "beer",
+   "aliases": [
+    "beer"
+   ],
+   "source": "fndds",
+   "fdcId": 2710616,
+   "usdaDescription": "Beer",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.02,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.02,
+    "calcium_mg": 4.0,
+    "zinc_mg": 0.01,
+    "potassium_mg": 27.0
+   }
+  },
+  {
+   "ko": "와인",
+   "en": "wine",
+   "aliases": [
+    "레드와인",
+    "wine",
+    "red wine"
+   ],
+   "source": "fndds",
+   "fdcId": 2710688,
+   "usdaDescription": "Wine, red",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.46,
+    "calcium_mg": 8.0,
+    "zinc_mg": 0.14,
+    "potassium_mg": 127.0
+   }
+  },
+  {
+   "ko": "피자",
+   "en": "pizza",
+   "aliases": [
+    "cheese pizza",
+    "pizza"
+   ],
+   "source": "fndds",
+   "fdcId": 2708616,
+   "usdaDescription": "Pizza, cheese, from restaurant or fast food, medium crust",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.42,
+    "vitaminA_ugRAE": 69.0,
+    "vitaminC_mg": 1.4,
+    "iron_mg": 2.48,
+    "calcium_mg": 188.0,
+    "zinc_mg": 1.34,
+    "potassium_mg": 172.0
+   }
+  },
+  {
+   "ko": "햄버거",
+   "en": "hamburger",
+   "aliases": [
+    "버거",
+    "burger",
+    "hamburger"
+   ],
+   "source": "fndds",
+   "fdcId": 2706920,
+   "usdaDescription": "Hamburger, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 1.63,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.5,
+    "iron_mg": 2.83,
+    "calcium_mg": 66.0,
+    "zinc_mg": 3.13,
+    "potassium_mg": 229.0
+   }
+  },
+  {
+   "ko": "감자튀김",
+   "en": "french fries",
+   "aliases": [
+    "후렌치후라이",
+    "french fries",
+    "fries"
+   ],
+   "source": "fndds",
+   "fdcId": 2709456,
+   "usdaDescription": "Potato, french fries, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 7.8,
+    "iron_mg": 0.53,
+    "calcium_mg": 11.0,
+    "zinc_mg": 0.32,
+    "potassium_mg": 435.0
+   }
+  },
+  {
+   "ko": "핫도그",
+   "en": "hot dog",
+   "aliases": [
+    "hot dog"
+   ],
+   "source": "fndds",
+   "fdcId": 2706166,
+   "usdaDescription": "Hot dog, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.9,
+    "vitaminB12_ug": 0.82,
+    "vitaminA_ugRAE": 3.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.14,
+    "calcium_mg": 15.0,
+    "zinc_mg": 2.06,
+    "potassium_mg": 326.0
+   }
+  },
+  {
+   "ko": "도넛",
+   "en": "doughnut",
+   "aliases": [
+    "도너츠",
+    "donut",
+    "doughnut"
+   ],
+   "source": "fndds",
+   "fdcId": 2708062,
+   "usdaDescription": "Doughnut, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.08,
+    "vitaminA_ugRAE": 4.0,
+    "vitaminC_mg": 0.6,
+    "iron_mg": 2.36,
+    "calcium_mg": 69.0,
+    "zinc_mg": 0.54,
+    "potassium_mg": 113.0
+   }
+  },
+  {
+   "ko": "초콜릿",
+   "en": "milk chocolate",
+   "aliases": [
+    "밀크초콜릿",
+    "chocolate"
+   ],
+   "source": "fndds",
+   "fdcId": 2710328,
+   "usdaDescription": "Chocolate candy",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.75,
+    "vitaminA_ugRAE": 59.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 2.35,
+    "calcium_mg": 189.0,
+    "zinc_mg": 2.3,
+    "potassium_mg": 372.0
+   }
+  },
+  {
+   "ko": "다크초콜릿",
+   "en": "dark chocolate",
+   "aliases": [
+    "dark chocolate"
+   ],
+   "source": "fndds",
+   "fdcId": 2710336,
+   "usdaDescription": "Dark chocolate candy",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.23,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 8.13,
+    "calcium_mg": 57.0,
+    "zinc_mg": 2.11,
+    "potassium_mg": 568.0
+   }
+  },
+  {
+   "ko": "쿠키",
+   "en": "cookie",
+   "aliases": [
+    "cookie"
+   ],
+   "source": "fndds",
+   "fdcId": 2707909,
+   "usdaDescription": "Cookie, chocolate chip",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.03,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 5.58,
+    "calcium_mg": 21.0,
+    "zinc_mg": 0.72,
+    "potassium_mg": 171.0
+   }
+  },
+  {
+   "ko": "팝콘",
+   "en": "popcorn",
+   "aliases": [
+    "popcorn"
+   ],
+   "source": "fndds",
+   "fdcId": 2708216,
+   "usdaDescription": "Popcorn, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 7.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 2.26,
+    "calcium_mg": 6.0,
+    "zinc_mg": 2.18,
+    "potassium_mg": 232.0
+   }
+  },
+  {
+   "ko": "감자칩",
+   "en": "potato chips",
+   "aliases": [
+    "포테이토칩",
+    "potato chips",
+    "chips"
+   ],
+   "source": "fndds",
+   "fdcId": 2709422,
+   "usdaDescription": "Potato chips, plain",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 21.6,
+    "iron_mg": 1.28,
+    "calcium_mg": 21.0,
+    "zinc_mg": 1.09,
+    "potassium_mg": 1196.0
+   }
+  },
+  {
+   "ko": "와플",
+   "en": "waffle",
+   "aliases": [
+    "waffle"
+   ],
+   "source": "fndds",
+   "fdcId": 2708325,
+   "usdaDescription": "Waffle, plain",
+   "per100g": {
+    "vitaminD_ug": 1.1,
+    "vitaminB12_ug": 0.45,
+    "vitaminA_ugRAE": 90.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.72,
+    "calcium_mg": 242.0,
+    "zinc_mg": 0.85,
+    "potassium_mg": 205.0
+   }
+  },
+  {
+   "ko": "팬케이크",
+   "en": "pancake",
+   "aliases": [
+    "핫케이크",
+    "pancake"
+   ],
+   "source": "fndds",
+   "fdcId": 2708304,
+   "usdaDescription": "Pancakes, plain",
+   "per100g": {
+    "vitaminD_ug": 1.0,
+    "vitaminB12_ug": 0.38,
+    "vitaminA_ugRAE": 77.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.45,
+    "calcium_mg": 206.0,
+    "zinc_mg": 0.73,
+    "potassium_mg": 174.0
+   }
+  },
+  {
+   "ko": "꿀",
+   "en": "honey",
+   "aliases": [
+    "honey"
+   ],
+   "source": "fndds",
+   "fdcId": 2710281,
+   "usdaDescription": "Honey",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.5,
+    "iron_mg": 0.42,
+    "calcium_mg": 6.0,
+    "zinc_mg": 0.22,
+    "potassium_mg": 52.0
+   }
+  },
+  {
+   "ko": "딸기잼",
+   "en": "jam",
+   "aliases": [
+    "잼",
+    "jam",
+    "strawberry jam"
+   ],
+   "source": "fndds",
+   "fdcId": 2710301,
+   "usdaDescription": "Jam",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 8.8,
+    "iron_mg": 0.49,
+    "calcium_mg": 20.0,
+    "zinc_mg": 0.06,
+    "potassium_mg": 77.0
+   }
+  },
+  {
+   "ko": "초밥",
+   "en": "sushi",
+   "aliases": [
+    "스시",
+    "sushi"
+   ],
+   "source": "fndds",
+   "fdcId": 2708959,
+   "usdaDescription": "Sushi, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.1,
+    "vitaminA_ugRAE": 4.0,
+    "vitaminC_mg": 0.9,
+    "iron_mg": 0.21,
+    "calcium_mg": 6.0,
+    "zinc_mg": 0.38,
+    "potassium_mg": 48.0
+   }
+  },
+  {
+   "ko": "간장",
+   "en": "soy sauce",
+   "aliases": [
+    "soy sauce"
+   ],
+   "source": "fndds",
+   "fdcId": 2707442,
+   "usdaDescription": "Soy sauce",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.45,
+    "calcium_mg": 33.0,
+    "zinc_mg": 0.87,
+    "potassium_mg": 435.0
+   }
+  },
+  {
+   "ko": "참기름",
+   "en": "sesame oil",
+   "aliases": [
+    "sesame oil"
+   ],
+   "source": "fndds",
+   "fdcId": 2710190,
+   "usdaDescription": "Sesame oil",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.0,
+    "calcium_mg": 0.0,
+    "zinc_mg": 0.0,
+    "potassium_mg": 0.0
+   }
+  },
+  {
+   "ko": "올리브유",
+   "en": "olive oil",
+   "aliases": [
+    "olive oil"
+   ],
+   "source": "fndds",
+   "fdcId": 2710186,
+   "usdaDescription": "Olive oil",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.56,
+    "calcium_mg": 1.0,
+    "zinc_mg": 0.0,
+    "potassium_mg": 1.0
+   }
+  },
+  {
+   "ko": "마요네즈",
+   "en": "mayonnaise",
+   "aliases": [
+    "mayo",
+    "mayonnaise"
+   ],
+   "source": "fndds",
+   "fdcId": 2710204,
+   "usdaDescription": "Mayonnaise, regular",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 0.12,
+    "vitaminA_ugRAE": 16.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.21,
+    "calcium_mg": 8.0,
+    "zinc_mg": 0.15,
+    "potassium_mg": 20.0
+   }
+  },
+  {
+   "ko": "케첩",
+   "en": "ketchup",
+   "aliases": [
+    "케찹",
+    "ketchup"
+   ],
+   "source": "fndds",
+   "fdcId": 2709733,
+   "usdaDescription": "Ketchup",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 26.0,
+    "vitaminC_mg": 4.1,
+    "iron_mg": 0.39,
+    "calcium_mg": 14.0,
+    "zinc_mg": 0.16,
+    "potassium_mg": 265.0
+   }
+  },
+  {
+   "ko": "퀴노아",
+   "en": "quinoa",
+   "aliases": [
+    "quinoa"
+   ],
+   "source": "fndds",
+   "fdcId": 2708400,
+   "usdaDescription": "Quinoa, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.48,
+    "calcium_mg": 17.0,
+    "zinc_mg": 1.09,
+    "potassium_mg": 171.0
+   }
+  },
+  {
+   "ko": "쌀국수",
+   "en": "rice noodles",
+   "aliases": [
+    "rice noodles",
+    "pho noodles"
+   ],
+   "source": "fndds",
+   "fdcId": 2708356,
+   "usdaDescription": "Rice noodles, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.14,
+    "calcium_mg": 4.0,
+    "zinc_mg": 0.25,
+    "potassium_mg": 4.0
+   }
+  },
+  {
+   "ko": "소면",
+   "en": "somen noodles",
+   "aliases": [
+    "국수",
+    "면",
+    "잔치국수",
+    "somen",
+    "noodles"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 168909,
+   "usdaDescription": "Noodles, japanese, somen, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.52,
+    "calcium_mg": 8.0,
+    "zinc_mg": 0.22,
+    "potassium_mg": 29.0
+   }
+  },
+  {
+   "ko": "호밀빵",
+   "en": "rye bread",
+   "aliases": [
+    "rye bread"
+   ],
+   "source": "fndds",
+   "fdcId": 2707755,
+   "usdaDescription": "Bread, rye",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.4,
+    "iron_mg": 2.83,
+    "calcium_mg": 73.0,
+    "zinc_mg": 1.14,
+    "potassium_mg": 166.0
+   }
+  },
+  {
+   "ko": "잡곡빵",
+   "en": "multigrain bread",
+   "aliases": [
+    "multigrain bread"
+   ],
+   "source": "fndds",
+   "fdcId": 2707777,
+   "usdaDescription": "Bread, multigrain",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.1,
+    "iron_mg": 2.5,
+    "calcium_mg": 103.0,
+    "zinc_mg": 1.7,
+    "potassium_mg": 230.0
+   }
+  },
+  {
+   "ko": "머핀",
+   "en": "muffin",
+   "aliases": [
+    "muffin"
+   ],
+   "source": "fndds",
+   "fdcId": 2707829,
+   "usdaDescription": "Muffin, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 0.16,
+    "vitaminA_ugRAE": 21.0,
+    "vitaminC_mg": 0.9,
+    "iron_mg": 1.3,
+    "calcium_mg": 44.0,
+    "zinc_mg": 0.37,
+    "potassium_mg": 121.0
+   }
+  },
+  {
+   "ko": "크래커",
+   "en": "crackers",
+   "aliases": [
+    "crackers",
+    "saltine"
+   ],
+   "source": "fndds",
+   "fdcId": 2708167,
+   "usdaDescription": "Crackers, saltine",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.09,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 5.57,
+    "calcium_mg": 19.0,
+    "zinc_mg": 0.69,
+    "potassium_mg": 152.0
+   }
+  },
+  {
+   "ko": "프레첼",
+   "en": "pretzels",
+   "aliases": [
+    "pretzel",
+    "pretzels"
+   ],
+   "source": "fndds",
+   "fdcId": 2708247,
+   "usdaDescription": "Pretzels, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 2.1,
+    "iron_mg": 4.58,
+    "calcium_mg": 27.0,
+    "zinc_mg": 1.04,
+    "potassium_mg": 223.0
+   }
+  },
+  {
+   "ko": "또띠아",
+   "en": "flour tortilla",
+   "aliases": [
+    "토르티야",
+    "tortilla"
+   ],
+   "source": "fndds",
+   "fdcId": 2707824,
+   "usdaDescription": "Tortilla, flour",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 3.63,
+    "calcium_mg": 146.0,
+    "zinc_mg": 0.53,
+    "potassium_mg": 125.0
+   }
+  },
+  {
+   "ko": "난",
+   "en": "naan",
+   "aliases": [
+    "naan"
+   ],
+   "source": "fndds",
+   "fdcId": 2707613,
+   "usdaDescription": "Bread, naan",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.88,
+    "calcium_mg": 64.0,
+    "zinc_mg": 1.35,
+    "potassium_mg": 201.0
+   }
+  },
+  {
+   "ko": "피타빵",
+   "en": "pita bread",
+   "aliases": [
+    "pita"
+   ],
+   "source": "fndds",
+   "fdcId": 2707616,
+   "usdaDescription": "Bread, pita",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 2.62,
+    "calcium_mg": 86.0,
+    "zinc_mg": 0.84,
+    "potassium_mg": 120.0
+   }
+  },
+  {
+   "ko": "비스킷",
+   "en": "biscuit",
+   "aliases": [
+    "biscuit"
+   ],
+   "source": "fndds",
+   "fdcId": 2707801,
+   "usdaDescription": "Biscuit, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 18.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 2.76,
+    "calcium_mg": 70.0,
+    "zinc_mg": 0.5,
+    "potassium_mg": 131.0
+   }
+  },
+  {
+   "ko": "치킨커리",
+   "en": "chicken curry",
+   "aliases": [
+    "chicken curry"
+   ],
+   "source": "fndds",
+   "fdcId": 2706437,
+   "usdaDescription": "Chicken curry",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.08,
+    "vitaminA_ugRAE": 48.0,
+    "vitaminC_mg": 8.9,
+    "iron_mg": 0.71,
+    "calcium_mg": 20.0,
+    "zinc_mg": 0.52,
+    "potassium_mg": 280.0
+   }
+  },
+  {
+   "ko": "미트볼",
+   "en": "meatballs",
+   "aliases": [
+    "meatball",
+    "meatballs"
+   ],
+   "source": "fndds",
+   "fdcId": 2706467,
+   "usdaDescription": "Meatballs, NS as to type of meat, with sauce",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 1.86,
+    "vitaminA_ugRAE": 19.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.79,
+    "calcium_mg": 22.0,
+    "zinc_mg": 4.19,
+    "potassium_mg": 212.0
+   }
+  },
+  {
+   "ko": "라자냐",
+   "en": "lasagna",
+   "aliases": [
+    "lasagne",
+    "lasagna"
+   ],
+   "source": "fndds",
+   "fdcId": 2708750,
+   "usdaDescription": "Lasagna with meat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.83,
+    "vitaminA_ugRAE": 42.0,
+    "vitaminC_mg": 4.4,
+    "iron_mg": 0.73,
+    "calcium_mg": 82.0,
+    "zinc_mg": 0.89,
+    "potassium_mg": 207.0
+   }
+  },
+  {
+   "ko": "맥앤치즈",
+   "en": "macaroni and cheese",
+   "aliases": [
+    "마카로니치즈",
+    "mac and cheese",
+    "macaroni and cheese"
+   ],
+   "source": "fndds",
+   "fdcId": 2708811,
+   "usdaDescription": "Macaroni or noodles with cheese",
+   "per100g": {
+    "vitaminD_ug": 0.5,
+    "vitaminB12_ug": 0.27,
+    "vitaminA_ugRAE": 106.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.06,
+    "calcium_mg": 170.0,
+    "zinc_mg": 1.08,
+    "potassium_mg": 103.0
+   }
+  },
+  {
+   "ko": "타코",
+   "en": "taco",
+   "aliases": [
+    "taco",
+    "tacos"
+   ],
+   "source": "fndds",
+   "fdcId": 2708514,
+   "usdaDescription": "Taco, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 1.27,
+    "vitaminA_ugRAE": 7.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.65,
+    "calcium_mg": 54.0,
+    "zinc_mg": 3.57,
+    "potassium_mg": 217.0
+   }
+  },
+  {
+   "ko": "부리또",
+   "en": "burrito",
+   "aliases": [
+    "브리또",
+    "burrito"
+   ],
+   "source": "fndds",
+   "fdcId": 2708534,
+   "usdaDescription": "Burrito, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.57,
+    "vitaminA_ugRAE": 11.0,
+    "vitaminC_mg": 0.2,
+    "iron_mg": 2.38,
+    "calcium_mg": 104.0,
+    "zinc_mg": 1.8,
+    "potassium_mg": 212.0
+   }
+  },
+  {
+   "ko": "치킨너겟",
+   "en": "chicken nuggets",
+   "aliases": [
+    "너겟",
+    "chicken nuggets"
+   ],
+   "source": "fndds",
+   "fdcId": 2706092,
+   "usdaDescription": "Chicken nuggets, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 0.33,
+    "vitaminA_ugRAE": 5.0,
+    "vitaminC_mg": 0.6,
+    "iron_mg": 0.83,
+    "calcium_mg": 11.0,
+    "zinc_mg": 0.59,
+    "potassium_mg": 251.0
+   }
+  },
+  {
+   "ko": "치킨누들수프",
+   "en": "chicken noodle soup",
+   "aliases": [
+    "치킨수프",
+    "chicken soup",
+    "chicken noodle soup"
+   ],
+   "source": "fndds",
+   "fdcId": 2709149,
+   "usdaDescription": "Soup, chicken noodle",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.04,
+    "vitaminA_ugRAE": 29.0,
+    "vitaminC_mg": 3.7,
+    "iron_mg": 0.38,
+    "calcium_mg": 10.0,
+    "zinc_mg": 0.31,
+    "potassium_mg": 108.0
+   }
+  },
+  {
+   "ko": "토마토수프",
+   "en": "tomato soup",
+   "aliases": [
+    "tomato soup"
+   ],
+   "source": "fndds",
+   "fdcId": 2709757,
+   "usdaDescription": "Soup, tomato",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 36.0,
+    "vitaminC_mg": 5.9,
+    "iron_mg": 0.44,
+    "calcium_mg": 11.0,
+    "zinc_mg": 0.14,
+    "potassium_mg": 169.0
+   }
+  },
+  {
+   "ko": "클램차우더",
+   "en": "clam chowder",
+   "aliases": [
+    "clam chowder"
+   ],
+   "source": "fndds",
+   "fdcId": 2707139,
+   "usdaDescription": "Soup, New England clam chowder",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 1.26,
+    "vitaminA_ugRAE": 70.0,
+    "vitaminC_mg": 5.5,
+    "iron_mg": 0.48,
+    "calcium_mg": 19.0,
+    "zinc_mg": 0.25,
+    "potassium_mg": 185.0
+   }
+  },
+  {
+   "ko": "감자샐러드",
+   "en": "potato salad",
+   "aliases": [
+    "potato salad"
+   ],
+   "source": "fndds",
+   "fdcId": 2709532,
+   "usdaDescription": "Potato salad with egg, made with mayonnaise",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 0.07,
+    "vitaminA_ugRAE": 19.0,
+    "vitaminC_mg": 0.8,
+    "iron_mg": 0.5,
+    "calcium_mg": 15.0,
+    "zinc_mg": 0.33,
+    "potassium_mg": 242.0
+   }
+  },
+  {
+   "ko": "코울슬로",
+   "en": "coleslaw",
+   "aliases": [
+    "coleslaw"
+   ],
+   "source": "fndds",
+   "fdcId": 2709815,
+   "usdaDescription": "Coleslaw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.02,
+    "vitaminA_ugRAE": 79.0,
+    "vitaminC_mg": 26.9,
+    "iron_mg": 0.14,
+    "calcium_mg": 33.0,
+    "zinc_mg": 0.2,
+    "potassium_mg": 172.0
+   }
+  },
+  {
+   "ko": "시저샐러드",
+   "en": "caesar salad",
+   "aliases": [
+    "caesar salad"
+   ],
+   "source": "fndds",
+   "fdcId": 2709591,
+   "usdaDescription": "Caesar salad, with romaine, no dressing",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.13,
+    "vitaminA_ugRAE": 398.0,
+    "vitaminC_mg": 4.0,
+    "iron_mg": 0.4,
+    "calcium_mg": 108.0,
+    "zinc_mg": 0.65,
+    "potassium_mg": 250.0
+   }
+  },
+  {
+   "ko": "참치샐러드",
+   "en": "tuna salad",
+   "aliases": [
+    "tuna salad"
+   ],
+   "source": "fndds",
+   "fdcId": 2706828,
+   "usdaDescription": "Tuna salad, made with mayonnaise",
+   "per100g": {
+    "vitaminD_ug": 0.7,
+    "vitaminB12_ug": 1.34,
+    "vitaminA_ugRAE": 20.0,
+    "vitaminC_mg": 0.7,
+    "iron_mg": 0.95,
+    "calcium_mg": 21.0,
+    "zinc_mg": 0.4,
+    "potassium_mg": 155.0
+   }
+  },
+  {
+   "ko": "에그샐러드",
+   "en": "egg salad",
+   "aliases": [
+    "egg salad"
+   ],
+   "source": "fndds",
+   "fdcId": 2707182,
+   "usdaDescription": "Egg salad, made with mayonnaise",
+   "per100g": {
+    "vitaminD_ug": 1.8,
+    "vitaminB12_ug": 0.91,
+    "vitaminA_ugRAE": 122.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.99,
+    "calcium_mg": 42.0,
+    "zinc_mg": 0.87,
+    "potassium_mg": 105.0
+   }
+  },
+  {
+   "ko": "칠리",
+   "en": "chili con carne",
+   "aliases": [
+    "chili con carne",
+    "chili"
+   ],
+   "source": "fndds",
+   "fdcId": 2706375,
+   "usdaDescription": "Chili with meat and beans",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.63,
+    "vitaminA_ugRAE": 12.0,
+    "vitaminC_mg": 6.3,
+    "iron_mg": 1.91,
+    "calcium_mg": 21.0,
+    "zinc_mg": 1.98,
+    "potassium_mg": 285.0
+   }
+  },
+  {
+   "ko": "팟타이",
+   "en": "pad thai",
+   "aliases": [
+    "pad thai"
+   ],
+   "source": "fndds",
+   "fdcId": 2708804,
+   "usdaDescription": "Pad Thai, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 0.14,
+    "vitaminA_ugRAE": 18.0,
+    "vitaminC_mg": 4.8,
+    "iron_mg": 0.68,
+    "calcium_mg": 21.0,
+    "zinc_mg": 0.69,
+    "potassium_mg": 152.0
+   }
+  },
+  {
+   "ko": "탕수육",
+   "en": "sweet and sour pork",
+   "aliases": [
+    "sweet and sour pork"
+   ],
+   "source": "fndds",
+   "fdcId": 2706401,
+   "usdaDescription": "Sweet and sour pork",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 0.19,
+    "vitaminA_ugRAE": 29.0,
+    "vitaminC_mg": 2.3,
+    "iron_mg": 3.07,
+    "calcium_mg": 46.0,
+    "zinc_mg": 1.07,
+    "potassium_mg": 152.0
+   }
+  },
+  {
+   "ko": "볶음면",
+   "en": "chow mein",
+   "aliases": [
+    "chow mein",
+    "lo mein"
+   ],
+   "source": "fndds",
+   "fdcId": 2708798,
+   "usdaDescription": "Lo mein, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 9.0,
+    "vitaminC_mg": 1.7,
+    "iron_mg": 1.07,
+    "calcium_mg": 21.0,
+    "zinc_mg": 0.36,
+    "potassium_mg": 105.0
+   }
+  },
+  {
+   "ko": "데리야끼치킨",
+   "en": "chicken teriyaki",
+   "aliases": [
+    "teriyaki chicken",
+    "chicken teriyaki"
+   ],
+   "source": "fndds",
+   "fdcId": 2706433,
+   "usdaDescription": "Chicken or turkey with teriyaki",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.34,
+    "vitaminA_ugRAE": 8.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.86,
+    "calcium_mg": 16.0,
+    "zinc_mg": 1.52,
+    "potassium_mg": 285.0
+   }
+  },
+  {
+   "ko": "캘리포니아롤",
+   "en": "california roll",
+   "aliases": [
+    "california roll"
+   ],
+   "source": "fndds",
+   "fdcId": 2708961,
+   "usdaDescription": "Sushi roll, California",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.1,
+    "vitaminA_ugRAE": 4.0,
+    "vitaminC_mg": 0.9,
+    "iron_mg": 0.21,
+    "calcium_mg": 6.0,
+    "zinc_mg": 0.38,
+    "potassium_mg": 48.0
+   }
+  },
+  {
+   "ko": "군만두",
+   "en": "fried dumpling",
+   "aliases": [
+    "potsticker",
+    "fried dumpling",
+    "gyoza"
+   ],
+   "source": "fndds",
+   "fdcId": 2708705,
+   "usdaDescription": "Wonton, dumpling or pot sticker, fried",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 0.28,
+    "vitaminA_ugRAE": 5.0,
+    "vitaminC_mg": 8.8,
+    "iron_mg": 0.79,
+    "calcium_mg": 30.0,
+    "zinc_mg": 1.77,
+    "potassium_mg": 301.0
+   }
+  },
+  {
+   "ko": "찐만두",
+   "en": "steamed dumpling",
+   "aliases": [
+    "물만두",
+    "steamed dumpling",
+    "dumpling",
+    "dumplings",
+    "wonton"
+   ],
+   "source": "fndds",
+   "fdcId": 2708708,
+   "usdaDescription": "Wonton, dumpling or pot sticker, steamed",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 0.22,
+    "vitaminA_ugRAE": 4.0,
+    "vitaminC_mg": 6.9,
+    "iron_mg": 0.62,
+    "calcium_mg": 23.0,
+    "zinc_mg": 1.39,
+    "potassium_mg": 237.0
+   }
+  },
+  {
+   "ko": "춘권",
+   "en": "egg roll",
+   "aliases": [
+    "spring roll",
+    "egg roll"
+   ],
+   "source": "fndds",
+   "fdcId": 2708702,
+   "usdaDescription": "Egg roll, with beef and/or pork",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 0.09,
+    "vitaminA_ugRAE": 42.0,
+    "vitaminC_mg": 5.7,
+    "iron_mg": 1.84,
+    "calcium_mg": 45.0,
+    "zinc_mg": 0.86,
+    "potassium_mg": 221.0
+   }
+  },
+  {
+   "ko": "햄샌드위치",
+   "en": "ham sandwich",
+   "aliases": [
+    "ham sandwich"
+   ],
+   "source": "fndds",
+   "fdcId": 2706964,
+   "usdaDescription": "Ham sandwich on white",
+   "per100g": {
+    "vitaminD_ug": 0.3,
+    "vitaminB12_ug": 0.17,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 2.02,
+    "calcium_mg": 112.0,
+    "zinc_mg": 1.19,
+    "potassium_mg": 266.0
+   }
+  },
+  {
+   "ko": "닭안심",
+   "en": "chicken tenders",
+   "aliases": [
+    "chicken tenders"
+   ],
+   "source": "fndds",
+   "fdcId": 2706098,
+   "usdaDescription": "Chicken tenders or strips, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 0.16,
+    "vitaminA_ugRAE": 3.0,
+    "vitaminC_mg": 1.1,
+    "iron_mg": 0.73,
+    "calcium_mg": 17.0,
+    "zinc_mg": 0.71,
+    "potassium_mg": 373.0
+   }
+  },
+  {
+   "ko": "닭간",
+   "en": "chicken liver",
+   "aliases": [
+    "chicken liver"
+   ],
+   "source": "fndds",
+   "fdcId": 2706154,
+   "usdaDescription": "Liver, chicken",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 15.07,
+    "vitaminA_ugRAE": 2808.0,
+    "vitaminC_mg": 16.3,
+    "iron_mg": 10.12,
+    "calcium_mg": 11.0,
+    "zinc_mg": 3.09,
+    "potassium_mg": 232.0
+   }
+  },
+  {
+   "ko": "소간",
+   "en": "beef liver",
+   "aliases": [
+    "liver",
+    "beef liver"
+   ],
+   "source": "fndds",
+   "fdcId": 2706153,
+   "usdaDescription": "Liver, beef",
+   "per100g": {
+    "vitaminD_ug": 1.2,
+    "vitaminB12_ug": 82.47,
+    "vitaminA_ugRAE": 7683.0,
+    "vitaminC_mg": 0.7,
+    "iron_mg": 6.12,
+    "calcium_mg": 6.0,
+    "zinc_mg": 5.19,
+    "potassium_mg": 348.0
+   }
+  },
+  {
+   "ko": "육포",
+   "en": "beef jerky",
+   "aliases": [
+    "jerky",
+    "beef jerky"
+   ],
+   "source": "fndds",
+   "fdcId": 2705860,
+   "usdaDescription": "Beef jerky",
+   "per100g": {
+    "vitaminD_ug": 0.3,
+    "vitaminB12_ug": 0.99,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 5.42,
+    "calcium_mg": 20.0,
+    "zinc_mg": 8.11,
+    "potassium_mg": 597.0
+   }
+  },
+  {
+   "ko": "칠면조",
+   "en": "turkey",
+   "aliases": [
+    "turkey"
+   ],
+   "source": "fndds",
+   "fdcId": 2706104,
+   "usdaDescription": "Turkey, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.3,
+    "vitaminB12_ug": 0.82,
+    "vitaminA_ugRAE": 3.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.65,
+    "calcium_mg": 11.0,
+    "zinc_mg": 1.63,
+    "potassium_mg": 247.0
+   }
+  },
+  {
+   "ko": "차돌박이",
+   "en": "beef brisket",
+   "aliases": [
+    "brisket",
+    "beef brisket"
+   ],
+   "source": "fndds",
+   "fdcId": 2705851,
+   "usdaDescription": "Beef, brisket",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 2.57,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 2.74,
+    "calcium_mg": 10.0,
+    "zinc_mg": 7.0,
+    "potassium_mg": 285.0
+   }
+  },
+  {
+   "ko": "안심",
+   "en": "beef tenderloin",
+   "aliases": [
+    "tenderloin",
+    "filet mignon"
+   ],
+   "source": "fndds",
+   "fdcId": 2705841,
+   "usdaDescription": "Beef, steak, tenderloin",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 4.53,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 3.56,
+    "calcium_mg": 15.0,
+    "zinc_mg": 4.64,
+    "potassium_mg": 387.0
+   }
+  },
+  {
+   "ko": "립아이",
+   "en": "ribeye steak",
+   "aliases": [
+    "ribeye"
+   ],
+   "source": "fndds",
+   "fdcId": 2705829,
+   "usdaDescription": "Beef, steak, ribeye, lean and fat eaten",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 2.08,
+    "vitaminA_ugRAE": 8.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 2.22,
+    "calcium_mg": 11.0,
+    "zinc_mg": 5.86,
+    "potassium_mg": 258.0
+   }
+  },
+  {
+   "ko": "돼지갈비",
+   "en": "pork ribs",
+   "aliases": [
+    "pork ribs"
+   ],
+   "source": "fndds",
+   "fdcId": 2705894,
+   "usdaDescription": "Pork, ribs",
+   "per100g": {
+    "vitaminD_ug": 0.8,
+    "vitaminB12_ug": 0.51,
+    "vitaminA_ugRAE": 7.0,
+    "vitaminC_mg": 0.2,
+    "iron_mg": 0.83,
+    "calcium_mg": 42.0,
+    "zinc_mg": 2.18,
+    "potassium_mg": 236.0
+   }
+  },
+  {
+   "ko": "족발",
+   "en": "pig's feet",
+   "aliases": [
+    "pig feet",
+    "pigs feet"
+   ],
+   "source": "fndds",
+   "fdcId": 2705898,
+   "usdaDescription": "Pork, pig's feet",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.41,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.97,
+    "calcium_mg": 0.0,
+    "zinc_mg": 1.04,
+    "potassium_mg": 33.0
+   }
+  },
+  {
+   "ko": "소 양",
+   "en": "beef tripe",
+   "aliases": [
+    "양",
+    "천엽",
+    "tripe"
+   ],
+   "source": "fndds",
+   "fdcId": 2706162,
+   "usdaDescription": "Tripe",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 1.09,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.62,
+    "calcium_mg": 72.0,
+    "zinc_mg": 1.48,
+    "potassium_mg": 70.0
+   }
+  },
+  {
+   "ko": "방어",
+   "en": "yellowtail",
+   "aliases": [
+    "yellowtail"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 174248,
+   "usdaDescription": "Fish, yellowtail, mixed species, cooked, dry heat",
+   "per100g": {
+    "vitaminD_ug": null,
+    "vitaminB12_ug": 1.25,
+    "vitaminA_ugRAE": 31.0,
+    "vitaminC_mg": 2.9,
+    "iron_mg": 0.63,
+    "calcium_mg": 29.0,
+    "zinc_mg": 0.67,
+    "potassium_mg": 538.0
+   }
+  },
+  {
+   "ko": "농어",
+   "en": "sea bass",
+   "aliases": [
+    "sea bass"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 173694,
+   "usdaDescription": "Fish, sea bass, mixed species, cooked, dry heat",
+   "per100g": {
+    "vitaminD_ug": null,
+    "vitaminB12_ug": 0.3,
+    "vitaminA_ugRAE": 64.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.37,
+    "calcium_mg": 13.0,
+    "zinc_mg": 0.52,
+    "potassium_mg": 328.0
+   }
+  },
+  {
+   "ko": "조기",
+   "en": "croaker",
+   "aliases": [
+    "yellow croaker",
+    "croaker"
+   ],
+   "source": "fndds",
+   "fdcId": 2706246,
+   "usdaDescription": "Fish, croaker",
+   "per100g": {
+    "vitaminD_ug": 0.8,
+    "vitaminB12_ug": 2.37,
+    "vitaminA_ugRAE": 33.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.97,
+    "calcium_mg": 26.0,
+    "zinc_mg": 0.54,
+    "potassium_mg": 378.0
+   }
+  },
+  {
+   "ko": "광어",
+   "en": "flounder",
+   "aliases": [
+    "넙치",
+    "flounder",
+    "halibut"
+   ],
+   "source": "fndds",
+   "fdcId": 2706249,
+   "usdaDescription": "Fish, flounder, baked or broiled",
+   "per100g": {
+    "vitaminD_ug": 3.5,
+    "vitaminB12_ug": 1.26,
+    "vitaminA_ugRAE": 31.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.23,
+    "calcium_mg": 27.0,
+    "zinc_mg": 0.4,
+    "potassium_mg": 199.0
+   }
+  },
+  {
+   "ko": "참치회",
+   "en": "raw tuna",
+   "aliases": [
+    "tuna sashimi"
+   ],
+   "source": "fndds",
+   "fdcId": 2706308,
+   "usdaDescription": "Fish, tuna, raw",
+   "per100g": {
+    "vitaminD_ug": 1.7,
+    "vitaminB12_ug": 2.08,
+    "vitaminA_ugRAE": 18.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.77,
+    "calcium_mg": 4.0,
+    "zinc_mg": 0.37,
+    "potassium_mg": 441.0
+   }
+  },
+  {
+   "ko": "정어리",
+   "en": "sardines",
+   "aliases": [
+    "sardine",
+    "sardines"
+   ],
+   "source": "fndds",
+   "fdcId": 2706293,
+   "usdaDescription": "Fish, sardines, canned",
+   "per100g": {
+    "vitaminD_ug": 4.8,
+    "vitaminB12_ug": 8.94,
+    "vitaminA_ugRAE": 32.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 2.92,
+    "calcium_mg": 382.0,
+    "zinc_mg": 1.31,
+    "potassium_mg": 397.0
+   }
+  },
+  {
+   "ko": "청어",
+   "en": "herring",
+   "aliases": [
+    "herring"
+   ],
+   "source": "fndds",
+   "fdcId": 2706261,
+   "usdaDescription": "Fish, herring",
+   "per100g": {
+    "vitaminD_ug": 4.5,
+    "vitaminB12_ug": 12.91,
+    "vitaminA_ugRAE": 47.0,
+    "vitaminC_mg": 0.6,
+    "iron_mg": 1.74,
+    "calcium_mg": 70.0,
+    "zinc_mg": 1.14,
+    "potassium_mg": 359.0
+   }
+  },
+  {
+   "ko": "송어",
+   "en": "trout",
+   "aliases": [
+    "trout"
+   ],
+   "source": "fndds",
+   "fdcId": 2706303,
+   "usdaDescription": "Fish, trout, baked or broiled",
+   "per100g": {
+    "vitaminD_ug": 19.8,
+    "vitaminB12_ug": 4.81,
+    "vitaminA_ugRAE": 109.0,
+    "vitaminC_mg": 2.9,
+    "iron_mg": 0.39,
+    "calcium_mg": 32.0,
+    "zinc_mg": 0.56,
+    "potassium_mg": 469.0
+   }
+  },
+  {
+   "ko": "메기",
+   "en": "catfish",
+   "aliases": [
+    "catfish"
+   ],
+   "source": "fndds",
+   "fdcId": 2706235,
+   "usdaDescription": "Fish, catfish, baked or broiled",
+   "per100g": {
+    "vitaminD_ug": 0.3,
+    "vitaminB12_ug": 3.22,
+    "vitaminA_ugRAE": 20.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.29,
+    "calcium_mg": 11.0,
+    "zinc_mg": 0.6,
+    "potassium_mg": 376.0
+   }
+  },
+  {
+   "ko": "틸라피아",
+   "en": "tilapia",
+   "aliases": [
+    "tilapia"
+   ],
+   "source": "fndds",
+   "fdcId": 2706319,
+   "usdaDescription": "Fish, tilapia, baked or broiled",
+   "per100g": {
+    "vitaminD_ug": 3.9,
+    "vitaminB12_ug": 1.77,
+    "vitaminA_ugRAE": 20.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.7,
+    "calcium_mg": 13.0,
+    "zinc_mg": 0.41,
+    "potassium_mg": 376.0
+   }
+  },
+  {
+   "ko": "랍스터",
+   "en": "lobster",
+   "aliases": [
+    "바닷가재",
+    "lobster"
+   ],
+   "source": "fndds",
+   "fdcId": 2706349,
+   "usdaDescription": "Lobster",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 1.34,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.33,
+    "calcium_mg": 106.0,
+    "zinc_mg": 4.47,
+    "potassium_mg": 253.0
+   }
+  },
+  {
+   "ko": "게맛살",
+   "en": "imitation crab",
+   "aliases": [
+    "크래미",
+    "imitation crab",
+    "surimi"
+   ],
+   "source": "fndds",
+   "fdcId": 2706568,
+   "usdaDescription": "Imitation crab meat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.57,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.39,
+    "calcium_mg": 13.0,
+    "zinc_mg": 0.33,
+    "potassium_mg": 90.0
+   }
+  },
+  {
+   "ko": "새우튀김",
+   "en": "fried shrimp",
+   "aliases": [
+    "shrimp tempura",
+    "fried shrimp"
+   ],
+   "source": "fndds",
+   "fdcId": 2706364,
+   "usdaDescription": "Shrimp, fried",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 0.74,
+    "vitaminA_ugRAE": 42.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.05,
+    "calcium_mg": 56.0,
+    "zinc_mg": 0.89,
+    "potassium_mg": 110.0
+   }
+  },
+  {
+   "ko": "오징어튀김",
+   "en": "fried calamari",
+   "aliases": [
+    "fried squid",
+    "fried calamari"
+   ],
+   "source": "fndds",
+   "fdcId": 2706334,
+   "usdaDescription": "Calamari, fried",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.86,
+    "vitaminA_ugRAE": 10.0,
+    "vitaminC_mg": 2.9,
+    "iron_mg": 1.41,
+    "calcium_mg": 39.0,
+    "zinc_mg": 1.31,
+    "potassium_mg": 211.0
+   }
+  },
+  {
+   "ko": "근대",
+   "en": "swiss chard",
+   "aliases": [
+    "chard",
+    "swiss chard"
+   ],
+   "source": "fndds",
+   "fdcId": 2709575,
+   "usdaDescription": "Chard, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 315.0,
+    "vitaminC_mg": 21.9,
+    "iron_mg": 1.88,
+    "calcium_mg": 54.0,
+    "zinc_mg": 0.38,
+    "potassium_mg": 395.0
+   }
+  },
+  {
+   "ko": "구운감자",
+   "en": "baked potato",
+   "aliases": [
+    "baked potato"
+   ],
+   "source": "fndds",
+   "fdcId": 2709524,
+   "usdaDescription": "Potato, baked, peel eaten",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 1.0,
+    "vitaminC_mg": 9.6,
+    "iron_mg": 1.08,
+    "calcium_mg": 15.0,
+    "zinc_mg": 0.36,
+    "potassium_mg": 533.0
+   }
+  },
+  {
+   "ko": "으깬감자",
+   "en": "mashed potatoes",
+   "aliases": [
+    "매쉬드포테이토",
+    "mashed potatoes"
+   ],
+   "source": "fndds",
+   "fdcId": 2709496,
+   "usdaDescription": "Potato, mashed, from fresh, made with milk",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.04,
+    "vitaminA_ugRAE": 37.0,
+    "vitaminC_mg": 10.1,
+    "iron_mg": 0.28,
+    "calcium_mg": 25.0,
+    "zinc_mg": 0.3,
+    "potassium_mg": 330.0
+   }
+  },
+  {
+   "ko": "강낭콩",
+   "en": "kidney beans",
+   "aliases": [
+    "kidney beans"
+   ],
+   "source": "fndds",
+   "fdcId": 2707383,
+   "usdaDescription": "Kidney beans, from canned, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 1.3,
+    "iron_mg": 2.08,
+    "calcium_mg": 48.0,
+    "zinc_mg": 1.03,
+    "potassium_mg": 433.0
+   }
+  },
+  {
+   "ko": "병아리콩",
+   "en": "chickpeas",
+   "aliases": [
+    "chickpeas",
+    "garbanzo"
+   ],
+   "source": "fndds",
+   "fdcId": 2707418,
+   "usdaDescription": "Chickpeas, from canned, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 0.2,
+    "iron_mg": 2.05,
+    "calcium_mg": 58.0,
+    "zinc_mg": 1.15,
+    "potassium_mg": 240.0
+   }
+  },
+  {
+   "ko": "렌틸콩",
+   "en": "lentils",
+   "aliases": [
+    "렌즈콩",
+    "lentils"
+   ],
+   "source": "fndds",
+   "fdcId": 2707425,
+   "usdaDescription": "Lentils, from dried, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 1.4,
+    "iron_mg": 3.31,
+    "calcium_mg": 19.0,
+    "zinc_mg": 1.26,
+    "potassium_mg": 367.0
+   }
+  },
+  {
+   "ko": "풋콩",
+   "en": "edamame",
+   "aliases": [
+    "에다마메",
+    "edamame"
+   ],
+   "source": "fndds",
+   "fdcId": 2707436,
+   "usdaDescription": "Edamame, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 26.0,
+    "vitaminC_mg": 5.3,
+    "iron_mg": 2.2,
+    "calcium_mg": 61.0,
+    "zinc_mg": 1.33,
+    "potassium_mg": 422.0
+   }
+  },
+  {
+   "ko": "껍질콩",
+   "en": "green beans",
+   "aliases": [
+    "green beans"
+   ],
+   "source": "fndds",
+   "fdcId": 2709852,
+   "usdaDescription": "Green beans, fresh, cooked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 35.0,
+    "vitaminC_mg": 10.8,
+    "iron_mg": 0.68,
+    "calcium_mg": 42.0,
+    "zinc_mg": 0.36,
+    "potassium_mg": 301.0
+   }
+  },
+  {
+   "ko": "오크라",
+   "en": "okra",
+   "aliases": [
+    "okra"
+   ],
+   "source": "fndds",
+   "fdcId": 2709944,
+   "usdaDescription": "Okra, fresh, cooked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 37.0,
+    "vitaminC_mg": 21.0,
+    "iron_mg": 0.66,
+    "calcium_mg": 88.0,
+    "zinc_mg": 0.62,
+    "potassium_mg": 321.0
+   }
+  },
+  {
+   "ko": "순무",
+   "en": "turnip",
+   "aliases": [
+    "turnip"
+   ],
+   "source": "fndds",
+   "fdcId": 2710002,
+   "usdaDescription": "Turnip, cooked",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 12.0,
+    "vitaminC_mg": 18.6,
+    "iron_mg": 0.32,
+    "calcium_mg": 32.0,
+    "zinc_mg": 0.28,
+    "potassium_mg": 199.0
+   }
+  },
+  {
+   "ko": "래디시",
+   "en": "red radish",
+   "aliases": [
+    "radishes"
+   ],
+   "source": "fndds",
+   "fdcId": 2709803,
+   "usdaDescription": "Radish",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 14.8,
+    "iron_mg": 0.34,
+    "calcium_mg": 25.0,
+    "zinc_mg": 0.28,
+    "potassium_mg": 233.0
+   }
+  },
+  {
+   "ko": "방울양배추",
+   "en": "brussels sprouts",
+   "aliases": [
+    "brussels sprouts"
+   ],
+   "source": "fndds",
+   "fdcId": 2709881,
+   "usdaDescription": "Brussels sprouts, fresh, cooked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 37.0,
+    "vitaminC_mg": 75.0,
+    "iron_mg": 1.45,
+    "calcium_mg": 44.0,
+    "zinc_mg": 0.44,
+    "potassium_mg": 404.0
+   }
+  },
+  {
+   "ko": "익힌 배추",
+   "en": "cooked napa cabbage",
+   "aliases": [
+    "cooked napa cabbage"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 169980,
+   "usdaDescription": "Cabbage, chinese (pe-tsai), cooked, boiled, drained, without salt",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 48.0,
+    "vitaminC_mg": 15.8,
+    "iron_mg": 0.3,
+    "calcium_mg": 32.0,
+    "zinc_mg": 0.18,
+    "potassium_mg": 225.0
+   }
+  },
+  {
+   "ko": "익힌 양배추",
+   "en": "cooked cabbage",
+   "aliases": [
+    "cooked cabbage"
+   ],
+   "source": "fndds",
+   "fdcId": 2709889,
+   "usdaDescription": "Cabbage, green, cooked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 5.0,
+    "vitaminC_mg": 35.6,
+    "iron_mg": 0.07,
+    "calcium_mg": 44.0,
+    "zinc_mg": 0.22,
+    "potassium_mg": 215.0
+   }
+  },
+  {
+   "ko": "익힌 당근",
+   "en": "cooked carrots",
+   "aliases": [
+    "cooked carrots"
+   ],
+   "source": "fndds",
+   "fdcId": 2709664,
+   "usdaDescription": "Carrots, fresh, cooked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 824.0,
+    "vitaminC_mg": 5.2,
+    "iron_mg": 0.16,
+    "calcium_mg": 31.0,
+    "zinc_mg": 0.25,
+    "potassium_mg": 291.0
+   }
+  },
+  {
+   "ko": "볶은 양파",
+   "en": "cooked onion",
+   "aliases": [
+    "cooked onion"
+   ],
+   "source": "fndds",
+   "fdcId": 2709950,
+   "usdaDescription": "Onions, cooked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 7.4,
+    "iron_mg": 0.25,
+    "calcium_mg": 27.0,
+    "zinc_mg": 0.2,
+    "potassium_mg": 171.0
+   }
+  },
+  {
+   "ko": "생브로콜리",
+   "en": "raw broccoli",
+   "aliases": [
+    "raw broccoli"
+   ],
+   "source": "fndds",
+   "fdcId": 2709643,
+   "usdaDescription": "Broccoli, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 8.0,
+    "vitaminC_mg": 91.3,
+    "iron_mg": 0.69,
+    "calcium_mg": 46.0,
+    "zinc_mg": 0.42,
+    "potassium_mg": 303.0
+   }
+  },
+  {
+   "ko": "피클",
+   "en": "pickles",
+   "aliases": [
+    "오이피클",
+    "pickles",
+    "pickle"
+   ],
+   "source": "fndds",
+   "fdcId": 2710078,
+   "usdaDescription": "Pickles, dill",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 4.0,
+    "vitaminC_mg": 2.1,
+    "iron_mg": 0.23,
+    "calcium_mg": 54.0,
+    "zinc_mg": 0.11,
+    "potassium_mg": 112.0
+   }
+  },
+  {
+   "ko": "올리브",
+   "en": "olives",
+   "aliases": [
+    "olive",
+    "olives"
+   ],
+   "source": "fndds",
+   "fdcId": 2710090,
+   "usdaDescription": "Olives, black",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 17.0,
+    "vitaminC_mg": 0.9,
+    "iron_mg": 6.28,
+    "calcium_mg": 88.0,
+    "zinc_mg": 0.22,
+    "potassium_mg": 8.0
+   }
+  },
+  {
+   "ko": "살구",
+   "en": "apricot",
+   "aliases": [
+    "apricot"
+   ],
+   "source": "fndds",
+   "fdcId": 2709221,
+   "usdaDescription": "Apricot, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 96.0,
+    "vitaminC_mg": 10.0,
+    "iron_mg": 0.39,
+    "calcium_mg": 13.0,
+    "zinc_mg": 0.2,
+    "potassium_mg": 259.0
+   }
+  },
+  {
+   "ko": "라임",
+   "en": "lime",
+   "aliases": [
+    "lime"
+   ],
+   "source": "fndds",
+   "fdcId": 2709170,
+   "usdaDescription": "Lime, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 29.1,
+    "iron_mg": 0.6,
+    "calcium_mg": 33.0,
+    "zinc_mg": 0.11,
+    "potassium_mg": 102.0
+   }
+  },
+  {
+   "ko": "코코넛",
+   "en": "coconut",
+   "aliases": [
+    "coconut"
+   ],
+   "source": "fndds",
+   "fdcId": 2707500,
+   "usdaDescription": "Coconut, fresh",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 3.3,
+    "iron_mg": 2.43,
+    "calcium_mg": 14.0,
+    "zinc_mg": 1.1,
+    "potassium_mg": 356.0
+   }
+  },
+  {
+   "ko": "리치",
+   "en": "lychee",
+   "aliases": [
+    "litchi",
+    "lychee"
+   ],
+   "source": "fndds",
+   "fdcId": 2709240,
+   "usdaDescription": "Lychee",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 71.5,
+    "iron_mg": 0.31,
+    "calcium_mg": 5.0,
+    "zinc_mg": 0.07,
+    "potassium_mg": 171.0
+   }
+  },
+  {
+   "ko": "용과",
+   "en": "dragon fruit",
+   "aliases": [
+    "dragonfruit",
+    "dragon fruit",
+    "pitaya"
+   ],
+   "source": "fndds",
+   "fdcId": 2709234,
+   "usdaDescription": "Dragon fruit",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 5.0,
+    "vitaminC_mg": 19.8,
+    "iron_mg": 0.12,
+    "calcium_mg": 13.0,
+    "zinc_mg": 0.09,
+    "potassium_mg": 206.0
+   }
+  },
+  {
+   "ko": "파파야",
+   "en": "papaya",
+   "aliases": [
+    "papaya"
+   ],
+   "source": "fndds",
+   "fdcId": 2709246,
+   "usdaDescription": "Papaya, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 47.0,
+    "vitaminC_mg": 60.9,
+    "iron_mg": 0.25,
+    "calcium_mg": 20.0,
+    "zinc_mg": 0.08,
+    "potassium_mg": 182.0
+   }
+  },
+  {
+   "ko": "구아바",
+   "en": "guava",
+   "aliases": [
+    "guava"
+   ],
+   "source": "fndds",
+   "fdcId": 2709238,
+   "usdaDescription": "Guava, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 31.0,
+    "vitaminC_mg": 228.3,
+    "iron_mg": 0.26,
+    "calcium_mg": 18.0,
+    "zinc_mg": 0.23,
+    "potassium_mg": 417.0
+   }
+  },
+  {
+   "ko": "라즈베리",
+   "en": "raspberries",
+   "aliases": [
+    "raspberry",
+    "raspberries"
+   ],
+   "source": "fndds",
+   "fdcId": 2709281,
+   "usdaDescription": "Raspberries, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 23.0,
+    "iron_mg": 0.45,
+    "calcium_mg": 16.0,
+    "zinc_mg": 0.22,
+    "potassium_mg": 156.0
+   }
+  },
+  {
+   "ko": "블랙베리",
+   "en": "blackberries",
+   "aliases": [
+    "blackberry",
+    "blackberries"
+   ],
+   "source": "fndds",
+   "fdcId": 2709273,
+   "usdaDescription": "Blackberries, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 11.0,
+    "vitaminC_mg": 21.0,
+    "iron_mg": 0.62,
+    "calcium_mg": 29.0,
+    "zinc_mg": 0.53,
+    "potassium_mg": 162.0
+   }
+  },
+  {
+   "ko": "크랜베리",
+   "en": "dried cranberries",
+   "aliases": [
+    "cranberry",
+    "cranberries"
+   ],
+   "source": "fndds",
+   "fdcId": 2709202,
+   "usdaDescription": "Cranberries, dried",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 0.2,
+    "iron_mg": 0.39,
+    "calcium_mg": 9.0,
+    "zinc_mg": 0.1,
+    "potassium_mg": 49.0
+   }
+  },
+  {
+   "ko": "청포도",
+   "en": "green grapes",
+   "aliases": [
+    "green grapes"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 174683,
+   "usdaDescription": "Grapes, red or green (European type, such as Thompson seedless), raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 3.0,
+    "vitaminC_mg": 3.2,
+    "iron_mg": 0.36,
+    "calcium_mg": 10.0,
+    "zinc_mg": 0.07,
+    "potassium_mg": 191.0
+   }
+  },
+  {
+   "ko": "과일칵테일",
+   "en": "fruit cocktail",
+   "aliases": [
+    "fruit cocktail"
+   ],
+   "source": "fndds",
+   "fdcId": 2709290,
+   "usdaDescription": "Fruit cocktail, canned, in syrup",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 12.0,
+    "vitaminC_mg": 1.9,
+    "iron_mg": 0.23,
+    "calcium_mg": 5.0,
+    "zinc_mg": 0.08,
+    "potassium_mg": 87.0
+   }
+  },
+  {
+   "ko": "사과소스",
+   "en": "applesauce",
+   "aliases": [
+    "applesauce"
+   ],
+   "source": "fndds",
+   "fdcId": 2709216,
+   "usdaDescription": "Applesauce, regular",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 40.8,
+    "iron_mg": 0.04,
+    "calcium_mg": 4.0,
+    "zinc_mg": 0.0,
+    "potassium_mg": 101.0
+   }
+  },
+  {
+   "ko": "프룬",
+   "en": "prunes",
+   "aliases": [
+    "dried plum",
+    "prunes"
+   ],
+   "source": "fndds",
+   "fdcId": 2709211,
+   "usdaDescription": "Prune, dried",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 39.0,
+    "vitaminC_mg": 0.6,
+    "iron_mg": 0.93,
+    "calcium_mg": 43.0,
+    "zinc_mg": 0.44,
+    "potassium_mg": 732.0
+   }
+  },
+  {
+   "ko": "말린 망고",
+   "en": "dried mango",
+   "aliases": [
+    "dried mango"
+   ],
+   "source": "fndds",
+   "fdcId": 2709205,
+   "usdaDescription": "Mango, dried",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 67.0,
+    "vitaminC_mg": 42.3,
+    "iron_mg": 0.23,
+    "calcium_mg": 0.0,
+    "zinc_mg": 0.3,
+    "potassium_mg": 279.0
+   }
+  },
+  {
+   "ko": "과일요거트",
+   "en": "fruit yogurt",
+   "aliases": [
+    "요플레",
+    "fruit yogurt"
+   ],
+   "source": "fndds",
+   "fdcId": 2705426,
+   "usdaDescription": "Yogurt, whole milk, fruit",
+   "per100g": {
+    "vitaminD_ug": 1.2,
+    "vitaminB12_ug": 0.32,
+    "vitaminA_ugRAE": 41.0,
+    "vitaminC_mg": 1.7,
+    "iron_mg": 0.07,
+    "calcium_mg": 112.0,
+    "zinc_mg": 0.38,
+    "potassium_mg": 152.0
+   }
+  },
+  {
+   "ko": "저지방우유(2%)",
+   "en": "reduced fat milk",
+   "aliases": [
+    "2% milk",
+    "reduced fat milk"
+   ],
+   "source": "fndds",
+   "fdcId": 2705386,
+   "usdaDescription": "Milk, reduced fat (2%)",
+   "per100g": {
+    "vitaminD_ug": 1.1,
+    "vitaminB12_ug": 0.55,
+    "vitaminA_ugRAE": 83.0,
+    "vitaminC_mg": 0.2,
+    "iron_mg": 0.0,
+    "calcium_mg": 126.0,
+    "zinc_mg": 0.43,
+    "potassium_mg": 159.0
+   }
+  },
+  {
+   "ko": "딸기우유",
+   "en": "strawberry milk",
+   "aliases": [
+    "strawberry milk"
+   ],
+   "source": "fndds",
+   "fdcId": 2705495,
+   "usdaDescription": "Strawberry milk, NFS",
+   "per100g": {
+    "vitaminD_ug": 1.1,
+    "vitaminB12_ug": 0.54,
+    "vitaminA_ugRAE": 55.0,
+    "vitaminC_mg": 0.1,
+    "iron_mg": 0.02,
+    "calcium_mg": 121.0,
+    "zinc_mg": 0.41,
+    "potassium_mg": 150.0
+   }
+  },
+  {
+   "ko": "파마산치즈",
+   "en": "parmesan",
+   "aliases": [
+    "parmesan"
+   ],
+   "source": "fndds",
+   "fdcId": 2705730,
+   "usdaDescription": "Cheese, Parmesan, hard",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 1.38,
+    "vitaminA_ugRAE": 230.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.3,
+    "calcium_mg": 917.0,
+    "zinc_mg": 4.47,
+    "potassium_mg": 129.0
+   }
+  },
+  {
+   "ko": "코티지치즈",
+   "en": "cottage cheese",
+   "aliases": [
+    "cottage cheese"
+   ],
+   "source": "fndds",
+   "fdcId": 2705747,
+   "usdaDescription": "Cheese, cottage, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.42,
+    "vitaminA_ugRAE": 69.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.13,
+    "calcium_mg": 103.0,
+    "zinc_mg": 0.61,
+    "potassium_mg": 120.0
+   }
+  },
+  {
+   "ko": "리코타치즈",
+   "en": "ricotta",
+   "aliases": [
+    "ricotta"
+   ],
+   "source": "fndds",
+   "fdcId": 2705750,
+   "usdaDescription": "Cheese, Ricotta",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 0.54,
+    "vitaminA_ugRAE": 117.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.27,
+    "calcium_mg": 248.0,
+    "zinc_mg": 0.95,
+    "potassium_mg": 178.0
+   }
+  },
+  {
+   "ko": "연유",
+   "en": "condensed milk",
+   "aliases": [
+    "condensed milk"
+   ],
+   "source": "fndds",
+   "fdcId": 2705402,
+   "usdaDescription": "Milk, condensed, sweetened",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 0.44,
+    "vitaminA_ugRAE": 74.0,
+    "vitaminC_mg": 2.6,
+    "iron_mg": 0.19,
+    "calcium_mg": 284.0,
+    "zinc_mg": 0.94,
+    "potassium_mg": 371.0
+   }
+  },
+  {
+   "ko": "초코아이스크림",
+   "en": "chocolate ice cream",
+   "aliases": [
+    "chocolate ice cream"
+   ],
+   "source": "fndds",
+   "fdcId": 2705632,
+   "usdaDescription": "Ice cream, chocolate",
+   "per100g": {
+    "vitaminD_ug": 0.2,
+    "vitaminB12_ug": 0.29,
+    "vitaminA_ugRAE": 118.0,
+    "vitaminC_mg": 0.7,
+    "iron_mg": 0.93,
+    "calcium_mg": 109.0,
+    "zinc_mg": 0.58,
+    "potassium_mg": 249.0
+   }
+  },
+  {
+   "ko": "프로즌요거트",
+   "en": "frozen yogurt",
+   "aliases": [
+    "frozen yogurt"
+   ],
+   "source": "fndds",
+   "fdcId": 2705451,
+   "usdaDescription": "Frozen yogurt, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 0.07,
+    "vitaminA_ugRAE": 49.0,
+    "vitaminC_mg": 0.7,
+    "iron_mg": 0.46,
+    "calcium_mg": 100.0,
+    "zinc_mg": 0.28,
+    "potassium_mg": 156.0
+   }
+  },
+  {
+   "ko": "푸딩",
+   "en": "pudding",
+   "aliases": [
+    "pudding"
+   ],
+   "source": "fndds",
+   "fdcId": 2705692,
+   "usdaDescription": "Pudding, flavors other than chocolate, ready-to-eat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.15,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 0.2,
+    "iron_mg": 0.09,
+    "calcium_mg": 49.0,
+    "zinc_mg": 0.16,
+    "potassium_mg": 65.0
+   }
+  },
+  {
+   "ko": "홍차",
+   "en": "black tea",
+   "aliases": [
+    "black tea"
+   ],
+   "source": "fndds",
+   "fdcId": 2710488,
+   "usdaDescription": "Tea, hot, leaf, black",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.02,
+    "calcium_mg": 0.0,
+    "zinc_mg": 0.02,
+    "potassium_mg": 37.0
+   }
+  },
+  {
+   "ko": "우롱차",
+   "en": "oolong tea",
+   "aliases": [
+    "oolong tea"
+   ],
+   "source": "fndds",
+   "fdcId": 2710492,
+   "usdaDescription": "Tea, hot, leaf, oolong",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.0,
+    "calcium_mg": 1.0,
+    "zinc_mg": 0.01,
+    "potassium_mg": 12.0
+   }
+  },
+  {
+   "ko": "밀크티",
+   "en": "bubble tea",
+   "aliases": [
+    "버블티",
+    "bubble tea",
+    "milk tea"
+   ],
+   "source": "fndds",
+   "fdcId": 2710508,
+   "usdaDescription": "Tea, bubble",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.02,
+    "vitaminA_ugRAE": 12.0,
+    "vitaminC_mg": 0.1,
+    "iron_mg": 0.13,
+    "calcium_mg": 15.0,
+    "zinc_mg": 0.06,
+    "potassium_mg": 17.0
+   }
+  },
+  {
+   "ko": "아이스티",
+   "en": "iced tea",
+   "aliases": [
+    "iced tea"
+   ],
+   "source": "fndds",
+   "fdcId": 2710527,
+   "usdaDescription": "Tea, iced, bottled, black",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.0,
+    "calcium_mg": 4.0,
+    "zinc_mg": 0.01,
+    "potassium_mg": 14.0
+   }
+  },
+  {
+   "ko": "스포츠음료",
+   "en": "sports drink",
+   "aliases": [
+    "게토레이",
+    "sports drink"
+   ],
+   "source": "fndds",
+   "fdcId": 2710771,
+   "usdaDescription": "Sports drink, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.4,
+    "iron_mg": 0.05,
+    "calcium_mg": 1.0,
+    "zinc_mg": 0.01,
+    "potassium_mg": 15.0
+   }
+  },
+  {
+   "ko": "에너지드링크",
+   "en": "energy drink",
+   "aliases": [
+    "energy drink"
+   ],
+   "source": "fndds",
+   "fdcId": 2710756,
+   "usdaDescription": "Energy Drink",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 1.97,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.06,
+    "calcium_mg": 6.0,
+    "zinc_mg": 0.01,
+    "potassium_mg": 3.0
+   }
+  },
+  {
+   "ko": "코코아",
+   "en": "hot chocolate",
+   "aliases": [
+    "핫초코",
+    "hot chocolate",
+    "cocoa"
+   ],
+   "source": "fndds",
+   "fdcId": 2705473,
+   "usdaDescription": "Hot chocolate / cocoa, made with whole or reduced fat (2%) milk",
+   "per100g": {
+    "vitaminD_ug": 0.9,
+    "vitaminB12_ug": 0.42,
+    "vitaminA_ugRAE": 68.0,
+    "vitaminC_mg": 0.2,
+    "iron_mg": 0.0,
+    "calcium_mg": 102.0,
+    "zinc_mg": 0.45,
+    "potassium_mg": 152.0
+   }
+  },
+  {
+   "ko": "토마토주스",
+   "en": "tomato juice",
+   "aliases": [
+    "tomato juice"
+   ],
+   "source": "fndds",
+   "fdcId": 2709728,
+   "usdaDescription": "Tomato juice, 100%",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 23.0,
+    "vitaminC_mg": 49.8,
+    "iron_mg": 0.3,
+    "calcium_mg": 10.0,
+    "zinc_mg": 0.1,
+    "potassium_mg": 198.0
+   }
+  },
+  {
+   "ko": "포도주스",
+   "en": "grape juice",
+   "aliases": [
+    "grape juice"
+   ],
+   "source": "fndds",
+   "fdcId": 2709325,
+   "usdaDescription": "Grape juice, 100%",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 50.4,
+    "iron_mg": 0.08,
+    "calcium_mg": 8.0,
+    "zinc_mg": 0.04,
+    "potassium_mg": 50.0
+   }
+  },
+  {
+   "ko": "자몽주스",
+   "en": "grapefruit juice",
+   "aliases": [
+    "grapefruit juice"
+   ],
+   "source": "fndds",
+   "fdcId": 2709177,
+   "usdaDescription": "Grapefruit juice, 100%, NS as to form",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 31.8,
+    "iron_mg": 0.04,
+    "calcium_mg": 12.0,
+    "zinc_mg": 0.04,
+    "potassium_mg": 134.0
+   }
+  },
+  {
+   "ko": "레모네이드",
+   "en": "lemonade",
+   "aliases": [
+    "lemonade"
+   ],
+   "source": "fndds",
+   "fdcId": 2710570,
+   "usdaDescription": "Lemonade, fruit juice drink",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 3.1,
+    "iron_mg": 0.0,
+    "calcium_mg": 2.0,
+    "zinc_mg": 0.01,
+    "potassium_mg": 10.0
+   }
+  },
+  {
+   "ko": "화이트와인",
+   "en": "white wine",
+   "aliases": [
+    "white wine"
+   ],
+   "source": "fndds",
+   "fdcId": 2710689,
+   "usdaDescription": "Wine, white",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.27,
+    "calcium_mg": 9.0,
+    "zinc_mg": 0.12,
+    "potassium_mg": 71.0
+   }
+  },
+  {
+   "ko": "그래놀라바",
+   "en": "granola bar",
+   "aliases": [
+    "granola bar",
+    "cereal bar"
+   ],
+   "source": "fndds",
+   "fdcId": 2708101,
+   "usdaDescription": "Cereal or Granola bar, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 2.0,
+    "vitaminC_mg": 0.9,
+    "iron_mg": 2.95,
+    "calcium_mg": 61.0,
+    "zinc_mg": 2.03,
+    "potassium_mg": 336.0
+   }
+  },
+  {
+   "ko": "단백질바",
+   "en": "protein bar",
+   "aliases": [
+    "protein bar"
+   ],
+   "source": "fndds",
+   "fdcId": 2708127,
+   "usdaDescription": "Nutrition bar or meal replacement bar, NFS",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 2.76,
+    "vitaminA_ugRAE": 526.0,
+    "vitaminC_mg": 104.1,
+    "iron_mg": 5.11,
+    "calcium_mg": 284.0,
+    "zinc_mg": 5.96,
+    "potassium_mg": 331.0
+   }
+  },
+  {
+   "ko": "치즈케이크",
+   "en": "cheesecake",
+   "aliases": [
+    "cheesecake"
+   ],
+   "source": "fndds",
+   "fdcId": 2707861,
+   "usdaDescription": "Cheesecake, plain",
+   "per100g": {
+    "vitaminD_ug": 0.3,
+    "vitaminB12_ug": 0.11,
+    "vitaminA_ugRAE": 221.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.75,
+    "calcium_mg": 67.0,
+    "zinc_mg": 0.58,
+    "potassium_mg": 104.0
+   }
+  },
+  {
+   "ko": "애플파이",
+   "en": "apple pie",
+   "aliases": [
+    "apple pie"
+   ],
+   "source": "fndds",
+   "fdcId": 2707995,
+   "usdaDescription": "Pie, apple",
+   "per100g": {
+    "vitaminD_ug": 0.1,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 40.0,
+    "vitaminC_mg": 0.5,
+    "iron_mg": 1.23,
+    "calcium_mg": 11.0,
+    "zinc_mg": 0.22,
+    "potassium_mg": 80.0
+   }
+  },
+  {
+   "ko": "컵케이크",
+   "en": "cupcake",
+   "aliases": [
+    "cupcake"
+   ],
+   "source": "fndds",
+   "fdcId": 2707866,
+   "usdaDescription": "Cake or cupcake, chocolate with chocolate icing, bakery",
+   "per100g": {
+    "vitaminD_ug": 0.3,
+    "vitaminB12_ug": 0.11,
+    "vitaminA_ugRAE": 19.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.73,
+    "calcium_mg": 70.0,
+    "zinc_mg": 0.5,
+    "potassium_mg": 153.0
+   }
+  },
+  {
+   "ko": "나초",
+   "en": "tortilla chips",
+   "aliases": [
+    "tortilla chips",
+    "nachos"
+   ],
+   "source": "fndds",
+   "fdcId": 2708202,
+   "usdaDescription": "Tortilla chips, plain",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.52,
+    "calcium_mg": 106.0,
+    "zinc_mg": 1.38,
+    "potassium_mg": 182.0
+   }
+  },
+  {
+   "ko": "설탕",
+   "en": "sugar",
+   "aliases": [
+    "sugar"
+   ],
+   "source": "fndds",
+   "fdcId": 2710258,
+   "usdaDescription": "Sugar, white, granulated or lump",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.05,
+    "calcium_mg": 1.0,
+    "zinc_mg": 0.01,
+    "potassium_mg": 2.0
+   }
+  },
+  {
+   "ko": "식초",
+   "en": "vinegar",
+   "aliases": [
+    "vinegar"
+   ],
+   "source": "fndds",
+   "fdcId": 2709351,
+   "usdaDescription": "Vinegar",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.2,
+    "calcium_mg": 7.0,
+    "zinc_mg": 0.04,
+    "potassium_mg": 73.0
+   }
+  },
+  {
+   "ko": "머스타드",
+   "en": "mustard",
+   "aliases": [
+    "mustard"
+   ],
+   "source": "fndds",
+   "fdcId": 2710085,
+   "usdaDescription": "Mustard",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 4.0,
+    "vitaminC_mg": 0.4,
+    "iron_mg": 1.59,
+    "calcium_mg": 63.0,
+    "zinc_mg": 0.64,
+    "potassium_mg": 150.0
+   }
+  },
+  {
+   "ko": "바베큐소스",
+   "en": "barbecue sauce",
+   "aliases": [
+    "bbq sauce",
+    "barbecue sauce"
+   ],
+   "source": "fndds",
+   "fdcId": 2709750,
+   "usdaDescription": "Barbecue sauce",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 11.0,
+    "vitaminC_mg": 0.6,
+    "iron_mg": 0.64,
+    "calcium_mg": 33.0,
+    "zinc_mg": 0.17,
+    "potassium_mg": 232.0
+   }
+  },
+  {
+   "ko": "굴소스",
+   "en": "oyster sauce",
+   "aliases": [
+    "oyster sauce"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 174529,
+   "usdaDescription": "Sauce, oyster, ready-to-serve",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.41,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.1,
+    "iron_mg": 0.18,
+    "calcium_mg": 32.0,
+    "zinc_mg": 0.09,
+    "potassium_mg": 54.0
+   }
+  },
+  {
+   "ko": "데리야끼소스",
+   "en": "teriyaki sauce",
+   "aliases": [
+    "teriyaki sauce"
+   ],
+   "source": "fndds",
+   "fdcId": 2707445,
+   "usdaDescription": "Teriyaki sauce",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.7,
+    "calcium_mg": 25.0,
+    "zinc_mg": 0.1,
+    "potassium_mg": 225.0
+   }
+  },
+  {
+   "ko": "핫소스",
+   "en": "hot sauce",
+   "aliases": [
+    "hot sauce"
+   ],
+   "source": "fndds",
+   "fdcId": 2710093,
+   "usdaDescription": "Hot pepper sauce",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 82.0,
+    "vitaminC_mg": 4.5,
+    "iron_mg": 1.16,
+    "calcium_mg": 12.0,
+    "zinc_mg": 0.16,
+    "potassium_mg": 128.0
+   }
+  },
+  {
+   "ko": "살사",
+   "en": "salsa",
+   "aliases": [
+    "salsa"
+   ],
+   "source": "fndds",
+   "fdcId": 2709738,
+   "usdaDescription": "Salsa, red",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 24.0,
+    "vitaminC_mg": 1.9,
+    "iron_mg": 0.42,
+    "calcium_mg": 28.0,
+    "zinc_mg": 0.2,
+    "potassium_mg": 258.0
+   }
+  },
+  {
+   "ko": "마가린",
+   "en": "margarine",
+   "aliases": [
+    "margarine"
+   ],
+   "source": "fndds",
+   "fdcId": 2710159,
+   "usdaDescription": "Margarine, stick",
+   "per100g": {
+    "vitaminD_ug": 3.7,
+    "vitaminB12_ug": 0.1,
+    "vitaminA_ugRAE": 819.0,
+    "vitaminC_mg": 0.2,
+    "iron_mg": 0.06,
+    "calcium_mg": 3.0,
+    "zinc_mg": 0.0,
+    "potassium_mg": 18.0
+   }
+  },
+  {
+   "ko": "식용유",
+   "en": "vegetable oil",
+   "aliases": [
+    "카놀라유",
+    "cooking oil",
+    "vegetable oil",
+    "canola oil"
+   ],
+   "source": "fndds",
+   "fdcId": 2710188,
+   "usdaDescription": "Canola oil",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 0.0,
+    "calcium_mg": 0.0,
+    "zinc_mg": 0.0,
+    "potassium_mg": 0.0
+   }
+  },
+  {
+   "ko": "오리알",
+   "en": "duck egg",
+   "aliases": [
+    "duck egg"
+   ],
+   "source": "fndds",
+   "fdcId": 2707176,
+   "usdaDescription": "Duck egg, cooked",
+   "per100g": {
+    "vitaminD_ug": 1.6,
+    "vitaminB12_ug": 4.03,
+    "vitaminA_ugRAE": 206.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 3.6,
+    "calcium_mg": 60.0,
+    "zinc_mg": 1.32,
+    "potassium_mg": 208.0
+   }
+  },
+  {
+   "ko": "쌀",
+   "en": "uncooked rice",
+   "aliases": [
+    "white rice uncooked"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 168877,
+   "usdaDescription": "Rice, white, long-grain, regular, raw, enriched",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 4.31,
+    "calcium_mg": 28.0,
+    "zinc_mg": 1.09,
+    "potassium_mg": 115.0
+   }
+  },
+  {
+   "ko": "현미(생)",
+   "en": "raw brown rice",
+   "aliases": [
+    "brown rice uncooked"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 169703,
+   "usdaDescription": "Rice, brown, long-grain, raw (Includes foods for USDA's Food Distribution Program)",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 0.0,
+    "iron_mg": 1.29,
+    "calcium_mg": 9.0,
+    "zinc_mg": 2.13,
+    "potassium_mg": 250.0
+   }
+  },
+  {
+   "ko": "감자(생)",
+   "en": "raw potato",
+   "aliases": [
+    "raw potato"
+   ],
+   "source": "sr_legacy",
+   "fdcId": 170026,
+   "usdaDescription": "Potatoes, flesh and skin, raw",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.0,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 19.7,
+    "iron_mg": 0.81,
+    "calcium_mg": 12.0,
+    "zinc_mg": 0.3,
+    "potassium_mg": 425.0
+   }
+  },
+  {
+   "ko": "양송이버섯(익힌)",
+   "en": "cooked mushrooms",
+   "aliases": [
+    "cooked mushrooms"
+   ],
+   "source": "fndds",
+   "fdcId": 2709937,
+   "usdaDescription": "Mushrooms, fresh, cooked, no added fat",
+   "per100g": {
+    "vitaminD_ug": 0.0,
+    "vitaminB12_ug": 0.05,
+    "vitaminA_ugRAE": 0.0,
+    "vitaminC_mg": 2.2,
+    "iron_mg": 0.28,
+    "calcium_mg": 6.0,
+    "zinc_mg": 0.62,
+    "potassium_mg": 463.0
+   }
+  }
+ ]
+}

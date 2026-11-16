@@ -66,6 +66,7 @@ flutter:
     - assets/
     - assets/calsnap_phrases.json
     - assets/food_db_seed.json
+    - assets/nutrition/
     - assets/promo/
 
 # Android mipmap-mdpi ~ xxxhdpi용 ic_launcher를 assets/icon/icon.png(512x512)로부터
