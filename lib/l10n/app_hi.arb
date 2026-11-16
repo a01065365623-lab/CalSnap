@@ -324,5 +324,7 @@
   "microNutrientNoData": "जानकारी नहीं",
   "microNutrientUnmatchedMeals": "{count, plural, =1{1 भोजन की पोषण जानकारी नहीं है} other{{count} भोजन की पोषण जानकारी नहीं है}}",
   "microNutrientBasisNote": "यह दर्ज किए गए भोजन के नाम और मात्रा से गणना है, फ़ोटो पहचान से नहीं।",
-  "microNutrientDisclaimer": "केवल संदर्भ के लिए, USDA खाद्य संरचना डेटा और कोरिया के MFDS दैनिक मानों पर आधारित। यह चिकित्सा सलाह नहीं है।"
+  "microNutrientDisclaimer": "केवल संदर्भ के लिए, USDA खाद्य संरचना डेटा और कोरिया के MFDS दैनिक मानों पर आधारित। यह चिकित्सा सलाह नहीं है।",
+
+  "microNutrientApproxNote": "कुछ की गणना मिलते-जुलते भोजन के मानों से की गई है।"
 }

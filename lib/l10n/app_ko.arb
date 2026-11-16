@@ -475,5 +475,8 @@
   "microNutrientBasisNote": "사진 인식 결과가 아니라 기록된 음식 이름과 양으로 계산해요.",
   "@microNutrientBasisNote": {"description": "사진 인식이 아니라 기록된 음식 이름으로 계산한다는 안내"},
   "microNutrientDisclaimer": "USDA 식품 성분 자료와 식약처 영양성분 기준치 기반 참고용이에요. 의학적 조언이 아니에요.",
-  "@microNutrientDisclaimer": {"description": "카드 하단 출처·참고용 안내. 값은 USDA 자료, % 기준은 식약처 영양성분 기준치"}
+  "@microNutrientDisclaimer": {"description": "카드 하단 출처·참고용 안내. 값은 USDA 자료, % 기준은 식약처 영양성분 기준치"},
+
+  "microNutrientApproxNote": "일부는 비슷한 음식 값으로 계산했어요.",
+  "@microNutrientApproxNote": {"description": "합산된 음식 중 일부가 같은 음식이 없어 비슷한 음식(USDA) 값으로 계산됐을 때 비타민·미네랄 카드에 붙는 안내"}
 }

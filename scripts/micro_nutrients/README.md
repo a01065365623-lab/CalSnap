@@ -32,6 +32,12 @@ python scripts/micro_nutrients/build_micro_nutrients.py \
 
 - USDA에 같은 음식이 있을 때만 넣었다. 비슷하지만 다른 음식(예: 명란 ≠ caviar, 순대 ≠ blood sausage,
   어묵 ≠ fish cake/patty, 된장 ≠ miso, 깐풍기 ≠ General Tso chicken)은 넣지 않았다.
+- 같은 음식은 없지만 가장 가까운 USDA 항목으로 대신한 15개는 `foods.tsv` 마지막 열과 JSON에
+  `approx: true`로 표시한다. 이런 음식이 합산에 들어가면 카드에 "일부는 비슷한 음식 값으로 계산했어요"가 붙는다.
+  라면(ramen soup), 돈까스(coated pork chop), 탕수육(sweet and sour pork), 김(dried seaweed),
+  단무지(pickled radishes), 볶음면(lo mein), 군만두·찐만두(wonton/pot sticker), 족발(pig's feet),
+  밀크티(bubble tea), 단호박(pumpkin), 애호박(green summer squash), 대파(green onions),
+  볶음밥(fried rice, NFS), 치킨(coated fried chicken breast).
 - 김치찌개·된장찌개·김밥·잡채·불고기·삼계탕·냉면·짜장면처럼 USDA에 없는 한식은 비워 두었다
   (매칭되지 않으면 앱에서 "영양 정보 없음"으로 센다).
 

@@ -83,6 +83,10 @@ class MicroNutrientCard extends StatelessWidget {
                   ],
                 ),
               ],
+            if (summary.hasData && summary.approxCount > 0) ...[
+              const SizedBox(height: 12),
+              _Notice(text: l10n.microNutrientApproxNote),
+            ],
             if (summary.unmatchedCount > 0) ...[
               const SizedBox(height: 12),
               Row(
@@ -119,6 +123,23 @@ class MicroNutrientCard extends StatelessWidget {
       noDataLabel: l10n.microNutrientNoData,
       barColor: isVitamin ? AppColors.goalOrange : AppColors.waterBlue,
       trackColor: isVitamin ? AppColors.goalOrangeBg : AppColors.waterBlueBg,
+    );
+  }
+}
+
+class _Notice extends StatelessWidget {
+  final String text;
+  const _Notice({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Icon(Icons.info_outline, size: 14, color: AppColors.textMuted),
+        const SizedBox(width: 4),
+        Expanded(child: Text(text, style: const TextStyle(fontSize: 12, color: AppColors.textMuted))),
+      ],
     );
   }
 }

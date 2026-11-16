@@ -12,7 +12,15 @@ class MicroNutrientFood {
   final String nameEn;
   final Map<MicroNutrient, double?> per100g;
 
-  const MicroNutrientFood({required this.nameKo, required this.nameEn, required this.per100g});
+  /// USDA에 같은 음식이 없어 가장 가까운 항목(예: 라면 → ramen soup)의 값을 쓴 경우.
+  final bool approx;
+
+  const MicroNutrientFood({
+    required this.nameKo,
+    required this.nameEn,
+    required this.per100g,
+    this.approx = false,
+  });
 }
 
 /// 음식명 비교용 정규화: 소문자로 바꾸고 공백·괄호 문자·흔한 구분 기호를 없앤다.
@@ -57,6 +65,7 @@ class MicroNutrientDb {
           for (final n in MicroNutrient.values)
             n: per100g[n.jsonKey] is num ? (per100g[n.jsonKey] as num).toDouble() : null,
         },
+        approx: raw['approx'] == true,
       );
       final aliases = raw['aliases'] is List ? (raw['aliases'] as List).whereType<String>() : const <String>[];
       for (final name in [ko, en, ...aliases]) {
@@ -105,7 +114,15 @@ class MicroNutrientSummary {
   /// 영양 정보를 못 붙인 음식 기록 수(음식명이 매칭되지 않았거나, 먹은 양(g)이 없는 기록).
   final int unmatchedCount;
 
-  const MicroNutrientSummary({required this.totals, required this.foodEntryCount, required this.unmatchedCount});
+  /// 합산에 들어간 기록 중 비슷한 음식 값([MicroNutrientFood.approx])으로 계산한 수.
+  final int approxCount;
+
+  const MicroNutrientSummary({
+    required this.totals,
+    required this.foodEntryCount,
+    required this.unmatchedCount,
+    this.approxCount = 0,
+  });
 
   int get matchedCount => foodEntryCount - unmatchedCount;
   bool get hasData => matchedCount > 0;
@@ -117,6 +134,7 @@ MicroNutrientSummary summarizeMicroNutrients(Iterable<DailyLogEntry> entries, Mi
   final totals = <MicroNutrient, double>{};
   var foodCount = 0;
   var unmatched = 0;
+  var approx = 0;
   for (final e in entries) {
     if (e.type != LogType.food) continue;
     foodCount++;
@@ -126,11 +144,17 @@ MicroNutrientSummary summarizeMicroNutrients(Iterable<DailyLogEntry> entries, Mi
       unmatched++;
       continue;
     }
+    if (food.approx) approx++;
     for (final n in MicroNutrient.values) {
       final per100 = food.per100g[n];
       if (per100 == null) continue;
       totals[n] = (totals[n] ?? 0) + per100 * grams / 100;
     }
   }
-  return MicroNutrientSummary(totals: totals, foodEntryCount: foodCount, unmatchedCount: unmatched);
+  return MicroNutrientSummary(
+    totals: totals,
+    foodEntryCount: foodCount,
+    unmatchedCount: unmatched,
+    approxCount: approx,
+  );
 }

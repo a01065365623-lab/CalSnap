@@ -324,5 +324,7 @@
   "microNutrientNoData": "لا توجد بيانات",
   "microNutrientUnmatchedMeals": "{count, plural, =1{وجبة واحدة بلا بيانات غذائية} other{{count} وجبات بلا بيانات غذائية}}",
   "microNutrientBasisNote": "يُحسب من أسماء الأطعمة المسجلة وكمياتها، وليس من التعرّف على الصور.",
-  "microNutrientDisclaimer": "للاسترشاد فقط، استنادًا إلى بيانات تركيب الأغذية من USDA والقيم اليومية لهيئة MFDS الكورية. ليست نصيحة طبية."
+  "microNutrientDisclaimer": "للاسترشاد فقط، استنادًا إلى بيانات تركيب الأغذية من USDA والقيم اليومية لهيئة MFDS الكورية. ليست نصيحة طبية.",
+
+  "microNutrientApproxNote": "حُسب بعضها باستخدام قيم طعام مشابه."
 }

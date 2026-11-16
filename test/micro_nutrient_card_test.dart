@@ -77,6 +77,27 @@ void main() {
     expect(b12.dx, greaterThan(d.dx));
   });
 
+  testWidgets('비슷한 음식 값이 합산에 들어가면 안내 문구', (tester) async {
+    await pump(
+      tester,
+      const MicroNutrientCard(
+        summary: MicroNutrientSummary(
+          totals: {MicroNutrient.iron: 2},
+          foodEntryCount: 2,
+          unmatchedCount: 0,
+          approxCount: 1,
+        ),
+      ),
+    );
+    expect(find.text(ko.microNutrientApproxNote), findsOneWidget);
+    expect(find.text('일부는 비슷한 음식 값으로 계산했어요.'), findsOneWidget);
+  });
+
+  testWidgets('비슷한 음식이 없으면 안내 없음', (tester) async {
+    await pump(tester, const MicroNutrientCard(summary: withData));
+    expect(find.text(ko.microNutrientApproxNote), findsNothing);
+  });
+
   testWidgets('기록이 없으면 카드 전체가 정보 없음(미매칭 안내 없음)', (tester) async {
     await pump(
       tester,
@@ -118,6 +139,7 @@ void main() {
         },
         foodEntryCount: 30,
         unmatchedCount: 21,
+        approxCount: 5,
       );
       await pump(tester, const MicroNutrientCard(summary: big), locale: locale);
       expect(tester.takeException(), isNull);

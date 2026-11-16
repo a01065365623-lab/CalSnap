@@ -324,5 +324,7 @@
   "microNutrientNoData": "Veri yok",
   "microNutrientUnmatchedMeals": "{count} öğünün besin verisi yok",
   "microNutrientBasisNote": "Fotoğraf tanımaya değil, kaydedilen yemek adı ve miktarına göre hesaplanır.",
-  "microNutrientDisclaimer": "Yalnızca bilgi amaçlıdır; USDA besin bileşimi verilerine ve Kore MFDS günlük referans değerlerine dayanır. Tıbbi tavsiye değildir."
+  "microNutrientDisclaimer": "Yalnızca bilgi amaçlıdır; USDA besin bileşimi verilerine ve Kore MFDS günlük referans değerlerine dayanır. Tıbbi tavsiye değildir.",
+
+  "microNutrientApproxNote": "Bazıları benzer bir yiyeceğin değerleriyle hesaplandı."
 }

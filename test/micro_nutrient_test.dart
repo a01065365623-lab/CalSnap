@@ -6,8 +6,11 @@ import 'package:calsnap/models/micro_nutrient.dart';
 import 'package:calsnap/services/micro_nutrient_db.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-Map<String, Object?> food(String ko, String en, List<String> aliases, Map<String, num?> per100g) => {
+Map<String, Object?> food(String ko, String en, List<String> aliases, Map<String, num?> per100g,
+        {Object? approx = false}) =>
+    {
       'ko': ko,
+      'approx': approx,
       'en': en,
       'aliases': aliases,
       'per100g': {
@@ -25,6 +28,7 @@ final sampleDb = MicroNutrientDb.fromJson({
     }),
     food('닭가슴살', 'chicken breast', ['chicken breast'], {'zinc_mg': 1.0, 'potassium_mg': 250}),
     food('명태', 'pollock', ['동태'], {'vitaminD_ug': null, 'calcium_mg': 20}),
+    food('라면', 'ramen', ['ramyeon'], {'iron_mg': 0.5, 'calcium_mg': 10}, approx: true),
   ],
 });
 
@@ -92,6 +96,35 @@ void main() {
       });
       expect(partial.size, 1);
       expect(partial.match('apple')?.per100g[MicroNutrient.vitaminC], 4);
+    });
+  });
+
+  group('approx(비슷한 음식 값)', () {
+    test('JSON의 approx=true만 비슷한 음식으로 읽고, 다른 값은 false', () {
+      expect(sampleDb.match('라면')?.approx, isTrue);
+      expect(sampleDb.match('삶은 계란')?.approx, isFalse);
+      final odd = MicroNutrientDb.fromJson({
+        'foods': [food('사과', 'apple', [], {}, approx: 'true'), food('배', 'pear', [], {}, approx: null)],
+      });
+      expect(odd.match('apple')?.approx, isFalse);
+      expect(odd.match('pear')?.approx, isFalse);
+    });
+
+    test('합산에 들어간 approx 기록만 센다(미매칭·양 없음은 제외)', () {
+      final s = summarizeMicroNutrients([
+        entry('라면', 500),
+        entry('ramyeon', 250),
+        entry('라면', null),
+        entry('삶은 계란', 50),
+        entry('김치찌개', 300),
+      ], sampleDb);
+      expect(s.approxCount, 2);
+      expect(s.matchedCount, 3);
+      expect(s.totals[MicroNutrient.iron], closeTo(0.5 * 7.5 + 1.2 * 0.5, 1e-9));
+    });
+
+    test('approx 음식이 없으면 0', () {
+      expect(summarizeMicroNutrients([entry('삶은 계란', 100)], sampleDb).approxCount, 0);
     });
   });
 
@@ -173,6 +206,21 @@ void main() {
         expect(db.match(f['ko'] as String)?.nameKo, f['ko']);
         expect(db.match(f['en'] as String)?.nameKo, f['ko']);
       }
+    });
+
+    test('비슷한 음식으로 대신한 15개만 approx=true', () {
+      const expected = {
+        '라면', '돈까스', '탕수육', '김', '단무지', '볶음면', '군만두', '찐만두', //
+        '족발', '밀크티', '단호박', '애호박', '대파', '볶음밥', '치킨',
+      };
+      for (final f in foods) {
+        expect(f['approx'], isA<bool>(), reason: '${f['ko']}');
+      }
+      expect(foods.where((f) => f['approx'] == true).map((f) => f['ko']).toSet(), expected);
+      for (final name in expected) {
+        expect(db.match(name)?.approx, isTrue, reason: name);
+      }
+      expect(db.match('쌀밥')?.approx, isFalse);
     });
 
     test('흔한 음식 매칭', () {

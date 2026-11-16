@@ -72,8 +72,10 @@ def main():
     for line in TSV.read_text(encoding="utf-8").splitlines():
         if not line.strip() or line.startswith("#"):
             continue
-        ko, en, aliases, dataset, fdc_id, desc = line.split("\t")
-        rows.append((ko, en, [a for a in aliases.split(";") if a], dataset, fdc_id, desc))
+        ko, en, aliases, dataset, fdc_id, desc, approx = line.split("\t")
+        if approx not in ("", "approx"):
+            raise SystemExit(f"approx 열은 비우거나 approx여야 한다: {ko}={approx!r}")
+        rows.append((ko, en, [a for a in aliases.split(";") if a], dataset, fdc_id, desc, approx == "approx"))
 
     loaded = {}
     for ds, d in dirs.items():
@@ -81,7 +83,7 @@ def main():
         loaded[ds] = load_dataset(ds, d, ids)
 
     foods, missing = [], []
-    for ko, en, aliases, ds, fdc_id, desc in rows:
+    for ko, en, aliases, ds, fdc_id, desc, approx in rows:
         descriptions, values = loaded[ds]
         if descriptions.get(fdc_id) != desc:
             raise SystemExit(f"대응표 불일치: {ko} fdc_id={fdc_id} 원본='{descriptions.get(fdc_id)}' 대응표='{desc}'")
@@ -96,13 +98,15 @@ def main():
             "source": ds,
             "fdcId": int(fdc_id),
             "usdaDescription": desc,
+            # 같은 음식이 USDA에 없어 가장 가까운 항목으로 대신했는지(앱에서 안내 문구 표시).
+            "approx": approx,
             "per100g": per100g,
         })
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     data = {
         "version": 1,
-        "note": "100g당 값. USDA FoodData Central 원본 값 그대로이며, 원본에 없는 값은 null이다.",
+        "note": "100g당 값. USDA FoodData Central 원본 값 그대로이며, 원본에 없는 값은 null이다. approx=true는 같은 음식이 없어 가장 가까운 USDA 항목으로 대신한 것이다.",
         "sources": SOURCES,
         "units": {k: k.split("_", 1)[1] for k in NUTRIENTS},
         "foods": foods,

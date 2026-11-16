@@ -1,6 +1,6 @@
 {
  "version": 1,
- "note": "100g당 값. USDA FoodData Central 원본 값 그대로이며, 원본에 없는 값은 null이다.",
+ "note": "100g당 값. USDA FoodData Central 원본 값 그대로이며, 원본에 없는 값은 null이다. approx=true는 같은 음식이 없어 가장 가까운 USDA 항목으로 대신한 것이다.",
  "sources": {
   "fndds": {
    "name": "USDA FoodData Central — FNDDS (Survey Foods), release 2024-10-31",
@@ -37,6 +37,7 @@
    "source": "fndds",
    "fdcId": 2708408,
    "usdaDescription": "Rice, white, cooked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -58,6 +59,7 @@
    "source": "fndds",
    "fdcId": 2708414,
    "usdaDescription": "Rice, brown, cooked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -80,6 +82,7 @@
    "source": "sr_legacy",
    "fdcId": 169711,
    "usdaDescription": "Rice, white, glutinous, unenriched, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -101,6 +104,7 @@
    "source": "sr_legacy",
    "fdcId": 170285,
    "usdaDescription": "Barley, pearled, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -124,6 +128,7 @@
    "source": "fndds",
    "fdcId": 2708418,
    "usdaDescription": "Congee",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -145,6 +150,7 @@
    "source": "fndds",
    "fdcId": 2708381,
    "usdaDescription": "Oatmeal, regular or quick, made with water, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -165,6 +171,7 @@
    "source": "fndds",
    "fdcId": 2708952,
    "usdaDescription": "Rice, fried, NFS",
+   "approx": true,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -186,6 +193,7 @@
    "source": "fndds",
    "fdcId": 2708950,
    "usdaDescription": "Bibimbap, Korean",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.26,
@@ -209,6 +217,7 @@
    "source": "fndds",
    "fdcId": 2708957,
    "usdaDescription": "Dukboki or Tteokbokki, Korean",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.22,
@@ -233,6 +242,7 @@
    "source": "fndds",
    "fdcId": 2709152,
    "usdaDescription": "Soup, ramen noodles, water added",
+   "approx": true,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.04,
@@ -253,6 +263,7 @@
    "source": "fndds",
    "fdcId": 2708352,
    "usdaDescription": "Noodles, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 0.09,
@@ -275,6 +286,7 @@
    "source": "sr_legacy",
    "fdcId": 168907,
    "usdaDescription": "Noodles, japanese, soba, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -296,6 +308,7 @@
    "source": "fndds",
    "fdcId": 2708355,
    "usdaDescription": "Long rice noodles, made from mung beans, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -318,6 +331,7 @@
    "source": "fndds",
    "fdcId": 2708357,
    "usdaDescription": "Pasta, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -342,6 +356,7 @@
    "source": "fndds",
    "fdcId": 2707598,
    "usdaDescription": "Bread, white",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -362,6 +377,7 @@
    "source": "fndds",
    "fdcId": 2707709,
    "usdaDescription": "Bread, whole wheat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -382,6 +398,7 @@
    "source": "fndds",
    "fdcId": 2707684,
    "usdaDescription": "Bagel",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -403,6 +420,7 @@
    "source": "fndds",
    "fdcId": 2707678,
    "usdaDescription": "Croissant",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.16,
@@ -424,6 +442,7 @@
    "source": "fndds",
    "fdcId": 2707654,
    "usdaDescription": "Roll, white, soft",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.2,
@@ -447,6 +466,7 @@
    "source": "fndds",
    "fdcId": 2709388,
    "usdaDescription": "Potato, boiled, from fresh, peel not eaten, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -469,6 +489,7 @@
    "source": "fndds",
    "fdcId": 2709699,
    "usdaDescription": "Sweet potato, baked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -491,6 +512,7 @@
    "source": "fndds",
    "fdcId": 2709910,
    "usdaDescription": "Corn, fresh, cooked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -513,6 +535,7 @@
    "source": "fndds",
    "fdcId": 2708453,
    "usdaDescription": "Cereal, corn flakes, plain",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 5.0,
     "vitaminB12_ug": 1.8,
@@ -533,6 +556,7 @@
    "source": "fndds",
    "fdcId": 2708461,
    "usdaDescription": "Cereal, granola",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -556,6 +580,7 @@
    "source": "fndds",
    "fdcId": 2707152,
    "usdaDescription": "Egg, whole, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 2.5,
     "vitaminB12_ug": 1.02,
@@ -579,6 +604,7 @@
    "source": "fndds",
    "fdcId": 2707154,
    "usdaDescription": "Egg, whole, boiled or poached",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 2.5,
     "vitaminB12_ug": 0.82,
@@ -601,6 +627,7 @@
    "source": "fndds",
    "fdcId": 2707156,
    "usdaDescription": "Egg, whole, fried no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 2.5,
     "vitaminB12_ug": 0.81,
@@ -623,6 +650,7 @@
    "source": "fndds",
    "fdcId": 2707205,
    "usdaDescription": "Egg omelet or scrambled egg, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 2.5,
     "vitaminB12_ug": 0.81,
@@ -644,6 +672,7 @@
    "source": "fndds",
    "fdcId": 2707200,
    "usdaDescription": "Egg omelet or scrambled egg, made with oil",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 2.3,
     "vitaminB12_ug": 0.76,
@@ -664,6 +693,7 @@
    "source": "sr_legacy",
    "fdcId": 172191,
    "usdaDescription": "Egg, quail, whole, fresh, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.4,
     "vitaminB12_ug": 1.58,
@@ -686,6 +716,7 @@
    "source": "fndds",
    "fdcId": 2705385,
    "usdaDescription": "Milk, whole",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.1,
     "vitaminB12_ug": 0.54,
@@ -707,6 +738,7 @@
    "source": "fndds",
    "fdcId": 2705387,
    "usdaDescription": "Milk, low fat (1%)",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.1,
     "vitaminB12_ug": 0.61,
@@ -729,6 +761,7 @@
    "source": "fndds",
    "fdcId": 2705388,
    "usdaDescription": "Milk, fat free (skim)",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.1,
     "vitaminB12_ug": 0.58,
@@ -749,6 +782,7 @@
    "source": "fndds",
    "fdcId": 2705466,
    "usdaDescription": "Chocolate milk, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.1,
     "vitaminB12_ug": 0.25,
@@ -770,6 +804,7 @@
    "source": "fndds",
    "fdcId": 2705405,
    "usdaDescription": "Soy milk, unsweetened",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.7,
     "vitaminB12_ug": 0.39,
@@ -793,6 +828,7 @@
    "source": "fndds",
    "fdcId": 2705418,
    "usdaDescription": "Yogurt, whole milk, plain",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.2,
     "vitaminB12_ug": 0.37,
@@ -813,6 +849,7 @@
    "source": "fndds",
    "fdcId": 2705422,
    "usdaDescription": "Yogurt, Greek, whole milk, plain",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.75,
@@ -835,6 +872,7 @@
    "source": "fndds",
    "fdcId": 2705709,
    "usdaDescription": "Cheese, Cheddar",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.6,
     "vitaminB12_ug": 1.06,
@@ -857,6 +895,7 @@
    "source": "fndds",
    "fdcId": 2705764,
    "usdaDescription": "Cheese, American",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 6.5,
     "vitaminB12_ug": 1.48,
@@ -878,6 +917,7 @@
    "source": "fndds",
    "fdcId": 2705722,
    "usdaDescription": "Cheese, Mozzarella, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.4,
     "vitaminB12_ug": 1.65,
@@ -898,6 +938,7 @@
    "source": "fndds",
    "fdcId": 2705760,
    "usdaDescription": "Cream cheese, regular, plain",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -918,6 +959,7 @@
    "source": "fndds",
    "fdcId": 2710155,
    "usdaDescription": "Butter, stick",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.4,
     "vitaminB12_ug": 0.0,
@@ -938,6 +980,7 @@
    "source": "fndds",
    "fdcId": 2705630,
    "usdaDescription": "Ice cream, vanilla",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 0.39,
@@ -960,6 +1003,7 @@
    "source": "fndds",
    "fdcId": 2705597,
    "usdaDescription": "Cream, heavy",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.6,
     "vitaminB12_ug": 0.0,
@@ -981,6 +1025,7 @@
    "source": "fndds",
    "fdcId": 2705956,
    "usdaDescription": "Chicken breast, baked, broiled, or roasted, skin not eaten, from raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.18,
@@ -1002,6 +1047,7 @@
    "source": "fndds",
    "fdcId": 2706002,
    "usdaDescription": "Chicken drumstick, baked, broiled, or roasted, skin eaten, from raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 0.39,
@@ -1023,6 +1069,7 @@
    "source": "fndds",
    "fdcId": 2706057,
    "usdaDescription": "Chicken wing, baked, broiled, or roasted, from raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 0.35,
@@ -1045,6 +1092,7 @@
    "source": "fndds",
    "fdcId": 2705973,
    "usdaDescription": "Chicken breast, fried, coated, skin / coating eaten, from raw",
+   "approx": true,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 0.15,
@@ -1069,6 +1117,7 @@
    "source": "fndds",
    "fdcId": 2705824,
    "usdaDescription": "Beef, steak, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 2.04,
@@ -1090,6 +1139,7 @@
    "source": "fndds",
    "fdcId": 2705854,
    "usdaDescription": "Beef, ground",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 2.7,
@@ -1111,6 +1161,7 @@
    "source": "fndds",
    "fdcId": 2705845,
    "usdaDescription": "Beef, shortribs",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 1.06,
@@ -1131,6 +1182,7 @@
    "source": "fndds",
    "fdcId": 2705862,
    "usdaDescription": "Pork, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.7,
     "vitaminB12_ug": 0.65,
@@ -1151,6 +1203,7 @@
    "source": "sr_legacy",
    "fdcId": 167812,
    "usdaDescription": "Pork, fresh, belly, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": null,
     "vitaminB12_ug": 0.84,
@@ -1173,6 +1226,7 @@
    "source": "fndds",
    "fdcId": 2705870,
    "usdaDescription": "Pork, chop, coated, lean and fat eaten",
+   "approx": true,
    "per100g": {
     "vitaminD_ug": 0.5,
     "vitaminB12_ug": 0.59,
@@ -1193,6 +1247,7 @@
    "source": "fndds",
    "fdcId": 2706206,
    "usdaDescription": "Ham, prepackaged or deli, luncheon meat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.6,
     "vitaminB12_ug": 0.36,
@@ -1213,6 +1268,7 @@
    "source": "fndds",
    "fdcId": 2705887,
    "usdaDescription": "Pork bacon, NS as to fresh, smoked or cured, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.4,
     "vitaminB12_ug": 1.09,
@@ -1234,6 +1290,7 @@
    "source": "fndds",
    "fdcId": 2706191,
    "usdaDescription": "Pork sausage",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.4,
     "vitaminB12_ug": 0.98,
@@ -1256,6 +1313,7 @@
    "source": "fndds",
    "fdcId": 2706205,
    "usdaDescription": "Luncheon meat, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.6,
     "vitaminB12_ug": 0.36,
@@ -1277,6 +1335,7 @@
    "source": "fndds",
    "fdcId": 2706139,
    "usdaDescription": "Duck, roasted, skin eaten",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 0.3,
@@ -1297,6 +1356,7 @@
    "source": "fndds",
    "fdcId": 2705905,
    "usdaDescription": "Lamb, NS as to cut",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 2.53,
@@ -1318,6 +1378,7 @@
    "source": "fndds",
    "fdcId": 2706264,
    "usdaDescription": "Fish, mackerel, baked or broiled",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 11.3,
     "vitaminB12_ug": 4.92,
@@ -1339,6 +1400,7 @@
    "source": "fndds",
    "fdcId": 2706286,
    "usdaDescription": "Fish, salmon, baked or broiled",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 13.7,
     "vitaminB12_ug": 3.87,
@@ -1359,6 +1421,7 @@
    "source": "fndds",
    "fdcId": 2706284,
    "usdaDescription": "Fish, salmon, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 11.0,
     "vitaminB12_ug": 3.46,
@@ -1381,6 +1444,7 @@
    "source": "fndds",
    "fdcId": 2706311,
    "usdaDescription": "Fish, tuna, canned",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.2,
     "vitaminB12_ug": 2.57,
@@ -1402,6 +1466,7 @@
    "source": "fndds",
    "fdcId": 2706232,
    "usdaDescription": "Fish, anchovy",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.7,
     "vitaminB12_ug": 0.88,
@@ -1422,6 +1487,7 @@
    "source": "fndds",
    "fdcId": 2706333,
    "usdaDescription": "Calamari, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 1.37,
@@ -1442,6 +1508,7 @@
    "source": "fndds",
    "fdcId": 2706331,
    "usdaDescription": "Octopus",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 12.95,
@@ -1463,6 +1530,7 @@
    "source": "fndds",
    "fdcId": 2706363,
    "usdaDescription": "Shrimp, steamed or boiled",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 1.19,
@@ -1485,6 +1553,7 @@
    "source": "fndds",
    "fdcId": 2706344,
    "usdaDescription": "Crab",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 3.33,
@@ -1506,6 +1575,7 @@
    "source": "fndds",
    "fdcId": 2706342,
    "usdaDescription": "Clams, steamed or boiled",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 12.14,
@@ -1527,6 +1597,7 @@
    "source": "fndds",
    "fdcId": 2706353,
    "usdaDescription": "Oysters, steamed",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 9.41,
@@ -1548,6 +1619,7 @@
    "source": "fndds",
    "fdcId": 2706350,
    "usdaDescription": "Mussels",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 12.91,
@@ -1569,6 +1641,7 @@
    "source": "sr_legacy",
    "fdcId": 173726,
    "usdaDescription": "Fish, pollock, Alaska, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": null,
     "vitaminB12_ug": null,
@@ -1589,6 +1662,7 @@
    "source": "fndds",
    "fdcId": 2706241,
    "usdaDescription": "Fish, cod, baked or broiled",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.7,
     "vitaminB12_ug": 2.21,
@@ -1609,6 +1683,7 @@
    "source": "fndds",
    "fdcId": 2706247,
    "usdaDescription": "Fish, eel",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 24.5,
     "vitaminB12_ug": 2.85,
@@ -1629,6 +1704,7 @@
    "source": "fndds",
    "fdcId": 2706337,
    "usdaDescription": "Abalone",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.77,
@@ -1650,6 +1726,7 @@
    "source": "fndds",
    "fdcId": 2706358,
    "usdaDescription": "Scallops, steamed or boiled",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 1.51,
@@ -1674,6 +1751,7 @@
    "source": "fndds",
    "fdcId": 2709988,
    "usdaDescription": "Seaweed, dried",
+   "approx": true,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -1695,6 +1773,7 @@
    "source": "sr_legacy",
    "fdcId": 170496,
    "usdaDescription": "Seaweed, wakame, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -1715,6 +1794,7 @@
    "source": "sr_legacy",
    "fdcId": 168457,
    "usdaDescription": "Seaweed, kelp, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -1735,6 +1815,7 @@
    "source": "fndds",
    "fdcId": 2710110,
    "usdaDescription": "Soup, seaweed",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.29,
@@ -1755,6 +1836,7 @@
    "source": "fndds",
    "fdcId": 2707435,
    "usdaDescription": "Soybean curd",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -1775,6 +1857,7 @@
    "source": "sr_legacy",
    "fdcId": 172449,
    "usdaDescription": "Tofu, soft, prepared with calcium sulfate and magnesium chloride (nigari)",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -1795,6 +1878,7 @@
    "source": "sr_legacy",
    "fdcId": 172451,
    "usdaDescription": "Tofu, fried",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -1816,6 +1900,7 @@
    "source": "fndds",
    "fdcId": 2707388,
    "usdaDescription": "Soybeans, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -1837,6 +1922,7 @@
    "source": "fndds",
    "fdcId": 2707363,
    "usdaDescription": "Black beans, from canned, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -1858,6 +1944,7 @@
    "source": "sr_legacy",
    "fdcId": 173728,
    "usdaDescription": "Beans, adzuki, mature seeds, cooked, boiled, without salt",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -1878,6 +1965,7 @@
    "source": "fndds",
    "fdcId": 2707389,
    "usdaDescription": "Mung beans, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -1900,6 +1988,7 @@
    "source": "fndds",
    "fdcId": 2709871,
    "usdaDescription": "Bean sprouts, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -1920,6 +2009,7 @@
    "source": "sr_legacy",
    "fdcId": 168460,
    "usdaDescription": "Soybeans, mature seeds, sprouted, cooked, steamed",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -1940,6 +2030,7 @@
    "source": "sr_legacy",
    "fdcId": 172443,
    "usdaDescription": "Natto",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -1961,6 +2052,7 @@
    "source": "fndds",
    "fdcId": 2707515,
    "usdaDescription": "Peanuts, roasted, salted",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -1981,6 +2073,7 @@
    "source": "fndds",
    "fdcId": 2707537,
    "usdaDescription": "Peanut butter",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2002,6 +2095,7 @@
    "source": "fndds",
    "fdcId": 2707489,
    "usdaDescription": "Almonds, unsalted",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2023,6 +2117,7 @@
    "source": "fndds",
    "fdcId": 2707531,
    "usdaDescription": "Walnuts, excluding honey roasted",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2044,6 +2139,7 @@
    "source": "fndds",
    "fdcId": 2707497,
    "usdaDescription": "Cashews, unsalted",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2065,6 +2161,7 @@
    "source": "fndds",
    "fdcId": 2707530,
    "usdaDescription": "Pistachio nuts, unsalted",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2085,6 +2182,7 @@
    "source": "sr_legacy",
    "fdcId": 170591,
    "usdaDescription": "Nuts, pine nuts, dried",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2107,6 +2205,7 @@
    "source": "fndds",
    "fdcId": 2707499,
    "usdaDescription": "Chestnuts",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2128,6 +2227,7 @@
    "source": "fndds",
    "fdcId": 2707586,
    "usdaDescription": "Sesame seeds",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2149,6 +2249,7 @@
    "source": "fndds",
    "fdcId": 2709615,
    "usdaDescription": "Spinach, fresh, cooked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2169,6 +2270,7 @@
    "source": "fndds",
    "fdcId": 2709614,
    "usdaDescription": "Spinach, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2191,6 +2293,7 @@
    "source": "sr_legacy",
    "fdcId": 169979,
    "usdaDescription": "Cabbage, chinese (pe-tsai), raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2211,6 +2314,7 @@
    "source": "fndds",
    "fdcId": 2709773,
    "usdaDescription": "Cabbage, green, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2231,6 +2335,7 @@
    "source": "fndds",
    "fdcId": 2709645,
    "usdaDescription": "Broccoli, fresh, cooked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2252,6 +2357,7 @@
    "source": "fndds",
    "fdcId": 2709660,
    "usdaDescription": "Carrots, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2273,6 +2379,7 @@
    "source": "fndds",
    "fdcId": 2709795,
    "usdaDescription": "Onions, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2296,6 +2403,7 @@
    "source": "fndds",
    "fdcId": 2709794,
    "usdaDescription": "Onions, green, raw",
+   "approx": true,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2316,6 +2424,7 @@
    "source": "fndds",
    "fdcId": 2709786,
    "usdaDescription": "Garlic, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2336,6 +2445,7 @@
    "source": "sr_legacy",
    "fdcId": 169231,
    "usdaDescription": "Ginger root, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2356,6 +2466,7 @@
    "source": "fndds",
    "fdcId": 2709784,
    "usdaDescription": "Cucumber, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2378,6 +2489,7 @@
    "source": "fndds",
    "fdcId": 2709808,
    "usdaDescription": "Summer squash, green, raw",
+   "approx": true,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2399,6 +2511,7 @@
    "source": "fndds",
    "fdcId": 2709692,
    "usdaDescription": "Pumpkin, cooked",
+   "approx": true,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2420,6 +2533,7 @@
    "source": "fndds",
    "fdcId": 2709929,
    "usdaDescription": "Eggplant, cooked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2443,6 +2557,7 @@
    "source": "fndds",
    "fdcId": 2709798,
    "usdaDescription": "Peppers, hot, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2466,6 +2581,7 @@
    "source": "fndds",
    "fdcId": 2709801,
    "usdaDescription": "Peppers, sweet, red, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2486,6 +2602,7 @@
    "source": "fndds",
    "fdcId": 2709719,
    "usdaDescription": "Tomatoes, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2506,6 +2623,7 @@
    "source": "fndds",
    "fdcId": 2709789,
    "usdaDescription": "Lettuce, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2528,6 +2646,7 @@
    "source": "sr_legacy",
    "fdcId": 168451,
    "usdaDescription": "Radishes, oriental, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2548,6 +2667,7 @@
    "source": "fndds",
    "fdcId": 2709936,
    "usdaDescription": "Lotus root, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2568,6 +2688,7 @@
    "source": "fndds",
    "fdcId": 2709886,
    "usdaDescription": "Burdock, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2590,6 +2711,7 @@
    "source": "fndds",
    "fdcId": 2709793,
    "usdaDescription": "Mushrooms, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.04,
@@ -2611,6 +2733,7 @@
    "source": "sr_legacy",
    "fdcId": 168437,
    "usdaDescription": "Mushrooms, shiitake, cooked, without salt",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.7,
     "vitaminB12_ug": 0.0,
@@ -2632,6 +2755,7 @@
    "source": "sr_legacy",
    "fdcId": 169382,
    "usdaDescription": "Mushrooms, enoki, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 0.0,
@@ -2653,6 +2777,7 @@
    "source": "sr_legacy",
    "fdcId": 168580,
    "usdaDescription": "Mushrooms, oyster, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.7,
     "vitaminB12_ug": 0.0,
@@ -2673,6 +2798,7 @@
    "source": "fndds",
    "fdcId": 2709834,
    "usdaDescription": "Asparagus, fresh, cooked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2694,6 +2820,7 @@
    "source": "fndds",
    "fdcId": 2709778,
    "usdaDescription": "Celery, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2714,6 +2841,7 @@
    "source": "fndds",
    "fdcId": 2709599,
    "usdaDescription": "Kale, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2735,6 +2863,7 @@
    "source": "sr_legacy",
    "fdcId": 170391,
    "usdaDescription": "Cabbage, chinese (pak-choi), cooked, boiled, drained, without salt",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2755,6 +2884,7 @@
    "source": "fndds",
    "fdcId": 2709777,
    "usdaDescription": "Cauliflower, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2777,6 +2907,7 @@
    "source": "fndds",
    "fdcId": 2709872,
    "usdaDescription": "Beets, fresh, cooked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2798,6 +2929,7 @@
    "source": "fndds",
    "fdcId": 2710077,
    "usdaDescription": "Kimchi",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2819,6 +2951,7 @@
    "source": "fndds",
    "fdcId": 2710099,
    "usdaDescription": "Radishes, pickled",
+   "approx": true,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2839,6 +2972,7 @@
    "source": "fndds",
    "fdcId": 2709215,
    "usdaDescription": "Apple, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2861,6 +2995,7 @@
    "source": "fndds",
    "fdcId": 2709255,
    "usdaDescription": "Pear, Asian, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2881,6 +3016,7 @@
    "source": "fndds",
    "fdcId": 2709224,
    "usdaDescription": "Banana, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2904,6 +3040,7 @@
    "source": "fndds",
    "fdcId": 2709175,
    "usdaDescription": "Tangerine, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2924,6 +3061,7 @@
    "source": "fndds",
    "fdcId": 2709171,
    "usdaDescription": "Orange, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2945,6 +3083,7 @@
    "source": "fndds",
    "fdcId": 2709237,
    "usdaDescription": "Grapes, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2966,6 +3105,7 @@
    "source": "fndds",
    "fdcId": 2709283,
    "usdaDescription": "Strawberries, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -2986,6 +3126,7 @@
    "source": "fndds",
    "fdcId": 2709270,
    "usdaDescription": "Watermelon, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3007,6 +3148,7 @@
    "source": "fndds",
    "fdcId": 2709226,
    "usdaDescription": "Cantaloupe, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3027,6 +3169,7 @@
    "source": "fndds",
    "fdcId": 2709249,
    "usdaDescription": "Peach, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3047,6 +3190,7 @@
    "source": "fndds",
    "fdcId": 2709265,
    "usdaDescription": "Plum, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3068,6 +3212,7 @@
    "source": "fndds",
    "fdcId": 2709239,
    "usdaDescription": "Kiwi fruit, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3089,6 +3234,7 @@
    "source": "fndds",
    "fdcId": 2709275,
    "usdaDescription": "Blueberries, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3111,6 +3257,7 @@
    "source": "fndds",
    "fdcId": 2709259,
    "usdaDescription": "Persimmon, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3131,6 +3278,7 @@
    "source": "fndds",
    "fdcId": 2709209,
    "usdaDescription": "Persimmon, dried",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3151,6 +3299,7 @@
    "source": "sr_legacy",
    "fdcId": 168151,
    "usdaDescription": "Jujube, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": null,
     "vitaminB12_ug": 0.0,
@@ -3171,6 +3320,7 @@
    "source": "fndds",
    "fdcId": 2709242,
    "usdaDescription": "Mango, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3191,6 +3341,7 @@
    "source": "fndds",
    "fdcId": 2709260,
    "usdaDescription": "Pineapple, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3212,6 +3363,7 @@
    "source": "fndds",
    "fdcId": 2709231,
    "usdaDescription": "Cherries, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3232,6 +3384,7 @@
    "source": "fndds",
    "fdcId": 2709168,
    "usdaDescription": "Lemon, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3252,6 +3405,7 @@
    "source": "fndds",
    "fdcId": 2709165,
    "usdaDescription": "Grapefruit, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3272,6 +3426,7 @@
    "source": "fndds",
    "fdcId": 2709267,
    "usdaDescription": "Pomegranate, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3292,6 +3447,7 @@
    "source": "fndds",
    "fdcId": 2709223,
    "usdaDescription": "Avocado, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3313,6 +3469,7 @@
    "source": "fndds",
    "fdcId": 2709235,
    "usdaDescription": "Fig, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3334,6 +3491,7 @@
    "source": "fndds",
    "fdcId": 2709212,
    "usdaDescription": "Raisins",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3354,6 +3512,7 @@
    "source": "fndds",
    "fdcId": 2709186,
    "usdaDescription": "Orange juice, 100%, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.4,
     "vitaminB12_ug": 0.0,
@@ -3374,6 +3533,7 @@
    "source": "fndds",
    "fdcId": 2709320,
    "usdaDescription": "Apple juice, 100%",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3397,6 +3557,7 @@
    "source": "fndds",
    "fdcId": 2710375,
    "usdaDescription": "Coffee, brewed",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3419,6 +3580,7 @@
    "source": "fndds",
    "fdcId": 2710386,
    "usdaDescription": "Coffee, Latte",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.9,
     "vitaminB12_ug": 0.37,
@@ -3439,6 +3601,7 @@
    "source": "fndds",
    "fdcId": 2710490,
    "usdaDescription": "Tea, hot, leaf, green",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3460,6 +3623,7 @@
    "source": "fndds",
    "fdcId": 2710541,
    "usdaDescription": "Soft drink, cola",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3480,6 +3644,7 @@
    "source": "fndds",
    "fdcId": 2710616,
    "usdaDescription": "Beer",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.02,
@@ -3502,6 +3667,7 @@
    "source": "fndds",
    "fdcId": 2710688,
    "usdaDescription": "Wine, red",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3523,6 +3689,7 @@
    "source": "fndds",
    "fdcId": 2708616,
    "usdaDescription": "Pizza, cheese, from restaurant or fast food, medium crust",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.42,
@@ -3545,6 +3712,7 @@
    "source": "fndds",
    "fdcId": 2706920,
    "usdaDescription": "Hamburger, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 1.63,
@@ -3567,6 +3735,7 @@
    "source": "fndds",
    "fdcId": 2709456,
    "usdaDescription": "Potato, french fries, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3587,6 +3756,7 @@
    "source": "fndds",
    "fdcId": 2706166,
    "usdaDescription": "Hot dog, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.9,
     "vitaminB12_ug": 0.82,
@@ -3609,6 +3779,7 @@
    "source": "fndds",
    "fdcId": 2708062,
    "usdaDescription": "Doughnut, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.08,
@@ -3630,6 +3801,7 @@
    "source": "fndds",
    "fdcId": 2710328,
    "usdaDescription": "Chocolate candy",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.75,
@@ -3650,6 +3822,7 @@
    "source": "fndds",
    "fdcId": 2710336,
    "usdaDescription": "Dark chocolate candy",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.23,
@@ -3670,6 +3843,7 @@
    "source": "fndds",
    "fdcId": 2707909,
    "usdaDescription": "Cookie, chocolate chip",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.03,
@@ -3690,6 +3864,7 @@
    "source": "fndds",
    "fdcId": 2708216,
    "usdaDescription": "Popcorn, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3712,6 +3887,7 @@
    "source": "fndds",
    "fdcId": 2709422,
    "usdaDescription": "Potato chips, plain",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3732,6 +3908,7 @@
    "source": "fndds",
    "fdcId": 2708325,
    "usdaDescription": "Waffle, plain",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.1,
     "vitaminB12_ug": 0.45,
@@ -3753,6 +3930,7 @@
    "source": "fndds",
    "fdcId": 2708304,
    "usdaDescription": "Pancakes, plain",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.0,
     "vitaminB12_ug": 0.38,
@@ -3773,6 +3951,7 @@
    "source": "fndds",
    "fdcId": 2710281,
    "usdaDescription": "Honey",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3795,6 +3974,7 @@
    "source": "fndds",
    "fdcId": 2710301,
    "usdaDescription": "Jam",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3816,6 +3996,7 @@
    "source": "fndds",
    "fdcId": 2708959,
    "usdaDescription": "Sushi, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.1,
@@ -3836,6 +4017,7 @@
    "source": "fndds",
    "fdcId": 2707442,
    "usdaDescription": "Soy sauce",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3856,6 +4038,7 @@
    "source": "fndds",
    "fdcId": 2710190,
    "usdaDescription": "Sesame oil",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3876,6 +4059,7 @@
    "source": "fndds",
    "fdcId": 2710186,
    "usdaDescription": "Olive oil",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3897,6 +4081,7 @@
    "source": "fndds",
    "fdcId": 2710204,
    "usdaDescription": "Mayonnaise, regular",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 0.12,
@@ -3918,6 +4103,7 @@
    "source": "fndds",
    "fdcId": 2709733,
    "usdaDescription": "Ketchup",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3938,6 +4124,7 @@
    "source": "fndds",
    "fdcId": 2708400,
    "usdaDescription": "Quinoa, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3959,6 +4146,7 @@
    "source": "fndds",
    "fdcId": 2708356,
    "usdaDescription": "Rice noodles, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -3983,6 +4171,7 @@
    "source": "sr_legacy",
    "fdcId": 168909,
    "usdaDescription": "Noodles, japanese, somen, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -4003,6 +4192,7 @@
    "source": "fndds",
    "fdcId": 2707755,
    "usdaDescription": "Bread, rye",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -4023,6 +4213,7 @@
    "source": "fndds",
    "fdcId": 2707777,
    "usdaDescription": "Bread, multigrain",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -4043,6 +4234,7 @@
    "source": "fndds",
    "fdcId": 2707829,
    "usdaDescription": "Muffin, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 0.16,
@@ -4064,6 +4256,7 @@
    "source": "fndds",
    "fdcId": 2708167,
    "usdaDescription": "Crackers, saltine",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.09,
@@ -4085,6 +4278,7 @@
    "source": "fndds",
    "fdcId": 2708247,
    "usdaDescription": "Pretzels, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -4106,6 +4300,7 @@
    "source": "fndds",
    "fdcId": 2707824,
    "usdaDescription": "Tortilla, flour",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -4126,6 +4321,7 @@
    "source": "fndds",
    "fdcId": 2707613,
    "usdaDescription": "Bread, naan",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -4146,6 +4342,7 @@
    "source": "fndds",
    "fdcId": 2707616,
    "usdaDescription": "Bread, pita",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -4166,6 +4363,7 @@
    "source": "fndds",
    "fdcId": 2707801,
    "usdaDescription": "Biscuit, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -4186,6 +4384,7 @@
    "source": "fndds",
    "fdcId": 2706437,
    "usdaDescription": "Chicken curry",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.08,
@@ -4207,6 +4406,7 @@
    "source": "fndds",
    "fdcId": 2706467,
    "usdaDescription": "Meatballs, NS as to type of meat, with sauce",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 1.86,
@@ -4228,6 +4428,7 @@
    "source": "fndds",
    "fdcId": 2708750,
    "usdaDescription": "Lasagna with meat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.83,
@@ -4250,6 +4451,7 @@
    "source": "fndds",
    "fdcId": 2708811,
    "usdaDescription": "Macaroni or noodles with cheese",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.5,
     "vitaminB12_ug": 0.27,
@@ -4271,6 +4473,7 @@
    "source": "fndds",
    "fdcId": 2708514,
    "usdaDescription": "Taco, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 1.27,
@@ -4292,6 +4495,7 @@
    "source": "fndds",
    "fdcId": 2708534,
    "usdaDescription": "Burrito, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.57,
@@ -4313,6 +4517,7 @@
    "source": "fndds",
    "fdcId": 2706092,
    "usdaDescription": "Chicken nuggets, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 0.33,
@@ -4335,6 +4540,7 @@
    "source": "fndds",
    "fdcId": 2709149,
    "usdaDescription": "Soup, chicken noodle",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.04,
@@ -4355,6 +4561,7 @@
    "source": "fndds",
    "fdcId": 2709757,
    "usdaDescription": "Soup, tomato",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -4375,6 +4582,7 @@
    "source": "fndds",
    "fdcId": 2707139,
    "usdaDescription": "Soup, New England clam chowder",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 1.26,
@@ -4395,6 +4603,7 @@
    "source": "fndds",
    "fdcId": 2709532,
    "usdaDescription": "Potato salad with egg, made with mayonnaise",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 0.07,
@@ -4415,6 +4624,7 @@
    "source": "fndds",
    "fdcId": 2709815,
    "usdaDescription": "Coleslaw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.02,
@@ -4435,6 +4645,7 @@
    "source": "fndds",
    "fdcId": 2709591,
    "usdaDescription": "Caesar salad, with romaine, no dressing",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.13,
@@ -4455,6 +4666,7 @@
    "source": "fndds",
    "fdcId": 2706828,
    "usdaDescription": "Tuna salad, made with mayonnaise",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.7,
     "vitaminB12_ug": 1.34,
@@ -4475,6 +4687,7 @@
    "source": "fndds",
    "fdcId": 2707182,
    "usdaDescription": "Egg salad, made with mayonnaise",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.8,
     "vitaminB12_ug": 0.91,
@@ -4496,6 +4709,7 @@
    "source": "fndds",
    "fdcId": 2706375,
    "usdaDescription": "Chili with meat and beans",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.63,
@@ -4516,6 +4730,7 @@
    "source": "fndds",
    "fdcId": 2708804,
    "usdaDescription": "Pad Thai, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 0.14,
@@ -4536,6 +4751,7 @@
    "source": "fndds",
    "fdcId": 2706401,
    "usdaDescription": "Sweet and sour pork",
+   "approx": true,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 0.19,
@@ -4557,6 +4773,7 @@
    "source": "fndds",
    "fdcId": 2708798,
    "usdaDescription": "Lo mein, NFS",
+   "approx": true,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 0.0,
@@ -4578,6 +4795,7 @@
    "source": "fndds",
    "fdcId": 2706433,
    "usdaDescription": "Chicken or turkey with teriyaki",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.34,
@@ -4598,6 +4816,7 @@
    "source": "fndds",
    "fdcId": 2708961,
    "usdaDescription": "Sushi roll, California",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.1,
@@ -4620,6 +4839,7 @@
    "source": "fndds",
    "fdcId": 2708705,
    "usdaDescription": "Wonton, dumpling or pot sticker, fried",
+   "approx": true,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 0.28,
@@ -4644,6 +4864,7 @@
    "source": "fndds",
    "fdcId": 2708708,
    "usdaDescription": "Wonton, dumpling or pot sticker, steamed",
+   "approx": true,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 0.22,
@@ -4665,6 +4886,7 @@
    "source": "fndds",
    "fdcId": 2708702,
    "usdaDescription": "Egg roll, with beef and/or pork",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 0.09,
@@ -4685,6 +4907,7 @@
    "source": "fndds",
    "fdcId": 2706964,
    "usdaDescription": "Ham sandwich on white",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.3,
     "vitaminB12_ug": 0.17,
@@ -4705,6 +4928,7 @@
    "source": "fndds",
    "fdcId": 2706098,
    "usdaDescription": "Chicken tenders or strips, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 0.16,
@@ -4725,6 +4949,7 @@
    "source": "fndds",
    "fdcId": 2706154,
    "usdaDescription": "Liver, chicken",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 15.07,
@@ -4746,6 +4971,7 @@
    "source": "fndds",
    "fdcId": 2706153,
    "usdaDescription": "Liver, beef",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.2,
     "vitaminB12_ug": 82.47,
@@ -4767,6 +4993,7 @@
    "source": "fndds",
    "fdcId": 2705860,
    "usdaDescription": "Beef jerky",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.3,
     "vitaminB12_ug": 0.99,
@@ -4787,6 +5014,7 @@
    "source": "fndds",
    "fdcId": 2706104,
    "usdaDescription": "Turkey, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.3,
     "vitaminB12_ug": 0.82,
@@ -4808,6 +5036,7 @@
    "source": "fndds",
    "fdcId": 2705851,
    "usdaDescription": "Beef, brisket",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 2.57,
@@ -4829,6 +5058,7 @@
    "source": "fndds",
    "fdcId": 2705841,
    "usdaDescription": "Beef, steak, tenderloin",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 4.53,
@@ -4849,6 +5079,7 @@
    "source": "fndds",
    "fdcId": 2705829,
    "usdaDescription": "Beef, steak, ribeye, lean and fat eaten",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 2.08,
@@ -4869,6 +5100,7 @@
    "source": "fndds",
    "fdcId": 2705894,
    "usdaDescription": "Pork, ribs",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.8,
     "vitaminB12_ug": 0.51,
@@ -4890,6 +5122,7 @@
    "source": "fndds",
    "fdcId": 2705898,
    "usdaDescription": "Pork, pig's feet",
+   "approx": true,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.41,
@@ -4912,6 +5145,7 @@
    "source": "fndds",
    "fdcId": 2706162,
    "usdaDescription": "Tripe",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 1.09,
@@ -4932,6 +5166,7 @@
    "source": "sr_legacy",
    "fdcId": 174248,
    "usdaDescription": "Fish, yellowtail, mixed species, cooked, dry heat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": null,
     "vitaminB12_ug": 1.25,
@@ -4952,6 +5187,7 @@
    "source": "sr_legacy",
    "fdcId": 173694,
    "usdaDescription": "Fish, sea bass, mixed species, cooked, dry heat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": null,
     "vitaminB12_ug": 0.3,
@@ -4973,6 +5209,7 @@
    "source": "fndds",
    "fdcId": 2706246,
    "usdaDescription": "Fish, croaker",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.8,
     "vitaminB12_ug": 2.37,
@@ -4995,6 +5232,7 @@
    "source": "fndds",
    "fdcId": 2706249,
    "usdaDescription": "Fish, flounder, baked or broiled",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 3.5,
     "vitaminB12_ug": 1.26,
@@ -5015,6 +5253,7 @@
    "source": "fndds",
    "fdcId": 2706308,
    "usdaDescription": "Fish, tuna, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.7,
     "vitaminB12_ug": 2.08,
@@ -5036,6 +5275,7 @@
    "source": "fndds",
    "fdcId": 2706293,
    "usdaDescription": "Fish, sardines, canned",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 4.8,
     "vitaminB12_ug": 8.94,
@@ -5056,6 +5296,7 @@
    "source": "fndds",
    "fdcId": 2706261,
    "usdaDescription": "Fish, herring",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 4.5,
     "vitaminB12_ug": 12.91,
@@ -5076,6 +5317,7 @@
    "source": "fndds",
    "fdcId": 2706303,
    "usdaDescription": "Fish, trout, baked or broiled",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 19.8,
     "vitaminB12_ug": 4.81,
@@ -5096,6 +5338,7 @@
    "source": "fndds",
    "fdcId": 2706235,
    "usdaDescription": "Fish, catfish, baked or broiled",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.3,
     "vitaminB12_ug": 3.22,
@@ -5116,6 +5359,7 @@
    "source": "fndds",
    "fdcId": 2706319,
    "usdaDescription": "Fish, tilapia, baked or broiled",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 3.9,
     "vitaminB12_ug": 1.77,
@@ -5137,6 +5381,7 @@
    "source": "fndds",
    "fdcId": 2706349,
    "usdaDescription": "Lobster",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 1.34,
@@ -5159,6 +5404,7 @@
    "source": "fndds",
    "fdcId": 2706568,
    "usdaDescription": "Imitation crab meat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.57,
@@ -5180,6 +5426,7 @@
    "source": "fndds",
    "fdcId": 2706364,
    "usdaDescription": "Shrimp, fried",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 0.74,
@@ -5201,6 +5448,7 @@
    "source": "fndds",
    "fdcId": 2706334,
    "usdaDescription": "Calamari, fried",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.86,
@@ -5222,6 +5470,7 @@
    "source": "fndds",
    "fdcId": 2709575,
    "usdaDescription": "Chard, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5242,6 +5491,7 @@
    "source": "fndds",
    "fdcId": 2709524,
    "usdaDescription": "Potato, baked, peel eaten",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5263,6 +5513,7 @@
    "source": "fndds",
    "fdcId": 2709496,
    "usdaDescription": "Potato, mashed, from fresh, made with milk",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.04,
@@ -5283,6 +5534,7 @@
    "source": "fndds",
    "fdcId": 2707383,
    "usdaDescription": "Kidney beans, from canned, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5304,6 +5556,7 @@
    "source": "fndds",
    "fdcId": 2707418,
    "usdaDescription": "Chickpeas, from canned, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5325,6 +5578,7 @@
    "source": "fndds",
    "fdcId": 2707425,
    "usdaDescription": "Lentils, from dried, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5346,6 +5600,7 @@
    "source": "fndds",
    "fdcId": 2707436,
    "usdaDescription": "Edamame, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5366,6 +5621,7 @@
    "source": "fndds",
    "fdcId": 2709852,
    "usdaDescription": "Green beans, fresh, cooked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5386,6 +5642,7 @@
    "source": "fndds",
    "fdcId": 2709944,
    "usdaDescription": "Okra, fresh, cooked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5406,6 +5663,7 @@
    "source": "fndds",
    "fdcId": 2710002,
    "usdaDescription": "Turnip, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5426,6 +5684,7 @@
    "source": "fndds",
    "fdcId": 2709803,
    "usdaDescription": "Radish",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5446,6 +5705,7 @@
    "source": "fndds",
    "fdcId": 2709881,
    "usdaDescription": "Brussels sprouts, fresh, cooked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5466,6 +5726,7 @@
    "source": "sr_legacy",
    "fdcId": 169980,
    "usdaDescription": "Cabbage, chinese (pe-tsai), cooked, boiled, drained, without salt",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5486,6 +5747,7 @@
    "source": "fndds",
    "fdcId": 2709889,
    "usdaDescription": "Cabbage, green, cooked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5506,6 +5768,7 @@
    "source": "fndds",
    "fdcId": 2709664,
    "usdaDescription": "Carrots, fresh, cooked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5526,6 +5789,7 @@
    "source": "fndds",
    "fdcId": 2709950,
    "usdaDescription": "Onions, cooked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5546,6 +5810,7 @@
    "source": "fndds",
    "fdcId": 2709643,
    "usdaDescription": "Broccoli, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5568,6 +5833,7 @@
    "source": "fndds",
    "fdcId": 2710078,
    "usdaDescription": "Pickles, dill",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5589,6 +5855,7 @@
    "source": "fndds",
    "fdcId": 2710090,
    "usdaDescription": "Olives, black",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5609,6 +5876,7 @@
    "source": "fndds",
    "fdcId": 2709221,
    "usdaDescription": "Apricot, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5629,6 +5897,7 @@
    "source": "fndds",
    "fdcId": 2709170,
    "usdaDescription": "Lime, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5649,6 +5918,7 @@
    "source": "fndds",
    "fdcId": 2707500,
    "usdaDescription": "Coconut, fresh",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5670,6 +5940,7 @@
    "source": "fndds",
    "fdcId": 2709240,
    "usdaDescription": "Lychee",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5692,6 +5963,7 @@
    "source": "fndds",
    "fdcId": 2709234,
    "usdaDescription": "Dragon fruit",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5712,6 +5984,7 @@
    "source": "fndds",
    "fdcId": 2709246,
    "usdaDescription": "Papaya, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5732,6 +6005,7 @@
    "source": "fndds",
    "fdcId": 2709238,
    "usdaDescription": "Guava, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5753,6 +6027,7 @@
    "source": "fndds",
    "fdcId": 2709281,
    "usdaDescription": "Raspberries, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5774,6 +6049,7 @@
    "source": "fndds",
    "fdcId": 2709273,
    "usdaDescription": "Blackberries, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5795,6 +6071,7 @@
    "source": "fndds",
    "fdcId": 2709202,
    "usdaDescription": "Cranberries, dried",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5815,6 +6092,7 @@
    "source": "sr_legacy",
    "fdcId": 174683,
    "usdaDescription": "Grapes, red or green (European type, such as Thompson seedless), raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5835,6 +6113,7 @@
    "source": "fndds",
    "fdcId": 2709290,
    "usdaDescription": "Fruit cocktail, canned, in syrup",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5855,6 +6134,7 @@
    "source": "fndds",
    "fdcId": 2709216,
    "usdaDescription": "Applesauce, regular",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5876,6 +6156,7 @@
    "source": "fndds",
    "fdcId": 2709211,
    "usdaDescription": "Prune, dried",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5896,6 +6177,7 @@
    "source": "fndds",
    "fdcId": 2709205,
    "usdaDescription": "Mango, dried",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -5917,6 +6199,7 @@
    "source": "fndds",
    "fdcId": 2705426,
    "usdaDescription": "Yogurt, whole milk, fruit",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.2,
     "vitaminB12_ug": 0.32,
@@ -5938,6 +6221,7 @@
    "source": "fndds",
    "fdcId": 2705386,
    "usdaDescription": "Milk, reduced fat (2%)",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.1,
     "vitaminB12_ug": 0.55,
@@ -5958,6 +6242,7 @@
    "source": "fndds",
    "fdcId": 2705495,
    "usdaDescription": "Strawberry milk, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.1,
     "vitaminB12_ug": 0.54,
@@ -5978,6 +6263,7 @@
    "source": "fndds",
    "fdcId": 2705730,
    "usdaDescription": "Cheese, Parmesan, hard",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 1.38,
@@ -5998,6 +6284,7 @@
    "source": "fndds",
    "fdcId": 2705747,
    "usdaDescription": "Cheese, cottage, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.42,
@@ -6018,6 +6305,7 @@
    "source": "fndds",
    "fdcId": 2705750,
    "usdaDescription": "Cheese, Ricotta",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 0.54,
@@ -6038,6 +6326,7 @@
    "source": "fndds",
    "fdcId": 2705402,
    "usdaDescription": "Milk, condensed, sweetened",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 0.44,
@@ -6058,6 +6347,7 @@
    "source": "fndds",
    "fdcId": 2705632,
    "usdaDescription": "Ice cream, chocolate",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.2,
     "vitaminB12_ug": 0.29,
@@ -6078,6 +6368,7 @@
    "source": "fndds",
    "fdcId": 2705451,
    "usdaDescription": "Frozen yogurt, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 0.07,
@@ -6098,6 +6389,7 @@
    "source": "fndds",
    "fdcId": 2705692,
    "usdaDescription": "Pudding, flavors other than chocolate, ready-to-eat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.15,
@@ -6118,6 +6410,7 @@
    "source": "fndds",
    "fdcId": 2710488,
    "usdaDescription": "Tea, hot, leaf, black",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6138,6 +6431,7 @@
    "source": "fndds",
    "fdcId": 2710492,
    "usdaDescription": "Tea, hot, leaf, oolong",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6160,6 +6454,7 @@
    "source": "fndds",
    "fdcId": 2710508,
    "usdaDescription": "Tea, bubble",
+   "approx": true,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.02,
@@ -6180,6 +6475,7 @@
    "source": "fndds",
    "fdcId": 2710527,
    "usdaDescription": "Tea, iced, bottled, black",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6201,6 +6497,7 @@
    "source": "fndds",
    "fdcId": 2710771,
    "usdaDescription": "Sports drink, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6221,6 +6518,7 @@
    "source": "fndds",
    "fdcId": 2710756,
    "usdaDescription": "Energy Drink",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 1.97,
@@ -6243,6 +6541,7 @@
    "source": "fndds",
    "fdcId": 2705473,
    "usdaDescription": "Hot chocolate / cocoa, made with whole or reduced fat (2%) milk",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.9,
     "vitaminB12_ug": 0.42,
@@ -6263,6 +6562,7 @@
    "source": "fndds",
    "fdcId": 2709728,
    "usdaDescription": "Tomato juice, 100%",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6283,6 +6583,7 @@
    "source": "fndds",
    "fdcId": 2709325,
    "usdaDescription": "Grape juice, 100%",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6303,6 +6604,7 @@
    "source": "fndds",
    "fdcId": 2709177,
    "usdaDescription": "Grapefruit juice, 100%, NS as to form",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6323,6 +6625,7 @@
    "source": "fndds",
    "fdcId": 2710570,
    "usdaDescription": "Lemonade, fruit juice drink",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6343,6 +6646,7 @@
    "source": "fndds",
    "fdcId": 2710689,
    "usdaDescription": "Wine, white",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6364,6 +6668,7 @@
    "source": "fndds",
    "fdcId": 2708101,
    "usdaDescription": "Cereal or Granola bar, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6384,6 +6689,7 @@
    "source": "fndds",
    "fdcId": 2708127,
    "usdaDescription": "Nutrition bar or meal replacement bar, NFS",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 2.76,
@@ -6404,6 +6710,7 @@
    "source": "fndds",
    "fdcId": 2707861,
    "usdaDescription": "Cheesecake, plain",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.3,
     "vitaminB12_ug": 0.11,
@@ -6424,6 +6731,7 @@
    "source": "fndds",
    "fdcId": 2707995,
    "usdaDescription": "Pie, apple",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.1,
     "vitaminB12_ug": 0.0,
@@ -6444,6 +6752,7 @@
    "source": "fndds",
    "fdcId": 2707866,
    "usdaDescription": "Cake or cupcake, chocolate with chocolate icing, bakery",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.3,
     "vitaminB12_ug": 0.11,
@@ -6465,6 +6774,7 @@
    "source": "fndds",
    "fdcId": 2708202,
    "usdaDescription": "Tortilla chips, plain",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6485,6 +6795,7 @@
    "source": "fndds",
    "fdcId": 2710258,
    "usdaDescription": "Sugar, white, granulated or lump",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6505,6 +6816,7 @@
    "source": "fndds",
    "fdcId": 2709351,
    "usdaDescription": "Vinegar",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6525,6 +6837,7 @@
    "source": "fndds",
    "fdcId": 2710085,
    "usdaDescription": "Mustard",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6546,6 +6859,7 @@
    "source": "fndds",
    "fdcId": 2709750,
    "usdaDescription": "Barbecue sauce",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6566,6 +6880,7 @@
    "source": "sr_legacy",
    "fdcId": 174529,
    "usdaDescription": "Sauce, oyster, ready-to-serve",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.41,
@@ -6586,6 +6901,7 @@
    "source": "fndds",
    "fdcId": 2707445,
    "usdaDescription": "Teriyaki sauce",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6606,6 +6922,7 @@
    "source": "fndds",
    "fdcId": 2710093,
    "usdaDescription": "Hot pepper sauce",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6626,6 +6943,7 @@
    "source": "fndds",
    "fdcId": 2709738,
    "usdaDescription": "Salsa, red",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6646,6 +6964,7 @@
    "source": "fndds",
    "fdcId": 2710159,
    "usdaDescription": "Margarine, stick",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 3.7,
     "vitaminB12_ug": 0.1,
@@ -6669,6 +6988,7 @@
    "source": "fndds",
    "fdcId": 2710188,
    "usdaDescription": "Canola oil",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6689,6 +7009,7 @@
    "source": "fndds",
    "fdcId": 2707176,
    "usdaDescription": "Duck egg, cooked",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 1.6,
     "vitaminB12_ug": 4.03,
@@ -6709,6 +7030,7 @@
    "source": "sr_legacy",
    "fdcId": 168877,
    "usdaDescription": "Rice, white, long-grain, regular, raw, enriched",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6729,6 +7051,7 @@
    "source": "sr_legacy",
    "fdcId": 169703,
    "usdaDescription": "Rice, brown, long-grain, raw (Includes foods for USDA's Food Distribution Program)",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6749,6 +7072,7 @@
    "source": "sr_legacy",
    "fdcId": 170026,
    "usdaDescription": "Potatoes, flesh and skin, raw",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.0,
@@ -6769,6 +7093,7 @@
    "source": "fndds",
    "fdcId": 2709937,
    "usdaDescription": "Mushrooms, fresh, cooked, no added fat",
+   "approx": false,
    "per100g": {
     "vitaminD_ug": 0.0,
     "vitaminB12_ug": 0.05,

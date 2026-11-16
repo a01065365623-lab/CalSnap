@@ -324,5 +324,7 @@
   "microNutrientNoData": "Keine Daten",
   "microNutrientUnmatchedMeals": "{count, plural, =1{1 Mahlzeit ohne Nährwertdaten} other{{count} Mahlzeiten ohne Nährwertdaten}}",
   "microNutrientBasisNote": "Berechnet aus den eingetragenen Lebensmittelnamen und Mengen, nicht aus der Fotoerkennung.",
-  "microNutrientDisclaimer": "Nur zur Orientierung, basierend auf USDA-Nährwertdaten und den koreanischen MFDS-Tagesreferenzwerten. Keine medizinische Beratung."
+  "microNutrientDisclaimer": "Nur zur Orientierung, basierend auf USDA-Nährwertdaten und den koreanischen MFDS-Tagesreferenzwerten. Keine medizinische Beratung.",
+
+  "microNutrientApproxNote": "Einige Einträge wurden mit Werten eines ähnlichen Lebensmittels berechnet."
 }

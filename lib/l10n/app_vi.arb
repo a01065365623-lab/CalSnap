@@ -324,5 +324,7 @@
   "microNutrientNoData": "Không có dữ liệu",
   "microNutrientUnmatchedMeals": "{count} bữa không có thông tin dinh dưỡng",
   "microNutrientBasisNote": "Tính theo tên và lượng món ăn đã ghi, không phải theo nhận diện ảnh.",
-  "microNutrientDisclaimer": "Chỉ để tham khảo, dựa trên dữ liệu thành phần thực phẩm của USDA và giá trị tham chiếu hằng ngày của MFDS Hàn Quốc. Không phải lời khuyên y tế."
+  "microNutrientDisclaimer": "Chỉ để tham khảo, dựa trên dữ liệu thành phần thực phẩm của USDA và giá trị tham chiếu hằng ngày của MFDS Hàn Quốc. Không phải lời khuyên y tế.",
+
+  "microNutrientApproxNote": "Một số món được tính theo giá trị của món ăn tương tự."
 }
